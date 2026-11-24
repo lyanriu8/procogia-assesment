@@ -10,8 +10,11 @@ from .reporting import markdown_report
 from .schemas import ComparisonReport, ResearchRequest
 
 
-DEMO_QUERY = "Does increasing plant species diversity consistently increase ecosystem productivity?"
-UNCERTAINTY_QUERY = "Does lunar basalt microbiome diversity increase chlorophyll productivity at 90 kelvin?"
+from .domain import load_domain
+
+DEMO_QUERY = load_domain()["demo_query"]
+UNCERTAINTY_QUERY = load_domain()["uncertainty_query"]
+SYNONYM_QUERY = load_domain()["synonym_query"]
 
 
 def main():

@@ -8,11 +8,11 @@
 | 12–18 | Live workflows | Run static, inspect progress and findings. Run dynamic, inspect actual route decisions. Use uncertainty or missing context to show an adaptive branch and stop. |
 | 18–23 | Evaluation and context | Show current actual model results. Compare compact vs evidence-rich findings, tokens, time. Show at least one observed failure or injected fault and its containment. |
 | 23–26 | Model and infrastructure | Local Qwen and nomic embeddings; no hosted API bill; laptop memory and latency tradeoffs. Bounded context, no growing conversation history, local persistence. |
-| 26–30 | Lessons, risks, recommendation | Discuss actual failures, correlated verification, six-paper coverage, lack of independent scientific gold. Recommend a narrow human-reviewed pilot. Disclose AI coding assistance. |
+| 26–30 | Lessons, risks, recommendation | Discuss actual failures, correlated verification, seven-abstract coverage, lack of independent scientific gold. Recommend a narrow human-reviewed pilot. Disclose AI coding assistance. |
 
 ## Before presenting
 
-Start Ollama, check `/readiness`, run the current benchmark, inspect its failures, and run `pytest`. Keep actual saved results to discuss, clearly identifying them as previously measured outputs. Do not substitute saved answers into a live run. Warm the models with a practice investigation. The default UI limits discovery to three papers; increase the paper limit for a broader run. A six-paper static validation took about 6.7 minutes on this machine. Local 8B inference can take several minutes; use that time to explain the trace and evidence chain.
+Start Ollama, check `/readiness`, run the current benchmark, inspect its failures, and run `pytest`. Keep actual saved results to discuss, clearly identifying them as previously measured outputs. Do not substitute saved answers into a live run. Warm the models with a practice investigation. The default UI limits discovery to three papers; increase the paper limit for a broader run. On the grassland corpus a six-paper static run took about 6.7 minutes; re-measure with the seven-paper gym corpus. Local 8B inference can take several minutes; use that time to explain the trace and evidence chain.
 
 ## Q&A changes
 

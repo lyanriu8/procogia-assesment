@@ -57,9 +57,19 @@ def test_failed_full_text_action_consumes_budget(engine, monkeypatch):
         calls.append(paper.paper_id)
         raise ProviderError("Injected full text outage")
 
+    from contradiction_lab.corpus import PublicCorpus
+
+    original_init = PublicCorpus.__init__
+
+    def with_full_text(self):
+        # The bundled corpus has no licensed full text; simulate one paper that does.
+        original_init(self)
+        self.papers[0].full_text_available = True
+
+    monkeypatch.setattr(PublicCorpus, "__init__", with_full_text)
     monkeypatch.setattr(Nodes, "fetch_full_text", fail)
     result = engine.run(
-        ResearchRequest(query="Compare plant diversity and productivity")
+        ResearchRequest(query="Compare training volume and muscle hypertrophy")
     )
     assert len(calls) == 1
     assert sum(e["node"] == "retrieve_full_text" for e in result["trace"]) == 1

@@ -1,154 +1,357 @@
 {
-  "version": "public-excerpts-v2",
-  "retrieved_at": "2026-11-08T00:49:50Z",
-  "papers": [
+ "version": "gym-hypertrophy-v1",
+ "retrieved_at": "2026-11-24T00:00:00Z",
+ "description": "Verbatim PubMed abstract excerpts from official NCBI E-utilities records. Sentences joined with ' … ' are separate verbatim sentences from the same abstract section. Non-breaking and thin spaces are normalized to ordinary spaces; wording is unchanged. All findings are extracted by the running model.",
+ "domain": {
+  "name": "resistance training and skeletal muscle hypertrophy",
+  "demo_query": "Does doing more weekly sets of resistance training increase muscle hypertrophy?",
+  "uncertainty_query": "Does lunar basalt microbiome diversity increase chlorophyll productivity at 90 kelvin?",
+  "synonym_query": "Does pumping iron more often each week grow bigger muscles?",
+  "extraction_hint": "Use concise normalized values. Outcome: muscle hypertrophy (for muscle size, thickness, volume, mass or fiber cross-sectional area) or muscle strength. Exposure: training volume (sets), training frequency (sessions or days per muscle per week), or training load (intensity, %1RM, repetition range; FEWER repetitions maximum means HIGHER load). Population: resistance-trained men or untrained men when stated. Method: randomized trial, or systematic review and meta-analysis, when stated.",
+  "direction_example": "Examples: 'higher volumes produced greater gains' means the outcome INCREASES with volume. 'No significant difference between higher and lower frequency' or 'a lower load resulted in similar hypertrophy as a heavy load' means NO EFFECT. 'Low repetition (heavier) programs induced greater hypertrophy than high repetition (lighter) programs' means hypertrophy INCREASES with load.",
+  "outcome_keywords": {
+   "muscle hypertrophy": [
+    "hypertroph",
+    "muscle size",
+    "muscle thickness",
+    "muscle volume",
+    "muscle mass",
+    "muscle growth",
+    "cross-sectional",
+    "fiber area",
+    "fibre area"
+   ],
+   "muscle strength": [
+    "strength",
+    "1rm",
+    "repetition maximum"
+   ]
+  },
+  "exposure_keywords": {
+   "training frequency": [
+    "frequency",
+    "sessions per week",
+    "times per week",
+    "days per week",
+    "times/wk",
+    "sessions/week"
+   ],
+   "training volume": [
+    "volume",
+    "sets"
+   ],
+   "training load": [
+    "load",
+    "intensity",
+    "repetition",
+    "%1rm",
+    "1rm",
+    "heavy",
+    "light"
+   ]
+  },
+  "query_aliases": {
+   "muscles": "muscle",
+   "bigger": "hypertrophy",
+   "growth": "hypertrophy",
+   "grow": "hypertrophy",
+   "size": "hypertrophy",
+   "mass": "hypertrophy",
+   "hypertrophic": "hypertrophy",
+   "sets": "volume",
+   "often": "frequency",
+   "frequently": "frequency",
+   "lifting": "resistance",
+   "weights": "resistance",
+   "iron": "resistance",
+   "heavier": "load",
+   "heavy": "load",
+   "lighter": "load"
+  }
+ },
+ "papers": [
+  {
+   "id": "schoenfeld2017volume",
+   "doi": "10.1080/02640414.2016.1210197",
+   "pmid": "27433992",
+   "year": 2017,
+   "title": "Dose-response relationship between weekly resistance training volume and increases in muscle mass: A systematic review and meta-analysis.",
+   "journal": "J Sports Sci",
+   "publication_types": [
+    "Journal Article",
+    "Meta-Analysis",
+    "Systematic Review"
+   ],
+   "authors": [
+    "Brad J Schoenfeld",
+    "Dan Ogborn",
+    "James W Krieger"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/27433992/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
     {
-      "id": "tilman1996",
-      "doi": "10.1038/379718a0",
-      "year": 1996,
-      "title": "Productivity and sustainability influenced by biodiversity in grassland ecosystems",
-      "authors": [
-        "David Tilman",
-        "David Wedin",
-        "Johannes Knops"
-      ],
-      "url": "https://www.nature.com/articles/379718a0",
-      "license": null,
-      "fragments": [
-        {
-          "section": "Abstract",
-          "type": "abstract",
-          "text": "ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity"
-        },
-        {
-          "section": "Abstract: study design",
-          "type": "abstract",
-          "text": "well-replicated field experiment, in which species diversity was directly controlled"
-        }
-      ]
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "The final analysis comprised 34 treatment groups from 15 studies."
     },
     {
-      "id": "hector1999",
-      "doi": "10.1126/science.286.5442.1123",
-      "year": 1999,
-      "title": "Plant diversity and productivity experiments in European grasslands",
-      "authors": [
-        "A. Hector",
-        "B. Schmid"
-      ],
-      "url": "https://pubmed.ncbi.nlm.nih.gov/10550043/",
-      "license": null,
-      "fragments": [
-        {
-          "section": "Abstract",
-          "type": "abstract",
-          "text": "there was an overall log-linear reduction of average aboveground biomass with loss of species"
-        },
-        {
-          "section": "Abstract: location",
-          "type": "abstract",
-          "text": "At eight European field sites"
-        }
-      ]
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "Outcomes for weekly sets as a continuous variable showed a significant effect of volume on changes in muscle size (P = 0.002). … Outcomes for weekly sets as a three-level categorical variable (<5, 5-9 and 10+ per muscle) showed a trend for an effect of weekly sets (P = 0.074)."
     },
     {
-      "id": "wagg2022",
-      "doi": "10.1038/s41467-022-35189-2",
-      "year": 2022,
-      "title": "Biodiversity\u2013stability relationships strengthen over time in a long-term grassland experiment",
-      "authors": [
-        "Cameron Wagg",
-        "Christiane Roscher"
-      ],
-      "url": "https://www.nature.com/articles/s41467-022-35189-2",
-      "license": "CC-BY-4.0",
-      "fragments": [
-        {
-          "section": "Abstract",
-          "type": "abstract",
-          "text": "Productivity declined more rapidly in less diverse communities"
-        },
-        {
-          "section": "Abstract: duration",
-          "type": "abstract",
-          "text": "over 17 years in a grassland biodiversity experiment"
-        },
-        {
-          "section": "Methods",
-          "type": "full_text",
-          "text": "Jena, Germany"
-        }
-      ]
-    },
-    {
-      "id": "tilman2006",
-      "doi": "10.1038/nature04742",
-      "year": 2006,
-      "title": "Biodiversity and ecosystem stability in a decade-long grassland experiment",
-      "authors": [
-        "David Tilman",
-        "Peter B. Reich",
-        "Johannes M. H. Knops"
-      ],
-      "url": "https://www.nature.com/articles/nature04742",
-      "license": null,
-      "fragments": [
-        {
-          "section": "Abstract",
-          "type": "abstract",
-          "text": "greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production"
-        },
-        {
-          "section": "Abstract: study design",
-          "type": "abstract",
-          "text": "long-term experimental field test"
-        }
-      ]
-    },
-    {
-      "id": "pfisterer2002",
-      "doi": "10.1038/416084a",
-      "year": 2002,
-      "title": "Diversity-dependent production can decrease the stability of ecosystem functioning",
-      "authors": [
-        "Andrea B. Pfisterer",
-        "Bernhard Schmid"
-      ],
-      "url": "https://pubmed.ncbi.nlm.nih.gov/11882897/",
-      "license": null,
-      "fragments": [
-        {
-          "section": "Abstract: resistance",
-          "type": "abstract",
-          "text": "the species-poor systems were more resistant to perturbation than the species-rich systems"
-        }
-      ],
-      "source_note": "Short quotation from the public publisher abstract at https://www.nature.com/articles/416084a. Unknown license prevents automated full-document fetching."
-    },
-    {
-      "id": "yachi1999",
-      "doi": "10.1073/pnas.96.4.1463",
-      "year": 1999,
-      "title": "Biodiversity and ecosystem productivity in a fluctuating environment: the insurance hypothesis",
-      "authors": [
-        "S. Yachi",
-        "M. Loreau"
-      ],
-      "url": "https://pubmed.ncbi.nlm.nih.gov/9990046/",
-      "license": null,
-      "fragments": [
-        {
-          "section": "Abstract",
-          "type": "abstract",
-          "text": "an increase in the temporal mean of productivity"
-        },
-        {
-          "section": "Abstract: method",
-          "type": "abstract",
-          "text": "We develop a general stochastic dynamic model"
-        }
-      ]
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "The findings indicate a graded dose-response relationship whereby increases in RT volume produce greater gains in muscle hypertrophy."
     }
-  ],
-  "description": "Public source excerpts only. All findings are extracted by the running model."
+   ]
+  },
+  {
+   "id": "schoenfeld2019volume",
+   "doi": "10.1249/MSS.0000000000001764",
+   "pmid": "30153194",
+   "year": 2019,
+   "title": "Resistance Training Volume Enhances Muscle Hypertrophy but Not Strength in Trained Men.",
+   "journal": "Med Sci Sports Exerc",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "authors": [
+    "Brad J Schoenfeld",
+    "Bret Contreras",
+    "James Krieger",
+    "Jozo Grgic",
+    "Kenneth Delcastillo",
+    "Ramon Belliard",
+    "Andrew Alto"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/30153194/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
+    {
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "Thirty-four healthy resistance-trained men were randomly assigned to one of three experimental groups: … Training for all routines consisted of three weekly sessions performed on nonconsecutive days for 8 wk."
+    },
+    {
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "Alternatively, while all groups increased muscle size in most of the measured sites from preintervention to postintervention, significant increases favoring the higher-volume conditions were seen for the elbow flexors, mid-thigh, and lateral thigh."
+    },
+    {
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "Alternatively, muscle hypertrophy follows a dose-response relationship, with increasingly greater gains achieved with higher training volumes."
+    }
+   ]
+  },
+  {
+   "id": "heaselgrave2019",
+   "doi": "10.1123/ijspp.2018-0427",
+   "pmid": "30160627",
+   "year": 2019,
+   "title": "Dose-Response Relationship of Weekly Resistance-Training Volume and Frequency on Muscular Adaptations in Trained Men.",
+   "journal": "Int J Sports Physiol Perform",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "authors": [
+    "Samuel R Heaselgrave",
+    "Joe Blacker",
+    "Benoit Smeuninx",
+    "James McKendry",
+    "Leigh Breen"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/30160627/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
+    {
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "RT-experienced men (N = 49) were randomly allocated to a low (LOW; n = 17), moderate (MOD; n = 15), or high (HIGH, n = 17) -volume group, performing 9, 18, or 27 weekly sets of biceps RT, respectively, for 6 wk. … RT was performed once (LOW) or twice (MOD and HIGH) weekly."
+    },
+    {
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "There were no significant differences between groups in MT or indices of strength. … However, effect-size estimates revealed that the magnitude of response was \"moderate to large\" for MOD and HIGH when compared with LOW."
+    },
+    {
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "The findings demonstrate that 9 weekly sets of biceps-focused RT, performed in 1 weekly session, are sufficient to increase MT, whereas 18-27 sets performed over 2 weekly sessions may confer greater strength increases."
+    }
+   ]
+  },
+  {
+   "id": "schoenfeld2016frequency",
+   "doi": "10.1007/s40279-016-0543-8",
+   "pmid": "27102172",
+   "year": 2016,
+   "title": "Effects of Resistance Training Frequency on Measures of Muscle Hypertrophy: A Systematic Review and Meta-Analysis.",
+   "journal": "Sports Med",
+   "publication_types": [
+    "Journal Article",
+    "Meta-Analysis",
+    "Systematic Review"
+   ],
+   "authors": [
+    "Brad J Schoenfeld",
+    "Dan Ogborn",
+    "James W Krieger"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/27102172/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
+    {
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "We conducted a systematic review and meta-analysis to determine the effects of resistance training frequency on hypertrophic outcomes."
+    },
+    {
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "Analysis using binary frequency as a predictor variable revealed a significant impact of training frequency on hypertrophy effect size (P = 0.002), with higher frequency being associated with a greater effect size than lower frequency (0.49 ± 0.08 vs. 0.30 ± 0.07, respectively)."
+    },
+    {
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "When comparing studies that investigated training muscle groups between 1 to 3 days per week on a volume-equated basis, the current body of evidence indicates that frequencies of training twice a week promote superior hypertrophic outcomes to once a week."
+    }
+   ]
+  },
+  {
+   "id": "schoenfeld2019frequency",
+   "doi": "10.1080/02640414.2018.1555906",
+   "pmid": "30558493",
+   "year": 2019,
+   "title": "How many times per week should a muscle be trained to maximize muscle hypertrophy? A systematic review and meta-analysis of studies examining the effects of resistance training frequency.",
+   "journal": "J Sports Sci",
+   "publication_types": [
+    "Journal Article",
+    "Meta-Analysis",
+    "Systematic Review"
+   ],
+   "authors": [
+    "Brad Jon Schoenfeld",
+    "Jozo Grgic",
+    "James Krieger"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/30558493/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
+    {
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "The purpose of this paper was to conduct a systematic review and meta-analysis of experimental studies designed to investigate the effects of weekly training frequency on hypertrophic adaptations. … a total of 25 studies were deemed to meet inclusion criteria."
+    },
+    {
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "Results showed no significant difference between higher and lower frequency on a volume-equated basis. … Meta-regression analysis of non-volume-equated studies showed a significant effect favoring higher frequencies, although the overall difference in magnitude of effect between frequencies of 1 and 3+ days per week was modest."
+    },
+    {
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "In conclusion, there is strong evidence that resistance training frequency does not significantly or meaningfully impact muscle hypertrophy when volume is equated."
+    }
+   ]
+  },
+  {
+   "id": "campos2002",
+   "doi": "10.1007/s00421-002-0681-6",
+   "pmid": "12436270",
+   "year": 2002,
+   "title": "Muscular adaptations in response to three different resistance-training regimens: specificity of repetition maximum training zones.",
+   "journal": "Eur J Appl Physiol",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "authors": [
+    "Gerson E R Campos",
+    "Thomas J Luecke",
+    "Heather K Wendeln",
+    "Kumika Toma",
+    "Fredrick C Hagerman",
+    "Thomas F Murray",
+    "Kerry E Ragg",
+    "Nicholas A Ratamess",
+    "William J Kraemer",
+    "Robert S Staron"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/12436270/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
+    {
+     "section": "Abstract: methods (participants)",
+     "type": "abstract",
+     "text": "Thirty-two untrained men [mean (SD) age 22.5 (5.8) years, height 178.3 (7.2) cm, body mass 77.8 (11.9) kg] participated in an 8-week progressive resistance-training program"
+    },
+    {
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "a low repetition group (Low Rep, n = 9) performing 3-5 repetitions maximum (RM) for four sets of each exercise with 3 min rest between sets and exercises, an intermediate repetition group (Int Rep, n = 11) performing 9-11 RM for three sets with 2 min rest, a high repetition group (High Rep, n = 7) performing 20-28 RM for two sets with 1 min rest"
+    },
+    {
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "All three major fiber types (types I, IIA, and IIB) hypertrophied for the Low Rep and Int Rep groups, whereas no significant increases were demonstrated for either the High Rep or Con groups."
+    },
+    {
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "the low to intermediate repetition resistance-training programs induced a greater hypertrophic effect compared to the high repetition regimen."
+    }
+   ]
+  },
+  {
+   "id": "mitchell2012",
+   "doi": "10.1152/japplphysiol.00307.2012",
+   "pmid": "22518835",
+   "year": 2012,
+   "title": "Resistance exercise load does not determine training-mediated hypertrophic gains in young men.",
+   "journal": "J Appl Physiol (1985)",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "authors": [
+    "Cameron J Mitchell",
+    "Tyler A Churchward-Venne",
+    "Daniel W D West",
+    "Nicholas A Burd",
+    "Leigh Breen",
+    "Steven K Baker",
+    "Stuart M Phillips"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/22518835/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
+    {
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "Eighteen men (21 ± 1 yr, 22.6 ± 2.1 kg/m(2); means ± SE) had their legs randomly assigned to two of three training conditions that differed in contraction intensity [% of maximal strength (1 repetition maximum)] or contraction volume (1 or 3 sets of repetitions): 30%-3, 80%-1, and 80%-3. … Subjects trained each leg with their assigned regime for a period of 10 wk, 3 times/wk."
+    },
+    {
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "Training-induced increases in MR-measured muscle volume were significant (P < 0.01), with no difference between groups: 30%-3 = 6.8 ± 1.8%, 80%-1 = 3.2 ± 0.8%, and 80%-3= 7.2 ± 1.9%, P = 0.18."
+    },
+    {
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "In accordance with our previous acute measurements of muscle protein synthetic rates a lower load lifted to failure resulted in similar hypertrophy as a heavy load lifted to failure."
+    }
+   ]
+  }
+ ]
 }

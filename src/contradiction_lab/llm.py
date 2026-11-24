@@ -19,21 +19,21 @@ class ExtractedFinding(Contract):
         description="One finding close to original wording; never universalize."
     )
     outcome: str = Field(
-        description="Measured endpoint, e.g. productivity, temporal stability, perturbation resistance. NEVER a direction such as positive/negative."
+        description="Measured endpoint as a short noun phrase. NEVER a direction such as positive/negative."
     )
     effect_of_increasing_exposure: Literal[
         "increases_outcome", "decreases_outcome", "no_effect", "mixed", "unclear"
     ] = Field(
-        description="What happens to the outcome when the exposure INCREASES? If reducing exposure reduces outcome, choose increases_outcome."
+        description="What happens to the outcome when the exposure INCREASES? If reducing exposure reduces outcome, choose increases_outcome. Similar outcomes or no significant difference across exposure levels is no_effect."
     )
     study_system: str | None = Field(
         description="Only a system explicitly in passages, otherwise null."
     )
     method: str | None = Field(
-        description="Only explicitly described method, otherwise null. Grassland or field site alone does NOT establish an experiment."
+        description="Only explicitly described study design, otherwise null. A title or setting alone does NOT establish a design."
     )
     intervention_or_exposure: str | None = Field(
-        description="What increases/decreases, e.g. plant biodiversity."
+        description="The manipulated or compared variable that increases/decreases."
     )
     duration: str | None = Field(description="Explicit duration or null.")
     conditions: list[str] = Field(max_length=3)
@@ -158,10 +158,17 @@ class OllamaModel:
         )
 
     def extract(self, paper, passages, query=""):
+        from .domain import load_domain
+
+        domain = load_domain()
 
         batch = self.structured(
             ClaimBatch,
-            "Extract at most ONE principal finding relevant to the research question. Return an empty claims list if unrelated. State direction relative to INCREASING exposure (e.g. biomass declines with species loss means POSITIVE diversity effect). Never infer field experiment from a title alone. Keep the statement close to the passage wording. Populate only directly supported fields. Use concise normalized values: productivity, temporal stability, perturbation resistance; grassland; field experiment; plant biodiversity. Preserve supplied paper and passage IDs. Each finding needs supporting passage IDs.",
+            "Extract at most ONE principal finding relevant to the research question. Return an empty claims list if unrelated. State direction relative to INCREASING exposure (if reducing the exposure reduces the outcome, the effect is POSITIVE). "
+            + domain.get("direction_example", "")
+            + " Never infer a study design from a title alone. Keep the statement close to the passage wording. Populate only directly supported fields. "
+            + domain.get("extraction_hint", "")
+            + " Preserve supplied paper and passage IDs. Each finding needs supporting passage IDs.",
             {
                 "research_question": query,
                 "paper_id": paper.paper_id,
@@ -196,7 +203,7 @@ class OllamaModel:
     def supports(self, claim, passages):
         return self.structured(
             SupportJudgment,
-            "Check whether the passage packet supports the supplied claim fields. Judge ONLY fields present in claim. Do not demand absent fields such as a comparator, sample size, or method. Verify the effect direction relative to INCREASING exposure. Use yes if ALL supplied fields are supported, partial if some lack support, no if contradicted, unclear if unable to judge. A field-experiment method requires explicit experiment text. Do not use outside knowledge.",
+            "Check whether the passage packet supports the supplied claim fields. Judge ONLY fields present in claim. Do not demand absent fields such as a comparator, sample size, or method. Verify the effect direction relative to INCREASING exposure. Use yes if ALL supplied fields are supported, partial if some lack support, no if contradicted, unclear if unable to judge. A study-design claim requires explicit design text. Do not use outside knowledge.",
             {
                 "claim": claim.model_dump(
                     exclude_none=True, exclude_defaults=True, exclude={"missing_fields"}

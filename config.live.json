@@ -7,8 +7,8 @@
   "embedding_model": "nomic-embed-text",
   "ollama_model": "qwen3:8b",
   "data_dir": ".runtime/product",
-  "top_k": 8,
-  "max_papers": 6,
+  "top_k": 12,
+  "max_papers": 7,
   "context_tokens": 6000,
   "max_iterations": 2
 }

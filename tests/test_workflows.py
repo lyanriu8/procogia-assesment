@@ -65,3 +65,30 @@ def test_request_paper_limit_is_recorded_and_applied(engine):
     assert result["config"]["max_papers"] == 1
     assert result["report"]["papers_considered"] == 1
     assert result["status"] == "limited_evidence"
+
+
+def test_direction_reviewer_no_change_becomes_no_effect(engine, monkeypatch):
+    from contradiction_lab.llm import OllamaModel
+    from contradiction_lab.schemas import DirectionReview, DirectionReviews, ResearchRequest
+
+    mocked = OllamaModel.structured
+
+    def structured(self, schema, task, context):
+        if schema is DirectionReviews:
+            self.usage.append({"input_tokens": 100, "output_tokens": 30, "repair": 0})
+            return DirectionReviews(
+                reviews=[
+                    DirectionReview(
+                        claim_id=c["claim_id"],
+                        effect_when_exposure_increases="no_change",
+                        explanation="Mock: no significant difference",
+                    )
+                    for c in context["claims"]
+                ]
+            )
+        return mocked(self, schema, task, context)
+
+    monkeypatch.setattr(OllamaModel, "structured", structured)
+    result = engine.run(ResearchRequest(query="training volume", workflow="static"))
+    assert result["extracted_claims"]
+    assert {c["direction"] for c in result["extracted_claims"]} == {"no_effect"}

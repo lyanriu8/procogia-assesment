@@ -8,9 +8,15 @@ from pathlib import Path
 from ..config import Settings
 from ..graph import ResearchEngine
 from ..schemas import ResearchRequest, utcnow
-from ..cli import DEMO_QUERY, UNCERTAINTY_QUERY
+from ..cli import DEMO_QUERY, SYNONYM_QUERY, UNCERTAINTY_QUERY
 
 CASES = [
+    {
+        "case_id": "contextual-disagreement",
+        "query": DEMO_QUERY,
+        "expected_status": "evidence_found",
+        "disagreement": True,
+    },
     {
         "case_id": "productivity",
         "query": DEMO_QUERY,
@@ -31,8 +37,8 @@ CASES = [
     },
     {
         "case_id": "missing-information",
-        "query": "Compare plant diversity and grassland productivity",
-        "date_from": "2020-01-01",
+        "query": "Does heavier training load increase muscle hypertrophy?",
+        "date_to": "2005-12-31",
         "expected_status": "limited_evidence",
     },
     {
@@ -56,7 +62,7 @@ CASES = [
     },
     {
         "case_id": "synonym-discovery",
-        "query": "Does botanical taxonomic heterogeneity enhance yield?",
+        "query": SYNONYM_QUERY,
         "expected_status": "evidence_found",
         "minimum_claims": 2,
     },
@@ -92,6 +98,11 @@ def score(case, result):
     if case.get("rejection"):
         checks["rejection"] = any(
             v["status"] == "rejected" for v in report["verification_results"]
+        )
+    if case.get("disagreement"):
+        checks["disagreement"] = any(
+            c["disagreement_type"] == "contextual_disagreement"
+            for c in report["comparisons"]
         )
     if case.get("error"):
         checks["error"] = any(e["kind"] == case["error"] for e in result["errors"])

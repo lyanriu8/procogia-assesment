@@ -64,9 +64,10 @@ def test_date_filter(corpus, mocked_models):
     from contradiction_lab.retrieval import OllamaEmbedding
 
     papers = corpus.search(
-        "plant diversity grassland productivity",
+        "resistance training volume muscle hypertrophy",
         20,
         OllamaEmbedding(),
-        date(2018, 1, 1),
+        None,
+        date(2005, 12, 31),
     )
-    assert [paper.paper_id for paper in papers] == ["wagg2022"]
+    assert [paper.paper_id for paper in papers] == ["campos2002"]

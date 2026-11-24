@@ -12,7 +12,7 @@ def build_comparison_report(state) -> ComparisonReport:
     claims = [ScientificClaim.model_validate(value) for value in state["claims"] if value["claim_id"] in verified_ids]
     comparisons = [ClaimComparison.model_validate(value) for value in state["comparisons"]
                    if value["claim_a_id"] in verified_ids and value["claim_b_id"] in verified_ids]
-    usable = [comparison for comparison in comparisons if comparison.direction_relationship in {"agreement", "opposition"}
+    usable = [comparison for comparison in comparisons if comparison.direction_relationship in {"agreement", "opposition", "divergence"}
               and comparison.disagreement_type != "insufficient_evidence"]
     thresholds_met = len(claims) >= state["settings"]["min_claims"] and len(usable) >= state["settings"]["min_comparable_pairs"]
     status = "evidence_found" if thresholds_met else "limited_evidence" if claims else "insufficient_evidence"

@@ -2,31 +2,29 @@
 
 ## Public corpus
 
-The preloaded corpus is six genuine publications, with short verbatim quotations rather than invented papers or fabricated full-text API responses. The snapshot identifies itself as `source_checked_excerpt`, not as a cached OpenAlex response. Findings are extracted by the running LLM; no source annotation is used as an answer.
+The preloaded corpus (`gym-hypertrophy-v1`) contains seven real publications on resistance training and skeletal muscle hypertrophy. Excerpts are exact sentences from the official PubMed records, fetched through NCBI E-utilities on November 24, 2026, and checked as exact substrings of each abstract when the corpus was built. Non-breaking and thin spaces are normalized to ordinary spaces; wording is unchanged. Sentences joined with ` … ` are separate exact sentences from the same abstract section. Each paper also records its PubMed publication types (randomized controlled trial, meta-analysis). Findings are extracted by the running LLM; no annotation is used as an answer.
 
-| ID | Publication | DOI | Evidence scope |
-|---|---|---|---|
-| `tilman1996` | Tilman, Wedin & Knops, productivity/sustainability in grasslands | `10.1038/379718a0` | Abstract finding and experimental-design fragment |
-| `hector1999` | Hector et al., European grassland diversity/productivity | `10.1126/science.286.5442.1123` | Abstract finding and location fragment |
-| `wagg2022` | Wagg et al., long-term biodiversity/stability relationships | `10.1038/s41467-022-35189-2` | Abstract finding/duration and short Methods location excerpt |
-| `tilman2006` | Tilman, Reich & Knops, decade-long grassland stability | `10.1038/nature04742` | Abstract finding and design fragment |
-| `pfisterer2002` | Pfisterer & Schmid, diversity-dependent production/stability | `10.1038/416084a` | Abstract resistance finding |
-| `yachi1999` | Yachi & Loreau, insurance hypothesis | `10.1073/pnas.96.4.1463` | Theoretical result and model-method fragment |
+| ID | Publication | DOI | Design | Abstract-level conclusion |
+|---|---|---|---|---|
+| `schoenfeld2017volume` | Schoenfeld, Ogborn & Krieger, *J Sports Sci* 2017 | `10.1080/02640414.2016.1210197` | Meta-analysis, 15 studies | More weekly sets, greater hypertrophy (graded dose-response) |
+| `schoenfeld2019volume` | Schoenfeld et al., *Med Sci Sports Exerc* 2019 | `10.1249/MSS.0000000000001764` | RCT, 34 trained men, 8 wk | Hypertrophy follows a dose-response with volume |
+| `heaselgrave2019` | Heaselgrave et al., *Int J Sports Physiol Perform* 2019 | `10.1123/ijspp.2018-0427` | RCT, 49 trained men, 6 wk, biceps | No significant between-group differences in muscle thickness; moderate-to-large effect sizes for higher volume |
+| `schoenfeld2016frequency` | Schoenfeld, Ogborn & Krieger, *Sports Med* 2016 | `10.1007/s40279-016-0543-8` | Meta-analysis | Training twice a week beats once a week |
+| `schoenfeld2019frequency` | Schoenfeld, Grgic & Krieger, *J Sports Sci* 2019 | `10.1080/02640414.2018.1555906` | Meta-analysis, 25 studies | Frequency does not meaningfully affect hypertrophy when volume is equated |
+| `campos2002` | Campos et al., *Eur J Appl Physiol* 2002 | `10.1007/s00421-002-0681-6` | Training study, 32 untrained men, 8 wk | Heavier (low/intermediate repetition) training gave greater hypertrophy than light (high repetition) |
+| `mitchell2012` | Mitchell et al., *J Appl Physiol* 2012 | `10.1152/japplphysiol.00307.2012` | Randomized within-subject, 18 men, 10 wk | A lower load lifted to failure gave similar hypertrophy to a heavy load |
 
-The selected primary productivity findings do not demonstrate a universal contradiction. Temporal stability and resistance to perturbation are different outcomes. The theoretical model is explicitly not an empirical experiment. No synthetic positive/negative pair is passed off as a real pair of papers. The genuine/contextual disagreement categories are demonstrated with separately identified synthetic rule tests until suitable independently labelled real pairs are added.
+The corpus contains three real disagreement clusters: training volume (two positive vs one no-significant-difference), training frequency (the same research group's 2016 positive result vs its 2019 volume-equated null), and load (heavier better vs similar when taken to failure). Comparisons across clusters involve different exposures and should be classified as apparent disagreements.
 
-### Source checks
+Excluded on purpose: Barbalho et al. 2019/2020, "Evidence of a ceiling effect for training volume…", was a natural counterpoint but is **retracted** (PubMed retraction notice, IJSPP 2020). The app does not yet check for retractions automatically.
 
-The source excerpts were checked using publisher/indexed primary-source pages on November 7, 2026 in America/Vancouver. IDs, DOI, authors and snippets can be rechecked at:
+### Domain vocabulary is data
 
-- https://www.nature.com/articles/379718a0
-- https://pubmed.ncbi.nlm.nih.gov/10550043/
-- https://www.nature.com/articles/s41467-022-35189-2 and https://pubmed.ncbi.nlm.nih.gov/36517483/
-- https://pubmed.ncbi.nlm.nih.gov/16738658/
-- https://www.nature.com/articles/416084a
-- https://pubmed.ncbi.nlm.nih.gov/9990046/
+The `domain` section of `data/corpus.json` holds the demo queries, the extraction hint (normalized outcome, exposure, population and design names), the direction examples, the outcome and exposure keyword maps used by `normalize_claims`, and the query aliases used for lexical retrieval scoring. Pipeline code contains no topic-specific vocabulary, so a new domain is a data change. The previous grassland corpus remains on the `main` branch and the `demo-ready` tag.
 
-Some publisher and PMC direct page requests returned redirects or bot challenges; search-indexed primary-source text was used to check those excerpts. This does not imply a direct full-document API download. License is unknown unless explicitly recorded. Public abstract visibility does not grant a full-document redistribution license. Live full-document fetching is restricted to recognized permissive licenses and provider access flags.
+### Licensing
+
+No excerpt has a verified open license, so every paper is abstract-only (`license: null`, `full_text_available: false`). The dynamic `retrieve_full_text` action is therefore never offered with the bundled corpus; it remains covered by a test that simulates a licensed paper and by live discovery mode. Public abstract visibility does not grant a full-document redistribution license.
 
 ## Current ingestion and retrieval
 

@@ -6,11 +6,12 @@ Actual model runs and final verification results are recorded in artifacts/valid
 
 Ollama Qwen3 8B and nomic-embed-text are installed locally. LangGraph and Chroma are installed in the project virtual environment. The loopback server starts successfully. Browser automation currently fails before navigation due to a missing sandboxPolicy field in the browser connector; browser visual verification is not claimed.
 
-Remaining scientific limitations: six short-excerpt sources; no independently reviewed contradiction dataset; same-model extraction/verification; no broad or held-out scientific accuracy claim. External provider behavior remains a separate integration boundary from the preloaded-document presentation path.
+Remaining scientific limitations: seven abstract-only sources; no automatic retraction check; no independently reviewed contradiction dataset; same-model extraction/verification; no broad or held-out scientific accuracy claim. External provider behavior remains a separate integration boundary from the preloaded-document presentation path.
 
 ## Completed verification
 
-- 56 automated tests passed; no skips. Model calls are explicitly mocked in these tests; actual LangGraph and Chroma run.
+- Gym corpus: 61 automated tests passed; no skips. Real-model validation pending re-recording. Earlier grassland results below are archived in artifacts/grassland-v1-evaluation/.
+- Grassland corpus (archived): 56 automated tests passed; no skips. Model calls are explicitly mocked in these tests; actual LangGraph and Chroma run.
 - Eight actual Qwen3 scenarios measured; seven strict behavioral checks passed. The unsupported-claim verdict was partial/qualified rather than rejected; the claim was excluded from synthesis. See artifacts/evaluation/report.md.
 - Both successful workflows returned real model-generated, verified findings. The missing-information case exercised two adaptive actions and stopped within budget.
 - Live readiness and health endpoints confirmed both installed models, LangGraph, and Chroma. Frontend JavaScript syntax checks passed.

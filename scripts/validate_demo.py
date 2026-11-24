@@ -29,7 +29,7 @@ scenarios = [
             "minimum_claims": 2,
         },
         "static",
-        8,
+        12,
     ),
     (
         {
@@ -37,9 +37,10 @@ scenarios = [
             "query": DEMO_QUERY,
             "expected_status": "evidence_found",
             "minimum_claims": 2,
+            "disagreement": True,
         },
         "dynamic",
-        8,
+        12,
     ),
     (
         {
@@ -78,8 +79,8 @@ scenarios.insert(
     (
         {
             "case_id": "missing-information",
-            "query": DEMO_QUERY,
-            "date_from": "2020-01-01",
+            "query": "Does heavier training load increase muscle hypertrophy?",
+            "date_to": "2005-12-31",
             "expected_status": "limited_evidence",
         },
         "dynamic",
@@ -113,7 +114,7 @@ for case, workflow, k in scenarios:
         print("Rescoring previously measured real run:", result["run_id"], flush=True)
     else:
         paper_limit = (
-            6 if case["case_id"] in {"success-static", "compact-context"} else 3
+            7 if case["case_id"] in {"success-static", "compact-context"} else 3
         )
         result = engine.run(
             ResearchRequest(
@@ -123,6 +124,7 @@ for case, workflow, k in scenarios:
                 context_config=config,
                 max_papers=paper_limit,
                 date_from=case.get("date_from"),
+                date_to=case.get("date_to"),
             ),
             fault=case.get("fault"),
         )
@@ -149,7 +151,7 @@ for case, workflow, k in scenarios:
         "warning": "Actual local Ollama inference. Behavioral checks, not independently reviewed scientific accuracy. Same-model verification can share errors.",
     }
     payload = {
-        "dataset_version": "presentation-validation-v2",
+        "dataset_version": "presentation-validation-gym-v1",
         "evaluated_at": utcnow().isoformat(),
         "model": engine.settings.ollama_model,
         "summary": summary,

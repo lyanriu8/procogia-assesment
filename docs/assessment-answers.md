@@ -4,7 +4,7 @@ The current product uses actual Qwen inference, real LangGraph orchestration, Ol
 
 Client recommendation: pilot an evidence-navigation assistant for R&D analysts who need to compare apparently inconsistent findings. Evaluate analyst time saved, usefulness, retrieval coverage, unsupported conclusions, latency, and operating cost before making commercial claims.
 
-Public data: six attributed source publications. Titles, DOI/URLs, and original passages are preloaded; findings are extracted live. The excerpts are deliberately small, so they cannot demonstrate full-document parsing or broad scientific generalization. External discovery is an optional separate configuration.
+Public data: seven attributed source publications on resistance training and muscle hypertrophy (exact PubMed abstract excerpts). Titles, DOI/URLs, and original passages are preloaded; findings are extracted live. The excerpts are deliberately small, so they cannot demonstrate full-document parsing or broad scientific generalization. External discovery is an optional separate configuration.
 
 Agents: the planner, extractor/context analyst, adaptive supervisor, comparison analyst, and verifier use specialized structured LLM calls and share typed state. Retriever and report assembly invoke reusable software skills. A single local model serves these roles sequentially. More roles do not inherently improve accuracy; the decomposition makes errors and evidence boundaries inspectable.
 

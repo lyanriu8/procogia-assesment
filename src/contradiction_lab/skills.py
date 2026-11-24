@@ -19,11 +19,9 @@ CONTEXT_FIELDS = (
 
 
 def normalize_claims(claims: list[ScientificClaim]) -> list[ScientificClaim]:
-    aliases = {
-        "aboveground biomass": "productivity",
-        "ecosystem productivity": "productivity",
-        "primary productivity": "productivity",
-    }
+    from .domain import canonical, load_domain
+
+    domain = load_domain()
     unique = {}
     for claim in claims:
         claim = claim.model_copy(deep=True)
@@ -36,20 +34,10 @@ def normalize_claims(claims: list[ScientificClaim]) -> list[ScientificClaim]:
                 "n/a",
             }:
                 setattr(claim, field, None)
-        if claim.outcome:
-            claim.outcome = aliases.get(
-                claim.outcome.strip().lower(), claim.outcome.strip().lower()
-            )
-        if (
-            claim.intervention_or_exposure
-            and claim.intervention_or_exposure.strip().casefold()
-            in {
-                "plant species diversity",
-                "plant diversity",
-                "plant species richness",
-            }
-        ):
-            claim.intervention_or_exposure = "plant biodiversity"
+        claim.outcome = canonical(claim.outcome, domain.get("outcome_keywords", {}))
+        claim.intervention_or_exposure = canonical(
+            claim.intervention_or_exposure, domain.get("exposure_keywords", {})
+        )
         claim.missing_fields = [
             field for field in CONTEXT_FIELDS if getattr(claim, field) is None
         ]
@@ -141,6 +129,24 @@ def classify_disagreement(
         ):
             category = "genuine_contradiction"
             explanation = "Opposing directions remain under the reported comparable system, method, and exposure. This is a candidate contradiction, not a scientific verdict."
+    elif context.same_outcome and "no_effect" in {left.direction, right.direction}:
+        notes.append(
+            "A non-significant result is not proof of no effect or of an opposing effect."
+        )
+        other = ({left.direction, right.direction} - {"no_effect"}) or {"no_effect"}
+        if (
+            other <= {"positive", "negative"}
+            and context.same_exposure is True
+            and context.context_differences
+        ):
+            # Divergent conclusions with known context differences. Never escalated
+            # to genuine_contradiction: "no detected effect" is not an opposite effect.
+            relationship, category = "divergence", "contextual_disagreement"
+            explanation = (
+                "One study reports an effect and the other reports no detectable effect, "
+                "alongside observed context differences that may explain, but do not prove "
+                "the cause of, the divergence."
+            )
     elif "no_effect" in {left.direction, right.direction}:
         notes.append(
             "A non-significant result is not proof of no effect or of an opposing effect."

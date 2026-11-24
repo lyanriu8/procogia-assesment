@@ -98,7 +98,7 @@ def mocked_models(monkeypatch):
     def supports(self, claim, passages):
         self.usage.append({"input_tokens": 100, "output_tokens": 30, "repair": 0})
         return SupportJudgment(
-            support="no" if "proves every ecosystem" in claim.statement else "yes",
+            support="no" if "proves every" in claim.statement else "yes",
             reason="Mock support check",
         )
 

@@ -560,7 +560,7 @@ class Nodes:
         claims = normalize_claims(claims)
         if claims and state["fault"] == "unsupported_claim":
             claims[0].statement = (
-                "This proves every ecosystem doubles its productivity."
+                "This proves every lifter doubles their muscle mass."
             )
         if claims and state["fault"] == "invalid_citation":
             claims[0].evidence_passage_ids = ["missing-passage"]
@@ -685,7 +685,7 @@ class Nodes:
         if claims:
             review = self.model.structured(
                 DirectionReviews,
-                "For each source statement, determine how the OUTCOME changes as the EXPOSURE INCREASES. Ignore the direction of verbs in isolation: reductions in both exposure and outcome imply that increasing exposure increases outcome. Slower decline at higher exposure is an increase relative to low exposure. If the statement alone does not establish an effect, choose not_established. Return one review per claim, preserve IDs, and explain briefly.",
+                "For each source statement, determine how the OUTCOME changes as the EXPOSURE INCREASES. Ignore the direction of verbs in isolation: reductions in both exposure and outcome imply that increasing exposure increases outcome. Slower decline at higher exposure is an increase relative to low exposure. If the statement reports similar outcomes or no significant difference between exposure levels, choose no_change. If the statement alone does not establish whether there is an effect, choose not_established. Return one review per claim, preserve IDs, and explain briefly.",
                 {
                     "claims": [
                         {
@@ -709,6 +709,7 @@ class Nodes:
                 claim.direction = {
                     "increases": "positive",
                     "decreases": "negative",
+                    "no_change": "no_effect",
                     "not_established": "unclear",
                 }[mapped[claim.claim_id].effect_when_exposure_increases]
             reviews = [r.model_dump() for r in review.reviews]
@@ -748,7 +749,7 @@ class Nodes:
         if selected:
             judgments = self.model.structured(
                 PairJudgments,
-                "Compare each pair IN ORDER. Return exactly one judgment per pair. Use agreement when same-outcome effects point in the same direction. Different outcomes/exposures are apparent_disagreement and not_comparable. Opposing effects with known differing context are contextual_disagreement; missing critical context means insufficient_evidence. Genuine contradiction requires known matching critical context. Explain briefly using only supplied evidence. Never claim a context difference proves causation. Each explanation must be ONE short sentence, at most 18 words.",
+                "Compare each pair IN ORDER. Return exactly one judgment per pair. Use agreement when same-outcome effects point in the same direction. Different outcomes/exposures are apparent_disagreement and not_comparable. Opposing effects with known differing context are contextual_disagreement. One effect versus no detectable effect on the same outcome and exposure is divergence (contextual_disagreement when context differs), never genuine_contradiction. Missing critical context means insufficient_evidence. Genuine contradiction requires known matching critical context. Explain briefly using only supplied evidence. Never claim a context difference proves causation. Each explanation must be ONE short sentence, at most 18 words.",
                 {
                     "claims": [
                         claim.model_dump(

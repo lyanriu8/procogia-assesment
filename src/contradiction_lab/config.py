@@ -15,8 +15,8 @@ class Settings(Contract):
     vector_backend: Literal["chroma"] = "chroma"
     embedding_backend: Literal["ollama"] = "ollama"
     embedding_model: str = "nomic-embed-text"
-    max_papers: int = Field(default=6, ge=1, le=50)
-    top_k: int = Field(default=8, ge=1, le=50)
+    max_papers: int = Field(default=7, ge=1, le=50)
+    top_k: int = Field(default=12, ge=1, le=50)
     chunk_size_tokens: int = Field(default=550, ge=20)
     chunk_overlap_tokens: int = Field(default=75, ge=0)
     max_iterations: int = Field(default=2, ge=0, le=5)
@@ -27,7 +27,7 @@ class Settings(Contract):
     request_timeout: float = Field(default=180, gt=0)
     max_retries: int = Field(default=2, ge=0, le=4)
     max_claims_per_paper: int = Field(default=3, ge=1, le=10)
-    max_comparisons: int = Field(default=6, ge=1, le=100)
+    max_comparisons: int = Field(default=21, ge=1, le=100)
     context_config: Literal["compact", "evidence-rich"] = "evidence-rich"
     data_dir: Path = Field(
         default_factory=lambda: Path(os.getenv("LAB_DATA_DIR", ".runtime/product"))

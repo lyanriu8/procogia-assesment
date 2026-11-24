@@ -9,7 +9,7 @@ from .schemas import EvidencePassage, Paper
 class PublicCorpus:
     def __init__(self):
         self.raw = json.loads(
-            files("contradiction_lab").joinpath("data/corpus.json").read_text()
+            files("contradiction_lab").joinpath("data/corpus.json").read_text(encoding="utf-8")
         )
         self.papers, self.passages = [], []
         for record in self.raw["papers"]:
@@ -24,7 +24,7 @@ class PublicCorpus:
                 source_url=record["url"],
                 license=record["license"],
                 retrieved_at=self.raw["retrieved_at"],
-                source_checked_at=self.raw["retrieved_at"],
+                source_checked_at=record.get("checked_at", self.raw["retrieved_at"]),
                 abstract="\n".join(
                     x["text"] for x in record["fragments"] if x["type"] == "abstract"
                 ),
@@ -32,7 +32,8 @@ class PublicCorpus:
                     record["license"]
                     and any(x["type"] == "full_text" for x in record["fragments"])
                 ),
-                provenance=[record["url"]],
+                provenance=[record["url"]]
+                + [f"publication_type:{kind}" for kind in record.get("publication_types", [])],
                 content_hash=digest(json.dumps(record["fragments"], sort_keys=True)),
             )
             self.papers.append(paper)

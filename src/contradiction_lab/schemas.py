@@ -95,7 +95,7 @@ class ClaimComparison(Contract):
     comparable_system: bool | None
     comparable_methods: bool | None
     direction_relationship: Literal[
-        "agreement", "opposition", "not_comparable", "unclear"
+        "agreement", "opposition", "divergence", "not_comparable", "unclear"
     ]
     disagreement_type: Disagreement | None
     explanation: str
@@ -203,7 +203,7 @@ class RouteDecision(Contract):
 
 class PairJudgment(Contract):
     direction_relationship: Literal[
-        "agreement", "opposition", "not_comparable", "unclear"
+        "agreement", "opposition", "divergence", "not_comparable", "unclear"
     ]
     disagreement_type: Disagreement | None
     explanation: str
@@ -215,7 +215,9 @@ class PairJudgments(Contract):
 
 class DirectionReview(Contract):
     claim_id: str
-    effect_when_exposure_increases: Literal["increases", "decreases", "not_established"]
+    effect_when_exposure_increases: Literal[
+        "increases", "decreases", "no_change", "not_established"
+    ]
     explanation: str
 
 

@@ -16,7 +16,7 @@ python3 -m venv .venv
 
 Open http://127.0.0.1:8000. The header shows the real model and runtime. `/readiness` checks Ollama and both models. Investigations run in the background; the execution tab shows the current node, routes, timing, and model token usage. Local inference can take several minutes. The interface starts with a three-paper limit for a shorter demo; increase it to explore more sources. Run one investigation at a time.
 
-The default source is six preloaded real publications with attributed public excerpts. **The documents are preloaded; the answers are not.** Qwen plans, extracts findings, separately reviews effect direction, assesses claim pairs, chooses adaptive actions, and verifies support on every run. Unknown fields stay null. Output validation, source ownership, hashes, comparison constraints, and stopping limits are deterministic safeguards. The final report is assembled from verified findings, not an unconstrained prose generator.
+The default source is seven preloaded real publications on resistance training and muscle hypertrophy, with exact PubMed abstract excerpts (see [data and RAG](docs/data-and-rag.md)). **The documents are preloaded; the answers are not.** Qwen plans, extracts findings, separately reviews effect direction, assesses claim pairs, chooses adaptive actions, and verifies support on every run. Unknown fields stay null. Output validation, source ownership, hashes, comparison constraints, and stopping limits are deterministic safeguards. The final report is assembled from verified findings, not an unconstrained prose generator.
 
 ## Demonstrate the assessment
 
@@ -59,10 +59,10 @@ This uses OpenAlex and Europe PMC instead of the fixed public corpus. Discovery 
 - `nomic-embed-text` creates semantic document/query embeddings. Chroma ranks scoped passages; keyword/title/section signals supplement similarity.
 - State uses typed records and source IDs, not an unbounded chat transcript. Approximate prompt budgets and schema validation bound requests.
 - All findings retain passage → paper → DOI/URL provenance. Only fully supported findings enter the report. The same LLM performs extraction and verification, so errors can be correlated.
-- The six-paper excerpt corpus demonstrates agreement and outcome differences. It does not establish performance on real scientific contradictions. Full-paper ingestion, independently reviewed labels, held-out opposing studies, and a human usefulness study remain next steps.
+- The seven-paper corpus contains real divergent findings (training volume, frequency, load). Where one study reports an effect and another reports no detectable effect on the same outcome and exposure, with known context differences, the rules label it `contextual_disagreement` (relationship `divergence`); they never label it `genuine_contradiction`, because "no detected effect" is not an opposite effect. Seven abstracts do not establish general accuracy. Full-paper ingestion, independently reviewed labels, held-out data, retraction checks, and a human usefulness study remain next steps.
 - Local API cost is zero; compute is not free of resource use and is not metered. Runtime and quality must be measured on the presentation machine.
 - No authentication; bind to loopback. This is evidence navigation, not a systematic review or scientific verdict.
 
 Historical replay measurements were moved to `artifacts/legacy-replay/` and must not be presented as current model results.
 
-Current recorded validation: **56 automated tests passed; 7/8 strict real-model scenario checks passed**. The retained failure is a partial/qualified verdict for an injected unsupported claim; that material was excluded from the report. See `artifacts/evaluation/report.md` and `artifacts/validation.json`.
+Current validation (gym corpus): **61 automated tests passed** with mocked inference. Real-model validation for this corpus must be re-recorded with `scripts/validate_demo.py`, which writes to `artifacts/evaluation/`. The previous grassland results (7/8 strict checks) are archived in `artifacts/grassland-v1-evaluation/` and do not describe the current corpus.

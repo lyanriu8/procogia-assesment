@@ -12,13 +12,9 @@ STOPWORDS = set(
 
 
 def tokens(text: str) -> list[str]:
-    aliases = {
-        "biodiversity": "diversity",
-        "diverse": "diversity",
-        "ecosystems": "ecosystem",
-        "grasslands": "grassland",
-        "richness": "diversity",
-    }
+    from .domain import load_domain
+
+    aliases = load_domain().get("query_aliases", {})
     return [
         aliases.get(word, word)
         for word in re.findall(r"[a-z0-9]+", text.lower())
@@ -246,7 +242,7 @@ class VectorIndex:
             if context_config == "compact" and passage.source_type == "abstract":
                 score += 0.12
             if context_config == "evidence-rich" and re.search(
-                r"method|result", passage.section or "", re.I
+                r"method|result|conclusion", passage.section or "", re.I
             ):
                 score += 0.12
             ranked.append((score, passage))
