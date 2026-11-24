@@ -49,6 +49,11 @@ def mocked_models(monkeypatch):
                 clarification_question=(
                     "Which intervention and outcome?" if q == "Does it work?" else None
                 ),
+                suggested_questions=(
+                    ["Does training frequency affect muscle hypertrophy?"]
+                    if q == "Does it work?"
+                    else []
+                ),
             )
         if schema is PairJudgments:
             return PairJudgments(

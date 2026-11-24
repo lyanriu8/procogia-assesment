@@ -12,7 +12,7 @@ from fastapi.responses import HTMLResponse
 
 from .config import Settings
 from .graph import ResearchEngine
-from .schemas import ResearchRequest
+from .schemas import AskRequest, ResearchRequest
 
 load_dotenv()
 executor = ThreadPoolExecutor(max_workers=1)
@@ -68,6 +68,35 @@ def get_research(run_id: str):
     if not result:
         raise HTTPException(status_code=404, detail="Research run not found")
     return result
+
+
+@app.post("/research/{run_id}/ask")
+def ask_about_run(run_id: str, request: AskRequest):
+    from .followup import answer_followup
+    from .llm import ModelError, OllamaModel
+
+    engine = get_engine()
+    result = engine.store.get("runs", run_id)
+    if not result:
+        raise HTTPException(status_code=404, detail="Research run not found")
+    if not result.get("report"):
+        raise HTTPException(status_code=409, detail="The run has not finished.")
+    if not job_lock.acquire(blocking=False):
+        raise HTTPException(status_code=409, detail="The model is busy with another run. Try again shortly.")
+    try:
+        reply = answer_followup(
+            OllamaModel(engine.settings),
+            result,
+            request.question.strip(),
+            [turn.model_dump() for turn in request.history],
+        )
+    except ModelError as error:
+        raise HTTPException(status_code=503, detail=str(error)) from None
+    finally:
+        job_lock.release()
+    latest = engine.store.get("runs", run_id) or result
+    engine.store.put("runs", run_id, {**latest, "followups": latest.get("followups", []) + [reply]})
+    return reply
 
 
 @app.get("/research/{run_id}/trace")

@@ -121,6 +121,7 @@ class SearchPlan(Contract):
     interpreted_scope: str
     needs_clarification: bool = False
     clarification_question: str | None = None
+    suggested_questions: list[str] = Field(default_factory=list, max_length=3)
 
 
 class TraceEvent(Contract):
@@ -164,6 +165,7 @@ class ComparisonReport(Contract):
         "evidence_found", "limited_evidence", "insufficient_evidence"
     ]
     clarification_question: str | None = None
+    suggested_questions: list[str] = Field(default_factory=list)
     generated_at: datetime = Field(default_factory=utcnow)
 
 
@@ -187,6 +189,22 @@ class ResearchRequest(Contract):
             raise ValueError("date_from must not be after date_to")
         if not self.query.strip():
             raise ValueError("query must contain non-whitespace text")
+        return self
+
+
+class FollowUpTurn(Contract):
+    question: str = Field(max_length=1000)
+    answer: str = Field(max_length=4000)
+
+
+class AskRequest(Contract):
+    question: str = Field(min_length=1, max_length=1000)
+    history: list[FollowUpTurn] = Field(default_factory=list, max_length=6)
+
+    @model_validator(mode="after")
+    def validate_question(self):
+        if not self.question.strip():
+            raise ValueError("question must contain non-whitespace text")
         return self
 
 

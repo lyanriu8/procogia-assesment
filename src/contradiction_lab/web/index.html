@@ -77,6 +77,21 @@ table.plain th{font-weight:400;color:var(--faint)}
 .cursor::after{content:"▍";animation:blink 1s steps(1) infinite;color:var(--accent);margin-left:2px}
 @keyframes blink{50%{opacity:0}}
 .notice{font:12px var(--mono);color:var(--warn);margin-top:28px}
+.suggest{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:12px}
+.suggest button{text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:6px 10px}
+.suggest button:hover{border-color:var(--fg)}
+.ask{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--fg);padding-bottom:8px}
+.ask input{flex:1;outline:none;font-size:16px;min-width:0}
+.ask input::placeholder{color:var(--faint)}
+.ask button{font:13px var(--mono);border:1px solid var(--fg);border-radius:4px;padding:4px 12px}
+.ask button:disabled{opacity:.5;cursor:wait}
+.turn{padding:14px 0;border-bottom:1px solid var(--line)}
+.turn .q{font-weight:600}
+.turn .a{margin:6px 0 0}
+.cites{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cites button{font:12px var(--mono);color:var(--dim);border:1px solid var(--line);border-radius:3px;padding:2px 7px}
+.cites button:hover{color:var(--fg);border-color:var(--fg)}
+.hint{font-size:13px;color:var(--faint);margin-top:8px}
 footer{margin-top:72px;font-size:12px;color:var(--faint)}
 @media (max-width:640px){.row{grid-template-columns:1fr;gap:6px}}
 </style>
@@ -168,12 +183,20 @@ function renderReport(result) {
   for (const [base, ids] of Object.entries(seen)) { const unique = [...new Set(ids)]; unique.forEach((id, i) => labels[id] = unique.length > 1 ? base + 'abcdefgh'[i] : base); }
   const label = pid => labels[pid] || author(papers[pid] || {});
   const name = id => { const c = claims[id]; return c ? label(c.paper_id) : id.slice(0, 10); };
+  const readable = text => report.claims.reduce((t, c) => t.replace(new RegExp('(claim[ -])?' + c.claim_id.replace(/^claim-/, '') + '|' + c.claim_id, 'gi'), label(c.paper_id)), text);
 
   const [statusText, cls] = report.clarification_question ? ['Needs clarification', 'warn'] : (STATUS[report.overall_status] || [report.overall_status, '']);
   const head = el('div', undefined, 'headline');
   head.append(el('div', statusText, 'status ' + cls));
   const conflicts = report.comparisons.filter(c => ['contextual_disagreement', 'genuine_contradiction'].includes(c.disagreement_type));
-  if (report.clarification_question) head.append(el('p', report.clarification_question));
+  if (report.clarification_question) {
+    head.append(el('p', report.clarification_question));
+    if (report.suggested_questions && report.suggested_questions.length) {
+      const box = el('div', undefined, 'suggest');
+      for (const q of report.suggested_questions) { const b = el('button', q); b.type = 'button'; b.onclick = () => { $('query').value = q; $('form').requestSubmit(); }; box.append(b); }
+      head.append(el('p', 'Try a specific question:', 'mono faint'), box);
+    }
+  }
   else if (conflicts.length) for (const c of conflicts) head.append(put(el('p'), `${name(c.claim_a_id)} and ${name(c.claim_b_id)} reach different conclusions `, el('span', `(${KIND[c.disagreement_type][0]})`, 'dim')));
   else if (report.claims.length) head.append(el('p', report.agreement_summary, 'dim'));
   else head.append(el('p', 'No verified findings for this question. See limitations below.', 'dim'));
@@ -212,7 +235,7 @@ function renderReport(result) {
       }
       for (const n of c.uncertainty_notes) {
         if (n.startsWith('Missing context')) continue;
-        box.append(n.startsWith('LLM assessment:') ? put(el('p', undefined, 'note'), el('span', 'model  ', 'mono faint'), n.slice(16).trim()) : put(el('p', undefined, 'note'), el('span', 'note  ', 'mono warn'), n));
+        box.append(n.startsWith('LLM assessment:') ? put(el('p', undefined, 'note'), el('span', 'model  ', 'mono faint'), readable(n.slice(16).trim())) : put(el('p', undefined, 'note'), el('span', 'note  ', 'mono warn'), n));
       }
       if (conflict) root.append(box);
       else { const d = el('details', undefined, 'cmp-fold'); const sm = el('summary'); sm.append(headRow); d.append(sm, box); root.append(d); }
@@ -220,6 +243,7 @@ function renderReport(result) {
   }
 
   const limits = [...report.evidence_limitations, ...report.unresolved_questions];
+  if (!report.clarification_question) root.append(askPanel(result, { label, name, claims, papers }));
   root.append(el('h2', 'Details'));
   if (limits.length) {
     const d = el('details'); put(d, put(el('summary'), `Limitations (${limits.length})`));
@@ -245,6 +269,54 @@ function renderReport(result) {
   }
   v.append(put(el('div', undefined, 'body'), t)); root.append(v);
   root.append(el('p', `run ${result.run_id} · ${result.model} · ${result.config.runtime} · ${result.config.vector_backend}`, 'mono faint'));
+}
+
+function askPanel(result, view) {
+  const wrap = el('div');
+  wrap.append(el('h2', 'Ask about these results'));
+  const thread = el('div');
+  const passages = Object.fromEntries(result.report.passages.map(p => [p.passage_id, p]));
+  const extracted = Object.fromEntries((result.extracted_claims || result.report.claims).map(c => [c.claim_id, c]));
+  const history = [];
+  const form = el('form', undefined, 'ask'); form.autocomplete = 'off';
+  const input = el('input'); input.placeholder = 'e.g. Why do these studies disagree?'; input.maxLength = 1000;
+  const button = el('button', 'ask'); button.type = 'submit';
+  form.append(input, button);
+  for (const turn of result.followups || []) { thread.append(renderTurn(turn)); if (turn.status === 'grounded') history.push({ question: turn.question, answer: turn.answer }); }
+  function citeLabel(id, isClaim) {
+    if (isClaim) { const c = extracted[id]; return c ? view.label(c.paper_id) + (view.claims[id] ? '' : ' (excluded)') : id.slice(0, 10); }
+    const p = passages[id]; return p ? `${view.label(p.paper_id)} · ${human(p.section).replace('Abstract: ', '')}` : id.slice(0, 10);
+  }
+  function renderTurn(turn) {
+    const box = el('div', undefined, 'turn');
+    box.append(el('div', turn.question, 'q'));
+    box.append(el('p', turn.answer, 'a' + (turn.status === 'grounded' ? '' : ' dim')));
+    const cites = el('div', undefined, 'cites'); const quote = el('div');
+    for (const id of turn.cited_claim_ids || []) cites.append(el('span', citeLabel(id, true), 'tag'));
+    for (const id of turn.cited_passage_ids || []) {
+      const b = el('button', '“ ' + citeLabel(id, false)); b.type = 'button';
+      b.onclick = () => { const p = passages[id]; quote.replaceChildren(p ? put(el('blockquote'), el('small', citeLabel(id, false)), p.text) : el('p', 'Passage not available.', 'dim')); };
+      cites.append(b);
+    }
+    if (cites.childElementCount) box.append(cites, quote);
+    if (turn.status === 'grounded') box.append(el('p', 'Answer drawn only from this run; citations checked against it.', 'hint'));
+    return box;
+  }
+  form.onsubmit = async event => {
+    event.preventDefault();
+    const question = input.value.trim(); if (!question) return;
+    button.disabled = true; input.disabled = true;
+    const pending = el('div', undefined, 'turn'); pending.append(el('div', question, 'q'), el('p', 'reading this run’s evidence', 'a dim cursor')); thread.append(pending);
+    try {
+      const turn = await request(`/research/${result.run_id}/ask`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question, history }) });
+      pending.replaceWith(renderTurn(turn));
+      if (turn.status === 'grounded') history.push({ question, answer: turn.answer });
+      input.value = '';
+    } catch (error) { pending.replaceWith(put(el('div', undefined, 'turn'), el('div', question, 'q'), el('p', error.message, 'a bad'))); }
+    finally { button.disabled = false; input.disabled = false; input.focus(); }
+  };
+  wrap.append(thread, form, el('p', 'Follow-ups use only this run’s papers, findings and passages. For new evidence, run a new question.', 'hint'));
+  return wrap;
 }
 
 function renderEvaluation(result) {

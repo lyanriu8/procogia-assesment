@@ -37,7 +37,19 @@ def build_comparison_report(state) -> ComparisonReport:
         disagreement_summary=f"{disagreements} pair(s) show potential or apparent disagreement. No study is selected as a winner.",
         evidence_limitations=list(dict.fromkeys(limits)), unresolved_questions=unresolved,
         citations=sorted(cited_passage_ids), overall_status=status,
-        clarification_question=state["search_plan"].get("clarification_question"),
+        clarification_question=(
+            state["search_plan"].get("clarification_question")
+            or (
+                "Which exposure and which outcome do you want to compare?"
+                if state["search_plan"].get("needs_clarification")
+                else None
+            )
+        ),
+        suggested_questions=(
+            state["search_plan"].get("suggested_questions", [])[:3]
+            if state["search_plan"].get("needs_clarification")
+            else []
+        ),
     )
 
 

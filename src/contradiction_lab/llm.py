@@ -151,10 +151,17 @@ class OllamaModel:
         raise ModelError("Structured output rejected after bounded repair budget")
 
     def plan(self, query: str):
+        from .domain import load_domain
+
         return self.structured(
             SearchPlan,
-            "Plan a bounded scholarly search. Set needs_clarification true ONLY when the question names no identifiable exposure or intervention AND no measurable outcome (for example 'Does it work?'). A question that names a specific exposure and outcome MUST be searched with needs_clarification false, even if it is unusual, hypothetical, implausible, or likely outside the available literature; finding no evidence is reported later, not by asking for clarification.",
-            {"query": query},
+            "Plan a bounded scholarly search. Set needs_clarification true ONLY when the question names no identifiable exposure or intervention AND no measurable outcome (for example 'Does it work?'). A question that names a specific exposure and outcome MUST be searched with needs_clarification false, even if it is unusual, hypothetical, implausible, or likely outside the available literature; finding no evidence is reported later, not by asking for clarification. When clarification is needed, write a one-sentence clarification_question and give up to three specific, searchable rephrasings in suggested_questions, each naming ONE of the available_exposures and ONE of the available_outcomes; otherwise leave suggested_questions empty.",
+            {
+                "query": query,
+                "available_topic": load_domain().get("name", ""),
+                "available_exposures": list(load_domain().get("exposure_keywords", {})),
+                "available_outcomes": list(load_domain().get("outcome_keywords", {})),
+            },
         )
 
     def extract(self, paper, passages, query=""):

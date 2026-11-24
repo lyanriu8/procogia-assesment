@@ -14,7 +14,7 @@ python3 -m venv .venv
 .venv/bin/python -m contradiction_lab serve
 ```
 
-Open http://127.0.0.1:8000. The header shows the real model and runtime. `/readiness` checks Ollama and both models. Investigations run in the background; the execution tab shows the current node, routes, timing, and model token usage. Local inference can take several minutes. The interface starts with a three-paper limit for a shorter demo; increase it to explore more sources. Run one investigation at a time.
+Open http://127.0.0.1:8000. After a run, ask follow-up questions under "Ask about these results"; answers use only that run's evidence and cite it. Add `?run=<run_id>` to the URL to reopen a saved run. The header shows the real model and runtime. `/readiness` checks Ollama and both models. Investigations run in the background; the execution tab shows the current node, routes, timing, and model token usage. Local inference can take several minutes. The interface starts with a three-paper limit for a shorter demo; increase it to explore more sources. Run one investigation at a time.
 
 The default source is seven preloaded real publications on resistance training and muscle hypertrophy, with exact PubMed abstract excerpts (see [data and RAG](docs/data-and-rag.md)). **The documents are preloaded; the answers are not.** Qwen plans, extracts findings, separately reviews effect direction, assesses claim pairs, chooses adaptive actions, and verifies support on every run. Unknown fields stay null. Output validation, source ownership, hashes, comparison constraints, and stopping limits are deterministic safeguards. The final report is assembled from verified findings, not an unconstrained prose generator.
 

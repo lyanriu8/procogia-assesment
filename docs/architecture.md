@@ -34,3 +34,9 @@ The UI uses background jobs and polls persisted node progress. Completed runs ex
 The context analyst uses Qwen3 reasoning for the small direction-review task. Other agents use non-thinking structured output to limit latency. Per-paper findings cite the full retrieved passage packet from that paper so the verifier can check both findings and study context. This is broader provenance than a single minimal supporting sentence.
 
 Latency checks found that disabling reasoning for the direction reviewer reintroduced sign errors on the targeted examples. Reasoning remains enabled for this specialist; the UI paper limit controls how much work a live demonstration requests.
+
+## Follow-up questions and clarification
+
+`POST /research/{run_id}/ask` answers a follow-up question about one completed run (`followup.py`). The model receives only that run's papers, findings (verified and excluded, with verification reasons), comparisons, quoted passages and limitations, plus up to three earlier grounded turns. It returns structured output: `answerable`, `answer`, `cited_claim_ids`, `cited_passage_ids`. Code then enforces grounding: an answer is shown only if it cites at least one claim or passage and every citation belongs to the run; otherwise it is withheld, and unanswerable questions return a fixed "this run's evidence does not answer that" message. Follow-ups never search or add evidence; new evidence requires a new run. Each follow-up is appended to the stored run for audit. It shares the single-model lock with research runs.
+
+When the planner asks for clarification, it also proposes up to three specific questions built from the corpus domain's exposures and outcomes. The UI shows them as buttons that start a normal investigation, so clarification leads back into the evidence pipeline instead of an open-ended chat. Free-form chat before a question is deliberately not offered: it would answer without retrieval or verification.
