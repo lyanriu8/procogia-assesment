@@ -1,0 +1,38 @@
+{
+  "validated_at": "2026-11-08T08:11:44.850828+00:00",
+  "python": "3.13.3",
+  "versions": {
+    "contradiction-lab": "0.1.0",
+    "pydantic": "2.11.5",
+    "fastapi": "0.115.12",
+    "uvicorn": "0.41.0",
+    "pytest": "8.4.1",
+    "httpx": "0.28.1",
+    "python-dotenv": "1.2.1"
+  },
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest -q",
+      "exit_code": 0,
+      "stdout": ".................................................................sss     [100%]\n=========================== short test summary info ============================\nSKIPPED [2] tests/test_workflows.py:102: could not import 'langgraph': No module named 'langgraph'\nSKIPPED [1] tests/test_workflows.py:108: could not import 'chromadb': No module named 'chromadb'\n65 passed, 3 skipped in 0.51s\n",
+      "stderr": ""
+    },
+    {
+      "command": "node -e const fs=require('fs'),vm=require('vm');new vm.Script(fs.readFileSync('src/contradiction_lab/web/index.html','utf8').match(/<script>([\\s\\S]*?)<\\/script>/)[1]);console.log('Frontend JavaScript syntax valid')",
+      "exit_code": 0,
+      "stdout": "Frontend JavaScript syntax valid\n",
+      "stderr": ""
+    }
+  ],
+  "unavailable_optional_integrations": [
+    "langgraph",
+    "chromadb",
+    "sentence_transformers"
+  ],
+  "environment_restrictions": [
+    "Terminal external DNS unavailable",
+    "Local socket binding denied by sandbox",
+    "Browser tool connection failed: missing sandboxPolicy request metadata"
+  ],
+  "package_build": "Editable install and non-editable wheel build succeeded with local dependencies; wheel in /tmp/contradiction-lab-wheel"
+}

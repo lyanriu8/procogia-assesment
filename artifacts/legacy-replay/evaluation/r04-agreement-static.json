@@ -1,0 +1,525 @@
+{
+  "run_id": "2f10e396dbc3446d9f1c6d06bf8da9ab",
+  "status": "evidence_found",
+  "report": {
+    "query": "Compare plant species diversity and grassland productivity",
+    "interpreted_scope": "Compare plant species diversity and grassland productivity",
+    "workflow_mode": "static",
+    "papers_considered": 2,
+    "papers_included": 2,
+    "claims_extracted": 2,
+    "comparisons": [
+      {
+        "comparison_id": "comparison-ac999462b54dd371",
+        "claim_a_id": "hector1999-c0",
+        "claim_b_id": "tilman1996-c0",
+        "same_outcome": true,
+        "comparable_system": true,
+        "comparable_methods": null,
+        "direction_relationship": "agreement",
+        "disagreement_type": null,
+        "explanation": "The reported directions agree for the normalized outcome; agreement does not establish identical effect sizes or causality.",
+        "context_differences": [],
+        "supporting_passage_ids": [
+          "hector1999-p0",
+          "hector1999-p1",
+          "tilman1996-p0",
+          "tilman1996-p1"
+        ],
+        "uncertainty_notes": [
+          "Missing context: population_or_material, method, comparator, duration, units"
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "hector1999-c0",
+        "paper_id": "hector1999",
+        "statement": "there was an overall log-linear reduction of average aboveground biomass with loss of species",
+        "outcome": "productivity",
+        "direction": "positive",
+        "study_system": "grassland",
+        "population_or_material": null,
+        "method": null,
+        "intervention_or_exposure": "plant biodiversity",
+        "comparator": null,
+        "conditions": [
+          "eight European field sites"
+        ],
+        "duration": null,
+        "effect_size": null,
+        "units": null,
+        "sample_size": null,
+        "limitations": [],
+        "evidence_passage_ids": [
+          "hector1999-p0",
+          "hector1999-p1"
+        ],
+        "extraction_confidence": null,
+        "missing_fields": [
+          "population_or_material",
+          "method",
+          "comparator",
+          "duration",
+          "effect_size",
+          "units",
+          "sample_size"
+        ]
+      },
+      {
+        "claim_id": "tilman1996-c0",
+        "paper_id": "tilman1996",
+        "statement": "ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity",
+        "outcome": "productivity",
+        "direction": "positive",
+        "study_system": "grassland",
+        "population_or_material": null,
+        "method": "field experiment",
+        "intervention_or_exposure": "plant biodiversity",
+        "comparator": null,
+        "conditions": [],
+        "duration": null,
+        "effect_size": null,
+        "units": null,
+        "sample_size": null,
+        "limitations": [],
+        "evidence_passage_ids": [
+          "tilman1996-p0",
+          "tilman1996-p1"
+        ],
+        "extraction_confidence": null,
+        "missing_fields": [
+          "population_or_material",
+          "comparator",
+          "duration",
+          "effect_size",
+          "units",
+          "sample_size"
+        ]
+      }
+    ],
+    "verification_results": [
+      {
+        "claim_id": "hector1999-c0",
+        "paper_exists": true,
+        "source_resolves": true,
+        "source_check": "cached_snapshot",
+        "passage_exists": true,
+        "passage_supports_claim": "yes",
+        "status": "verified",
+        "reason": "Matches source-checked extraction replay and intact passages; not independent human entailment review."
+      },
+      {
+        "claim_id": "tilman1996-c0",
+        "paper_exists": true,
+        "source_resolves": true,
+        "source_check": "cached_snapshot",
+        "passage_exists": true,
+        "passage_supports_claim": "yes",
+        "status": "verified",
+        "reason": "Matches source-checked extraction replay and intact passages; not independent human entailment review."
+      }
+    ],
+    "papers": [
+      {
+        "paper_id": "hector1999",
+        "provider": "source_checked_excerpt",
+        "provider_id": "hector1999",
+        "doi": "10.1126/science.286.5442.1123",
+        "title": "Plant diversity and productivity experiments in European grasslands",
+        "abstract": "there was an overall log-linear reduction of average aboveground biomass with loss of species\nAt eight European field sites",
+        "publication_year": 1999,
+        "publication_date": null,
+        "authors": [
+          "A. Hector",
+          "B. Schmid"
+        ],
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/10550043/",
+        "full_text_available": false,
+        "license": null,
+        "retrieved_at": "2026-11-08T00:49:50Z",
+        "content_hash": "f979bc7d775b88278157c12fa67ed8a2b40353fdca40117c2c5f6b7b16ea1273",
+        "pmcid": null,
+        "provenance": [
+          "https://pubmed.ncbi.nlm.nih.gov/10550043/"
+        ],
+        "source_checked_at": "2026-11-08T00:49:50Z"
+      },
+      {
+        "paper_id": "tilman1996",
+        "provider": "source_checked_excerpt",
+        "provider_id": "tilman1996",
+        "doi": "10.1038/379718a0",
+        "title": "Productivity and sustainability influenced by biodiversity in grassland ecosystems",
+        "abstract": "ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity\nwell-replicated field experiment, in which species diversity was directly controlled",
+        "publication_year": 1996,
+        "publication_date": null,
+        "authors": [
+          "David Tilman",
+          "David Wedin",
+          "Johannes Knops"
+        ],
+        "source_url": "https://www.nature.com/articles/379718a0",
+        "full_text_available": false,
+        "license": null,
+        "retrieved_at": "2026-11-08T00:49:50Z",
+        "content_hash": "6e94e7158cb4accad79a580c90d84fe550dd68406e82546f8b9c102a90a50829",
+        "pmcid": null,
+        "provenance": [
+          "https://www.nature.com/articles/379718a0"
+        ],
+        "source_checked_at": "2026-11-08T00:49:50Z"
+      }
+    ],
+    "passages": [
+      {
+        "passage_id": "tilman1996-p0",
+        "paper_id": "tilman1996",
+        "text": "ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity",
+        "section": "Abstract",
+        "page_or_location": "Abstract",
+        "source_type": "abstract",
+        "source_url": "https://www.nature.com/articles/379718a0",
+        "chunk_index": 0,
+        "content_hash": "9c9fd5afb3fd868956292f49bbdff840faad91cc86cd3ee9933086611d652579",
+        "paper_title": "Productivity and sustainability influenced by biodiversity in grassland ecosystems",
+        "doi": "10.1038/379718a0",
+        "publication_year": 1996
+      },
+      {
+        "passage_id": "tilman1996-p1",
+        "paper_id": "tilman1996",
+        "text": "well-replicated field experiment, in which species diversity was directly controlled",
+        "section": "Abstract: study design",
+        "page_or_location": "Abstract: study design",
+        "source_type": "abstract",
+        "source_url": "https://www.nature.com/articles/379718a0",
+        "chunk_index": 1,
+        "content_hash": "6223bf5f91da15c1d9f19f8e63fd2c8dad9f5cabadb253975e462613ad3d715d",
+        "paper_title": "Productivity and sustainability influenced by biodiversity in grassland ecosystems",
+        "doi": "10.1038/379718a0",
+        "publication_year": 1996
+      },
+      {
+        "passage_id": "hector1999-p0",
+        "paper_id": "hector1999",
+        "text": "there was an overall log-linear reduction of average aboveground biomass with loss of species",
+        "section": "Abstract",
+        "page_or_location": "Abstract",
+        "source_type": "abstract",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/10550043/",
+        "chunk_index": 0,
+        "content_hash": "d91372721b1b7535a458a074295c48ac528db5af0c0f018671ec4facf42d20ae",
+        "paper_title": "Plant diversity and productivity experiments in European grasslands",
+        "doi": "10.1126/science.286.5442.1123",
+        "publication_year": 1999
+      },
+      {
+        "passage_id": "hector1999-p1",
+        "paper_id": "hector1999",
+        "text": "At eight European field sites",
+        "section": "Abstract: location",
+        "page_or_location": "Abstract: location",
+        "source_type": "abstract",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/10550043/",
+        "chunk_index": 1,
+        "content_hash": "2e8010bc10836d57e1f570ae0e5b92e2e1faca2be9d495a0af0c1784ccec5a1c",
+        "paper_title": "Plant diversity and productivity experiments in European grasslands",
+        "doi": "10.1126/science.286.5442.1123",
+        "publication_year": 1999
+      }
+    ],
+    "agreement_summary": "1 verified claim pair(s) have matching reported directions. Inspect context before inferring a consensus.",
+    "disagreement_summary": "0 pair(s) show potential or apparent disagreement. No study is selected as a winner.",
+    "evidence_limitations": [
+      "Evidence navigation only: not an exhaustive review, meta-analysis, scientific verdict, or clinical recommendation.",
+      "Source validation confirms cached/provider identity, not a fresh HTTP/DOI resolution or independent scientific truth.",
+      "Some included studies have only short abstract-level excerpts; methods and results may be missing.",
+      "Unreported or unavailable fields remain unknown: comparator, duration, effect_size, method, population_or_material, sample_size, units.",
+      "Offline replay: AI-authored cached extractions and rule-based comparisons, not a live LLM or human-reviewed scientific benchmark."
+    ],
+    "unresolved_questions": [],
+    "citations": [
+      "hector1999-p0",
+      "hector1999-p1",
+      "tilman1996-p0",
+      "tilman1996-p1"
+    ],
+    "overall_status": "evidence_found",
+    "clarification_question": null,
+    "generated_at": "2026-11-08T08:11:42.990108Z"
+  },
+  "trace": [
+    {
+      "node": "plan_research",
+      "started_at": "2026-11-08T08:11:42.987679Z",
+      "ended_at": "2026-11-08T08:11:42.987686Z",
+      "latency_ms": 0.007,
+      "papers": 0,
+      "passages": 0,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "retrieve_papers",
+      "started_at": "2026-11-08T08:11:42.987700Z",
+      "ended_at": "2026-11-08T08:11:42.988365Z",
+      "latency_ms": 0.666,
+      "papers": 2,
+      "passages": 0,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "retrieve_passages",
+      "started_at": "2026-11-08T08:11:42.988380Z",
+      "ended_at": "2026-11-08T08:11:42.989821Z",
+      "latency_ms": 1.442,
+      "papers": 2,
+      "passages": 4,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "extract_claims",
+      "started_at": "2026-11-08T08:11:42.989837Z",
+      "ended_at": "2026-11-08T08:11:42.989894Z",
+      "latency_ms": 0.057,
+      "papers": 2,
+      "passages": 4,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "analyze_context",
+      "started_at": "2026-11-08T08:11:42.989907Z",
+      "ended_at": "2026-11-08T08:11:42.989919Z",
+      "latency_ms": 0.012,
+      "papers": 2,
+      "passages": 4,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "compare_claims",
+      "started_at": "2026-11-08T08:11:42.989932Z",
+      "ended_at": "2026-11-08T08:11:42.989955Z",
+      "latency_ms": 0.024,
+      "papers": 2,
+      "passages": 4,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "verify_evidence",
+      "started_at": "2026-11-08T08:11:42.989968Z",
+      "ended_at": "2026-11-08T08:11:42.990063Z",
+      "latency_ms": 0.096,
+      "papers": 2,
+      "passages": 4,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "build_report",
+      "started_at": "2026-11-08T08:11:42.990076Z",
+      "ended_at": "2026-11-08T08:11:42.990128Z",
+      "latency_ms": 0.052,
+      "papers": 2,
+      "passages": 4,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "config": {
+    "source": "fixture",
+    "model_backend": "replay",
+    "runtime": "builtin",
+    "vector_backend": "sqlite",
+    "embedding_backend": "hash",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "max_papers": 20,
+    "top_k": 8,
+    "chunk_size_tokens": 550,
+    "chunk_overlap_tokens": 75,
+    "max_iterations": 2,
+    "min_claims": 2,
+    "min_comparable_pairs": 1,
+    "max_structured_output_repairs": 1,
+    "context_tokens": 6000,
+    "request_timeout": 15.0,
+    "max_retries": 2,
+    "max_claims_per_paper": 3,
+    "max_comparisons": 30,
+    "context_config": "evidence-rich",
+    "data_dir": ".runtime"
+  },
+  "embedding": "signed-token-hash-384-v1 (lexical baseline, not semantic)",
+  "model": "fixture-replay-v1 (not live inference)",
+  "prompt_version": "grounded-v1",
+  "source_mode": "fixture",
+  "request": {
+    "query": "Compare plant species diversity and grassland productivity",
+    "workflow": "static",
+    "max_papers": null,
+    "top_k": null,
+    "max_iterations": null,
+    "context_config": null,
+    "date_from": null,
+    "date_to": null,
+    "sources": [
+      "openalex",
+      "europepmc"
+    ]
+  },
+  "retrieved_passage_ids": [
+    "tilman1996-p0",
+    "tilman1996-p1",
+    "hector1999-p0",
+    "hector1999-p1"
+  ],
+  "extracted_claims": [
+    {
+      "claim_id": "hector1999-c0",
+      "paper_id": "hector1999",
+      "statement": "there was an overall log-linear reduction of average aboveground biomass with loss of species",
+      "outcome": "productivity",
+      "direction": "positive",
+      "study_system": "grassland",
+      "population_or_material": null,
+      "method": null,
+      "intervention_or_exposure": "plant biodiversity",
+      "comparator": null,
+      "conditions": [
+        "eight European field sites"
+      ],
+      "duration": null,
+      "effect_size": null,
+      "units": null,
+      "sample_size": null,
+      "limitations": [],
+      "evidence_passage_ids": [
+        "hector1999-p0",
+        "hector1999-p1"
+      ],
+      "extraction_confidence": null,
+      "missing_fields": [
+        "population_or_material",
+        "method",
+        "comparator",
+        "duration",
+        "effect_size",
+        "units",
+        "sample_size"
+      ]
+    },
+    {
+      "claim_id": "tilman1996-c0",
+      "paper_id": "tilman1996",
+      "statement": "ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity",
+      "outcome": "productivity",
+      "direction": "positive",
+      "study_system": "grassland",
+      "population_or_material": null,
+      "method": "field experiment",
+      "intervention_or_exposure": "plant biodiversity",
+      "comparator": null,
+      "conditions": [],
+      "duration": null,
+      "effect_size": null,
+      "units": null,
+      "sample_size": null,
+      "limitations": [],
+      "evidence_passage_ids": [
+        "tilman1996-p0",
+        "tilman1996-p1"
+      ],
+      "extraction_confidence": null,
+      "missing_fields": [
+        "population_or_material",
+        "comparator",
+        "duration",
+        "effect_size",
+        "units",
+        "sample_size"
+      ]
+    }
+  ],
+  "benchmark_fault": null,
+  "implementation_version": "0.1.0",
+  "corpus_version": "source-excerpts-v1",
+  "config_hash": "6d0f3d620e037ac7d07327917e609dc223128dcc282744addc7510134268decb"
+}

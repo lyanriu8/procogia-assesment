@@ -1,0 +1,96 @@
+{
+  "warning": "Measured offline replay; local latencies and structural checks are not live LLM quality/cost measurements.",
+  "experiments": [
+    {
+      "experiment": "retrieval_top_k",
+      "value": 4,
+      "status": "evidence_found",
+      "passages": 4,
+      "verified_claims": 3,
+      "comparisons": 3,
+      "nodes": 8,
+      "latency_ms": 6.3260000000000005,
+      "input_tokens": 0,
+      "routes": [],
+      "run_id": "217c5865bf9741919eb704b6b2384a1e"
+    },
+    {
+      "experiment": "retrieval_top_k",
+      "value": 8,
+      "status": "evidence_found",
+      "passages": 8,
+      "verified_claims": 5,
+      "comparisons": 10,
+      "nodes": 8,
+      "latency_ms": 7.9110000000000005,
+      "input_tokens": 0,
+      "routes": [],
+      "run_id": "3a7eec70d9084e5fa35cbd35d2fae716"
+    },
+    {
+      "experiment": "adaptive_iterations",
+      "value": 1,
+      "status": "insufficient_evidence",
+      "passages": 0,
+      "verified_claims": 0,
+      "comparisons": 0,
+      "nodes": 15,
+      "latency_ms": 0.127,
+      "input_tokens": 0,
+      "routes": [
+        "broaden_search",
+        "verify_with_limitations"
+      ],
+      "run_id": "f819d5caa7b1496f946450402019c306"
+    },
+    {
+      "experiment": "adaptive_iterations",
+      "value": 2,
+      "status": "insufficient_evidence",
+      "passages": 0,
+      "verified_claims": 0,
+      "comparisons": 0,
+      "nodes": 15,
+      "latency_ms": 0.122,
+      "input_tokens": 0,
+      "routes": [
+        "broaden_search",
+        "verify_with_limitations"
+      ],
+      "run_id": "076d0ff26f4c40d58a122227f449799f"
+    },
+    {
+      "experiment": "min_comparable_pairs",
+      "value": 1,
+      "status": "evidence_found",
+      "passages": 8,
+      "verified_claims": 5,
+      "comparisons": 10,
+      "nodes": 13,
+      "latency_ms": 8.443999999999999,
+      "input_tokens": 0,
+      "routes": [
+        "retrieve_full_text",
+        "analyze_context"
+      ],
+      "run_id": "b52d71f9fb0e48a1a7a13be232d69053"
+    },
+    {
+      "experiment": "min_comparable_pairs",
+      "value": 8,
+      "status": "limited_evidence",
+      "passages": 8,
+      "verified_claims": 5,
+      "comparisons": 10,
+      "nodes": 18,
+      "latency_ms": 12.408,
+      "input_tokens": 0,
+      "routes": [
+        "retrieve_full_text",
+        "refine_comparison",
+        "verify_with_limitations"
+      ],
+      "run_id": "557ff62af7ba41feb07b2e9139abbd72"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "contradiction-lab"
+version = "0.1.0"
+description = "Source-grounded scientific evidence comparison with inspectable agent workflows"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.11,<3", "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "python-dotenv>=1,<2", "langgraph>=1,<2", "chromadb>=1,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "httpx>=0.28,<1"]
+
+[project.scripts]
+contradiction-lab = "contradiction_lab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+contradiction_lab = ["web/*.html", "data/*.json", "data/*.jsonl"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"

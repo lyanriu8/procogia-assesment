@@ -1,0 +1,154 @@
+{
+  "version": "public-excerpts-v2",
+  "retrieved_at": "2026-11-08T00:49:50Z",
+  "papers": [
+    {
+      "id": "tilman1996",
+      "doi": "10.1038/379718a0",
+      "year": 1996,
+      "title": "Productivity and sustainability influenced by biodiversity in grassland ecosystems",
+      "authors": [
+        "David Tilman",
+        "David Wedin",
+        "Johannes Knops"
+      ],
+      "url": "https://www.nature.com/articles/379718a0",
+      "license": null,
+      "fragments": [
+        {
+          "section": "Abstract",
+          "type": "abstract",
+          "text": "ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity"
+        },
+        {
+          "section": "Abstract: study design",
+          "type": "abstract",
+          "text": "well-replicated field experiment, in which species diversity was directly controlled"
+        }
+      ]
+    },
+    {
+      "id": "hector1999",
+      "doi": "10.1126/science.286.5442.1123",
+      "year": 1999,
+      "title": "Plant diversity and productivity experiments in European grasslands",
+      "authors": [
+        "A. Hector",
+        "B. Schmid"
+      ],
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10550043/",
+      "license": null,
+      "fragments": [
+        {
+          "section": "Abstract",
+          "type": "abstract",
+          "text": "there was an overall log-linear reduction of average aboveground biomass with loss of species"
+        },
+        {
+          "section": "Abstract: location",
+          "type": "abstract",
+          "text": "At eight European field sites"
+        }
+      ]
+    },
+    {
+      "id": "wagg2022",
+      "doi": "10.1038/s41467-022-35189-2",
+      "year": 2022,
+      "title": "Biodiversity\u2013stability relationships strengthen over time in a long-term grassland experiment",
+      "authors": [
+        "Cameron Wagg",
+        "Christiane Roscher"
+      ],
+      "url": "https://www.nature.com/articles/s41467-022-35189-2",
+      "license": "CC-BY-4.0",
+      "fragments": [
+        {
+          "section": "Abstract",
+          "type": "abstract",
+          "text": "Productivity declined more rapidly in less diverse communities"
+        },
+        {
+          "section": "Abstract: duration",
+          "type": "abstract",
+          "text": "over 17 years in a grassland biodiversity experiment"
+        },
+        {
+          "section": "Methods",
+          "type": "full_text",
+          "text": "Jena, Germany"
+        }
+      ]
+    },
+    {
+      "id": "tilman2006",
+      "doi": "10.1038/nature04742",
+      "year": 2006,
+      "title": "Biodiversity and ecosystem stability in a decade-long grassland experiment",
+      "authors": [
+        "David Tilman",
+        "Peter B. Reich",
+        "Johannes M. H. Knops"
+      ],
+      "url": "https://www.nature.com/articles/nature04742",
+      "license": null,
+      "fragments": [
+        {
+          "section": "Abstract",
+          "type": "abstract",
+          "text": "greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production"
+        },
+        {
+          "section": "Abstract: study design",
+          "type": "abstract",
+          "text": "long-term experimental field test"
+        }
+      ]
+    },
+    {
+      "id": "pfisterer2002",
+      "doi": "10.1038/416084a",
+      "year": 2002,
+      "title": "Diversity-dependent production can decrease the stability of ecosystem functioning",
+      "authors": [
+        "Andrea B. Pfisterer",
+        "Bernhard Schmid"
+      ],
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11882897/",
+      "license": null,
+      "fragments": [
+        {
+          "section": "Abstract: resistance",
+          "type": "abstract",
+          "text": "the species-poor systems were more resistant to perturbation than the species-rich systems"
+        }
+      ],
+      "source_note": "Short quotation from the public publisher abstract at https://www.nature.com/articles/416084a. Unknown license prevents automated full-document fetching."
+    },
+    {
+      "id": "yachi1999",
+      "doi": "10.1073/pnas.96.4.1463",
+      "year": 1999,
+      "title": "Biodiversity and ecosystem productivity in a fluctuating environment: the insurance hypothesis",
+      "authors": [
+        "S. Yachi",
+        "M. Loreau"
+      ],
+      "url": "https://pubmed.ncbi.nlm.nih.gov/9990046/",
+      "license": null,
+      "fragments": [
+        {
+          "section": "Abstract",
+          "type": "abstract",
+          "text": "an increase in the temporal mean of productivity"
+        },
+        {
+          "section": "Abstract: method",
+          "type": "abstract",
+          "text": "We develop a general stochastic dynamic model"
+        }
+      ]
+    }
+  ],
+  "description": "Public source excerpts only. All findings are extracted by the running model."
+}

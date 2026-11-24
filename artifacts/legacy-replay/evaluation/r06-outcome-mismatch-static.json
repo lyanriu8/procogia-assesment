@@ -1,0 +1,510 @@
+{
+  "run_id": "68b58bb918ba464d8ab7375af2ccc58a",
+  "status": "limited_evidence",
+  "report": {
+    "query": "Compare plant diversity and ecosystem stability biomass",
+    "interpreted_scope": "Compare plant diversity and ecosystem stability biomass",
+    "workflow_mode": "static",
+    "papers_considered": 2,
+    "papers_included": 2,
+    "claims_extracted": 2,
+    "comparisons": [
+      {
+        "comparison_id": "comparison-c3276b6220ee81ba",
+        "claim_a_id": "tilman2006-c0",
+        "claim_b_id": "pfisterer2002-c0",
+        "same_outcome": false,
+        "comparable_system": null,
+        "comparable_methods": null,
+        "direction_relationship": "not_comparable",
+        "disagreement_type": "apparent_disagreement",
+        "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
+        "context_differences": [],
+        "supporting_passage_ids": [
+          "tilman2006-p0",
+          "tilman2006-p1",
+          "pfisterer2002-p0"
+        ],
+        "uncertainty_notes": [
+          "Missing context: study_system, population_or_material, method, comparator, duration, units"
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "tilman2006-c0",
+        "paper_id": "tilman2006",
+        "statement": "greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production",
+        "outcome": "temporal stability",
+        "direction": "positive",
+        "study_system": "grassland",
+        "population_or_material": null,
+        "method": "field experiment",
+        "intervention_or_exposure": "plant biodiversity",
+        "comparator": null,
+        "conditions": [],
+        "duration": null,
+        "effect_size": null,
+        "units": null,
+        "sample_size": null,
+        "limitations": [],
+        "evidence_passage_ids": [
+          "tilman2006-p0",
+          "tilman2006-p1"
+        ],
+        "extraction_confidence": null,
+        "missing_fields": [
+          "population_or_material",
+          "comparator",
+          "duration",
+          "effect_size",
+          "units",
+          "sample_size"
+        ]
+      },
+      {
+        "claim_id": "pfisterer2002-c0",
+        "paper_id": "pfisterer2002",
+        "statement": "the species-poor systems were more resistant to perturbation than the species-rich systems",
+        "outcome": "perturbation resistance",
+        "direction": "negative",
+        "study_system": null,
+        "population_or_material": null,
+        "method": null,
+        "intervention_or_exposure": "plant biodiversity",
+        "comparator": null,
+        "conditions": [
+          "perturbation"
+        ],
+        "duration": null,
+        "effect_size": null,
+        "units": null,
+        "sample_size": null,
+        "limitations": [],
+        "evidence_passage_ids": [
+          "pfisterer2002-p0"
+        ],
+        "extraction_confidence": null,
+        "missing_fields": [
+          "study_system",
+          "population_or_material",
+          "method",
+          "comparator",
+          "duration",
+          "effect_size",
+          "units",
+          "sample_size"
+        ]
+      }
+    ],
+    "verification_results": [
+      {
+        "claim_id": "tilman2006-c0",
+        "paper_exists": true,
+        "source_resolves": true,
+        "source_check": "cached_snapshot",
+        "passage_exists": true,
+        "passage_supports_claim": "yes",
+        "status": "verified",
+        "reason": "Matches source-checked extraction replay and intact passages; not independent human entailment review."
+      },
+      {
+        "claim_id": "pfisterer2002-c0",
+        "paper_exists": true,
+        "source_resolves": true,
+        "source_check": "cached_snapshot",
+        "passage_exists": true,
+        "passage_supports_claim": "yes",
+        "status": "verified",
+        "reason": "Matches source-checked extraction replay and intact passages; not independent human entailment review."
+      }
+    ],
+    "papers": [
+      {
+        "paper_id": "tilman2006",
+        "provider": "source_checked_excerpt",
+        "provider_id": "tilman2006",
+        "doi": "10.1038/nature04742",
+        "title": "Biodiversity and ecosystem stability in a decade-long grassland experiment",
+        "abstract": "greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production\nlong-term experimental field test",
+        "publication_year": 2006,
+        "publication_date": null,
+        "authors": [
+          "David Tilman",
+          "Peter B. Reich",
+          "Johannes M. H. Knops"
+        ],
+        "source_url": "https://www.nature.com/articles/nature04742",
+        "full_text_available": false,
+        "license": null,
+        "retrieved_at": "2026-11-08T00:49:50Z",
+        "content_hash": "63521df114a2f9eca673444f5e212a78b09c9855f483ff753945e5e929f5338d",
+        "pmcid": null,
+        "provenance": [
+          "https://www.nature.com/articles/nature04742"
+        ],
+        "source_checked_at": "2026-11-08T00:49:50Z"
+      },
+      {
+        "paper_id": "pfisterer2002",
+        "provider": "source_checked_excerpt",
+        "provider_id": "pfisterer2002",
+        "doi": "10.1038/416084a",
+        "title": "Diversity-dependent production can decrease the stability of ecosystem functioning",
+        "abstract": "the species-poor systems were more resistant to perturbation than the species-rich systems",
+        "publication_year": 2002,
+        "publication_date": null,
+        "authors": [
+          "Andrea B. Pfisterer",
+          "Bernhard Schmid"
+        ],
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/11882897/",
+        "full_text_available": false,
+        "license": null,
+        "retrieved_at": "2026-11-08T00:49:50Z",
+        "content_hash": "3fff3deadc7d975cd2d9f21b5ae58e4b3ac0e5ce030e40576320aff8d715cb8c",
+        "pmcid": null,
+        "provenance": [
+          "https://pubmed.ncbi.nlm.nih.gov/11882897/"
+        ],
+        "source_checked_at": "2026-11-08T00:49:50Z"
+      }
+    ],
+    "passages": [
+      {
+        "passage_id": "tilman2006-p0",
+        "paper_id": "tilman2006",
+        "text": "greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production",
+        "section": "Abstract",
+        "page_or_location": "Abstract",
+        "source_type": "abstract",
+        "source_url": "https://www.nature.com/articles/nature04742",
+        "chunk_index": 0,
+        "content_hash": "5f19c1a66c7d7a6daeae01596fbf25b233a0b13ab2ea0ff567646fc05e34751f",
+        "paper_title": "Biodiversity and ecosystem stability in a decade-long grassland experiment",
+        "doi": "10.1038/nature04742",
+        "publication_year": 2006
+      },
+      {
+        "passage_id": "tilman2006-p1",
+        "paper_id": "tilman2006",
+        "text": "long-term experimental field test",
+        "section": "Abstract: study design",
+        "page_or_location": "Abstract: study design",
+        "source_type": "abstract",
+        "source_url": "https://www.nature.com/articles/nature04742",
+        "chunk_index": 1,
+        "content_hash": "093e3a2c064d6092ae0bcf7f057c95cd3ec1b893549a815331d0667ac06e62ca",
+        "paper_title": "Biodiversity and ecosystem stability in a decade-long grassland experiment",
+        "doi": "10.1038/nature04742",
+        "publication_year": 2006
+      },
+      {
+        "passage_id": "pfisterer2002-p0",
+        "paper_id": "pfisterer2002",
+        "text": "the species-poor systems were more resistant to perturbation than the species-rich systems",
+        "section": "Abstract: resistance",
+        "page_or_location": "Abstract: resistance",
+        "source_type": "abstract",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/11882897/",
+        "chunk_index": 0,
+        "content_hash": "d1701811f8ed98a51c817c97d0cfeff24c07a7a2a09b3cc715865d8bf54a94f2",
+        "paper_title": "Diversity-dependent production can decrease the stability of ecosystem functioning",
+        "doi": "10.1038/416084a",
+        "publication_year": 2002
+      }
+    ],
+    "agreement_summary": "0 verified claim pair(s) have matching reported directions. Inspect context before inferring a consensus.",
+    "disagreement_summary": "1 pair(s) show potential or apparent disagreement. No study is selected as a winner.",
+    "evidence_limitations": [
+      "Evidence navigation only: not an exhaustive review, meta-analysis, scientific verdict, or clinical recommendation.",
+      "Source validation confirms cached/provider identity, not a fresh HTTP/DOI resolution or independent scientific truth.",
+      "Some included studies have only short abstract-level excerpts; methods and results may be missing.",
+      "Unreported or unavailable fields remain unknown: comparator, duration, effect_size, method, population_or_material, sample_size, study_system, units.",
+      "Offline replay: AI-authored cached extractions and rule-based comparisons, not a live LLM or human-reviewed scientific benchmark."
+    ],
+    "unresolved_questions": [
+      "Not enough verified comparable findings for the configured reporting threshold. Broader retrieval and human review are needed."
+    ],
+    "citations": [
+      "pfisterer2002-p0",
+      "tilman2006-p0",
+      "tilman2006-p1"
+    ],
+    "overall_status": "limited_evidence",
+    "clarification_question": null,
+    "generated_at": "2026-11-08T08:11:43.002885Z"
+  },
+  "trace": [
+    {
+      "node": "plan_research",
+      "started_at": "2026-11-08T08:11:43.001021Z",
+      "ended_at": "2026-11-08T08:11:43.001028Z",
+      "latency_ms": 0.007,
+      "papers": 0,
+      "passages": 0,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "retrieve_papers",
+      "started_at": "2026-11-08T08:11:43.001042Z",
+      "ended_at": "2026-11-08T08:11:43.001712Z",
+      "latency_ms": 0.67,
+      "papers": 2,
+      "passages": 0,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "retrieve_passages",
+      "started_at": "2026-11-08T08:11:43.001726Z",
+      "ended_at": "2026-11-08T08:11:43.002635Z",
+      "latency_ms": 0.909,
+      "papers": 2,
+      "passages": 3,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "extract_claims",
+      "started_at": "2026-11-08T08:11:43.002650Z",
+      "ended_at": "2026-11-08T08:11:43.002702Z",
+      "latency_ms": 0.052,
+      "papers": 2,
+      "passages": 3,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "analyze_context",
+      "started_at": "2026-11-08T08:11:43.002715Z",
+      "ended_at": "2026-11-08T08:11:43.002727Z",
+      "latency_ms": 0.012,
+      "papers": 2,
+      "passages": 3,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "compare_claims",
+      "started_at": "2026-11-08T08:11:43.002738Z",
+      "ended_at": "2026-11-08T08:11:43.002758Z",
+      "latency_ms": 0.02,
+      "papers": 2,
+      "passages": 3,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "verify_evidence",
+      "started_at": "2026-11-08T08:11:43.002769Z",
+      "ended_at": "2026-11-08T08:11:43.002847Z",
+      "latency_ms": 0.078,
+      "papers": 2,
+      "passages": 3,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "build_report",
+      "started_at": "2026-11-08T08:11:43.002860Z",
+      "ended_at": "2026-11-08T08:11:43.002902Z",
+      "latency_ms": 0.043,
+      "papers": 2,
+      "passages": 3,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "fixture-replay-v1 (not live inference)",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "config": {
+    "source": "fixture",
+    "model_backend": "replay",
+    "runtime": "builtin",
+    "vector_backend": "sqlite",
+    "embedding_backend": "hash",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "max_papers": 20,
+    "top_k": 8,
+    "chunk_size_tokens": 550,
+    "chunk_overlap_tokens": 75,
+    "max_iterations": 2,
+    "min_claims": 2,
+    "min_comparable_pairs": 1,
+    "max_structured_output_repairs": 1,
+    "context_tokens": 6000,
+    "request_timeout": 15.0,
+    "max_retries": 2,
+    "max_claims_per_paper": 3,
+    "max_comparisons": 30,
+    "context_config": "evidence-rich",
+    "data_dir": ".runtime"
+  },
+  "embedding": "signed-token-hash-384-v1 (lexical baseline, not semantic)",
+  "model": "fixture-replay-v1 (not live inference)",
+  "prompt_version": "grounded-v1",
+  "source_mode": "fixture",
+  "request": {
+    "query": "Compare plant diversity and ecosystem stability biomass",
+    "workflow": "static",
+    "max_papers": null,
+    "top_k": null,
+    "max_iterations": null,
+    "context_config": null,
+    "date_from": null,
+    "date_to": null,
+    "sources": [
+      "openalex",
+      "europepmc"
+    ]
+  },
+  "retrieved_passage_ids": [
+    "tilman2006-p0",
+    "tilman2006-p1",
+    "pfisterer2002-p0"
+  ],
+  "extracted_claims": [
+    {
+      "claim_id": "tilman2006-c0",
+      "paper_id": "tilman2006",
+      "statement": "greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production",
+      "outcome": "temporal stability",
+      "direction": "positive",
+      "study_system": "grassland",
+      "population_or_material": null,
+      "method": "field experiment",
+      "intervention_or_exposure": "plant biodiversity",
+      "comparator": null,
+      "conditions": [],
+      "duration": null,
+      "effect_size": null,
+      "units": null,
+      "sample_size": null,
+      "limitations": [],
+      "evidence_passage_ids": [
+        "tilman2006-p0",
+        "tilman2006-p1"
+      ],
+      "extraction_confidence": null,
+      "missing_fields": [
+        "population_or_material",
+        "comparator",
+        "duration",
+        "effect_size",
+        "units",
+        "sample_size"
+      ]
+    },
+    {
+      "claim_id": "pfisterer2002-c0",
+      "paper_id": "pfisterer2002",
+      "statement": "the species-poor systems were more resistant to perturbation than the species-rich systems",
+      "outcome": "perturbation resistance",
+      "direction": "negative",
+      "study_system": null,
+      "population_or_material": null,
+      "method": null,
+      "intervention_or_exposure": "plant biodiversity",
+      "comparator": null,
+      "conditions": [
+        "perturbation"
+      ],
+      "duration": null,
+      "effect_size": null,
+      "units": null,
+      "sample_size": null,
+      "limitations": [],
+      "evidence_passage_ids": [
+        "pfisterer2002-p0"
+      ],
+      "extraction_confidence": null,
+      "missing_fields": [
+        "study_system",
+        "population_or_material",
+        "method",
+        "comparator",
+        "duration",
+        "effect_size",
+        "units",
+        "sample_size"
+      ]
+    }
+  ],
+  "benchmark_fault": null,
+  "implementation_version": "0.1.0",
+  "corpus_version": "source-excerpts-v1",
+  "config_hash": "6d0f3d620e037ac7d07327917e609dc223128dcc282744addc7510134268decb"
+}
