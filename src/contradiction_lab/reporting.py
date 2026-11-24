@@ -22,8 +22,6 @@ def build_comparison_report(state) -> ComparisonReport:
     limits.extend(f"{error['kind']}: {error['message']}" for error in state["errors"])
     if any(result.status != "verified" for result in results):
         limits.append("Qualified or rejected claims were excluded from synthesis; inspect verification results for reasons.")
-    if state["settings"]["model_backend"] == "replay":
-        limits.append("Offline replay: AI-authored cached extractions and rule-based comparisons, not a live LLM or human-reviewed scientific benchmark.")
     cited_passage_ids = {identifier for claim in claims for identifier in claim.evidence_passage_ids}
     cited_paper_ids = {claim.paper_id for claim in claims}
     agreements = sum(comparison.direction_relationship == "agreement" for comparison in comparisons)

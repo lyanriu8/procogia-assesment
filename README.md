@@ -1,94 +1,66 @@
 # Contradiction Lab
 
-A compact scientific-evidence comparison product implementing `contradiction_lab_implementation_plan.md` and the accompanying AI internship assessment. It finds papers, retrieves passages, extracts findings, checks comparability, verifies citations, and reports agreement, disagreement, or uncertainty.
+A local scientific evidence comparison app with **actual Ollama inference, LangGraph agents, semantic RAG, and persistent Chroma**. No replay inference, cached extraction answers, token hashing, or alternate graph executor exists in the application.
 
-**Start here:** [assessment answers](docs/assessment-answers.md), [30-minute presentation](docs/presentation-spec.md), [measured evaluation](artifacts/evaluation/report.md), and [implementation/validation status](docs/implementation-status.md).
-
-## Run the demo
-
-Python 3.11+ is required; the implementation was tested with Python 3.13.3.
+## Run
 
 ```sh
+brew install ollama
+brew services start ollama
+ollama pull qwen2.5:7b
+ollama pull nomic-embed-text
 python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[dev]'
-python -m contradiction_lab serve
-```
-
-Open `http://127.0.0.1:8000`. The UI includes question input, static/dynamic workflows, date/source filters, top-K and iteration controls, execution traces, comparison tables, source passages, JSON export, and evaluation results. API docs are at `/docs`.
-
-The current workspace already contains an installed `.venv`. To use it directly:
-
-```sh
-.venv/bin/python -m contradiction_lab research --workflow static
-.venv/bin/python -m contradiction_lab research --workflow dynamic
+.venv/bin/python -m pip install -e '.[dev]'
 .venv/bin/python -m contradiction_lab serve
 ```
 
-The default is **explicit offline replay**, not a disguised live LLM: six real papers, short source-checked excerpts, AI-authored extraction replays, a deterministic graph executor, and persistent SQLite vector search with a lexical hash embedding. It requires no model download or API key. Hash vectors are **not semantic embeddings**. Unknown scientific fields remain unknown. See [data provenance](docs/data-and-rag.md).
+Open http://127.0.0.1:8000. The header shows the real model and runtime. `/readiness` checks Ollama and both models. Investigations run in the background; the execution tab shows the current node, routes, timing, and model token usage. Local inference can take several minutes. Run one investigation at a time.
 
-## LangGraph, Chroma, and semantic embeddings
+The default source is six preloaded real publications with attributed public excerpts. **The documents are preloaded; the answers are not.** Qwen plans, extracts findings and context, assesses claim pairs, chooses adaptive actions, and verifies support on every run. Unknown fields stay null. Output validation, source ownership, hashes, comparison constraints, and stopping limits are deterministic safeguards. The final report is assembled from verified findings, not an unconstrained prose generator.
 
-```sh
-python -m pip install -e '.[dev,agents]'
-python -m contradiction_lab research --config config.langgraph-replay.json
-python -m pytest -q
-```
-
-This selects genuine LangGraph `StateGraph`, persistent Chroma, and Sentence Transformers `sentence-transformers/all-MiniLM-L6-v2`. The first semantic run downloads model weights. The same skills and state contracts power both graph runtimes. A requested missing dependency raises an error: there is **no silent fallback**.
-
-## Live scholarly discovery and live model
-
-Install the agent extras, run Ollama, and download the configured model:
+## Demonstrate the assessment
 
 ```sh
-ollama pull qwen2.5:7b
-cp .env.example .env
-# Set OPENALEX_API_KEY and optionally OPENALEX_EMAIL in .env.
-# OLLAMA_MODEL and OLLAMA_BASE_URL are optional overrides.
-python -m contradiction_lab research --config config.live.json --workflow dynamic
-LAB_CONFIG=config.live.json python -m contradiction_lab serve
+# Fixed eight-step LangGraph workflow
+.venv/bin/python -m contradiction_lab research --workflow static --output artifacts/demo-static.json
+# Real conditional LangGraph workflow
+.venv/bin/python -m contradiction_lab research --workflow dynamic --output artifacts/demo-dynamic.json
+# Bounded uncertainty / abstention
+.venv/bin/python -m contradiction_lab research 'Does lunar basalt microbiome diversity increase chlorophyll productivity at 90 kelvin?'
+# Clarification
+.venv/bin/python -m contradiction_lab research 'Does it work?'
+# Actual model evaluation, both workflows and two context configurations
+.venv/bin/python -m contradiction_lab evaluate
+# Smaller benchmark: one workflow, without the extra context experiment
+.venv/bin/python -m contradiction_lab evaluate --workflow dynamic --quick
+# Requested Q&A changes
+.venv/bin/python -m contradiction_lab research --workflow static --top-k 4
+.venv/bin/python -m contradiction_lab research --workflow static --top-k 8
+.venv/bin/python -m contradiction_lab research --max-iterations 1
+.venv/bin/python -m contradiction_lab research --min-comparable-pairs 8
 ```
 
-Live mode uses OpenAlex/Europe PMC, Ollama JSON-schema outputs, semantic embeddings, Chroma, and LangGraph. It never substitutes cached extraction outputs for failed live inference. Provider/model errors are recorded and produce a qualified report or abstention. Model tags are configurable, not claimed to be the best model or a pinned weight digest. Validate the chosen model before presenting live scientific results.
+The evaluation saves complete real runs and a readable report in `artifacts/evaluation/`. It includes success, ambiguity, missing information, synonyms, an unsupported-claim injection, invalid citations, and provider failure. Behavioral expectations are authored for regression testing, not independent scientific gold. Tests under `tests/` explicitly mock inference while exercising actual LangGraph and Chroma; these are distinct from real-model evaluation.
 
-**Validation boundary:** terminal DNS/network access, local socket binding, and the browser tool were unavailable in the build sandbox. LangGraph/Chroma were not installed. The live adapters are implemented and mock-tested; actual LangGraph, Chroma, model-download, live API, and rendered-browser checks remain environment-dependent. Three integration tests explicitly skip until agent dependencies are installed. Do not describe them as passed.
+See [presentation](docs/presentation-spec.md), [architecture](docs/architecture.md), [evaluation](docs/evaluation.md), and [current validation](docs/implementation-status.md).
 
-## Demos and evaluation
+## Optional external paper discovery
 
 ```sh
-python scripts/run_static_demo.py
-python scripts/run_dynamic_demo.py
-python -m contradiction_lab.evaluation.runner --workflow both
-python -m contradiction_lab.evaluation.runner --compare-context-configs
-python scripts/compare_settings.py
-python -m pytest -q
+.venv/bin/python -m contradiction_lab research --config config.live.json
+LAB_CONFIG=config.live.json .venv/bin/python -m contradiction_lab serve
 ```
 
-The bundled versioned dataset contains 20 source-based/operational scenarios and four **separately reported synthetic protocol cases**. Running both workflows produces 40 research runs. Labels are AI-authored regression expectations, **not independent human-reviewed scientific gold**. One known synonym-discovery failure is retained in both modes rather than hidden. Raw runs, settings, metrics, confusion matrices, and a readable report are saved in `artifacts/evaluation/`.
+This uses OpenAlex and Europe PMC instead of the fixed public corpus. Discovery credentials are read from `.env`; configure `OPENALEX_API_KEY` if needed. External availability, licensing, coverage, and latency vary. A provider failure is reported separately from an empty search. Full text is fetched only where availability and licensing permit it. The preloaded corpus is the repeatable presentation path.
 
-### Q&A settings
+## Design and limits
 
-```sh
-python -m contradiction_lab research --workflow static --top-k 4
-python -m contradiction_lab research --workflow static --top-k 8
-python -m contradiction_lab research --max-iterations 1
-python -m contradiction_lab research --max-iterations 2
-python -m contradiction_lab research --min-comparable-pairs 8
-```
+- Qwen 2.5 7B is a local starting model, not a demonstrated best model. Override `OLLAMA_MODEL` to compare another installed model.
+- `nomic-embed-text` creates semantic document/query embeddings. Chroma ranks scoped passages; keyword/title/section signals supplement similarity.
+- State uses typed records and source IDs, not an unbounded chat transcript. Approximate prompt budgets and schema validation bound requests.
+- All findings retain passage → paper → DOI/URL provenance. Only fully supported findings enter the report. The same LLM performs extraction and verification, so errors can be correlated.
+- The six-paper excerpt corpus demonstrates agreement and outcome differences. It does not establish performance on real scientific contradictions. Full-paper ingestion, independently reviewed labels, held-out opposing studies, and a human usefulness study remain next steps.
+- Local API cost is zero; compute is not free of resource use and is not metered. Runtime and quality must be measured on the presentation machine.
+- No authentication; bind to loopback. This is evidence navigation, not a systematic review or scientific verdict.
 
-`config.json` contains the offline defaults. Overrides are validated and recorded per run. `scripts/compare_settings.py` measures all three requested change exercises and writes `artifacts/settings-experiments.json`.
-
-## API and files
-
-| Endpoint | Purpose |
-|---|---|
-| `GET /health` | Current source/model/graph/vector modes |
-| `POST /research` | Synchronous, validated research job |
-| `GET /research/{run_id}` | Persisted report and configuration |
-| `GET /research/{run_id}/trace` | Node timings, counts, routes, errors |
-| `GET /papers/{paper_id}` | Normalized source record |
-| `GET /evaluation/latest` | Last persisted benchmark |
-| `POST /evaluation/run` | Run the bundled fixture benchmark |
-
-Application code lives in `src/contradiction_lab/`; tests in `tests/`; demonstration commands in `scripts/`. Runtime data and caches are local in `.runtime/` and ignored by Git. There are no accounts or authentication: bind to loopback only. This is a research-navigation tool, not medical advice, a systematic review, or a scientific adjudicator.
+Historical replay measurements were moved to `artifacts/legacy-replay/` and must not be presented as current model results.

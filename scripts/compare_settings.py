@@ -26,7 +26,7 @@ if __name__ == "__main__":
     for threshold in (1, 8):
         result = ResearchEngine(Settings(min_comparable_pairs=threshold)).run(ResearchRequest(query=DEMO_QUERY))
         rows.append({"experiment": "min_comparable_pairs", "value": threshold, **describe(result)})
-    output = {"warning": "Measured offline replay; local latencies and structural checks are not live LLM quality/cost measurements.", "experiments": rows}
+    output = {"warning": "Actual local Ollama inference; these small experiments do not establish scientific accuracy.", "experiments": rows}
     path = Path("artifacts/settings-experiments.json")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(output, indent=2) + "\n")

@@ -104,12 +104,12 @@ class ResearchEngine:
         self.settings = settings or Settings()
         self.store = Store(self.settings.data_dir / "lab.sqlite3")
 
-    def run(self, request: ResearchRequest, *, fault=None, paper_subset=None) -> dict:
+    def run(self, request: ResearchRequest, *, fault=None, paper_subset=None, run_id=None) -> dict:
         overrides = {key: getattr(request, key) for key in ("max_papers", "top_k", "max_iterations", "context_config") if getattr(request, key) is not None}
         if request.context_config == "compact" and request.top_k is None:
             overrides["top_k"] = 4
         settings = Settings.model_validate({**self.settings.model_dump(), **overrides})
-        run_id = uuid.uuid4().hex
+        run_id = run_id or uuid.uuid4().hex
         corpus = PublicCorpus() if settings.source == "corpus" else None
         model = OllamaModel(settings)
         client = HTTPClient(settings, self.store)
@@ -150,6 +150,7 @@ class Nodes:
             state["errors"] = list(original["errors"])
             state["missing_evidence"] = list(original["missing_evidence"])
             started, clock = utcnow(), time.perf_counter()
+            self.store.put("runs", state["run_id"], {"run_id":state["run_id"],"status":"running","current_node":name,"trace":state["trace"],"query":state["query"]})
             usage_start = len(self.model.usage) if self.model else 0
             retries_start = self.client.retries
             try:
@@ -178,6 +179,7 @@ class Nodes:
                 errors=[error["message"] for error in state["errors"][len(original["errors"]):]],
             )
             state["trace"] = original["trace"] + [event.model_dump(mode="json")]
+            self.store.put("runs",state["run_id"],{"run_id":state["run_id"],"status":"running","current_node":name,"trace":state["trace"],"query":state["query"]})
             logger.info("graph_node %s", json.dumps({"run_id": state["run_id"], **event.model_dump(mode="json")}))
             return state
         return execute
@@ -345,7 +347,7 @@ class Nodes:
         if selected:
             judgments = self.model.structured(PairJudgments,
                 "Compare each pair IN ORDER. Return exactly one judgment per pair. Use agreement when same-outcome effects point in the same direction. Different outcomes/exposures are apparent_disagreement and not_comparable. Opposing effects with known differing context are contextual_disagreement; missing critical context means insufficient_evidence. Genuine contradiction requires known matching critical context. Explain briefly using only supplied evidence. Never claim a context difference proves causation.",
-                {"pairs":[{"left":a.model_dump(),"right":b.model_dump()} for a,b in selected]})
+                {"pairs":[{"left":a.model_dump(exclude_none=True,exclude_defaults=True),"right":b.model_dump(exclude_none=True,exclude_defaults=True)} for a,b in selected]})
             if len(judgments.judgments) != len(selected):
                 raise ModelError("Comparison model returned wrong number of pair judgments")
             for (left,right), judgment in zip(selected,judgments.judgments):
@@ -367,7 +369,7 @@ class Nodes:
         for value in state["claims"]:
             claim = ScientificClaim.model_validate(value)
             try:
-                result = verify_citation(claim, papers, passages, canonical, None, self.model)
+                result = verify_citation(claim, papers, passages, canonical, self.model)
             except ModelError as error:
                 state["errors"].append({"kind": "model_error", "node": "verify_evidence", "message": str(error)})
                 result = verify_citation(claim, papers, passages, canonical)

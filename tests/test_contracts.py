@@ -14,7 +14,7 @@ def test_invalid_requests(values):
         ResearchRequest(**values)
 
 
-@pytest.mark.parametrize("values", [{"chunk_size_tokens": 50, "chunk_overlap_tokens": 50}, {"source": "live"}, {"extra_field": True}])
+@pytest.mark.parametrize("values", [{"chunk_size_tokens": 50, "chunk_overlap_tokens": 50}, {"model_backend": "replay"}, {"extra_field": True}])
 def test_invalid_config(values):
     with pytest.raises(ValidationError):
         Settings(**values)
@@ -33,6 +33,7 @@ def test_empty_evidence_rejected():
         ScientificClaim(claim_id="claim", paper_id="paper", statement="Synthetic test", direction="positive", evidence_passage_ids=[])
 
 
-def test_date_filter(corpus):
-    papers = corpus.search("plant diversity grassland productivity", 20, date(2018, 1, 1))
+def test_date_filter(corpus, mocked_models):
+    from contradiction_lab.retrieval import OllamaEmbedding
+    papers = corpus.search("plant diversity grassland productivity", 20, OllamaEmbedding(), date(2018, 1, 1))
     assert [paper.paper_id for paper in papers] == ["wagg2022"]

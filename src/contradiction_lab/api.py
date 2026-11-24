@@ -1,4 +1,7 @@
 import os
+import uuid
+import threading
+from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 from importlib.resources import files
 from pathlib import Path
@@ -13,6 +16,8 @@ from .schemas import ResearchRequest
 
 
 load_dotenv()
+executor = ThreadPoolExecutor(max_workers=1)
+job_lock = threading.Lock()
 app = FastAPI(title="Contradiction Lab", version="0.1.0", description="Local evidence-navigation MVP; not medical advice.")
 
 
@@ -31,7 +36,8 @@ def health():
     settings = get_engine().settings
     return {"status": "ok", "source": settings.source, "model_backend": settings.model_backend,
             "runtime": settings.runtime, "vector_backend": settings.vector_backend, "embedding_backend": settings.embedding_backend,
-            "notice": "Fixture replay is not live LLM inference or human scientific evaluation."}
+            "model":settings.ollama_model,"embedding_model":settings.embedding_model,
+            "notice": "Actual local LLM inference. Source excerpts are preloaded; findings are generated per run."}
 
 
 @app.post("/research")
@@ -75,6 +81,46 @@ def latest_evaluation():
 def run_evaluation():
     from .evaluation.runner import evaluate
 
-    if get_engine().settings.source != "fixture":
-        raise HTTPException(status_code=409, detail="The bundled benchmark requires the fixture corpus; live research is a separate experiment.")
-    return evaluate(output_dir=Path("artifacts/evaluation"), settings=get_engine().settings)
+    if get_engine().settings.source != "corpus":
+        raise HTTPException(status_code=409, detail="The bundled benchmark requires the public corpus; live research is a separate experiment.")
+    if not job_lock.acquire(blocking=False):
+        raise HTTPException(status_code=409, detail="A run is already using the model.")
+    try:
+        return evaluate(output_dir=Path("artifacts/evaluation"), settings=get_engine().settings)
+    finally:
+        job_lock.release()
+
+
+@app.get("/readiness")
+def readiness():
+    import json
+    import urllib.request
+    engine = get_engine()
+    try:
+        base = (os.getenv("OLLAMA_BASE_URL") or "http://127.0.0.1:11434").rstrip("/")
+        with urllib.request.urlopen(base + "/api/tags", timeout=5) as response:
+            installed = {m["name"] for m in json.load(response)["models"]}
+        required = [os.getenv("OLLAMA_MODEL") or engine.settings.ollama_model, engine.settings.embedding_model]
+        missing = [m for m in required if m not in installed and m + ":latest" not in installed]
+        return {"ready":not missing,"missing_models":missing,"models":required}
+    except (OSError, ValueError, KeyError):
+        return {"ready":False,"error":"Ollama is unavailable. Start Ollama and download the configured models."}
+
+
+@app.post("/research/jobs", status_code=202)
+def start_research(request: ResearchRequest):
+    if not job_lock.acquire(blocking=False):
+        raise HTTPException(status_code=409, detail="A research or evaluation run is already using the model. Wait for it to finish.")
+    engine = get_engine()
+    run_id = uuid.uuid4().hex
+    engine.store.put("runs",run_id,{"run_id":run_id,"status":"queued","trace":[],"query":request.query})
+    def work():
+        try:
+            engine.run(request, run_id=run_id)
+        except Exception as error:
+            previous=engine.store.get("runs",run_id) or {}
+            engine.store.put("runs",run_id,{**previous,"status":"failed","error":str(error)})
+        finally:
+            job_lock.release()
+    executor.submit(work)
+    return {"run_id":run_id,"status":"queued"}

@@ -1,73 +1,31 @@
-# Architecture and skills
+# Architecture
 
-## Execution model
+The production stack is Ollama (`qwen2.5:7b`), Ollama semantic embeddings (`nomic-embed-text`), Chroma, LangGraph, FastAPI, and SQLite for report/cache persistence.
 
-Both workflows share Pydantic contracts (`schemas.py`), serializable `ResearchState`, a `Nodes` implementation, provider adapters, retrieval, verification, report building, and SQLite persistence. Graph state contains IDs and explicit evidence records rather than opaque chat histories.
+## Agents and reusable skills
 
-`compile_graph` uses genuine LangGraph `StateGraph` when `runtime=langgraph`. The explicit `builtin` executor exists to make the replay demonstrable without downloaded dependencies. It follows the same node/edge specification, has a hard step limit, and is identified in API responses, the UI, and saved configurations. It is not represented as LangGraph. This is an intentional deviation from the plan's mandatory-LangGraph validation because that package could not be installed in this sandbox.
-
-```text
-STATIC
-plan_research → retrieve_papers → retrieve_passages → extract_claims
-  → analyze_context → compare_claims → verify_evidence → build_report
-
-DYNAMIC
-plan_research → retrieve_papers → retrieve_passages → extract_claims
-  → assess_sufficiency
-      ├─ broaden_search → retrieve_papers
-      ├─ retrieve_full_text → retrieve_passages
-      ├─ refine_comparison → retrieve_passages
-      ├─ analyze_context → compare_claims → verify_evidence → build_report
-      └─ verify_with_limitations → analyze_context → compare_claims
-           → verify_evidence → build_report
-```
-
-## Agent boundaries and reusable skills
-
-| Agent/node | Responsibility | Reusable implementation |
+| Agent | Behavior | Implementation |
 |---|---|---|
-| Planner | Search scope, terms, clarification | `plan_research`, `OllamaModel.plan` |
-| Retriever | Provider discovery, deduplication, evidence ranking | `OpenAlex.search`, `EuropePMC.search/enrich/full_text`, `VectorIndex.search` |
-| Extractor | Atomic findings and study context in one structured output | `OllamaModel.extract`, `FixtureCorpus.extract`, `normalize_claims` |
-| Context analyst | Tri-state comparability and missing/different fields | `check_comparability`, `comparable_pairs` |
-| Conflict analyst | Classify within deterministic evidence constraints | `classify_disagreement` plus optional model review |
-| Verifier | Identity, exact provenance, all populated claim fields | `verify_citation`, `OllamaModel.supports` |
-| Report builder | Synthesize only fully verified findings | `assess_evidence_quality`, `build_comparison_report`, `markdown_report` |
+| Planner | LLM identifies scope, search terms, ambiguity | `OllamaModel.plan` |
+| Retriever | Searches the public corpus or external providers, indexes and ranks passages | `PublicCorpus.search`, provider adapters, `VectorIndex` |
+| Extractor / context analyst | LLM extracts atomic findings and explicit study fields | `OllamaModel.extract`, Pydantic contracts |
+| Adaptive supervisor | LLM selects useful permitted actions; code enforces budgets | `Nodes.assess_sufficiency`, `RouteDecision` |
+| Comparison analyst | LLM assesses ordered pairs; scientific constraints prevent stronger unsupported labels | `Nodes.compare_claims`, `classify_disagreement` |
+| Verifier | Checks source ownership/hashes, then LLM judges all populated fields | `verify_citation`, `OllamaModel.supports` |
+| Report builder | Includes only verified claims and surviving comparisons | `build_comparison_report` |
 
-Context extraction shares the claim extraction response rather than making a redundant model call. Multiple nodes are logical specialized agents; they do not require seven different model processes. The implementation is sequential to avoid unnecessary concurrency and make failures easy to locate.
+These are sequential specialized roles sharing one local model, not seven simultaneous model processes. Model-generated pair explanations are marked as LLM assessments and are not independently verified causal explanations.
 
-## Dynamic decisions and bounds
+## Workflows
 
-- Unsearchably ambiguous question: request clarification; do not manufacture a scope.
-- API failure with no findings: stop with a provider error, not a claim that papers do not exist.
-- Too few papers/findings: broaden once within the total adaptive budget.
-- Missing methods with potentially accessible full text: attempt permitted text once.
-- Too few same-outcome claim pairs: refine the evidence query once.
-- Sufficient candidate findings: analyze and compare, then independently verify before synthesis.
-- Shared retry budget exhausted or no useful untried action: finish with limitations.
+Static: plan → find papers → retrieve passages → extract → analyze context → compare → verify → report.
 
-Adaptive iterations default to two, maximum five. Structured output allows one repair, maximum two. HTTP requests have timeouts, bounded backoff, 429 handling, and an 8 MB response cap. Papers, retrieved passages, claims per paper, compared pairs, and model context sizes are bounded. Failed full-text attempts consume their adaptive budget as well.
+Dynamic: after extraction, assess sufficiency. Select broaden search, retrieve permitted full text, refine passage retrieval, or finish with limitations; then return to the shared comparison and verification path. The model can choose among permitted useful actions, but cannot exceed the adaptive budget, repeat an action, or bypass a hard stop. Sufficient candidate evidence proceeds directly to analysis; the final report applies a separate post-verification threshold.
 
-The gate before comparison uses *candidate* claims; a second gate in reporting counts verified findings and usable comparisons. A sufficiently populated but ungrounded extraction therefore cannot silently become a successful final report.
+## Evidence and state
 
-## Scientific safeguards
+`ResearchState` contains explicit records and IDs. Chroma queries are scoped by run namespace and paper IDs. Semantic embeddings are reused by model/content key; extraction answers are never cached. Exact passages and content hashes remain intact for citations. Report status is evidence_found, limited_evidence, or insufficient_evidence.
 
-Agreement has `direction_relationship=agreement` and `disagreement_type=null`; the four disagreement labels are not forced onto agreement. Different known outcomes, exposures, or units cannot become a genuine contradiction. Opposite directions with missing critical context remain insufficient. A non-significant/no-effect result is not treated as an opposing direction. Context differences are possible explanations, not demonstrated causes.
+Model errors do not invoke replay or a substitute extractor. They are recorded and lead to limitations or abstention. Invalid JSON gets a bounded repair attempt. Provider calls have bounded retries and response sizes. Dynamic loops have a shared iteration budget and LangGraph recursion limit.
 
-Live model interpretations may conservatively request abstention; they cannot override hard comparability constraints. Free-form model explanations are not published as verified scientific assertions. Final comparison explanations are evidence-constrained templates, with the actual claim/passage chain exposed for inspection.
-
-## Storage and observability
-
-SQLite stores normalized papers, complete runs, raw provider-response cache entries with original retrieval timestamps, cached embeddings, evaluation runs, and a small vector table. Chroma is an optional persistent vector backend. A unique namespace restricts every retrieval to the current run; paper filtering is applied before ranking. Content/model-keyed embedding reuse avoids repeated embedding work.
-
-Every graph node logs run ID, start/end timestamps, latency, counts, adaptive iteration, route/reason, errors, retries, prompt version, model, and provider-reported tokens when inference occurs. Replay correctly reports zero model tokens; it never invents usage or cost. Configurations and a configuration hash are stored with each run. Secrets are read from environment variables and are not written into runs or request URLs.
-
-## Primary technical references
-
-- LangGraph graph API: https://docs.langchain.com/oss/python/langgraph/graph-api
-- Chroma clients and collections: https://docs.trychroma.com/
-- OpenAlex authentication and API: https://help.openalex.org/api/authentication/
-- Europe PMC REST service: https://europepmc.org/RestfulWebService
-- Ollama structured outputs: https://docs.ollama.com/capabilities/structured-outputs
-
-Provider behavior and optional integrations should be revalidated against these primary references when dependencies are upgraded.
+The UI uses background jobs and polls persisted node progress. Completed runs expose configuration, trace, provider-reported inference tokens, findings, pair assessments, and verification decisions. SQLite persistence is not a second vector retrieval mode; the only production vector backend is Chroma.

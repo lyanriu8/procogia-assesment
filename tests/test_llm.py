@@ -43,7 +43,7 @@ def test_unavailable_model_abstains(settings):
         OllamaModel(settings, opener=opener).plan("A test query")
 
 
-def test_full_workflow_with_unavailable_model_returns_report(settings, monkeypatch):
+def test_full_workflow_with_unavailable_model_returns_report(settings, mocked_models, monkeypatch):
     from contradiction_lab.graph import ResearchEngine
     from contradiction_lab.schemas import ResearchRequest
 

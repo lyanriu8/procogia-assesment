@@ -83,16 +83,6 @@ def classify_disagreement(left: ScientificClaim, right: ScientificClaim, model=N
         direction_relationship=relationship, disagreement_type=category, explanation=explanation,
         context_differences=context.context_differences, supporting_passage_ids=identifiers, uncertainty_notes=notes,
     )
-    if model:
-        semantic = model.structured(ClaimComparison,
-                                    "Explain this pair using only the source passages and deterministic checks. Do not strengthen category or change IDs. Explain context differences as possible, not proven causes.",
-                                    {"claims": [left.model_dump(), right.model_dump()], "constraints": comparison.model_dump(),
-                                     "passages": [passage.model_dump() for passage in passages or [] if passage.passage_id in identifiers]})
-        if semantic.disagreement_type == "insufficient_evidence" and category != "insufficient_evidence":
-            comparison.disagreement_type = "insufficient_evidence"
-            comparison.direction_relationship = "unclear"
-            comparison.explanation = "The semantic reviewer found insufficient support for the deterministic candidate comparison."
-        comparison.uncertainty_notes.append("Model interpretation was constrained by deterministic checks; free-form model explanations are excluded from the final report to avoid unverified scientific assertions.")
     return comparison
 
 
@@ -101,7 +91,7 @@ def comparable_pairs(claims: list[ScientificClaim]) -> int:
                for left, right in combinations(claims, 2))
 
 
-def verify_citation(claim, papers, passages, canonical, fixture=None, model=None):
+def verify_citation(claim, papers, passages, canonical, model=None):
     paper = next((paper for paper in papers if paper.paper_id == claim.paper_id), None)
     selected = {passage.passage_id: passage for passage in passages}
     evidence = [selected[identifier] for identifier in claim.evidence_passage_ids if identifier in selected]
@@ -113,13 +103,7 @@ def verify_citation(claim, papers, passages, canonical, fixture=None, model=None
                   and (normalize_doi(paper.doi) or paper.provider_id))
     support, reason = "no", "Missing source, foreign passage, corrupted text, or unsupported claim."
     if paper and source and valid_passages:
-        if fixture:
-            expected = fixture.extract(paper, evidence)
-            compared_fields = [field for field in ScientificClaim.model_fields if field not in {"claim_id", "missing_fields", "extraction_confidence"}]
-            supported = any(all(getattr(claim, field) == getattr(candidate, field) for field in compared_fields) for candidate in normalize_claims(expected))
-            support = "yes" if supported else "no"
-            reason = "Matches source-checked extraction replay and intact passages; not independent human entailment review." if supported else "Claim or context differs from the cached extraction; rejected."
-        elif model:
+        if model:
             judgment = model.supports(claim, evidence)
             support = judgment.support if judgment.support in {"yes", "partial", "no", "unclear"} else "unclear"
             reason = judgment.reason
