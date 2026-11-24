@@ -8,7 +8,7 @@ def test_api_roundtrip(engine, monkeypatch):
     monkeypatch.setattr(api, "get_engine", lambda: engine)
     with TestClient(api.app) as client:
         assert client.get("/health").json()["model_backend"] == "ollama"
-        assert "Evidence is rarely binary" in client.get("/").text
+        assert "evidence is rarely binary" in client.get("/").text
         result = client.post(
             "/research", json={"query": DEMO_QUERY, "workflow": "static"}
         ).json()
@@ -75,3 +75,16 @@ def test_background_job_progress_and_concurrent_request_guard(engine, monkeypatc
             time.sleep(0.02)
         assert result["status"] == "evidence_found"
         assert result["trace"][-1]["node"] == "build_report"
+
+
+def test_off_topic_check_fails_if_answered_by_clarification():
+    from contradiction_lab.evaluation.runner import score
+
+    result = {
+        "report": {"verification_results": [], "claims": [], "comparisons": [], "clarification_question": "Hypothetical?"},
+        "trace": [{"input_tokens": 10, "output_tokens": 5, "iteration": 0, "latency_ms": 1, "route": None}],
+        "config": {"max_iterations": 2}, "status": "insufficient_evidence", "request": {"workflow": "dynamic"},
+        "run_id": "r", "errors": [],
+    }
+    case = {"case_id": "off-topic", "expected_status": "insufficient_evidence", "empty": True, "clarification": False}
+    assert not score(case, result)["passed"]

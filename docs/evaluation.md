@@ -18,14 +18,16 @@ Gym corpus, recorded November 24, 2026 with qwen3:8b and nomic-embed-text throug
 
 | Scenario | Workflow | Status | Result | Time |
 |---|---|---|---|---|
-| success-static (7 papers) | static | evidence_found, 5 verified claims | pass | 75 s |
-| success-dynamic (3 papers, frequency question) | dynamic | evidence_found, 3 verified; 2016 vs 2019 frequency = contextual_disagreement | pass | 46 s |
-| ambiguity ("Does it work?") | dynamic | insufficient_evidence, clarification | pass | 2 s |
-| uncertainty (off-topic) | dynamic | insufficient_evidence, no papers above the 0.6 cutoff | pass | 4 s |
-| invalid-citation | static | injected citation rejected | pass | 23 s |
-| missing-information (date_to 2005) | dynamic | limited_evidence via broaden_search, refine_comparison, verify_with_limitations | pass | 38 s |
-| unsupported-claim | static | injected claim qualified (partial), not rejected; excluded from report | **fail** | 28 s |
+| success-static (7 papers) | static | evidence_found, 5 verified claims | pass | 78 s |
+| success-dynamic (3 papers, frequency question) | dynamic | evidence_found, 3 verified; 2016 vs 2019 frequency = contextual_disagreement | pass | 47 s |
+| ambiguity ("Does it work?") | dynamic | insufficient_evidence, clarification requested | pass | 3 s |
+| uncertainty (off-topic) | dynamic | insufficient_evidence; searched without clarification, no papers above the 0.6 cutoff, broadened once, stopped | pass | 9 s |
+| invalid-citation | static | injected citation rejected | pass | 25 s |
+| missing-information (date_to 2005) | dynamic | limited_evidence via broaden_search, refine_comparison, verify_with_limitations | pass | 32 s |
+| unsupported-claim | static | injected claim qualified (partial), not rejected; excluded from report | **fail** | 29 s |
 | compact-context (top-K 4) | static | evidence_found, 2 verified | pass | 24 s |
+
+An earlier recording passed the off-topic case only because no findings were produced: the planner had asked for clarification instead of searching. The planner prompt now reserves clarification for questions with no identifiable exposure and outcome, and the case also asserts that no clarification was requested.
 
 The failure repeats the grassland result: the verifier recognised the injected universal statement as stronger than the passage but returned partial rather than no. The strict check is kept. Single runs; timings are individual measurements after model warm-up, not controlled latency estimates.
 

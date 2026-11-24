@@ -2,65 +2,288 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Contradiction Lab · Evidence, in context</title>
+<title>contradiction lab · evidence is rarely binary</title>
 <style>
-:root{--ink:#1d302e;--muted:#63706a;--paper:#f6f7f2;--line:#dce2d8;--green:#245e48;--light:#e9f0e5;--amber:#875618}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:wait}a{color:var(--green)}header{border-bottom:1px solid var(--line);padding:20px 5%;display:flex;align-items:center;justify-content:space-between;background:#fff}.brand{font-weight:750;letter-spacing:-.6px;font-size:21px}.brand span{color:var(--green);margin-right:10px}.badge{border:1px solid var(--line);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--muted)}main{max-width:1350px;margin:auto;padding:38px 5%}.eyebrow{font-size:11px;font-weight:750;letter-spacing:2px;text-transform:uppercase;color:var(--green)}h1{font:46px/1.15 Georgia,serif;letter-spacing:-1.2px;margin:10px 0 15px}h2{font-size:19px;letter-spacing:-.4px}h3{font-size:15px}p{margin:10px 0}.intro{max-width:720px;color:var(--muted)}.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;margin-top:30px}.card{border:1px solid var(--line);background:#fff;border-radius:12px;padding:24px}.sidebar{align-self:start;position:sticky;top:20px}label{display:block;font-size:12px;font-weight:650;margin:17px 0 6px}textarea,input,select{background:#fcfdfb;border:1px solid #ced8cb;border-radius:6px;padding:10px;width:100%;color:var(--ink)}textarea{min-height:150px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.primary{background:var(--green);color:#fff;border:0;border-radius:6px;padding:12px 18px;font-weight:650;width:100%;margin-top:22px}.secondary{background:none;border:1px solid var(--line);border-radius:6px;padding:7px 10px;color:var(--green);font-size:12px}.samples{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.hint{font-size:12px;color:var(--muted);margin-top:16px}.tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin-bottom:22px}.tab{border:0;background:none;padding:12px 2px;color:var(--muted)}.tab.active{color:var(--green);box-shadow:inset 0 -2px var(--green);font-weight:700}.empty{padding:50px 30px;text-align:center;border:1px dashed #c7d3c3;border-radius:12px;background:linear-gradient(140deg,#eef3e9,#fafbf8)}.empty .symbol{font:44px Georgia,serif;color:#7b9b78}.muted{color:var(--muted)}.banner{padding:15px 18px;border-radius:7px;background:var(--light);border-left:3px solid #648953;margin-bottom:20px}.warning{background:#fbf2e3;border-left-color:#b98b45;color:var(--amber)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}.stat{padding:16px;border:1px solid var(--line);border-radius:8px;background:#fff}.stat strong{display:block;font-size:28px;font-weight:500}.stat span{font-size:12px;color:var(--muted)}.table-wrap{overflow:auto;margin:18px 0}table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;background:#eef2e9;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.7px}th,td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;min-width:85px}td:nth-child(1){min-width:140px}details{border:1px solid var(--line);border-radius:7px;margin:12px 0;padding:12px 16px}summary{cursor:pointer;font-size:13px;font-weight:650}blockquote{font:17px/1.6 Georgia,serif;border-left:2px solid #aabd9e;margin:15px 0;padding-left:15px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;background:#eef2e9;padding:16px;border-radius:6px}.trace-item{border-left:2px solid #c8d6bf;padding:0 0 20px 20px;margin-left:8px}.trace-item strong{font-size:14px}.trace-item p{font-size:12px;color:var(--muted);margin:3px 0}.trace-item .route{color:var(--green);font-weight:600}.notice{font-size:12px;margin-bottom:22px;color:var(--muted)}ul{padding-left:22px}.export{float:right}.loader{height:3px;background:var(--light);overflow:hidden;margin-top:20px}.loader:after{content:'';display:block;height:100%;width:35%;background:var(--green);animation:slide 1.4s infinite}@keyframes slide{from{transform:translateX(-100%)}to{transform:translateX(350%)}}[hidden]{display:none!important}footer{font-size:11px;color:var(--muted);border-top:1px solid var(--line);margin-top:40px;padding-top:18px}@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:static}h1{font-size:36px}.stats{gap:6px}.stat{padding:10px}main{padding:25px 4%}header{padding:14px 4%}.badge{max-width:170px;font-size:10px}.tabs{gap:15px}}
+:root{--bg:#fafaf7;--fg:#1c1f1b;--dim:#6b7068;--faint:#a3a89f;--line:#e6e7e1;--soft:#f1f2ec;--accent:#2f6b3a;--warn:#9a6100;--warn-bg:#fbf1dc;--bad:#a63b2c;--ok-bg:#e7f1e4;
+--sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#111311;--fg:#e4e6e1;--dim:#9aa096;--faint:#5f645c;--line:#272a26;--soft:#191c18;--accent:#9fd49a;--warn:#e7b85f;--warn-bg:#2b2414;--bad:#ee8b7a;--ok-bg:#1b2a1b}}
+*{box-sizing:border-box}
+html{background:var(--bg);color:var(--fg);font:15px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body{max-width:860px;margin:0 auto;padding:44px 28px 100px}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--faint);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:currentColor}
+button,input,select{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer;padding:0}
+.mono{font-family:var(--mono);font-size:13px}
+.dim{color:var(--dim)}.faint{color:var(--faint)}.ok{color:var(--accent)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:56px}
+header b{font-family:var(--mono);font-weight:600;letter-spacing:-.2px}
+form{display:flex;gap:14px;align-items:center;border-bottom:1.5px solid var(--fg);padding:0 0 12px}
+#query{flex:1;min-width:0;outline:none;font-size:21px;letter-spacing:-.3px}
+#query::placeholder{color:var(--faint)}
+#run{font-family:var(--mono);font-size:13px;border:1px solid var(--fg);border-radius:4px;padding:5px 14px}
+#run:hover{background:var(--fg);color:var(--bg)}
+#run:disabled{opacity:.5;cursor:wait}
+.bar{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px}
+.bar button{color:var(--dim)}.bar button:hover{color:var(--fg)}
+.bar .sep{flex:1}
+#options{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:4px 28px;margin-top:16px;padding:14px 16px;background:var(--soft);border-radius:6px}
+#options label{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--dim)}
+#options input,#options select{text-align:right;width:130px;outline:none;color:var(--fg)}
+#options option{background:var(--bg)}
+h2{font:600 11px/1 var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--faint);margin:44px 0 14px}
+.headline{margin-top:44px;padding:18px 20px;border-radius:8px;background:var(--soft)}
+.headline .status{font-size:22px;letter-spacing:-.3px;font-weight:600}
+.headline p{margin:6px 0 0}
+.tag{display:inline-block;font:500 11px/1 var(--mono);letter-spacing:.3px;padding:4px 7px;border-radius:3px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.tag.up,.tag.agree{color:var(--accent);background:var(--ok-bg);border-color:transparent}
+.tag.none,.tag.ctx{color:var(--warn);background:var(--warn-bg);border-color:transparent}
+.tag.down,.tag.genuine{color:var(--bad);border-color:currentColor}
+.row{display:grid;grid-template-columns:170px 1fr;gap:20px;padding:16px 0;border-top:1px solid var(--line)}
+.row:last-child{border-bottom:1px solid var(--line)}
+.who{font-weight:600}.who small{display:block;font-weight:400;color:var(--dim);font-size:12.5px;line-height:1.45;margin-top:2px}
+.claim{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+q{display:block;margin-top:6px;color:var(--dim);font-style:italic;quotes:"“" "”"}
+.pair{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-weight:600}
+.pair .vs{color:var(--faint);font-weight:400}
+.cmp{padding:16px 0;border-top:1px solid var(--line)}
+.cmp:last-child{border-bottom:1px solid var(--line)}
+.head{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.cmp p{margin:6px 0 0}
+.diff{margin-top:10px;width:100%;border-collapse:collapse;font-size:13px}
+.diff td{padding:3px 14px 3px 0;vertical-align:top;border-top:1px solid var(--line)}
+.diff td:first-child{color:var(--faint);width:130px}
+.note{font-size:13px;color:var(--dim);margin-top:6px}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:10px 0;display:flex;justify-content:space-between;align-items:center;gap:12px}
+summary .head{flex:1}
+.cmp+details,.cmp-fold+.cmp{margin-top:0}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--faint);font-family:var(--mono)}
+details[open]>summary::after{content:"–"}
+details .body{padding:0 0 14px}
+blockquote{margin:8px 0;padding-left:12px;border-left:2px solid var(--line);color:var(--dim)}
+blockquote small{display:block;color:var(--faint);font:12px var(--mono);margin-bottom:2px}
+ul.limits{margin:0;padding-left:18px;color:var(--dim);font-size:14px}
+ul.limits li{margin:4px 0}
+.log{font-family:var(--mono);font-size:13px}
+.log div{display:grid;grid-template-columns:18px 1fr auto;gap:8px;padding:2px 0}
+.log .route{grid-column:2/4;color:var(--warn)}
+table.plain{border-collapse:collapse;width:100%;font-size:13px}
+table.plain td,table.plain th{text-align:left;padding:5px 12px 5px 0;vertical-align:top;border-bottom:1px solid var(--line)}
+table.plain th{font-weight:400;color:var(--faint)}
+.cursor::after{content:"▍";animation:blink 1s steps(1) infinite;color:var(--accent);margin-left:2px}
+@keyframes blink{50%{opacity:0}}
+.notice{font:12px var(--mono);color:var(--warn);margin-top:28px}
+footer{margin-top:72px;font-size:12px;color:var(--faint)}
+@media (max-width:640px){.row{grid-template-columns:1fr;gap:6px}}
 </style>
 </head>
 <body>
-<header><div class="brand"><span>◈</span>Contradiction Lab</div><span id="modeBadge" class="badge">Checking runtime…</span></header>
-<main>
-<div class="eyebrow">Scientific evidence intelligence</div><h1>Evidence is rarely binary.<br>Put disagreement in context.</h1>
-<p class="intro">Compare research findings, inspect their sources, and distinguish a genuine conflict from a different question. Every finding has an evidence trail.</p>
-<div class="layout">
-<aside class="card sidebar"><div class="eyebrow">Start an investigation</div>
-<form id="researchForm"><label for="query">Research question</label><textarea id="query" required maxlength="2000">Is training a muscle more times per week better for muscle hypertrophy?</textarea>
-<div class="samples"><button type="button" class="secondary" id="successDemo">Training frequency demo</button><button type="button" class="secondary" id="uncertainDemo">Uncertainty demo</button><button type="button" class="secondary" id="missingDemo">Missing evidence</button></div>
-<label for="workflow">Workflow</label><select id="workflow"><option value="dynamic">Dynamic · adapt to evidence</option><option value="static">Static · predefined steps</option></select>
-<label for="context">Context configuration</label><select id="context"><option value="evidence-rich">Evidence-rich · methods/results</option><option value="compact">Compact · abstract-heavy</option></select>
-<div class="row"><div><label for="topK">Passage top-K</label><input id="topK" type="number" value="12" min="1" max="50" required></div><div><label for="iterations">Adaptive limit</label><input id="iterations" type="number" value="2" min="0" max="5" required></div></div>
-<div class="row"><div><label for="paperLimit">Paper limit</label><input id="paperLimit" type="number" value="3" min="1" max="50" required></div><div><label for="pairLimit">Required comparable pairs</label><input id="pairLimit" type="number" value="1" min="1" max="100" required></div></div>
-<details><summary>Scope filters</summary><label for="dateFrom">Published from</label><input type="date" id="dateFrom"><label for="dateTo">Published through</label><input type="date" id="dateTo"><label for="source">Live discovery source</label><select id="source"><option value="both">OpenAlex + Europe PMC</option><option value="openalex">OpenAlex</option><option value="europepmc">Europe PMC</option></select><p class="hint">Date filters apply to the public corpus. Source selection applies when external discovery is enabled.</p></details>
-<button class="primary" id="runButton" type="submit">Investigate evidence</button><div id="loader" class="loader" hidden></div>
-</form><p class="hint" id="runtimeNote">Qwen analyzes source passages live. Dynamic mode can request more evidence within the adaptive limit.</p></aside>
-<section aria-live="polite"><div class="tabs"><button class="tab active" data-tab="report">Comparison report</button><button class="tab" data-tab="trace">Execution trace</button><button class="tab" data-tab="evaluation">Evaluation</button></div>
-<div id="error" class="banner warning" role="alert" hidden></div>
-<div id="report" class="panel"><div class="empty"><div class="symbol">↔</div><h2>One question. Multiple perspectives.</h2><p class="muted">Run an investigation to see findings, context differences,<br>supporting passages, and what remains uncertain.</p><p class="hint">Try the training frequency demo first. The uncertainty demo<br>shows clarification or abstention when evidence is unavailable.</p></div></div>
-<div id="trace" class="panel" hidden><p class="muted">Completed graph nodes and routing reasons appear here after a run.</p></div>
-<div id="evaluation" class="panel" hidden><div class="banner warning">The benchmark runs actual local inference, including ambiguity, missing information, unsupported claims, and failures. Expectations are not independently reviewed scientific labels. Run the benchmark before presenting; a full suite can take tens of minutes on a laptop. Saved results appear below.</div><button class="secondary" id="evaluateButton">Run full LLM benchmark</button><div id="evaluationResults"></div></div>
-</section></div><footer>Contradiction Lab · Research navigation, not scientific adjudication. Limited coverage and unknown fields are disclosed, not filled in.</footer>
-</main>
+<header><b>contradiction lab</b><span id="runtime" class="mono faint">connecting…</span></header>
+
+<form id="form" autocomplete="off">
+<input id="query" required maxlength="2000" placeholder="Ask a research question" value="Is training a muscle more times per week better for muscle hypertrophy?">
+<button id="run" type="submit">run</button>
+</form>
+<div class="bar mono">
+<button type="button" data-q="Is training a muscle more times per week better for muscle hypertrophy?">frequency</button>
+<button type="button" data-q="Does a higher weekly resistance training volume increase muscle hypertrophy in trained men?">volume</button>
+<button type="button" data-q="Does it work?">vague</button>
+<button type="button" data-q="Does lunar basalt microbiome diversity increase chlorophyll productivity at 90 kelvin?">off-topic</button>
+<button type="button" data-q="Does heavier training load increase muscle hypertrophy?" data-to="2005-12-31">pre-2006</button>
+<span class="sep"></span>
+<button type="button" id="toggleOptions">options</button>
+<button type="button" id="toggleEval">evaluation</button>
+</div>
+<div id="options" class="mono" hidden>
+<label>workflow <select id="workflow"><option value="dynamic">dynamic</option><option value="static">static</option></select></label>
+<label>context <select id="context"><option value="evidence-rich">evidence-rich</option><option value="compact">compact</option></select></label>
+<label>papers <input id="paperLimit" type="number" value="3" min="1" max="50"></label>
+<label>passages <input id="topK" type="number" value="12" min="1" max="50"></label>
+<label>adaptive steps <input id="iterations" type="number" value="2" min="0" max="5"></label>
+<label>pairs required <input id="pairLimit" type="number" value="1" min="1" max="100"></label>
+<label>from <input id="dateFrom" type="date"></label>
+<label>to <input id="dateTo" type="date"></label>
+</div>
+
+<section id="evaluation" hidden></section>
+<section id="live" hidden></section>
+<section id="report"></section>
+
+<footer>Research navigation, not scientific adjudication. Unknown fields stay unknown; only verified findings are reported.</footer>
+
 <script>
-const $=id=>document.getElementById(id);
-function element(tag,text,className){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node;}
-function showError(error){$('error').textContent=error.message||String(error);$('error').hidden=false;}
-function link(text,url){const node=element('a',text);try{const parsed=new URL(url);if(parsed.protocol==='https:'||parsed.protocol==='http:'){node.href=parsed.href;node.target='_blank';node.rel='noopener noreferrer';}}catch{}return node;}
-function table(headers,rows){const wrap=element('div',undefined,'table-wrap'),table=element('table'),head=element('thead'),header=element('tr');for(const text of headers)header.append(element('th',text));head.append(header);table.append(head);const body=element('tbody');for(const values of rows){const row=element('tr');for(const value of values){const cell=element('td');cell.append(value instanceof Node?value:document.createTextNode(value??'unknown'));row.append(cell);}body.append(row);}table.append(body);wrap.append(table);return wrap;}
-function stats(values){const grid=element('div',undefined,'stats');for(const [number,label] of values){const stat=element('div',undefined,'stat');stat.append(element('strong',number),element('span',label));grid.append(stat);}return grid;}
-function selectTab(tab){document.querySelectorAll('.panel').forEach(panel=>panel.hidden=panel.id!==tab);document.querySelectorAll('.tab').forEach(button=>button.classList.toggle('active',button.dataset.tab===tab));}
-document.querySelectorAll('.tab').forEach(button=>button.onclick=()=>selectTab(button.dataset.tab));
-async function request(url,options){const response=await fetch(url,options);const data=await response.json();if(!response.ok)throw new Error(typeof data.detail==='string'?data.detail:JSON.stringify(data.detail));return data;}
-function renderReport(result){const report=result.report,root=$('report');root.replaceChildren();const banner=element('div',undefined,'banner'+(report.overall_status!=='evidence_found'?' warning':''));banner.append(element('strong',report.overall_status.replaceAll('_',' ').toUpperCase()),element('p',report.clarification_question||report.agreement_summary));root.append(banner);root.append(element('p',`${result.source_mode} sources · ${result.model} · ${result.config.runtime} graph · ${result.config.vector_backend} vectors`, 'notice'));
-const download=element('button','Export run JSON','secondary export');download.onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(result,null,2)],{type:'application/json'}));const anchor=link('Download',url);anchor.href=url;anchor.download=`contradiction-lab-${result.run_id}.json`;anchor.click();URL.revokeObjectURL(url);};root.append(download);
-root.append(stats([[report.papers_included,'papers with verified findings'],[report.claims.length,'verified findings'],[report.comparisons.length,'claim pairs compared']]));
-const papers=Object.fromEntries(report.papers.map(paper=>[paper.paper_id,paper]));root.append(element('h2','Findings, side by side'));
-root.append(table(['Paper / year','System & method','Outcome / direction','Finding & evidence'],report.claims.map(claim=>{const source=element('div');source.append(link(papers[claim.paper_id].title,papers[claim.paper_id].source_url),element('p',String(papers[claim.paper_id].publication_year)));const finding=element('div');finding.append(element('p',claim.statement),element('p',claim.evidence_passage_ids.join(' · '),'muted'));return[source,`${claim.study_system||'unknown'} / ${claim.method||'method unknown'}`,`${claim.outcome||'unknown'} / ${claim.direction}`,finding];})));
-if(result.direction_reviews?.length){const review=element('details');review.append(element('summary','Context agent: effect direction checks'),table(['Claim','Effect as exposure increases','Explanation'],result.direction_reviews.map(r=>[r.claim_id,r.effect_when_exposure_increases,r.explanation])));root.append(review);}
-root.append(element('h2','Agreement & disagreement'),element('p',report.disagreement_summary));for(const comparison of report.comparisons){const detail=element('details');detail.append(element('summary',`${comparison.disagreement_type||'agreement'} · ${comparison.claim_a_id} ↔ ${comparison.claim_b_id}`),element('p',comparison.explanation));for(const note of comparison.uncertainty_notes.filter(n=>n.startsWith('LLM assessment:')))detail.append(element('p',note));if(comparison.context_differences.length)detail.append(element('p',comparison.context_differences.join('; ')));detail.append(element('p',comparison.uncertainty_notes.filter(n=>!n.startsWith('LLM assessment:')).join('; '),'hint'),element('p',comparison.supporting_passage_ids.join(' · '),'hint'));root.append(detail);}
-root.append(element('h2','Limitations & unresolved questions'));const limitations=element('ul');for(const note of [...report.evidence_limitations,...report.unresolved_questions])limitations.append(element('li',note));root.append(limitations);
-root.append(element('h2','Evidence trail'));for(const passage of report.passages){const detail=element('details');detail.append(element('summary',`${passage.passage_id} · ${passage.source_type} · ${passage.section}`),element('blockquote',passage.text),link('Open original source ↗',passage.source_url),element('p',`SHA-256: ${passage.content_hash}`,'hint'));root.append(detail);}
-const verification=element('details');verification.append(element('summary','All verification results, including excluded material'),table(['Claim','Status','Source check','Support','Reason'],report.verification_results.map(row=>[row.claim_id,row.status,row.source_check,row.passage_supports_claim,row.reason])));root.append(verification);
-const trace=$('trace');trace.replaceChildren(element('p',`Run ${result.run_id} · ${result.config.runtime} runtime`,'notice'));for(const event of result.trace){const item=element('div',undefined,'trace-item');item.append(element('strong',event.node.replaceAll('_',' ')),element('p',`${event.latency_ms} ms · ${event.papers} papers · ${event.passages} passages · ${event.claims} claims · iteration ${event.iteration}`));if(event.route)item.append(element('p',`→ ${event.route}: ${event.reason}`,'route'));for(const error of event.errors)item.append(element('p',error));trace.append(item);}selectTab('report');}
-function renderProgress(result){const root=$('trace');root.replaceChildren(element('h2','Agents at work'),element('p',`Current step: ${(result.current_node||result.status).replaceAll('_',' ')}`,'banner'));for(const event of result.trace||[]){const item=element('div',undefined,'trace-item');item.append(element('strong',event.node.replaceAll('_',' ')),element('p',`${(event.latency_ms/1000).toFixed(1)} seconds · ${event.input_tokens} input tokens · ${event.output_tokens} output tokens · ${event.claims} findings`));if(event.route)item.append(element('p',`${event.route}: ${event.reason}`,'route'));for(const error of event.errors)item.append(element('p',error));root.append(item);}}
-$('researchForm').onsubmit=async event=>{event.preventDefault();$('error').hidden=true;$('runButton').disabled=true;$('loader').hidden=false;selectTab('trace');try{const job=await request('/research/jobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:$('query').value,workflow:$('workflow').value,context_config:$('context').value,top_k:Number($('topK').value),max_papers:Number($('paperLimit').value),min_comparable_pairs:Number($('pairLimit').value),max_iterations:Number($('iterations').value),date_from:$('dateFrom').value||null,date_to:$('dateTo').value||null,sources:$('source').value==='both'?['openalex','europepmc']:[$('source').value]})});let result;do{await new Promise(resolve=>setTimeout(resolve,1200));result=await request(`/research/${job.run_id}`);renderProgress(result);}while(['queued','running'].includes(result.status));if(result.status==='failed')throw new Error(result.error);renderReport(result);}catch(error){showError(error);}finally{$('runButton').disabled=false;$('loader').hidden=true;}};
-$('context').onchange=()=>{$('topK').value=$('context').value==='compact'?4:12;};
-$('successDemo').onclick=()=>{$('query').value='Is training a muscle more times per week better for muscle hypertrophy?';$('dateFrom').value='';$('dateTo').value='';};
-$('uncertainDemo').onclick=()=>{$('query').value='Does lunar basalt microbiome diversity increase chlorophyll productivity at 90 kelvin?';$('workflow').value='dynamic';$('dateFrom').value='';$('dateTo').value='';};
-$('missingDemo').onclick=()=>{$('query').value='Does heavier training load increase muscle hypertrophy?';$('workflow').value='dynamic';$('dateFrom').value='';$('dateTo').value='2005-12-31';};
-function renderEvaluation(result){const root=$('evaluationResults');root.replaceChildren();root.append(stats([[`${result.summary.research_passed}/${result.summary.research_runs}`,'actual LLM scenarios passed'],[result.summary.input_tokens,'model input tokens'],[result.summary.output_tokens,'model output tokens']]));root.append(element('p',result.summary.warning,'hint'),table(['Case','Mode','Expected','Actual','Passed'],result.cases.map(row=>[row.case_id,row.workflow,row.expected_status,row.actual_status,String(row.passed)])),element('h2','Compact vs evidence-rich context'),table(['Context','Passages','Verified findings','Input / output tokens','Latency'],result.context_experiment.map(row=>[row.context,row.retrieved_passages,row.verified_claims,`${row.input_tokens} / ${row.output_tokens}`,`${(row.latency_ms/1000).toFixed(1)} s`])));const detail=element('details');detail.append(element('summary','Raw results and limitations'),element('pre',JSON.stringify(result,null,2)));root.append(detail);}
-$('evaluateButton').onclick=async()=>{$('evaluateButton').disabled=true;$('error').hidden=true;try{const job=await request('/evaluation/jobs',{method:'POST'});let state;do{await new Promise(resolve=>setTimeout(resolve,1500));state=await request(`/evaluation/jobs/${job.job_id}`);$('evaluationResults').replaceChildren(element('p',state.current_case?`Completed ${state.completed}/${state.total} cases. Running ${state.current_case} (${state.workflow}). Context comparison follows.`:'Starting local model benchmark…','banner'));}while(['queued','running'].includes(state.status));if(state.status==='failed')throw new Error(state.error);renderEvaluation(state.result);}catch(error){showError(error);}finally{$('evaluateButton').disabled=false;}};
-request('/health').then(health=>{$('modeBadge').textContent=`${health.model} · ${health.runtime} · ${health.vector_backend}`;$('runtimeNote').textContent=`${health.source==='corpus'?'Preloaded public papers':'External paper discovery'} · live Qwen analysis and semantic retrieval. Each run generates new findings.`;}).catch(showError);
-request('/readiness').then(state=>{if(!state.ready)showError(new Error(state.error||`Missing models: ${state.missing_models.join(', ')}. Download them with ollama pull.`));}).catch(showError);
-request('/evaluation/latest').then(renderEvaluation).catch(()=>{});
+const $ = id => document.getElementById(id);
+function el(tag, text, cls) { const n = document.createElement(tag); if (text !== undefined && text !== null) n.textContent = text; if (cls) n.className = cls; return n; }
+function put(parent, ...kids) { for (const k of kids) if (k !== null && k !== undefined) parent.append(typeof k === 'string' ? document.createTextNode(k) : k); return parent; }
+function link(text, url) { const a = el('a', text); try { const u = new URL(url); if (u.protocol === 'https:' || u.protocol === 'http:') { a.href = u.href; a.target = '_blank'; a.rel = 'noopener noreferrer'; } } catch {} return a; }
+function human(v) { return (v || '').replaceAll('_', ' '); }
+function tidy(v) { return String(v).replace(/[\[\]']/g, '').trim(); }
+async function request(url, options) { const r = await fetch(url, options); const data = await r.json(); if (!r.ok) throw new Error(typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail)); return data; }
+function fail(error) { $('report').replaceChildren(put(el('p', undefined, 'notice'), el('span', 'error  ', 'bad'), error.message || String(error))); }
+
+const DIR = { positive: ['↑ increases', 'up'], negative: ['↓ decreases', 'down'], no_effect: ['→ no detectable effect', 'none'], mixed: ['~ mixed', ''], unclear: ['? unclear', ''] };
+const KIND = { contextual_disagreement: ['contextual disagreement', 'ctx'], genuine_contradiction: ['candidate contradiction', 'genuine'], apparent_disagreement: ['different questions', ''], insufficient_evidence: ['insufficient context', ''] };
+const STATUS = { evidence_found: ['Evidence found', 'ok'], limited_evidence: ['Limited evidence', 'warn'], insufficient_evidence: ['Insufficient evidence', 'bad'] };
+const FIELD = { study_system: 'system', population_or_material: 'population', method: 'design', intervention_or_exposure: 'exposure', comparator: 'comparator', duration: 'duration', units: 'units', conditions: 'conditions' };
+
+function author(paper) { const a = paper.authors && paper.authors[0]; return `${a ? a.split(' ').slice(-1)[0] : paper.paper_id} ${paper.publication_year || ''}`.trim(); }
+function design(paper) { return (paper.provenance || []).filter(p => p.startsWith('publication_type:')).map(p => p.slice(17)).filter(k => k !== 'Journal Article').join(', ').toLowerCase(); }
+function tag(text, cls) { return el('span', text, 'tag ' + (cls || '')); }
+
+function renderLive(result) {
+  const root = $('live'); root.hidden = false;
+  const steps = result.trace || [];
+  const log = el('div', undefined, 'log');
+  for (const e of steps) {
+    const row = el('div');
+    put(row, el('span', '✓', 'ok'), el('span', human(e.node)), el('span', `${(e.latency_ms / 1000).toFixed(1)}s${e.input_tokens ? `   ${e.input_tokens}→${e.output_tokens} tok` : ''}`, 'faint'));
+    if (e.route) row.append(el('span', `→ ${human(e.route)} · ${e.reason}`, 'route'));
+    for (const err of e.errors || []) row.append(el('span', err, 'route bad'));
+    log.append(row);
+  }
+  if (['queued', 'running'].includes(result.status)) {
+    const row = el('div'); put(row, el('span', '›', 'faint'), el('span', result.current_node ? `${human(result.current_node)} done, continuing` : 'starting', 'cursor'), el('span', ''));
+    log.append(row);
+    root.replaceChildren(el('h2', 'working'), log);
+  } else {
+    const total = steps.reduce((t, e) => t + e.latency_ms, 0) / 1000;
+    const tokens = steps.reduce((t, e) => t + e.input_tokens + e.output_tokens, 0);
+    const d = el('details'); const s = el('summary');
+    put(s, el('span', `Trace · ${steps.length} steps · ${total.toFixed(0)}s · ${tokens.toLocaleString()} tokens`, 'mono dim'));
+    d.append(s, put(el('div', undefined, 'body'), log));
+    root.replaceChildren(d);
+  }
+}
+
+function renderReport(result) {
+  const report = result.report, root = $('report'); root.replaceChildren();
+  const papers = Object.fromEntries(report.papers.map(p => [p.paper_id, p]));
+  const claims = Object.fromEntries(report.claims.map(c => [c.claim_id, c]));
+  const labels = {}, seen = {};
+  for (const c of report.claims) { const base = author(papers[c.paper_id] || {}); (seen[base] ||= []).push(c.paper_id); }
+  for (const [base, ids] of Object.entries(seen)) { const unique = [...new Set(ids)]; unique.forEach((id, i) => labels[id] = unique.length > 1 ? base + 'abcdefgh'[i] : base); }
+  const label = pid => labels[pid] || author(papers[pid] || {});
+  const name = id => { const c = claims[id]; return c ? label(c.paper_id) : id.slice(0, 10); };
+
+  const [statusText, cls] = report.clarification_question ? ['Needs clarification', 'warn'] : (STATUS[report.overall_status] || [report.overall_status, '']);
+  const head = el('div', undefined, 'headline');
+  head.append(el('div', statusText, 'status ' + cls));
+  const conflicts = report.comparisons.filter(c => ['contextual_disagreement', 'genuine_contradiction'].includes(c.disagreement_type));
+  if (report.clarification_question) head.append(el('p', report.clarification_question));
+  else if (conflicts.length) for (const c of conflicts) head.append(put(el('p'), `${name(c.claim_a_id)} and ${name(c.claim_b_id)} reach different conclusions `, el('span', `(${KIND[c.disagreement_type][0]})`, 'dim')));
+  else if (report.claims.length) head.append(el('p', report.agreement_summary, 'dim'));
+  else head.append(el('p', 'No verified findings for this question. See limitations below.', 'dim'));
+  head.append(el('p', `${report.claims.length} verified findings · ${report.comparisons.length} pairs compared · ${report.papers_considered} papers considered`, 'mono faint'));
+  root.append(head);
+
+  if (report.claims.length) {
+    root.append(el('h2', 'Findings'));
+    for (const c of report.claims) {
+      const paper = papers[c.paper_id] || {};
+      const left = put(el('div', undefined, 'who'), link(label(c.paper_id), paper.source_url), el('small', [design(paper) || c.method, c.duration].filter(Boolean).join(' · ')));
+      const [dtext, dcls] = DIR[c.direction] || [c.direction, ''];
+      const right = put(el('div'), put(el('div', undefined, 'claim'), el('span', `${c.intervention_or_exposure || 'exposure unknown'} → ${c.outcome || 'outcome unknown'}`), tag(dtext, dcls)), el('q', c.statement));
+      root.append(put(el('div', undefined, 'row'), left, right));
+    }
+  }
+
+  if (report.comparisons.length) {
+    root.append(el('h2', 'Comparisons'));
+    const order = c => c.disagreement_type === 'genuine_contradiction' ? 0 : c.disagreement_type === 'contextual_disagreement' ? 1 : c.direction_relationship === 'agreement' ? 2 : 3;
+    for (const c of [...report.comparisons].sort((a, b) => order(a) - order(b))) {
+      const [ktext, kcls] = c.disagreement_type ? (KIND[c.disagreement_type] || [human(c.disagreement_type), '']) : ['agreement', 'agree'];
+      const a = claims[c.claim_a_id], b = claims[c.claim_b_id];
+      const arrow = x => x ? (DIR[x.direction] || ['?'])[0].split(' ')[0] : '';
+      const conflict = ['contextual_disagreement', 'genuine_contradiction'].includes(c.disagreement_type);
+      const headRow = put(el('div', undefined, 'head'), put(el('div', undefined, 'pair'), `${name(c.claim_a_id)} ${arrow(a)}`, el('span', 'vs', 'vs'), `${name(c.claim_b_id)} ${arrow(b)}`), tag(ktext, kcls));
+      const box = el('div', undefined, conflict ? 'cmp' : 'body');
+      if (conflict) box.append(headRow);
+      box.append(el('p', c.explanation, 'dim'));
+      const diffs = c.context_differences.map(d => { const i = d.indexOf(': '); const field = d.slice(0, i); const [x, y] = d.slice(i + 2).split(' vs '); return [FIELD[field] || human(field), tidy(x), tidy(y || '')]; });
+      if (diffs.length) {
+        const t = el('table', undefined, 'diff');
+        t.append(put(el('tr'), el('td', ''), el('td', name(c.claim_a_id), 'faint'), el('td', name(c.claim_b_id), 'faint')));
+        for (const [f, x, y] of diffs) t.append(put(el('tr'), el('td', f), el('td', x), el('td', y)));
+        box.append(t);
+      }
+      for (const n of c.uncertainty_notes) {
+        if (n.startsWith('Missing context')) continue;
+        box.append(n.startsWith('LLM assessment:') ? put(el('p', undefined, 'note'), el('span', 'model  ', 'mono faint'), n.slice(16).trim()) : put(el('p', undefined, 'note'), el('span', 'note  ', 'mono warn'), n));
+      }
+      if (conflict) root.append(box);
+      else { const d = el('details', undefined, 'cmp-fold'); const sm = el('summary'); sm.append(headRow); d.append(sm, box); root.append(d); }
+    }
+  }
+
+  const limits = [...report.evidence_limitations, ...report.unresolved_questions];
+  root.append(el('h2', 'Details'));
+  if (limits.length) {
+    const d = el('details'); put(d, put(el('summary'), `Limitations (${limits.length})`));
+    const ul = el('ul', undefined, 'limits'); for (const n of limits) ul.append(el('li', n));
+    d.append(put(el('div', undefined, 'body'), ul)); root.append(d);
+  }
+  const byPaper = {};
+  for (const p of report.passages) (byPaper[p.paper_id] ||= []).push(p);
+  for (const [pid, passages] of Object.entries(byPaper)) {
+    const paper = papers[pid] || {}; const d = el('details');
+    const title = (paper.title || '').length > 64 ? paper.title.slice(0, 62).trimEnd() + '…' : (paper.title || '');
+    put(d, put(el('summary'), put(el('span'), `Source · ${label(pid)}  `, el('span', title, 'dim'))));
+    const body = el('div', undefined, 'body');
+    for (const p of passages.sort((a, b) => a.chunk_index - b.chunk_index)) body.append(put(el('blockquote'), el('small', human(p.section)), p.text));
+    body.append(put(el('p', undefined, 'mono faint'), link('open on PubMed ↗', paper.source_url), `   doi ${paper.doi || 'unknown'}`));
+    d.append(body); root.append(d);
+  }
+  const v = el('details'); put(v, put(el('summary'), `Verification (${report.verification_results.length} claims, including excluded)`));
+  const t = el('table', undefined, 'plain'); t.append(put(el('tr'), el('th', 'claim'), el('th', 'status'), el('th', 'reason')));
+  for (const r of report.verification_results) {
+    const c = result.extracted_claims ? result.extracted_claims.find(x => x.claim_id === r.claim_id) : null;
+    t.append(put(el('tr'), el('td', c ? label(c.paper_id) : r.claim_id.slice(0, 12)), el('td', `${r.status} (${r.passage_supports_claim})`, r.status === 'verified' ? 'ok' : r.status === 'qualified' ? 'warn' : 'bad'), el('td', r.reason, 'dim')));
+  }
+  v.append(put(el('div', undefined, 'body'), t)); root.append(v);
+  root.append(el('p', `run ${result.run_id} · ${result.model} · ${result.config.runtime} · ${result.config.vector_backend}`, 'mono faint'));
+}
+
+function renderEvaluation(result) {
+  const root = $('evaluation'); const s = result.summary;
+  const head = el('div', undefined, 'headline');
+  head.append(el('div', `${s.research_passed}/${s.research_runs} checks passed`, 'status ' + (s.research_passed === s.research_runs ? 'ok' : 'warn')), el('p', `Saved real-model run · ${result.model} · ${s.input_tokens.toLocaleString()}→${s.output_tokens.toLocaleString()} tokens`, 'mono faint'));
+  const t = el('table', undefined, 'plain'); t.append(put(el('tr'), el('th', 'case'), el('th', 'workflow'), el('th', 'status'), el('th', 'result')));
+  for (const c of result.cases) t.append(put(el('tr'), el('td', c.case_id, 'mono'), el('td', c.workflow, 'dim'), el('td', human(c.actual_status), 'dim'), el('td', c.passed ? 'pass' : 'fail', c.passed ? 'ok' : 'bad')));
+  root.replaceChildren(head, el('h2', 'Scenarios'), t, el('p', s.warning, 'note'));
+}
+
+$('form').onsubmit = async event => {
+  event.preventDefault();
+  $('run').disabled = true; $('run').textContent = 'running'; $('report').replaceChildren(); $('evaluation').hidden = true;
+  const body = { query: $('query').value, workflow: $('workflow').value, context_config: $('context').value, top_k: Number($('topK').value), max_papers: Number($('paperLimit').value), min_comparable_pairs: Number($('pairLimit').value), max_iterations: Number($('iterations').value), date_from: $('dateFrom').value || null, date_to: $('dateTo').value || null };
+  try {
+    const job = await request('/research/jobs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    let result; renderLive({ status: 'queued', trace: [] });
+    do { await new Promise(r => setTimeout(r, 1200)); result = await request(`/research/${job.run_id}`); renderLive(result); } while (['queued', 'running'].includes(result.status));
+    if (result.status === 'failed') throw new Error(result.error);
+    renderReport(result);
+  } catch (error) { fail(error); }
+  finally { $('run').disabled = false; $('run').textContent = 'run'; }
+};
+document.querySelectorAll('[data-q]').forEach(b => b.onclick = () => { $('query').value = b.dataset.q; $('dateFrom').value = ''; $('dateTo').value = b.dataset.to || ''; $('workflow').value = 'dynamic'; $('query').focus(); });
+$('context').onchange = () => { $('topK').value = $('context').value === 'compact' ? 4 : 12; };
+$('toggleOptions').onclick = () => { $('options').hidden = !$('options').hidden; };
+$('toggleEval').onclick = async () => {
+  const root = $('evaluation'); root.hidden = !root.hidden;
+  if (!root.hidden && !root.childElementCount) { try { renderEvaluation(await request('/evaluation/latest')); } catch { root.replaceChildren(el('p', 'No saved evaluation yet.', 'dim')); } }
+};
+const savedRun = new URLSearchParams(location.search).get('run');
+if (savedRun) request(`/research/${encodeURIComponent(savedRun)}`).then(result => {
+  $('query').value = result.request ? result.request.query : result.query || '';
+  renderLive(result); if (result.report) renderReport(result);
+  $('report').prepend(el('p', 'Showing a saved run, not a live investigation.', 'notice'));
+}).catch(fail);
+request('/health').then(h => { $('runtime').textContent = `${h.model} · ${h.source === 'corpus' ? 'preloaded corpus' : 'live discovery'}`; }).catch(fail);
+request('/readiness').then(s => { if (!s.ready) fail(new Error(s.error || `Missing models: ${s.missing_models.join(', ')}. Run ollama pull.`)); }).catch(fail);
 </script>
-</body></html>
+</body>
+</html>

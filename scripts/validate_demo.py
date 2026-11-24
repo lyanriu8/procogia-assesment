@@ -58,6 +58,7 @@ scenarios = [
             "query": UNCERTAINTY_QUERY,
             "expected_status": "insufficient_evidence",
             "empty": True,
+            "clarification": False,
         },
         "dynamic",
         8,

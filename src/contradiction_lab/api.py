@@ -31,7 +31,7 @@ def get_engine():
 
 @app.get("/", response_class=HTMLResponse)
 def home():
-    return files("contradiction_lab").joinpath("web/index.html").read_text()
+    return files("contradiction_lab").joinpath("web/index.html").read_text(encoding="utf-8")
 
 
 @app.get("/health")

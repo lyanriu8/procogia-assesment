@@ -153,7 +153,7 @@ class OllamaModel:
     def plan(self, query: str):
         return self.structured(
             SearchPlan,
-            "Plan a bounded scholarly search; request clarification only for truly unsearchable questions.",
+            "Plan a bounded scholarly search. Set needs_clarification true ONLY when the question names no identifiable exposure or intervention AND no measurable outcome (for example 'Does it work?'). A question that names a specific exposure and outcome MUST be searched with needs_clarification false, even if it is unusual, hypothetical, implausible, or likely outside the available literature; finding no evidence is reported later, not by asking for clarification.",
             {"query": query},
         )
 

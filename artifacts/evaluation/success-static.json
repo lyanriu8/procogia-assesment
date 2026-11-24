@@ -1,9 +1,9 @@
 {
-  "run_id": "1001e9c676754383b8a01330415ac096",
+  "run_id": "142a7374aa0f4fd4898a403e77e44e7e",
   "status": "evidence_found",
   "report": {
     "query": "Is training a muscle more times per week better for muscle hypertrophy?",
-    "interpreted_scope": "The query seeks to determine whether increasing the frequency of training a specific muscle group per week leads to greater muscle hypertrophy.",
+    "interpreted_scope": "The question investigates whether increasing the frequency of muscle training sessions per week leads to greater muscle hypertrophy.",
     "workflow_mode": "static",
     "papers_considered": 7,
     "papers_included": 5,
@@ -23,7 +23,7 @@
           "study_system: resistance training vs systematic review and meta-analysis",
           "method: randomized trial vs systematic review and meta-analysis",
           "intervention_or_exposure: training volume vs training frequency",
-          "conditions: ['elbow flexors', 'mid-thigh', 'lateral thigh'] vs ['resistance-trained men']"
+          "conditions: ['elbow flexors', 'mid-thigh', 'lateral thigh'] vs ['resistance-trained men', 'volume-equated basis']"
         ],
         "supporting_passage_ids": [
           "schoenfeld2019volume-p2",
@@ -35,7 +35,7 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Both claim-501b01bcf540f7aeba4f and claim-5847b510f2fcf1c5fc5a agree on muscle hypertrophy and positive direction."
+          "LLM assessment: Both claim-501b01bcf540f7aeba4f and claim-5847b510f2fcf1c5fc5a agree on the positive effect of training frequency on hypertrophy."
         ]
       },
       {
@@ -63,7 +63,7 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Claim-501b01bcf540f7aeba4f shows positive effect, while claim-e3e40e99ceade896f97e shows no effect."
+          "LLM assessment: Claim-501b01bcf540f7aeba4f states a positive effect of training volume, while claim-e3e40e99ceade896f97e states no effect."
         ]
       },
       {
@@ -90,7 +90,7 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Both claim-501b01bcf540f7aeba4f and claim-ab6e02d0f605cf544337 agree on muscle hypertrophy and positive direction."
+          "LLM assessment: Both claim-501b01bcf540f7aeba4f and claim-ab6e02d0f605cf544337 agree on the positive effect of training volume on hypertrophy."
         ]
       },
       {
@@ -117,7 +117,7 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, units",
-          "LLM assessment: Claim-501b01bcf540f7aeba4f involves training volume, while claim-5a271c5ad6367d0ae491 involves training frequency."
+          "LLM assessment: Claim-501b01bcf540f7aeba4f discusses training volume, while claim-5a271c5ad6367d0ae491 discusses training frequency."
         ]
       },
       {
@@ -132,7 +132,7 @@
         "explanation": "One study reports an effect and the other reports no detectable effect, alongside observed context differences that may explain, but do not prove the cause of, the divergence.",
         "context_differences": [
           "study_system: systematic review and meta-analysis vs resistance training",
-          "conditions: ['resistance-trained men'] vs ['volume-equated studies']"
+          "conditions: ['resistance-trained men', 'volume-equated basis'] vs ['volume-equated studies']"
         ],
         "supporting_passage_ids": [
           "schoenfeld2016frequency-p2",
@@ -145,7 +145,7 @@
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
           "A non-significant result is not proof of no effect or of an opposing effect.",
-          "LLM assessment: Claim-5847b510f2fcf1c5fc5a shows positive effect, while claim-e3e40e99ceade896f97e shows no effect."
+          "LLM assessment: Claim-5847b510f2fcf1c5fc5a states a positive effect of training frequency, while claim-e3e40e99ceade896f97e states no effect."
         ]
       },
       {
@@ -160,7 +160,8 @@
         "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
         "context_differences": [
           "study_system: systematic review and meta-analysis vs muscle",
-          "intervention_or_exposure: training frequency vs training volume"
+          "intervention_or_exposure: training frequency vs training volume",
+          "conditions: ['resistance-trained men', 'volume-equated basis'] vs ['resistance-trained men']"
         ],
         "supporting_passage_ids": [
           "schoenfeld2016frequency-p2",
@@ -171,7 +172,7 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Both claim-5847b510f2fcf1c5fc5a and claim-ab6e02d0f605cf544337 agree on muscle hypertrophy and positive direction."
+          "LLM assessment: Both claim-5847b510f2fcf1c5fc5a and claim-ab6e02d0f605cf544337 agree on the positive effect of training frequency on hypertrophy."
         ]
       },
       {
@@ -187,7 +188,7 @@
         "context_differences": [
           "study_system: systematic review and meta-analysis vs muscle",
           "method: systematic review and meta-analysis vs randomized trial",
-          "conditions: ['resistance-trained men'] vs ['30%-3', '80%-1', '80%-3']"
+          "conditions: ['resistance-trained men', 'volume-equated basis'] vs ['30%-3', '80%-1', '80%-3']"
         ],
         "supporting_passage_ids": [
           "schoenfeld2016frequency-p2",
@@ -197,7 +198,7 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Claim-5847b510f2fcf1c5fc5a involves training frequency, while claim-5a271c5ad6367d0ae491 involves training frequency."
+          "LLM assessment: Claim-5847b510f2fcf1c5fc5a discusses training frequency, while claim-5a271c5ad6367d0ae491 discusses training frequency."
         ]
       },
       {
@@ -224,7 +225,7 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Both claim-e3e40e99ceade896f97e and claim-ab6e02d0f605cf544337 agree on muscle hypertrophy and no effect."
+          "LLM assessment: Claim-e3e40e99ceade896f97e states no effect of training frequency, while claim-ab6e02d0f605cf544337 states a positive effect."
         ]
       },
       {
@@ -251,7 +252,7 @@
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
           "A non-significant result is not proof of no effect or of an opposing effect.",
-          "LLM assessment: Claim-e3e40e99ceade896f97e involves training frequency, while claim-5a271c5ad6367d0ae491 involves training frequency."
+          "LLM assessment: Claim-e3e40e99ceade896f97e discusses training frequency, while claim-5a271c5ad6367d0ae491 discusses training frequency."
         ]
       },
       {
@@ -276,7 +277,7 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Both claim-ab6e02d0f605cf544337 and claim-5a271c5ad6367d0ae491 agree on muscle hypertrophy and no effect."
+          "LLM assessment: Both claim-ab6e02d0f605cf544337 and claim-5a271c5ad6367d0ae491 agree on the positive effect of training frequency on hypertrophy."
         ]
       }
     ],
@@ -328,7 +329,8 @@
         "intervention_or_exposure": "training frequency",
         "comparator": null,
         "conditions": [
-          "resistance-trained men"
+          "resistance-trained men",
+          "volume-equated basis"
         ],
         "duration": null,
         "effect_size": null,
@@ -470,7 +472,7 @@
         "passage_exists": true,
         "passage_supports_claim": "yes",
         "status": "verified",
-        "reason": "The passage directly supports the claim that training twice a week promotes superior hypertrophic outcomes compared to once a week on a volume-equated basis. The passage also confirms the study design as a systematic review and meta-analysis, and the outcome is muscle hypertrophy with a positive direction. The evidence passage explicitly states that higher frequency is associated with a greater effect size."
+        "reason": "The passage directly supports the claim that training twice a week promotes superior hypertrophic outcomes compared to once a week on a volume-equated basis. The study design is a systematic review and meta-analysis, which matches the claim. The outcome is muscle hypertrophy, and the direction is positive, as higher frequency is associated with greater effect size."
       },
       {
         "claim_id": "claim-e3e40e99ceade896f97e",
@@ -500,7 +502,7 @@
         "passage_exists": true,
         "passage_supports_claim": "yes",
         "status": "verified",
-        "reason": "The passage explicitly states that subjects trained each leg with their assigned regime for a period of 10 wk, 3 times/wk, which matches the claim. The conditions listed in the claim (30%-3, 80%-1, 80%-3) are also mentioned in the passage. The study design is a randomized trial, as stated in the passage. The outcome is muscle hypertrophy, which is implied by the study's focus on resistance exercise and its effects on muscle. The direction of the effect is unclear as the passage does not provide results or comparisons between the groups."
+        "reason": "The passage explicitly states that subjects trained each leg with their assigned regime for a period of 10 wk, 3 times/wk, which matches the claim. The conditions listed in the claim (30%-3, 80%-1, 80%-3) are also mentioned in the passage. The study design is a randomized trial, as stated in the passage. The outcome is muscle hypertrophy, which is implied by the context of the study. The direction of the effect is unclear as the passage does not provide results or comparisons between the conditions."
       }
     ],
     "papers": [
@@ -846,14 +848,14 @@
     ],
     "overall_status": "evidence_found",
     "clarification_question": null,
-    "generated_at": "2026-11-24T17:13:42.121963Z"
+    "generated_at": "2026-11-24T18:08:14.964908Z"
   },
   "trace": [
     {
       "node": "plan_research",
-      "started_at": "2026-11-24T17:12:27.148695Z",
-      "ended_at": "2026-11-24T17:12:29.814311Z",
-      "latency_ms": 2665.527,
+      "started_at": "2026-11-24T18:06:57.246640Z",
+      "ended_at": "2026-11-24T18:06:59.726216Z",
+      "latency_ms": 2479.551,
       "papers": 0,
       "passages": 0,
       "claims": 0,
@@ -862,17 +864,17 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 308,
-      "output_tokens": 109,
+      "input_tokens": 446,
+      "output_tokens": 94,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "retrieve_papers",
-      "started_at": "2026-11-24T17:12:29.820230Z",
-      "ended_at": "2026-11-24T17:12:29.965919Z",
-      "latency_ms": 145.689,
+      "started_at": "2026-11-24T18:06:59.732785Z",
+      "ended_at": "2026-11-24T18:06:59.870084Z",
+      "latency_ms": 137.301,
       "papers": 7,
       "passages": 0,
       "claims": 0,
@@ -889,9 +891,9 @@
     },
     {
       "node": "retrieve_passages",
-      "started_at": "2026-11-24T17:12:29.972199Z",
-      "ended_at": "2026-11-24T17:12:30.241899Z",
-      "latency_ms": 269.693,
+      "started_at": "2026-11-24T18:06:59.876196Z",
+      "ended_at": "2026-11-24T18:07:00.036680Z",
+      "latency_ms": 160.483,
       "papers": 7,
       "passages": 12,
       "claims": 0,
@@ -908,9 +910,9 @@
     },
     {
       "node": "extract_claims",
-      "started_at": "2026-11-24T17:12:30.247015Z",
-      "ended_at": "2026-11-24T17:12:49.588864Z",
-      "latency_ms": 19341.187,
+      "started_at": "2026-11-24T18:07:00.041522Z",
+      "ended_at": "2026-11-24T18:07:20.392653Z",
+      "latency_ms": 20350.877,
       "papers": 7,
       "passages": 12,
       "claims": 5,
@@ -920,16 +922,16 @@
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
       "input_tokens": 9648,
-      "output_tokens": 763,
+      "output_tokens": 776,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "analyze_context",
-      "started_at": "2026-11-24T17:12:49.607818Z",
-      "ended_at": "2026-11-24T17:13:09.246923Z",
-      "latency_ms": 19638.433,
+      "started_at": "2026-11-24T18:07:20.398467Z",
+      "ended_at": "2026-11-24T18:07:41.490794Z",
+      "latency_ms": 21092.065,
       "papers": 7,
       "passages": 12,
       "claims": 5,
@@ -939,16 +941,16 @@
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
       "input_tokens": 856,
-      "output_tokens": 858,
+      "output_tokens": 899,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "compare_claims",
-      "started_at": "2026-11-24T17:13:09.278054Z",
-      "ended_at": "2026-11-24T17:13:29.977172Z",
-      "latency_ms": 20698.412,
+      "started_at": "2026-11-24T18:07:41.497231Z",
+      "ended_at": "2026-11-24T18:08:02.892662Z",
+      "latency_ms": 21395.164,
       "papers": 7,
       "passages": 12,
       "claims": 5,
@@ -957,17 +959,17 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 2782,
-      "output_tokens": 825,
+      "input_tokens": 2788,
+      "output_tokens": 851,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "verify_evidence",
-      "started_at": "2026-11-24T17:13:29.984056Z",
-      "ended_at": "2026-11-24T17:13:42.092569Z",
-      "latency_ms": 12108.099,
+      "started_at": "2026-11-24T18:08:02.898717Z",
+      "ended_at": "2026-11-24T18:08:14.952910Z",
+      "latency_ms": 12054.044,
       "papers": 7,
       "passages": 12,
       "claims": 5,
@@ -976,17 +978,17 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 3864,
-      "output_tokens": 485,
+      "input_tokens": 3870,
+      "output_tokens": 474,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "build_report",
-      "started_at": "2026-11-24T17:13:42.116852Z",
-      "ended_at": "2026-11-24T17:13:42.122101Z",
-      "latency_ms": 5.247,
+      "started_at": "2026-11-24T18:08:14.959446Z",
+      "ended_at": "2026-11-24T18:08:14.965066Z",
+      "latency_ms": 5.621,
       "papers": 7,
       "passages": 12,
       "claims": 5,
@@ -1109,7 +1111,8 @@
       "intervention_or_exposure": "training frequency",
       "comparator": null,
       "conditions": [
-        "resistance-trained men"
+        "resistance-trained men",
+        "volume-equated basis"
       ],
       "duration": null,
       "effect_size": null,
@@ -1236,27 +1239,27 @@
     {
       "claim_id": "claim-501b01bcf540f7aeba4f",
       "effect_when_exposure_increases": "increases",
-      "explanation": "Source explicitly states a dose-response relationship where higher training volume leads to greater muscle hypertrophy gains."
+      "explanation": "Source states muscle hypertrophy follows a dose-response relationship with higher training volumes leading to greater gains."
     },
     {
       "claim_id": "claim-5847b510f2fcf1c5fc5a",
       "effect_when_exposure_increases": "increases",
-      "explanation": "Higher training frequency (twice vs once per week) is associated with superior hypertrophic outcomes on a volume-equated basis."
+      "explanation": "Source indicates twice weekly training (higher frequency) produces superior hypertrophic outcomes compared to once weekly."
     },
     {
       "claim_id": "claim-e3e40e99ceade896f97e",
       "effect_when_exposure_increases": "no_change",
-      "explanation": "Source reports no significant difference in hypertrophy outcomes between higher and lower training frequency groups."
+      "explanation": "Source reports no significant difference between higher and lower frequency on a volume-equated basis."
     },
     {
       "claim_id": "claim-ab6e02d0f605cf544337",
       "effect_when_exposure_increases": "increases",
-      "explanation": "Findings show a graded dose-response where increased resistance training volume produces greater muscle hypertrophy gains."
+      "explanation": "Source describes a graded dose-response where increased RT volume produces greater hypertrophy gains."
     },
     {
       "claim_id": "claim-5a271c5ad6367d0ae491",
       "effect_when_exposure_increases": "not_established",
-      "explanation": "Statement only describes study methodology without comparing outcomes across different training frequency levels."
+      "explanation": "Source only describes a study's training regimen without comparing outcomes across exposure levels."
     }
   ],
   "benchmark_fault": null,

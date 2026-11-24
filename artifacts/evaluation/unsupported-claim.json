@@ -1,9 +1,9 @@
 {
-  "run_id": "21ee7945f9134028904daa85cd6395ec",
+  "run_id": "07ae42e7e79f417db061bda548c8cd7b",
   "status": "limited_evidence",
   "report": {
     "query": "Is training a muscle more times per week better for muscle hypertrophy?",
-    "interpreted_scope": "The query seeks to determine whether increasing the frequency of training a specific muscle group per week leads to greater muscle hypertrophy.",
+    "interpreted_scope": "The question investigates whether increasing the frequency of muscle training sessions per week leads to greater muscle hypertrophy.",
     "workflow_mode": "static",
     "papers_considered": 3,
     "papers_included": 1,
@@ -54,7 +54,7 @@
         "passage_exists": true,
         "passage_supports_claim": "partial",
         "status": "qualified",
-        "reason": "The passage states that training twice a week promotes superior hypertrophic outcomes compared to once a week, which supports the claim that increasing training frequency (from once to twice) leads to better muscle hypertrophy. However, the claim states that 'every lifter doubles their muscle mass,' which is a stronger and more specific statement than what the passage supports. The passage does not provide evidence that every lifter achieves this outcome, only that higher frequency leads to better hypertrophy in general."
+        "reason": "The passage states that training twice a week promotes superior hypertrophic outcomes compared to once a week, which supports the claim that increasing training frequency (from once to twice) leads to better muscle hypertrophy. However, the claim states that 'every lifter doubles their muscle mass,' which is a stronger and more specific statement than what the passage supports. The passage does not provide evidence that every lifter achieves this outcome, only that higher frequency leads to better hypertrophy."
       },
       {
         "claim_id": "claim-e3e40e99ceade896f97e",
@@ -160,14 +160,14 @@
     ],
     "overall_status": "limited_evidence",
     "clarification_question": null,
-    "generated_at": "2026-11-24T17:16:04.951806Z"
+    "generated_at": "2026-11-24T18:10:39.197157Z"
   },
   "trace": [
     {
       "node": "plan_research",
-      "started_at": "2026-11-24T17:15:36.540542Z",
-      "ended_at": "2026-11-24T17:15:39.000294Z",
-      "latency_ms": 2459.67,
+      "started_at": "2026-11-24T18:10:10.581138Z",
+      "ended_at": "2026-11-24T18:10:12.747279Z",
+      "latency_ms": 2166.117,
       "papers": 0,
       "passages": 0,
       "claims": 0,
@@ -176,17 +176,17 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 308,
-      "output_tokens": 109,
+      "input_tokens": 446,
+      "output_tokens": 94,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "retrieve_papers",
-      "started_at": "2026-11-24T17:15:39.006361Z",
-      "ended_at": "2026-11-24T17:15:39.123577Z",
-      "latency_ms": 117.216,
+      "started_at": "2026-11-24T18:10:12.751795Z",
+      "ended_at": "2026-11-24T18:10:12.870515Z",
+      "latency_ms": 118.721,
       "papers": 3,
       "passages": 0,
       "claims": 0,
@@ -203,9 +203,9 @@
     },
     {
       "node": "retrieve_passages",
-      "started_at": "2026-11-24T17:15:39.128726Z",
-      "ended_at": "2026-11-24T17:15:39.218175Z",
-      "latency_ms": 89.448,
+      "started_at": "2026-11-24T18:10:12.874451Z",
+      "ended_at": "2026-11-24T18:10:12.949794Z",
+      "latency_ms": 75.346,
       "papers": 3,
       "passages": 4,
       "claims": 0,
@@ -222,9 +222,9 @@
     },
     {
       "node": "extract_claims",
-      "started_at": "2026-11-24T17:15:39.223687Z",
-      "ended_at": "2026-11-24T17:15:46.727798Z",
-      "latency_ms": 7503.856,
+      "started_at": "2026-11-24T18:10:12.953661Z",
+      "ended_at": "2026-11-24T18:10:20.564035Z",
+      "latency_ms": 7610.281,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -241,9 +241,9 @@
     },
     {
       "node": "analyze_context",
-      "started_at": "2026-11-24T17:15:46.734164Z",
-      "ended_at": "2026-11-24T17:15:57.917551Z",
-      "latency_ms": 11183.006,
+      "started_at": "2026-11-24T18:10:20.568291Z",
+      "ended_at": "2026-11-24T18:10:31.982103Z",
+      "latency_ms": 11413.67,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -253,16 +253,16 @@
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
       "input_tokens": 609,
-      "output_tokens": 487,
+      "output_tokens": 483,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "compare_claims",
-      "started_at": "2026-11-24T17:15:57.924605Z",
-      "ended_at": "2026-11-24T17:15:59.952350Z",
-      "latency_ms": 2027.678,
+      "started_at": "2026-11-24T18:10:31.988223Z",
+      "ended_at": "2026-11-24T18:10:34.137082Z",
+      "latency_ms": 2148.834,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -279,9 +279,9 @@
     },
     {
       "node": "verify_evidence",
-      "started_at": "2026-11-24T17:15:59.958622Z",
-      "ended_at": "2026-11-24T17:16:04.940043Z",
-      "latency_ms": 4981.252,
+      "started_at": "2026-11-24T18:10:34.143628Z",
+      "ended_at": "2026-11-24T18:10:39.185893Z",
+      "latency_ms": 5042.207,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -291,16 +291,16 @@
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
       "input_tokens": 1444,
-      "output_tokens": 208,
+      "output_tokens": 206,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "build_report",
-      "started_at": "2026-11-24T17:16:04.946777Z",
-      "ended_at": "2026-11-24T17:16:04.951887Z",
-      "latency_ms": 5.109,
+      "started_at": "2026-11-24T18:10:39.192445Z",
+      "ended_at": "2026-11-24T18:10:39.197213Z",
+      "latency_ms": 4.768,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -440,12 +440,12 @@
     {
       "claim_id": "claim-5847b510f2fcf1c5fc5a",
       "effect_when_exposure_increases": "not_established",
-      "explanation": "The statement makes a general claim without comparing outcomes at different training frequencies, so no effect direction can be determined."
+      "explanation": "The statement makes a general claim without comparing different training frequency levels, so no effect direction can be determined."
     },
     {
       "claim_id": "claim-e3e40e99ceade896f97e",
       "effect_when_exposure_increases": "no_change",
-      "explanation": "The study found no significant difference in muscle hypertrophy between higher and lower training frequency groups when volume was equated."
+      "explanation": "The study found no significant difference in muscle hypertrophy between higher and lower training frequency when volume was equated."
     }
   ],
   "benchmark_fault": "unsupported_claim",

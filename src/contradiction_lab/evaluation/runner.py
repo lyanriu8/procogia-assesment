@@ -34,6 +34,7 @@ CASES = [
         "query": UNCERTAINTY_QUERY,
         "expected_status": "insufficient_evidence",
         "empty": True,
+        "clarification": False,
     },
     {
         "case_id": "missing-information",
@@ -91,8 +92,10 @@ def score(case, result):
         checks["expected_status"] = result["status"] == case["expected_status"]
     if case.get("minimum_claims"):
         checks["minimum_claims"] = len(claims) >= case["minimum_claims"]
-    if case.get("clarification"):
+    if case.get("clarification") is True:
         checks["clarification"] = bool(report["clarification_question"])
+    if case.get("clarification") is False:
+        checks["searched_without_clarification"] = not report["clarification_question"]
     if case.get("empty"):
         checks["empty"] = not claims
     if case.get("rejection"):
