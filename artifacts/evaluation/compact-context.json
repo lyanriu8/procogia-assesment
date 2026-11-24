@@ -1,0 +1,695 @@
+{
+  "run_id": "0ed8f39dc6da4570b06188dc269b294f",
+  "status": "limited_evidence",
+  "report": {
+    "query": "Does increasing plant species diversity consistently increase ecosystem productivity?",
+    "interpreted_scope": "The query seeks to determine whether there is a consistent positive relationship between plant species diversity and ecosystem productivity across different ecosystems and conditions.",
+    "workflow_mode": "static",
+    "papers_considered": 6,
+    "papers_included": 3,
+    "claims_extracted": 3,
+    "comparisons": [
+      {
+        "comparison_id": "comparison-885def5515229421",
+        "claim_a_id": "claim-7091cfd14459f179803f",
+        "claim_b_id": "claim-b9e72b7da0b814da0846",
+        "same_outcome": false,
+        "comparable_system": true,
+        "comparable_methods": false,
+        "direction_relationship": "not_comparable",
+        "disagreement_type": "apparent_disagreement",
+        "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
+        "context_differences": [
+          "method: well-replicated field experiment vs field experiment"
+        ],
+        "supporting_passage_ids": [
+          "tilman1996-p0",
+          "tilman1996-p1",
+          "pfisterer2002-p0"
+        ],
+        "uncertainty_notes": [
+          "Missing context: population_or_material, comparator, duration, units",
+          "LLM assessment: Both claims refer to grassland ecosystems and plant biodiversity, but one shows increased productivity while the other shows increased perturbation resistance."
+        ]
+      },
+      {
+        "comparison_id": "comparison-1d00f11e034223e0",
+        "claim_a_id": "claim-7091cfd14459f179803f",
+        "claim_b_id": "claim-ca7149ae98a5c4c64b65",
+        "same_outcome": false,
+        "comparable_system": true,
+        "comparable_methods": false,
+        "direction_relationship": "not_comparable",
+        "disagreement_type": "apparent_disagreement",
+        "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
+        "context_differences": [
+          "method: well-replicated field experiment vs field experiment",
+          "conditions: ['field experiment'] vs ['grassland', 'field experiment', 'decade-long']"
+        ],
+        "supporting_passage_ids": [
+          "tilman1996-p0",
+          "tilman1996-p1",
+          "tilman2006-p0"
+        ],
+        "uncertainty_notes": [
+          "Missing context: population_or_material, comparator, duration, units",
+          "LLM assessment: Both claims refer to grassland ecosystems and plant biodiversity, but one shows increased productivity while the other shows increased temporal stability."
+        ]
+      },
+      {
+        "comparison_id": "comparison-f30f951fdafd7342",
+        "claim_a_id": "claim-b9e72b7da0b814da0846",
+        "claim_b_id": "claim-ca7149ae98a5c4c64b65",
+        "same_outcome": false,
+        "comparable_system": true,
+        "comparable_methods": true,
+        "direction_relationship": "not_comparable",
+        "disagreement_type": "apparent_disagreement",
+        "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
+        "context_differences": [
+          "conditions: ['field experiment'] vs ['grassland', 'field experiment', 'decade-long']"
+        ],
+        "supporting_passage_ids": [
+          "pfisterer2002-p0",
+          "tilman2006-p0"
+        ],
+        "uncertainty_notes": [
+          "Missing context: population_or_material, comparator, duration, units",
+          "LLM assessment: The first claim refers to perturbation resistance, while the second refers to temporal stability, with no shared outcome."
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "claim-7091cfd14459f179803f",
+        "paper_id": "tilman1996",
+        "statement": "ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity",
+        "outcome": "productivity",
+        "direction": "positive",
+        "study_system": "grassland",
+        "population_or_material": null,
+        "method": "well-replicated field experiment",
+        "intervention_or_exposure": "plant biodiversity",
+        "comparator": null,
+        "conditions": [
+          "field experiment"
+        ],
+        "duration": null,
+        "effect_size": null,
+        "units": null,
+        "sample_size": null,
+        "limitations": [],
+        "evidence_passage_ids": [
+          "tilman1996-p0",
+          "tilman1996-p1"
+        ],
+        "extraction_confidence": null,
+        "missing_fields": [
+          "population_or_material",
+          "comparator",
+          "duration",
+          "effect_size",
+          "units",
+          "sample_size"
+        ]
+      },
+      {
+        "claim_id": "claim-b9e72b7da0b814da0846",
+        "paper_id": "pfisterer2002",
+        "statement": "the species-poor systems were more resistant to perturbation than the species-rich systems",
+        "outcome": "perturbation resistance",
+        "direction": "negative",
+        "study_system": "grassland",
+        "population_or_material": null,
+        "method": "field experiment",
+        "intervention_or_exposure": "plant biodiversity",
+        "comparator": null,
+        "conditions": [
+          "field experiment"
+        ],
+        "duration": null,
+        "effect_size": null,
+        "units": null,
+        "sample_size": null,
+        "limitations": [],
+        "evidence_passage_ids": [
+          "pfisterer2002-p0"
+        ],
+        "extraction_confidence": null,
+        "missing_fields": [
+          "population_or_material",
+          "comparator",
+          "duration",
+          "effect_size",
+          "units",
+          "sample_size"
+        ]
+      },
+      {
+        "claim_id": "claim-ca7149ae98a5c4c64b65",
+        "paper_id": "tilman2006",
+        "statement": "greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production",
+        "outcome": "temporal stability",
+        "direction": "positive",
+        "study_system": "grassland",
+        "population_or_material": null,
+        "method": "field experiment",
+        "intervention_or_exposure": "plant biodiversity",
+        "comparator": null,
+        "conditions": [
+          "grassland",
+          "field experiment",
+          "decade-long"
+        ],
+        "duration": "decade-long",
+        "effect_size": null,
+        "units": null,
+        "sample_size": null,
+        "limitations": [],
+        "evidence_passage_ids": [
+          "tilman2006-p0"
+        ],
+        "extraction_confidence": null,
+        "missing_fields": [
+          "population_or_material",
+          "comparator",
+          "effect_size",
+          "units",
+          "sample_size"
+        ]
+      }
+    ],
+    "verification_results": [
+      {
+        "claim_id": "claim-7091cfd14459f179803f",
+        "paper_exists": true,
+        "source_resolves": true,
+        "source_check": "cached_snapshot",
+        "passage_exists": true,
+        "passage_supports_claim": "yes",
+        "status": "verified",
+        "reason": "The passage directly supports the claim that ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity. It also confirms that the study was a well-replicated field experiment, matching the method described in the claim."
+      },
+      {
+        "claim_id": "claim-b9e72b7da0b814da0846",
+        "paper_exists": true,
+        "source_resolves": true,
+        "source_check": "cached_snapshot",
+        "passage_exists": true,
+        "passage_supports_claim": "yes",
+        "status": "verified",
+        "reason": "The passage directly states that 'the species-poor systems were more resistant to perturbation than the species-rich systems', which aligns with the claim's statement about perturbation resistance being higher in species-poor systems. The passage also specifies the study system as grassland and the method as a field experiment. The direction of the effect (negative) is supported by the comparison between species-poor and species-rich systems."
+      },
+      {
+        "claim_id": "claim-ca7149ae98a5c4c64b65",
+        "paper_exists": true,
+        "source_resolves": true,
+        "source_check": "cached_snapshot",
+        "passage_exists": true,
+        "passage_supports_claim": "yes",
+        "status": "verified",
+        "reason": "The passage directly states that greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production, which aligns with the claim's statement, outcome, and direction. The study system is specified as grassland, and the method is a field experiment, as indicated in the passage. The duration is described as decade-long, matching the claim. All fields in the claim are supported by the passage."
+      }
+    ],
+    "papers": [
+      {
+        "paper_id": "tilman1996",
+        "provider": "source_checked_excerpt",
+        "provider_id": "tilman1996",
+        "doi": "10.1038/379718a0",
+        "title": "Productivity and sustainability influenced by biodiversity in grassland ecosystems",
+        "abstract": "ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity\nwell-replicated field experiment, in which species diversity was directly controlled",
+        "publication_year": 1996,
+        "publication_date": null,
+        "authors": [
+          "David Tilman",
+          "David Wedin",
+          "Johannes Knops"
+        ],
+        "source_url": "https://www.nature.com/articles/379718a0",
+        "full_text_available": false,
+        "license": null,
+        "retrieved_at": "2026-11-08T00:49:50Z",
+        "content_hash": "6e94e7158cb4accad79a580c90d84fe550dd68406e82546f8b9c102a90a50829",
+        "pmcid": null,
+        "provenance": [
+          "https://www.nature.com/articles/379718a0"
+        ],
+        "source_checked_at": "2026-11-08T00:49:50Z"
+      },
+      {
+        "paper_id": "pfisterer2002",
+        "provider": "source_checked_excerpt",
+        "provider_id": "pfisterer2002",
+        "doi": "10.1038/416084a",
+        "title": "Diversity-dependent production can decrease the stability of ecosystem functioning",
+        "abstract": "the species-poor systems were more resistant to perturbation than the species-rich systems",
+        "publication_year": 2002,
+        "publication_date": null,
+        "authors": [
+          "Andrea B. Pfisterer",
+          "Bernhard Schmid"
+        ],
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/11882897/",
+        "full_text_available": false,
+        "license": null,
+        "retrieved_at": "2026-11-08T00:49:50Z",
+        "content_hash": "3fff3deadc7d975cd2d9f21b5ae58e4b3ac0e5ce030e40576320aff8d715cb8c",
+        "pmcid": null,
+        "provenance": [
+          "https://pubmed.ncbi.nlm.nih.gov/11882897/"
+        ],
+        "source_checked_at": "2026-11-08T00:49:50Z"
+      },
+      {
+        "paper_id": "tilman2006",
+        "provider": "source_checked_excerpt",
+        "provider_id": "tilman2006",
+        "doi": "10.1038/nature04742",
+        "title": "Biodiversity and ecosystem stability in a decade-long grassland experiment",
+        "abstract": "greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production\nlong-term experimental field test",
+        "publication_year": 2006,
+        "publication_date": null,
+        "authors": [
+          "David Tilman",
+          "Peter B. Reich",
+          "Johannes M. H. Knops"
+        ],
+        "source_url": "https://www.nature.com/articles/nature04742",
+        "full_text_available": false,
+        "license": null,
+        "retrieved_at": "2026-11-08T00:49:50Z",
+        "content_hash": "63521df114a2f9eca673444f5e212a78b09c9855f483ff753945e5e929f5338d",
+        "pmcid": null,
+        "provenance": [
+          "https://www.nature.com/articles/nature04742"
+        ],
+        "source_checked_at": "2026-11-08T00:49:50Z"
+      }
+    ],
+    "passages": [
+      {
+        "passage_id": "tilman1996-p0",
+        "paper_id": "tilman1996",
+        "text": "ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity",
+        "section": "Abstract",
+        "page_or_location": "Abstract",
+        "source_type": "abstract",
+        "source_url": "https://www.nature.com/articles/379718a0",
+        "chunk_index": 0,
+        "content_hash": "9c9fd5afb3fd868956292f49bbdff840faad91cc86cd3ee9933086611d652579",
+        "paper_title": "Productivity and sustainability influenced by biodiversity in grassland ecosystems",
+        "doi": "10.1038/379718a0",
+        "publication_year": 1996
+      },
+      {
+        "passage_id": "tilman2006-p0",
+        "paper_id": "tilman2006",
+        "text": "greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production",
+        "section": "Abstract",
+        "page_or_location": "Abstract",
+        "source_type": "abstract",
+        "source_url": "https://www.nature.com/articles/nature04742",
+        "chunk_index": 0,
+        "content_hash": "5f19c1a66c7d7a6daeae01596fbf25b233a0b13ab2ea0ff567646fc05e34751f",
+        "paper_title": "Biodiversity and ecosystem stability in a decade-long grassland experiment",
+        "doi": "10.1038/nature04742",
+        "publication_year": 2006
+      },
+      {
+        "passage_id": "tilman1996-p1",
+        "paper_id": "tilman1996",
+        "text": "well-replicated field experiment, in which species diversity was directly controlled",
+        "section": "Abstract: study design",
+        "page_or_location": "Abstract: study design",
+        "source_type": "abstract",
+        "source_url": "https://www.nature.com/articles/379718a0",
+        "chunk_index": 1,
+        "content_hash": "6223bf5f91da15c1d9f19f8e63fd2c8dad9f5cabadb253975e462613ad3d715d",
+        "paper_title": "Productivity and sustainability influenced by biodiversity in grassland ecosystems",
+        "doi": "10.1038/379718a0",
+        "publication_year": 1996
+      },
+      {
+        "passage_id": "pfisterer2002-p0",
+        "paper_id": "pfisterer2002",
+        "text": "the species-poor systems were more resistant to perturbation than the species-rich systems",
+        "section": "Abstract: resistance",
+        "page_or_location": "Abstract: resistance",
+        "source_type": "abstract",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/11882897/",
+        "chunk_index": 0,
+        "content_hash": "d1701811f8ed98a51c817c97d0cfeff24c07a7a2a09b3cc715865d8bf54a94f2",
+        "paper_title": "Diversity-dependent production can decrease the stability of ecosystem functioning",
+        "doi": "10.1038/416084a",
+        "publication_year": 2002
+      }
+    ],
+    "agreement_summary": "0 verified claim pair(s) have matching reported directions. Inspect context before inferring a consensus.",
+    "disagreement_summary": "3 pair(s) show potential or apparent disagreement. No study is selected as a winner.",
+    "evidence_limitations": [
+      "Evidence navigation only: not an exhaustive review, meta-analysis, scientific verdict, or clinical recommendation.",
+      "Source validation confirms cached/provider identity, not a fresh HTTP/DOI resolution or independent scientific truth.",
+      "Some included studies have only short abstract-level excerpts; methods and results may be missing.",
+      "Unreported or unavailable fields remain unknown: comparator, duration, effect_size, population_or_material, sample_size, units."
+    ],
+    "unresolved_questions": [
+      "Not enough verified comparable findings for the configured reporting threshold. Broader retrieval and human review are needed."
+    ],
+    "citations": [
+      "pfisterer2002-p0",
+      "tilman1996-p0",
+      "tilman1996-p1",
+      "tilman2006-p0"
+    ],
+    "overall_status": "limited_evidence",
+    "clarification_question": null,
+    "generated_at": "2026-11-24T06:54:39.581647Z"
+  },
+  "trace": [
+    {
+      "node": "plan_research",
+      "started_at": "2026-11-24T06:52:20.860662Z",
+      "ended_at": "2026-11-24T06:52:28.455434Z",
+      "latency_ms": 7594.673,
+      "papers": 0,
+      "passages": 0,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 304,
+      "output_tokens": 102,
+      "token_measurement": "provider_reported",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "retrieve_papers",
+      "started_at": "2026-11-24T06:52:28.458957Z",
+      "ended_at": "2026-11-24T06:52:28.803522Z",
+      "latency_ms": 344.574,
+      "papers": 6,
+      "passages": 0,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "retrieve_passages",
+      "started_at": "2026-11-24T06:52:28.806087Z",
+      "ended_at": "2026-11-24T06:52:28.878979Z",
+      "latency_ms": 72.895,
+      "papers": 6,
+      "passages": 4,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "extract_claims",
+      "started_at": "2026-11-24T06:52:28.880159Z",
+      "ended_at": "2026-11-24T06:53:11.081077Z",
+      "latency_ms": 42200.377,
+      "papers": 6,
+      "passages": 4,
+      "claims": 3,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 3573,
+      "output_tokens": 392,
+      "token_measurement": "provider_reported",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "analyze_context",
+      "started_at": "2026-11-24T06:53:11.085619Z",
+      "ended_at": "2026-11-24T06:53:57.742511Z",
+      "latency_ms": 46656.318,
+      "papers": 6,
+      "passages": 4,
+      "claims": 3,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 1091,
+      "output_tokens": 213,
+      "token_measurement": "provider_reported",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "compare_claims",
+      "started_at": "2026-11-24T06:53:57.746354Z",
+      "ended_at": "2026-11-24T06:54:16.052830Z",
+      "latency_ms": 18306.267,
+      "papers": 6,
+      "passages": 4,
+      "claims": 3,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 1235,
+      "output_tokens": 181,
+      "token_measurement": "provider_reported",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "verify_evidence",
+      "started_at": "2026-11-24T06:54:16.057093Z",
+      "ended_at": "2026-11-24T06:54:39.575028Z",
+      "latency_ms": 23517.65,
+      "papers": 6,
+      "passages": 4,
+      "claims": 3,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 1697,
+      "output_tokens": 257,
+      "token_measurement": "provider_reported",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "build_report",
+      "started_at": "2026-11-24T06:54:39.580155Z",
+      "ended_at": "2026-11-24T06:54:39.581744Z",
+      "latency_ms": 1.588,
+      "papers": 6,
+      "passages": 4,
+      "claims": 3,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "config": {
+    "source": "corpus",
+    "model_backend": "ollama",
+    "runtime": "langgraph",
+    "vector_backend": "chroma",
+    "embedding_backend": "ollama",
+    "embedding_model": "nomic-embed-text",
+    "max_papers": 6,
+    "top_k": 4,
+    "chunk_size_tokens": 550,
+    "chunk_overlap_tokens": 75,
+    "max_iterations": 2,
+    "min_claims": 2,
+    "min_comparable_pairs": 1,
+    "max_structured_output_repairs": 1,
+    "context_tokens": 6000,
+    "request_timeout": 180.0,
+    "max_retries": 2,
+    "max_claims_per_paper": 3,
+    "max_comparisons": 6,
+    "context_config": "compact",
+    "data_dir": ".runtime/product",
+    "discovery_min_similarity": 0.45,
+    "ollama_model": "qwen3:8b"
+  },
+  "embedding": "nomic-embed-text:ollama-semantic-v1",
+  "model": "qwen3:8b",
+  "prompt_version": "grounded-v2",
+  "source_mode": "corpus",
+  "request": {
+    "query": "Does increasing plant species diversity consistently increase ecosystem productivity?",
+    "workflow": "static",
+    "max_papers": 6,
+    "min_comparable_pairs": null,
+    "top_k": 4,
+    "max_iterations": null,
+    "context_config": "compact",
+    "date_from": null,
+    "date_to": null,
+    "sources": [
+      "openalex",
+      "europepmc"
+    ]
+  },
+  "retrieved_passage_ids": [
+    "tilman1996-p0",
+    "tilman2006-p0",
+    "tilman1996-p1",
+    "pfisterer2002-p0"
+  ],
+  "extracted_claims": [
+    {
+      "claim_id": "claim-7091cfd14459f179803f",
+      "paper_id": "tilman1996",
+      "statement": "ecosystem productivity in 147 grassland plots increased significantly with plant biodiversity",
+      "outcome": "productivity",
+      "direction": "positive",
+      "study_system": "grassland",
+      "population_or_material": null,
+      "method": "well-replicated field experiment",
+      "intervention_or_exposure": "plant biodiversity",
+      "comparator": null,
+      "conditions": [
+        "field experiment"
+      ],
+      "duration": null,
+      "effect_size": null,
+      "units": null,
+      "sample_size": null,
+      "limitations": [],
+      "evidence_passage_ids": [
+        "tilman1996-p0",
+        "tilman1996-p1"
+      ],
+      "extraction_confidence": null,
+      "missing_fields": [
+        "population_or_material",
+        "comparator",
+        "duration",
+        "effect_size",
+        "units",
+        "sample_size"
+      ]
+    },
+    {
+      "claim_id": "claim-b9e72b7da0b814da0846",
+      "paper_id": "pfisterer2002",
+      "statement": "the species-poor systems were more resistant to perturbation than the species-rich systems",
+      "outcome": "perturbation resistance",
+      "direction": "negative",
+      "study_system": "grassland",
+      "population_or_material": null,
+      "method": "field experiment",
+      "intervention_or_exposure": "plant biodiversity",
+      "comparator": null,
+      "conditions": [
+        "field experiment"
+      ],
+      "duration": null,
+      "effect_size": null,
+      "units": null,
+      "sample_size": null,
+      "limitations": [],
+      "evidence_passage_ids": [
+        "pfisterer2002-p0"
+      ],
+      "extraction_confidence": null,
+      "missing_fields": [
+        "population_or_material",
+        "comparator",
+        "duration",
+        "effect_size",
+        "units",
+        "sample_size"
+      ]
+    },
+    {
+      "claim_id": "claim-ca7149ae98a5c4c64b65",
+      "paper_id": "tilman2006",
+      "statement": "greater numbers of plant species led to greater temporal stability of ecosystem annual aboveground plant production",
+      "outcome": "temporal stability",
+      "direction": "positive",
+      "study_system": "grassland",
+      "population_or_material": null,
+      "method": "field experiment",
+      "intervention_or_exposure": "plant biodiversity",
+      "comparator": null,
+      "conditions": [
+        "grassland",
+        "field experiment",
+        "decade-long"
+      ],
+      "duration": "decade-long",
+      "effect_size": null,
+      "units": null,
+      "sample_size": null,
+      "limitations": [],
+      "evidence_passage_ids": [
+        "tilman2006-p0"
+      ],
+      "extraction_confidence": null,
+      "missing_fields": [
+        "population_or_material",
+        "comparator",
+        "effect_size",
+        "units",
+        "sample_size"
+      ]
+    }
+  ],
+  "direction_reviews": [
+    {
+      "claim_id": "claim-7091cfd14459f179803f",
+      "effect_when_exposure_increases": "increases",
+      "explanation": "The statement directly links higher plant biodiversity to increased ecosystem productivity."
+    },
+    {
+      "claim_id": "claim-b9e72b7da0b814da0846",
+      "effect_when_exposure_increases": "decreases",
+      "explanation": "Species-poor systems (low biodiversity) show higher perturbation resistance than species-rich systems (high biodiversity)."
+    },
+    {
+      "claim_id": "claim-ca7149ae98a5c4c64b65",
+      "effect_when_exposure_increases": "increases",
+      "explanation": "Greater plant species numbers (higher biodiversity) are explicitly linked to greater temporal stability."
+    }
+  ],
+  "benchmark_fault": null,
+  "implementation_version": "0.1.0",
+  "corpus_version": "public-excerpts-v2",
+  "config_hash": "8fde84c1d26e9a875c5efd3eabecd089961b6956a6b59548b86d542a648b9dd7"
+}

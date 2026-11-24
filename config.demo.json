@@ -1,0 +1,14 @@
+{
+  "source": "corpus",
+  "model_backend": "ollama",
+  "runtime": "langgraph",
+  "vector_backend": "chroma",
+  "embedding_backend": "ollama",
+  "embedding_model": "nomic-embed-text",
+  "ollama_model": "qwen3:8b",
+  "data_dir": ".runtime/product",
+  "top_k": 8,
+  "max_papers": 3,
+  "context_tokens": 6000,
+  "max_iterations": 2
+}

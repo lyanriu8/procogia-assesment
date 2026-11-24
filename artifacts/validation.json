@@ -1,0 +1,45 @@
+{
+  "automated_tests": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 56,
+    "failed": 0,
+    "skipped": 0,
+    "note": "Inference is mocked explicitly; genuine LangGraph and Chroma execute."
+  },
+  "actual_model_validation": {
+    "model": "qwen3:8b",
+    "embedding_model": "nomic-embed-text",
+    "runtime": "langgraph",
+    "vector_database": "chroma",
+    "measured_scenarios": 8,
+    "passed": 7,
+    "failed": [
+      "unsupported-claim: strict rejection decision; material excluded as qualified"
+    ],
+    "source": "artifacts/evaluation/summary.json"
+  },
+  "server": {
+    "url": "http://127.0.0.1:8000",
+    "models_installed": true,
+    "health_verified": true
+  },
+  "browser_visual_verification": {
+    "verified": false,
+    "reason": "Browser connector fails before navigation: missing sandboxPolicy metadata."
+  },
+  "external_discovery_integration": "Not revalidated against live scholarly services. The presentation path uses preloaded public source documents and actual local inference.",
+  "live_http_smoke": {
+    "passed": true,
+    "run_id": "a95cc5830d054f38b7457eacb1236f35",
+    "checks": [
+      "readiness",
+      "background job accepted",
+      "actual model input tokens",
+      "persisted progress and final report",
+      "clarification",
+      "paper-limit and comparison-threshold overrides"
+    ],
+    "artifact": "artifacts/api-smoke.json"
+  },
+  "frontend_javascript_syntax": "passed: node --check"
+}

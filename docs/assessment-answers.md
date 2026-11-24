@@ -12,7 +12,7 @@ RAG: section-aware exact chunks, nomic semantic embeddings, Chroma cosine retrie
 
 Workflows: the static graph executes a fixed sequence. The dynamic graph adds a bounded sufficiency gate and LLM action selection among permitted search/full-text/refinement actions. Stop conditions prevent futile repeated work. A final gate counts verified claims and usable pairs.
 
-Model/context: Qwen 2.5 7B is already installed and supports structured output; it has not been benchmarked as best for this task. Local inference avoids API fees but consumes laptop memory/compute. Prompt budgets include schema and source context. No conversation history accumulates. Compact and evidence-rich configurations must be compared using current actual outputs.
+Model/context: Qwen3 8B is already installed and supports structured output; it has not been benchmarked as best for this task. Local inference avoids API fees but consumes laptop memory/compute. Prompt budgets include schema and source context. No conversation history accumulates. Compact and evidence-rich configurations must be compared using current actual outputs.
 
 Evaluation: run the behavioral harness and inspect complete saved runs. Success, ambiguity, missing information, unsupported text, invalid citations, provider failure, and synonym retrieval are explicit scenarios. Report failures honestly. Tests use explicit model mocks; real-model runs are separate. Labels are not independent scientific gold, and the same-model verifier has correlated errors.
 

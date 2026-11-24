@@ -69,7 +69,12 @@ class ScientificClaim(Contract):
     missing_fields: list[str] = Field(default_factory=list)
 
 
-Disagreement = Literal["genuine_contradiction", "contextual_disagreement", "apparent_disagreement", "insufficient_evidence"]
+Disagreement = Literal[
+    "genuine_contradiction",
+    "contextual_disagreement",
+    "apparent_disagreement",
+    "insufficient_evidence",
+]
 
 
 class Comparability(Contract):
@@ -89,7 +94,9 @@ class ClaimComparison(Contract):
     same_outcome: bool | None
     comparable_system: bool | None
     comparable_methods: bool | None
-    direction_relationship: Literal["agreement", "opposition", "not_comparable", "unclear"]
+    direction_relationship: Literal[
+        "agreement", "opposition", "not_comparable", "unclear"
+    ]
     disagreement_type: Disagreement | None
     explanation: str
     context_differences: list[str]
@@ -153,7 +160,9 @@ class ComparisonReport(Contract):
     evidence_limitations: list[str]
     unresolved_questions: list[str]
     citations: list[str]
-    overall_status: Literal["evidence_found", "limited_evidence", "insufficient_evidence"]
+    overall_status: Literal[
+        "evidence_found", "limited_evidence", "insufficient_evidence"
+    ]
     clarification_question: str | None = None
     generated_at: datetime = Field(default_factory=utcnow)
 
@@ -162,12 +171,15 @@ class ResearchRequest(Contract):
     query: str = Field(min_length=1, max_length=2000)
     workflow: Literal["static", "dynamic"] = "dynamic"
     max_papers: int | None = Field(default=None, ge=1, le=50)
+    min_comparable_pairs: int | None = Field(default=None, ge=1, le=100)
     top_k: int | None = Field(default=None, ge=1, le=50)
     max_iterations: int | None = Field(default=None, ge=0, le=5)
     context_config: Literal["compact", "evidence-rich"] | None = None
     date_from: date | None = None
     date_to: date | None = None
-    sources: list[Literal["openalex", "europepmc"]] = Field(default_factory=lambda: ["openalex", "europepmc"], min_length=1)
+    sources: list[Literal["openalex", "europepmc"]] = Field(
+        default_factory=lambda: ["openalex", "europepmc"], min_length=1
+    )
 
     @model_validator(mode="after")
     def validate_dates(self):
@@ -179,15 +191,33 @@ class ResearchRequest(Contract):
 
 
 class RouteDecision(Contract):
-    action: Literal['broaden_search', 'retrieve_full_text', 'refine_comparison', 'analyze_context', 'verify_with_limitations']
+    action: Literal[
+        "broaden_search",
+        "retrieve_full_text",
+        "refine_comparison",
+        "analyze_context",
+        "verify_with_limitations",
+    ]
     reason: str
 
 
 class PairJudgment(Contract):
-    direction_relationship: Literal['agreement', 'opposition', 'not_comparable', 'unclear']
+    direction_relationship: Literal[
+        "agreement", "opposition", "not_comparable", "unclear"
+    ]
     disagreement_type: Disagreement | None
     explanation: str
 
 
 class PairJudgments(Contract):
     judgments: list[PairJudgment]
+
+
+class DirectionReview(Contract):
+    claim_id: str
+    effect_when_exposure_increases: Literal["increases", "decreases", "not_established"]
+    explanation: str
+
+
+class DirectionReviews(Contract):
+    reviews: list[DirectionReview]

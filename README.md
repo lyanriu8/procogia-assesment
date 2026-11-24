@@ -7,16 +7,16 @@ A local scientific evidence comparison app with **actual Ollama inference, LangG
 ```sh
 brew install ollama
 brew services start ollama
-ollama pull qwen2.5:7b
+ollama pull qwen3:8b
 ollama pull nomic-embed-text
 python3 -m venv .venv
 .venv/bin/python -m pip install -e '.[dev]'
 .venv/bin/python -m contradiction_lab serve
 ```
 
-Open http://127.0.0.1:8000. The header shows the real model and runtime. `/readiness` checks Ollama and both models. Investigations run in the background; the execution tab shows the current node, routes, timing, and model token usage. Local inference can take several minutes. Run one investigation at a time.
+Open http://127.0.0.1:8000. The header shows the real model and runtime. `/readiness` checks Ollama and both models. Investigations run in the background; the execution tab shows the current node, routes, timing, and model token usage. Local inference can take several minutes. The interface starts with a three-paper limit for a shorter demo; increase it to explore more sources. Run one investigation at a time.
 
-The default source is six preloaded real publications with attributed public excerpts. **The documents are preloaded; the answers are not.** Qwen plans, extracts findings and context, assesses claim pairs, chooses adaptive actions, and verifies support on every run. Unknown fields stay null. Output validation, source ownership, hashes, comparison constraints, and stopping limits are deterministic safeguards. The final report is assembled from verified findings, not an unconstrained prose generator.
+The default source is six preloaded real publications with attributed public excerpts. **The documents are preloaded; the answers are not.** Qwen plans, extracts findings, separately reviews effect direction, assesses claim pairs, chooses adaptive actions, and verifies support on every run. Unknown fields stay null. Output validation, source ownership, hashes, comparison constraints, and stopping limits are deterministic safeguards. The final report is assembled from verified findings, not an unconstrained prose generator.
 
 ## Demonstrate the assessment
 
@@ -32,7 +32,7 @@ The default source is six preloaded real publications with attributed public exc
 # Actual model evaluation, both workflows and two context configurations
 .venv/bin/python -m contradiction_lab evaluate
 # Smaller benchmark: one workflow, without the extra context experiment
-.venv/bin/python -m contradiction_lab evaluate --workflow dynamic --quick
+.venv/bin/python -m contradiction_lab evaluate --config config.demo.json --workflow dynamic --quick
 # Requested Q&A changes
 .venv/bin/python -m contradiction_lab research --workflow static --top-k 4
 .venv/bin/python -m contradiction_lab research --workflow static --top-k 8
@@ -55,7 +55,7 @@ This uses OpenAlex and Europe PMC instead of the fixed public corpus. Discovery 
 
 ## Design and limits
 
-- Qwen 2.5 7B is a local starting model, not a demonstrated best model. Override `OLLAMA_MODEL` to compare another installed model.
+- Qwen3 8B is the current local model, exercised in real presentation checks. Qwen 2.5 made sign/verification errors during development; these are retained under `artifacts/model-checks/`. This is not a broad model benchmark. Override `OLLAMA_MODEL` to compare another installed model.
 - `nomic-embed-text` creates semantic document/query embeddings. Chroma ranks scoped passages; keyword/title/section signals supplement similarity.
 - State uses typed records and source IDs, not an unbounded chat transcript. Approximate prompt budgets and schema validation bound requests.
 - All findings retain passage → paper → DOI/URL provenance. Only fully supported findings enter the report. The same LLM performs extraction and verification, so errors can be correlated.
@@ -64,3 +64,5 @@ This uses OpenAlex and Europe PMC instead of the fixed public corpus. Discovery 
 - No authentication; bind to loopback. This is evidence navigation, not a systematic review or scientific verdict.
 
 Historical replay measurements were moved to `artifacts/legacy-replay/` and must not be presented as current model results.
+
+Current recorded validation: **56 automated tests passed; 7/8 strict real-model scenario checks passed**. The retained failure is a partial/qualified verdict for an injected unsupported claim; that material was excluded from the report. See `artifacts/evaluation/report.md` and `artifacts/validation.json`.

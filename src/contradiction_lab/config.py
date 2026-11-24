@@ -27,12 +27,14 @@ class Settings(Contract):
     request_timeout: float = Field(default=180, gt=0)
     max_retries: int = Field(default=2, ge=0, le=4)
     max_claims_per_paper: int = Field(default=3, ge=1, le=10)
-    max_comparisons: int = Field(default=15, ge=1, le=100)
+    max_comparisons: int = Field(default=6, ge=1, le=100)
     context_config: Literal["compact", "evidence-rich"] = "evidence-rich"
-    data_dir: Path = Field(default_factory=lambda: Path(os.getenv("LAB_DATA_DIR", ".runtime")))
+    data_dir: Path = Field(
+        default_factory=lambda: Path(os.getenv("LAB_DATA_DIR", ".runtime/product"))
+    )
 
     discovery_min_similarity: float = Field(default=0.45, ge=0, le=1)
-    ollama_model: str = "qwen2.5:7b"
+    ollama_model: str = "qwen3:8b"
 
     @model_validator(mode="after")
     def validate_combination(self):
@@ -43,5 +45,7 @@ class Settings(Contract):
     @classmethod
     def load(cls, path: str | Path | None = None, **overrides):
         values = json.loads(Path(path).read_text()) if path else {}
-        values.update({key: value for key, value in overrides.items() if value is not None})
+        values.update(
+            {key: value for key, value in overrides.items() if value is not None}
+        )
         return cls.model_validate(values)

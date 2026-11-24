@@ -1,6 +1,6 @@
 # Architecture
 
-The production stack is Ollama (`qwen2.5:7b`), Ollama semantic embeddings (`nomic-embed-text`), Chroma, LangGraph, FastAPI, and SQLite for report/cache persistence.
+The production stack is Ollama (`qwen3:8b`), Ollama semantic embeddings (`nomic-embed-text`), Chroma, LangGraph, FastAPI, and SQLite for report/cache persistence.
 
 ## Agents and reusable skills
 
@@ -8,7 +8,8 @@ The production stack is Ollama (`qwen2.5:7b`), Ollama semantic embeddings (`nomi
 |---|---|---|
 | Planner | LLM identifies scope, search terms, ambiguity | `OllamaModel.plan` |
 | Retriever | Searches the public corpus or external providers, indexes and ranks passages | `PublicCorpus.search`, provider adapters, `VectorIndex` |
-| Extractor / context analyst | LLM extracts atomic findings and explicit study fields | `OllamaModel.extract`, Pydantic contracts |
+| Extractor | LLM extracts atomic findings and explicit study fields | `OllamaModel.extract`, Pydantic contracts |
+| Context analyst | Separate LLM review normalizes the effect direction relative to increasing exposure | `Nodes.analyze_context`, `DirectionReviews` |
 | Adaptive supervisor | LLM selects useful permitted actions; code enforces budgets | `Nodes.assess_sufficiency`, `RouteDecision` |
 | Comparison analyst | LLM assesses ordered pairs; scientific constraints prevent stronger unsupported labels | `Nodes.compare_claims`, `classify_disagreement` |
 | Verifier | Checks source ownership/hashes, then LLM judges all populated fields | `verify_citation`, `OllamaModel.supports` |
@@ -29,3 +30,7 @@ Dynamic: after extraction, assess sufficiency. Select broaden search, retrieve p
 Model errors do not invoke replay or a substitute extractor. They are recorded and lead to limitations or abstention. Invalid JSON gets a bounded repair attempt. Provider calls have bounded retries and response sizes. Dynamic loops have a shared iteration budget and LangGraph recursion limit.
 
 The UI uses background jobs and polls persisted node progress. Completed runs expose configuration, trace, provider-reported inference tokens, findings, pair assessments, and verification decisions. SQLite persistence is not a second vector retrieval mode; the only production vector backend is Chroma.
+
+The context analyst uses Qwen3 reasoning for the small direction-review task. Other agents use non-thinking structured output to limit latency. Per-paper findings cite the full retrieved passage packet from that paper so the verifier can check both findings and study context. This is broader provenance than a single minimal supporting sentence.
+
+Latency checks found that disabling reasoning for the direction reviewer reintroduced sign errors on the targeted examples. Reasoning remains enabled for this specialist; the UI paper limit controls how much work a live demonstration requests.
