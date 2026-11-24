@@ -4,14 +4,16 @@
  "description": "Verbatim PubMed abstract excerpts from official NCBI E-utilities records. Sentences joined with ' … ' are separate verbatim sentences from the same abstract section. Non-breaking and thin spaces are normalized to ordinary spaces; wording is unchanged. All findings are extracted by the running model.",
  "domain": {
   "name": "resistance training and skeletal muscle hypertrophy",
-  "demo_query": "Does doing more weekly sets of resistance training increase muscle hypertrophy?",
+  "demo_query": "Is training a muscle more times per week better for muscle hypertrophy?",
+  "volume_query": "Does a higher weekly resistance training volume increase muscle hypertrophy in trained men?",
   "uncertainty_query": "Does lunar basalt microbiome diversity increase chlorophyll productivity at 90 kelvin?",
   "synonym_query": "Does pumping iron more often each week grow bigger muscles?",
-  "extraction_hint": "Use concise normalized values. Outcome: muscle hypertrophy (for muscle size, thickness, volume, mass or fiber cross-sectional area) or muscle strength. Exposure: training volume (sets), training frequency (sessions or days per muscle per week), or training load (intensity, %1RM, repetition range; FEWER repetitions maximum means HIGHER load). Population: resistance-trained men or untrained men when stated. Method: randomized trial, or systematic review and meta-analysis, when stated.",
+  "extraction_hint": "Use concise normalized values. Outcome: muscle hypertrophy (for muscle size, muscle thickness or MT, volume, mass or fiber cross-sectional area) or muscle strength; when a finding reports both size and strength, the outcome is muscle hypertrophy. Exposure: training volume (sets), training frequency (sessions or days per muscle per week), or training load (intensity, %1RM, repetition range; FEWER repetitions maximum means HIGHER load). Population: resistance-trained men or untrained men when stated. Method: randomized trial, or systematic review and meta-analysis, when stated.",
   "direction_example": "Examples: 'higher volumes produced greater gains' means the outcome INCREASES with volume. 'No significant difference between higher and lower frequency' or 'a lower load resulted in similar hypertrophy as a heavy load' means NO EFFECT. 'Low repetition (heavier) programs induced greater hypertrophy than high repetition (lighter) programs' means hypertrophy INCREASES with load.",
   "outcome_keywords": {
    "muscle hypertrophy": [
     "hypertroph",
+    "mt",
     "muscle size",
     "muscle thickness",
     "muscle volume",

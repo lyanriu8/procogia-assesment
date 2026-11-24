@@ -1,0 +1,455 @@
+{
+  "run_id": "21ee7945f9134028904daa85cd6395ec",
+  "status": "limited_evidence",
+  "report": {
+    "query": "Is training a muscle more times per week better for muscle hypertrophy?",
+    "interpreted_scope": "The query seeks to determine whether increasing the frequency of training a specific muscle group per week leads to greater muscle hypertrophy.",
+    "workflow_mode": "static",
+    "papers_considered": 3,
+    "papers_included": 1,
+    "claims_extracted": 2,
+    "comparisons": [],
+    "claims": [
+      {
+        "claim_id": "claim-e3e40e99ceade896f97e",
+        "paper_id": "schoenfeld2019frequency",
+        "statement": "Results showed no significant difference between higher and lower frequency on a volume-equated basis.",
+        "outcome": "muscle hypertrophy",
+        "direction": "no_effect",
+        "study_system": "resistance training",
+        "population_or_material": null,
+        "method": "systematic review and meta-analysis",
+        "intervention_or_exposure": "training frequency",
+        "comparator": null,
+        "conditions": [
+          "volume-equated studies"
+        ],
+        "duration": null,
+        "effect_size": null,
+        "units": null,
+        "sample_size": null,
+        "limitations": [],
+        "evidence_passage_ids": [
+          "schoenfeld2019frequency-p2",
+          "schoenfeld2019frequency-p1",
+          "schoenfeld2019frequency-p0"
+        ],
+        "extraction_confidence": null,
+        "missing_fields": [
+          "population_or_material",
+          "comparator",
+          "duration",
+          "effect_size",
+          "units",
+          "sample_size"
+        ]
+      }
+    ],
+    "verification_results": [
+      {
+        "claim_id": "claim-5847b510f2fcf1c5fc5a",
+        "paper_exists": true,
+        "source_resolves": true,
+        "source_check": "cached_snapshot",
+        "passage_exists": true,
+        "passage_supports_claim": "partial",
+        "status": "qualified",
+        "reason": "The passage states that training twice a week promotes superior hypertrophic outcomes compared to once a week, which supports the claim that increasing training frequency (from once to twice) leads to better muscle hypertrophy. However, the claim states that 'every lifter doubles their muscle mass,' which is a stronger and more specific statement than what the passage supports. The passage does not provide evidence that every lifter achieves this outcome, only that higher frequency leads to better hypertrophy in general."
+      },
+      {
+        "claim_id": "claim-e3e40e99ceade896f97e",
+        "paper_exists": true,
+        "source_resolves": true,
+        "source_check": "cached_snapshot",
+        "passage_exists": true,
+        "passage_supports_claim": "yes",
+        "status": "verified",
+        "reason": "The passage states that results showed no significant difference between higher and lower frequency on a volume-equated basis, which directly supports the claim that there is no significant difference between higher and lower frequency on a volume-equated basis. The study design is a systematic review and meta-analysis, which matches the claim's method. The outcome is muscle hypertrophy, and the direction is no effect, which is consistent with the passage."
+      }
+    ],
+    "papers": [
+      {
+        "paper_id": "schoenfeld2019frequency",
+        "provider": "source_checked_excerpt",
+        "provider_id": "schoenfeld2019frequency",
+        "doi": "10.1080/02640414.2018.1555906",
+        "title": "How many times per week should a muscle be trained to maximize muscle hypertrophy? A systematic review and meta-analysis of studies examining the effects of resistance training frequency.",
+        "abstract": "The purpose of this paper was to conduct a systematic review and meta-analysis of experimental studies designed to investigate the effects of weekly training frequency on hypertrophic adaptations. \u2026 a total of 25 studies were deemed to meet inclusion criteria.\nResults showed no significant difference between higher and lower frequency on a volume-equated basis. \u2026 Meta-regression analysis of non-volume-equated studies showed a significant effect favoring higher frequencies, although the overall difference in magnitude of effect between frequencies of 1 and 3+ days per week was modest.\nIn conclusion, there is strong evidence that resistance training frequency does not significantly or meaningfully impact muscle hypertrophy when volume is equated.",
+        "publication_year": 2019,
+        "publication_date": null,
+        "authors": [
+          "Brad Jon Schoenfeld",
+          "Jozo Grgic",
+          "James Krieger"
+        ],
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/30558493/",
+        "full_text_available": false,
+        "license": null,
+        "retrieved_at": "2026-11-24T00:00:00Z",
+        "content_hash": "1ad26f1e080f83e9e9ff6ca490191a641fd908c79302d8af727e8eff7935c088",
+        "pmcid": null,
+        "provenance": [
+          "https://pubmed.ncbi.nlm.nih.gov/30558493/",
+          "publication_type:Journal Article",
+          "publication_type:Meta-Analysis",
+          "publication_type:Systematic Review"
+        ],
+        "source_checked_at": "2026-11-24T00:00:00Z"
+      }
+    ],
+    "passages": [
+      {
+        "passage_id": "schoenfeld2019frequency-p2",
+        "paper_id": "schoenfeld2019frequency",
+        "text": "In conclusion, there is strong evidence that resistance training frequency does not significantly or meaningfully impact muscle hypertrophy when volume is equated.",
+        "section": "Abstract: conclusions",
+        "page_or_location": "Abstract: conclusions",
+        "source_type": "abstract",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/30558493/",
+        "chunk_index": 2,
+        "content_hash": "50a692dab757d69a2fd32f43f59c95c7d2a97653006c91ba264565856f75cf54",
+        "paper_title": "How many times per week should a muscle be trained to maximize muscle hypertrophy? A systematic review and meta-analysis of studies examining the effects of resistance training frequency.",
+        "doi": "10.1080/02640414.2018.1555906",
+        "publication_year": 2019
+      },
+      {
+        "passage_id": "schoenfeld2019frequency-p1",
+        "paper_id": "schoenfeld2019frequency",
+        "text": "Results showed no significant difference between higher and lower frequency on a volume-equated basis. \u2026 Meta-regression analysis of non-volume-equated studies showed a significant effect favoring higher frequencies, although the overall difference in magnitude of effect between frequencies of 1 and 3+ days per week was modest.",
+        "section": "Abstract: results",
+        "page_or_location": "Abstract: results",
+        "source_type": "abstract",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/30558493/",
+        "chunk_index": 1,
+        "content_hash": "694de9996652607a9dcc8bfe5d9316538428be5bd6e3417e3d7ed2850a7e8b2d",
+        "paper_title": "How many times per week should a muscle be trained to maximize muscle hypertrophy? A systematic review and meta-analysis of studies examining the effects of resistance training frequency.",
+        "doi": "10.1080/02640414.2018.1555906",
+        "publication_year": 2019
+      },
+      {
+        "passage_id": "schoenfeld2019frequency-p0",
+        "paper_id": "schoenfeld2019frequency",
+        "text": "The purpose of this paper was to conduct a systematic review and meta-analysis of experimental studies designed to investigate the effects of weekly training frequency on hypertrophic adaptations. \u2026 a total of 25 studies were deemed to meet inclusion criteria.",
+        "section": "Abstract: methods",
+        "page_or_location": "Abstract: methods",
+        "source_type": "abstract",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/30558493/",
+        "chunk_index": 0,
+        "content_hash": "f6a082822749ac073fe6b97a92031065560951dda814abbfd03f90eb1e1f8da5",
+        "paper_title": "How many times per week should a muscle be trained to maximize muscle hypertrophy? A systematic review and meta-analysis of studies examining the effects of resistance training frequency.",
+        "doi": "10.1080/02640414.2018.1555906",
+        "publication_year": 2019
+      }
+    ],
+    "agreement_summary": "0 verified claim pair(s) have matching reported directions. Inspect context before inferring a consensus.",
+    "disagreement_summary": "0 pair(s) show potential or apparent disagreement. No study is selected as a winner.",
+    "evidence_limitations": [
+      "Evidence navigation only: not an exhaustive review, meta-analysis, scientific verdict, or clinical recommendation.",
+      "Source validation confirms cached/provider identity, not a fresh HTTP/DOI resolution or independent scientific truth.",
+      "Some included studies have only short abstract-level excerpts; methods and results may be missing.",
+      "Unreported or unavailable fields remain unknown: comparator, duration, effect_size, population_or_material, sample_size, units.",
+      "Qualified or rejected claims were excluded from synthesis; inspect verification results for reasons."
+    ],
+    "unresolved_questions": [
+      "Not enough verified comparable findings for the configured reporting threshold. Broader retrieval and human review are needed."
+    ],
+    "citations": [
+      "schoenfeld2019frequency-p0",
+      "schoenfeld2019frequency-p1",
+      "schoenfeld2019frequency-p2"
+    ],
+    "overall_status": "limited_evidence",
+    "clarification_question": null,
+    "generated_at": "2026-11-24T17:16:04.951806Z"
+  },
+  "trace": [
+    {
+      "node": "plan_research",
+      "started_at": "2026-11-24T17:15:36.540542Z",
+      "ended_at": "2026-11-24T17:15:39.000294Z",
+      "latency_ms": 2459.67,
+      "papers": 0,
+      "passages": 0,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 308,
+      "output_tokens": 109,
+      "token_measurement": "provider_reported",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "retrieve_papers",
+      "started_at": "2026-11-24T17:15:39.006361Z",
+      "ended_at": "2026-11-24T17:15:39.123577Z",
+      "latency_ms": 117.216,
+      "papers": 3,
+      "passages": 0,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "retrieve_passages",
+      "started_at": "2026-11-24T17:15:39.128726Z",
+      "ended_at": "2026-11-24T17:15:39.218175Z",
+      "latency_ms": 89.448,
+      "papers": 3,
+      "passages": 4,
+      "claims": 0,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "extract_claims",
+      "started_at": "2026-11-24T17:15:39.223687Z",
+      "ended_at": "2026-11-24T17:15:46.727798Z",
+      "latency_ms": 7503.856,
+      "papers": 3,
+      "passages": 4,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 3675,
+      "output_tokens": 317,
+      "token_measurement": "provider_reported",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "analyze_context",
+      "started_at": "2026-11-24T17:15:46.734164Z",
+      "ended_at": "2026-11-24T17:15:57.917551Z",
+      "latency_ms": 11183.006,
+      "papers": 3,
+      "passages": 4,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 609,
+      "output_tokens": 487,
+      "token_measurement": "provider_reported",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "compare_claims",
+      "started_at": "2026-11-24T17:15:57.924605Z",
+      "ended_at": "2026-11-24T17:15:59.952350Z",
+      "latency_ms": 2027.678,
+      "papers": 3,
+      "passages": 4,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 1234,
+      "output_tokens": 65,
+      "token_measurement": "provider_reported",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "verify_evidence",
+      "started_at": "2026-11-24T17:15:59.958622Z",
+      "ended_at": "2026-11-24T17:16:04.940043Z",
+      "latency_ms": 4981.252,
+      "papers": 3,
+      "passages": 4,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 1444,
+      "output_tokens": 208,
+      "token_measurement": "provider_reported",
+      "retries": 0,
+      "errors": []
+    },
+    {
+      "node": "build_report",
+      "started_at": "2026-11-24T17:16:04.946777Z",
+      "ended_at": "2026-11-24T17:16:04.951887Z",
+      "latency_ms": 5.109,
+      "papers": 3,
+      "passages": 4,
+      "claims": 2,
+      "iteration": 0,
+      "route": null,
+      "reason": null,
+      "model": "qwen3:8b",
+      "prompt_version": "grounded-v1",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "token_measurement": "not_applicable (no LLM call)",
+      "retries": 0,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "config": {
+    "source": "corpus",
+    "model_backend": "ollama",
+    "runtime": "langgraph",
+    "vector_backend": "chroma",
+    "embedding_backend": "ollama",
+    "embedding_model": "nomic-embed-text",
+    "max_papers": 3,
+    "top_k": 4,
+    "chunk_size_tokens": 550,
+    "chunk_overlap_tokens": 75,
+    "max_iterations": 2,
+    "min_claims": 2,
+    "min_comparable_pairs": 1,
+    "max_structured_output_repairs": 1,
+    "context_tokens": 6000,
+    "request_timeout": 180.0,
+    "max_retries": 2,
+    "max_claims_per_paper": 3,
+    "max_comparisons": 21,
+    "context_config": "evidence-rich",
+    "data_dir": ".runtime\\product",
+    "discovery_min_similarity": 0.6,
+    "ollama_model": "qwen3:8b"
+  },
+  "embedding": "nomic-embed-text:ollama-semantic-v1",
+  "model": "qwen3:8b",
+  "prompt_version": "grounded-v2",
+  "source_mode": "corpus",
+  "request": {
+    "query": "Is training a muscle more times per week better for muscle hypertrophy?",
+    "workflow": "static",
+    "max_papers": 3,
+    "min_comparable_pairs": null,
+    "top_k": 4,
+    "max_iterations": null,
+    "context_config": "evidence-rich",
+    "date_from": null,
+    "date_to": null,
+    "sources": [
+      "openalex",
+      "europepmc"
+    ]
+  },
+  "retrieved_passage_ids": [
+    "schoenfeld2016frequency-p2",
+    "schoenfeld2019frequency-p2",
+    "schoenfeld2019frequency-p1",
+    "schoenfeld2019frequency-p0"
+  ],
+  "extracted_claims": [
+    {
+      "claim_id": "claim-5847b510f2fcf1c5fc5a",
+      "paper_id": "schoenfeld2016frequency",
+      "statement": "This proves every lifter doubles their muscle mass.",
+      "outcome": "muscle hypertrophy",
+      "direction": "unclear",
+      "study_system": "muscle hypertrophy",
+      "population_or_material": null,
+      "method": "systematic review and meta-analysis",
+      "intervention_or_exposure": "training frequency",
+      "comparator": null,
+      "conditions": [
+        "volume-equated basis",
+        "training muscle groups between 1 to 3 days per week"
+      ],
+      "duration": null,
+      "effect_size": null,
+      "units": null,
+      "sample_size": null,
+      "limitations": [],
+      "evidence_passage_ids": [
+        "schoenfeld2016frequency-p2"
+      ],
+      "extraction_confidence": null,
+      "missing_fields": [
+        "population_or_material",
+        "comparator",
+        "duration",
+        "effect_size",
+        "units",
+        "sample_size"
+      ]
+    },
+    {
+      "claim_id": "claim-e3e40e99ceade896f97e",
+      "paper_id": "schoenfeld2019frequency",
+      "statement": "Results showed no significant difference between higher and lower frequency on a volume-equated basis.",
+      "outcome": "muscle hypertrophy",
+      "direction": "no_effect",
+      "study_system": "resistance training",
+      "population_or_material": null,
+      "method": "systematic review and meta-analysis",
+      "intervention_or_exposure": "training frequency",
+      "comparator": null,
+      "conditions": [
+        "volume-equated studies"
+      ],
+      "duration": null,
+      "effect_size": null,
+      "units": null,
+      "sample_size": null,
+      "limitations": [],
+      "evidence_passage_ids": [
+        "schoenfeld2019frequency-p2",
+        "schoenfeld2019frequency-p1",
+        "schoenfeld2019frequency-p0"
+      ],
+      "extraction_confidence": null,
+      "missing_fields": [
+        "population_or_material",
+        "comparator",
+        "duration",
+        "effect_size",
+        "units",
+        "sample_size"
+      ]
+    }
+  ],
+  "direction_reviews": [
+    {
+      "claim_id": "claim-5847b510f2fcf1c5fc5a",
+      "effect_when_exposure_increases": "not_established",
+      "explanation": "The statement makes a general claim without comparing outcomes at different training frequencies, so no effect direction can be determined."
+    },
+    {
+      "claim_id": "claim-e3e40e99ceade896f97e",
+      "effect_when_exposure_increases": "no_change",
+      "explanation": "The study found no significant difference in muscle hypertrophy between higher and lower training frequency groups when volume was equated."
+    }
+  ],
+  "benchmark_fault": "unsupported_claim",
+  "implementation_version": "0.1.0",
+  "corpus_version": "gym-hypertrophy-v1",
+  "config_hash": "3f79cbfb4747b6dd754da75cfed9be5a4c4dd7fca58dec660924b53d5f0f2fb8"
+}

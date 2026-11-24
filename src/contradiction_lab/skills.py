@@ -18,6 +18,16 @@ CONTEXT_FIELDS = (
 )
 
 
+def is_unreported(value: str) -> bool:
+    text = value.strip().casefold().rstrip(".")
+    return text in {"", "null", "none", "unknown", "n/a", "na", "unclear"} or bool(
+        re.fullmatch(
+            r"not (explicitly |clearly )?(stated|specified|reported|mentioned|described|provided|available|given)",
+            text,
+        )
+    )
+
+
 def normalize_claims(claims: list[ScientificClaim]) -> list[ScientificClaim]:
     from .domain import canonical, load_domain
 
@@ -27,12 +37,7 @@ def normalize_claims(claims: list[ScientificClaim]) -> list[ScientificClaim]:
         claim = claim.model_copy(deep=True)
         for field in CONTEXT_FIELDS:
             value = getattr(claim, field)
-            if isinstance(value, str) and value.strip().casefold() in {
-                "null",
-                "unknown",
-                "not reported",
-                "n/a",
-            }:
+            if isinstance(value, str) and is_unreported(value):
                 setattr(claim, field, None)
         claim.outcome = canonical(claim.outcome, domain.get("outcome_keywords", {}))
         claim.intervention_or_exposure = canonical(

@@ -33,7 +33,7 @@ class Settings(Contract):
         default_factory=lambda: Path(os.getenv("LAB_DATA_DIR", ".runtime/product"))
     )
 
-    discovery_min_similarity: float = Field(default=0.45, ge=0, le=1)
+    discovery_min_similarity: float = Field(default=0.6, ge=0, le=1)
     ollama_model: str = "qwen3:8b"
 
     @model_validator(mode="after")

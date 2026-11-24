@@ -10,7 +10,7 @@ Remaining scientific limitations: seven abstract-only sources; no automatic retr
 
 ## Completed verification
 
-- Gym corpus: 61 automated tests passed; no skips. Real-model validation pending re-recording. Earlier grassland results below are archived in artifacts/grassland-v1-evaluation/.
+- Gym corpus: 62 automated tests passed; no skips. Real-model validation 7/8 strict checks (see docs/evaluation.md); Ollama 0.40.18 with qwen3:8b on Windows, RTX 4060 laptop GPU. Earlier grassland results below are archived in artifacts/grassland-v1-evaluation/.
 - Grassland corpus (archived): 56 automated tests passed; no skips. Model calls are explicitly mocked in these tests; actual LangGraph and Chroma run.
 - Eight actual Qwen3 scenarios measured; seven strict behavioral checks passed. The unsupported-claim verdict was partial/qualified rather than rejected; the claim was excluded from synthesis. See artifacts/evaluation/report.md.
 - Both successful workflows returned real model-generated, verified findings. The missing-information case exercised two adaptive actions and stopped within budget.

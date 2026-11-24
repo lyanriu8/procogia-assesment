@@ -14,6 +14,21 @@ These are repeatable behavioral expectations, not human-reviewed scientific labe
 
 ## Recorded presentation validation
 
-The gym corpus has not yet been validated with the real model. Run `scripts/validate_demo.py` on the presentation machine; results go to `artifacts/evaluation/`. The success-dynamic scenario also checks that at least one `contextual_disagreement` appears.
+Gym corpus, recorded November 24, 2026 with qwen3:8b and nomic-embed-text through Ollama on an RTX 4060 laptop GPU: **7/8 strict behavioral checks passed** (`artifacts/evaluation/summary.json`, raw runs alongside).
 
-The previous grassland corpus passed 7/8 strict behavioral checks; its runs and report are archived in `artifacts/grassland-v1-evaluation/`. That result is retained for reference and must not be presented as a measurement of the current corpus. Do not use `--reuse-completed` with archived runs.
+| Scenario | Workflow | Status | Result | Time |
+|---|---|---|---|---|
+| success-static (7 papers) | static | evidence_found, 5 verified claims | pass | 75 s |
+| success-dynamic (3 papers, frequency question) | dynamic | evidence_found, 3 verified; 2016 vs 2019 frequency = contextual_disagreement | pass | 46 s |
+| ambiguity ("Does it work?") | dynamic | insufficient_evidence, clarification | pass | 2 s |
+| uncertainty (off-topic) | dynamic | insufficient_evidence, no papers above the 0.6 cutoff | pass | 4 s |
+| invalid-citation | static | injected citation rejected | pass | 23 s |
+| missing-information (date_to 2005) | dynamic | limited_evidence via broaden_search, refine_comparison, verify_with_limitations | pass | 38 s |
+| unsupported-claim | static | injected claim qualified (partial), not rejected; excluded from report | **fail** | 28 s |
+| compact-context (top-K 4) | static | evidence_found, 2 verified | pass | 24 s |
+
+The failure repeats the grassland result: the verifier recognised the injected universal statement as stronger than the passage but returned partial rather than no. The strict check is kept. Single runs; timings are individual measurements after model warm-up, not controlled latency estimates.
+
+An earlier exploratory run of the volume question showed the verifier rating Heaselgrave 2019's no-effect claim as partial, because the same abstract reports moderate-to-large effect sizes for higher volume; that claim was excluded.
+
+The previous grassland corpus results are archived in `artifacts/grassland-v1-evaluation/` and must not be presented as measurements of the current corpus.

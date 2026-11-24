@@ -116,3 +116,12 @@ def test_domain_normalization_maps_synonyms():
         "training load",
         "training frequency",
     ]
+
+
+def test_unreported_phrasings_become_null():
+    raw = [
+        claim(claim_id="1", statement="a", duration="not explicitly stated"),
+        claim(claim_id="2", statement="b", duration="Not specified."),
+        claim(claim_id="3", statement="c", duration="8 wk"),
+    ]
+    assert [c.duration for c in normalize_claims(raw)] == [None, None, "8 wk"]

@@ -56,8 +56,16 @@ class PublicCorpus:
                 )
 
     def search(
-        self, query, limit, embedding, date_from=None, date_to=None, minimum=0.45
+        self, query, limit, embedding, date_from=None, date_to=None, minimum=0.6
     ):
+        """Semantic similarity gates relevance; title term overlap breaks near-ties.
+
+        Papers in a single-topic corpus have compressed semantic scores, so the
+        cutoff applies to semantic similarity alone while ranking adds a lexical
+        title signal (the same idea as passage ranking in VectorIndex.search).
+        """
+        from .retrieval import tokens
+
         candidates = [
             p
             for p in self.papers
@@ -70,13 +78,13 @@ class PublicCorpus:
         vectors = embedding.encode(
             [p.title + "\n" + (p.abstract or "") for p in candidates]
         )
-        ranked = sorted(
-            (
-                (sum(a * b for a, b in zip(q, v)), p)
-                for p, v in zip(candidates, vectors)
-            ),
-            key=lambda x: -x[0],
-        )
-        return [p.model_copy(deep=True) for score, p in ranked if score >= minimum][
-            :limit
-        ]
+        query_terms = set(tokens(query))
+        scored = []
+        for paper, vector in zip(candidates, vectors):
+            semantic = sum(a * b for a, b in zip(q, vector))
+            if semantic < minimum:
+                continue
+            title = len(query_terms & set(tokens(paper.title))) / max(1, len(query_terms))
+            scored.append((semantic + 0.5 * title, paper))
+        scored.sort(key=lambda item: (-item[0], item[1].paper_id))
+        return [paper.model_copy(deep=True) for _, paper in scored][:limit]
