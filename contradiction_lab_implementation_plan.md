@@ -1,3 +1,5 @@
+> **Historical planning document.** This was the original specification. The current implementation differs (for example, it uses a resistance-training corpus, local Ollama models and grounded follow-up questions). See README.md and docs/ for the current design and results.
+
 # Contradiction Lab --- Implementation Plan & Technical Specification
 
 **Document purpose:** Give Codex an implementation-ready plan for

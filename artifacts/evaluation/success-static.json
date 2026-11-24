@@ -1,125 +1,14 @@
 {
-  "run_id": "142a7374aa0f4fd4898a403e77e44e7e",
+  "run_id": "44a09a7002354be0b2175a0251ef4434",
   "status": "evidence_found",
   "report": {
     "query": "Is training a muscle more times per week better for muscle hypertrophy?",
-    "interpreted_scope": "The question investigates whether increasing the frequency of muscle training sessions per week leads to greater muscle hypertrophy.",
+    "interpreted_scope": "The question focuses on the relationship between training frequency (specifically, training a muscle more times per week) and muscle hypertrophy.",
     "workflow_mode": "static",
     "papers_considered": 7,
     "papers_included": 5,
     "claims_extracted": 5,
     "comparisons": [
-      {
-        "comparison_id": "comparison-76536247d1f78900",
-        "claim_a_id": "claim-501b01bcf540f7aeba4f",
-        "claim_b_id": "claim-5847b510f2fcf1c5fc5a",
-        "same_outcome": true,
-        "comparable_system": false,
-        "comparable_methods": false,
-        "direction_relationship": "not_comparable",
-        "disagreement_type": "apparent_disagreement",
-        "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
-        "context_differences": [
-          "study_system: resistance training vs systematic review and meta-analysis",
-          "method: randomized trial vs systematic review and meta-analysis",
-          "intervention_or_exposure: training volume vs training frequency",
-          "conditions: ['elbow flexors', 'mid-thigh', 'lateral thigh'] vs ['resistance-trained men', 'volume-equated basis']"
-        ],
-        "supporting_passage_ids": [
-          "schoenfeld2019volume-p2",
-          "schoenfeld2019volume-p1",
-          "schoenfeld2019volume-p0",
-          "schoenfeld2016frequency-p2",
-          "schoenfeld2016frequency-p0",
-          "schoenfeld2016frequency-p1"
-        ],
-        "uncertainty_notes": [
-          "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Both claim-501b01bcf540f7aeba4f and claim-5847b510f2fcf1c5fc5a agree on the positive effect of training frequency on hypertrophy."
-        ]
-      },
-      {
-        "comparison_id": "comparison-efbcb40631d9aec8",
-        "claim_a_id": "claim-501b01bcf540f7aeba4f",
-        "claim_b_id": "claim-e3e40e99ceade896f97e",
-        "same_outcome": true,
-        "comparable_system": true,
-        "comparable_methods": false,
-        "direction_relationship": "not_comparable",
-        "disagreement_type": "apparent_disagreement",
-        "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
-        "context_differences": [
-          "method: randomized trial vs systematic review and meta-analysis",
-          "intervention_or_exposure: training volume vs training frequency",
-          "conditions: ['elbow flexors', 'mid-thigh', 'lateral thigh'] vs ['volume-equated studies']"
-        ],
-        "supporting_passage_ids": [
-          "schoenfeld2019volume-p2",
-          "schoenfeld2019volume-p1",
-          "schoenfeld2019volume-p0",
-          "schoenfeld2019frequency-p2",
-          "schoenfeld2019frequency-p1",
-          "schoenfeld2019frequency-p0"
-        ],
-        "uncertainty_notes": [
-          "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Claim-501b01bcf540f7aeba4f states a positive effect of training volume, while claim-e3e40e99ceade896f97e states no effect."
-        ]
-      },
-      {
-        "comparison_id": "comparison-5e661a473a5037d9",
-        "claim_a_id": "claim-501b01bcf540f7aeba4f",
-        "claim_b_id": "claim-ab6e02d0f605cf544337",
-        "same_outcome": true,
-        "comparable_system": false,
-        "comparable_methods": false,
-        "direction_relationship": "agreement",
-        "disagreement_type": null,
-        "explanation": "The reported directions agree for the normalized outcome; agreement does not establish identical effect sizes or causality.",
-        "context_differences": [
-          "study_system: resistance training vs muscle",
-          "method: randomized trial vs systematic review and meta-analysis",
-          "conditions: ['elbow flexors', 'mid-thigh', 'lateral thigh'] vs ['resistance-trained men']"
-        ],
-        "supporting_passage_ids": [
-          "schoenfeld2019volume-p2",
-          "schoenfeld2019volume-p1",
-          "schoenfeld2019volume-p0",
-          "schoenfeld2017volume-p1",
-          "schoenfeld2017volume-p2"
-        ],
-        "uncertainty_notes": [
-          "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Both claim-501b01bcf540f7aeba4f and claim-ab6e02d0f605cf544337 agree on the positive effect of training volume on hypertrophy."
-        ]
-      },
-      {
-        "comparison_id": "comparison-16040c7a35eb3cc8",
-        "claim_a_id": "claim-501b01bcf540f7aeba4f",
-        "claim_b_id": "claim-5a271c5ad6367d0ae491",
-        "same_outcome": true,
-        "comparable_system": false,
-        "comparable_methods": true,
-        "direction_relationship": "not_comparable",
-        "disagreement_type": "apparent_disagreement",
-        "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
-        "context_differences": [
-          "study_system: resistance training vs muscle",
-          "intervention_or_exposure: training volume vs training frequency",
-          "duration: 8 wk vs 10 wk",
-          "conditions: ['elbow flexors', 'mid-thigh', 'lateral thigh'] vs ['30%-3', '80%-1', '80%-3']"
-        ],
-        "supporting_passage_ids": [
-          "schoenfeld2019volume-p2",
-          "schoenfeld2019volume-p1",
-          "schoenfeld2019volume-p0",
-          "mitchell2012-p0"
-        ],
-        "uncertainty_notes": [
-          "Missing context: population_or_material, comparator, units",
-          "LLM assessment: Claim-501b01bcf540f7aeba4f discusses training volume, while claim-5a271c5ad6367d0ae491 discusses training frequency."
-        ]
-      },
       {
         "comparison_id": "comparison-bde88fc53b45fa2b",
         "claim_a_id": "claim-5847b510f2fcf1c5fc5a",
@@ -145,7 +34,36 @@
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
           "A non-significant result is not proof of no effect or of an opposing effect.",
-          "LLM assessment: Claim-5847b510f2fcf1c5fc5a states a positive effect of training frequency, while claim-e3e40e99ceade896f97e states no effect."
+          "LLM assessment: Schoenfeld 2016 claims twice weekly training is better, while Schoenfeld 2019 claims no significant difference."
+        ]
+      },
+      {
+        "comparison_id": "comparison-2ccce98bb42d6bec",
+        "claim_a_id": "claim-5847b510f2fcf1c5fc5a",
+        "claim_b_id": "claim-501b01bcf540f7aeba4f",
+        "same_outcome": true,
+        "comparable_system": false,
+        "comparable_methods": false,
+        "direction_relationship": "not_comparable",
+        "disagreement_type": "apparent_disagreement",
+        "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
+        "context_differences": [
+          "study_system: systematic review and meta-analysis vs resistance training",
+          "method: systematic review and meta-analysis vs randomized trial",
+          "intervention_or_exposure: training frequency vs training volume",
+          "conditions: ['resistance-trained men', 'volume-equated basis'] vs ['elbow flexors', 'mid-thigh', 'lateral thigh']"
+        ],
+        "supporting_passage_ids": [
+          "schoenfeld2016frequency-p2",
+          "schoenfeld2016frequency-p0",
+          "schoenfeld2016frequency-p1",
+          "schoenfeld2019volume-p2",
+          "schoenfeld2019volume-p1",
+          "schoenfeld2019volume-p0"
+        ],
+        "uncertainty_notes": [
+          "Missing context: population_or_material, comparator, duration, units",
+          "LLM assessment: Both claims agree that higher training volume leads to greater hypertrophy."
         ]
       },
       {
@@ -172,7 +90,7 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Both claim-5847b510f2fcf1c5fc5a and claim-ab6e02d0f605cf544337 agree on the positive effect of training frequency on hypertrophy."
+          "LLM assessment: Both claims agree that higher training volume leads to greater hypertrophy."
         ]
       },
       {
@@ -198,7 +116,35 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Claim-5847b510f2fcf1c5fc5a discusses training frequency, while claim-5a271c5ad6367d0ae491 discusses training frequency."
+          "LLM assessment: Schoenfeld 2016 claims twice weekly training is better, while Mitchell 2012 shows no clear effect."
+        ]
+      },
+      {
+        "comparison_id": "comparison-7bb64f1a11cb5e50",
+        "claim_a_id": "claim-e3e40e99ceade896f97e",
+        "claim_b_id": "claim-501b01bcf540f7aeba4f",
+        "same_outcome": true,
+        "comparable_system": true,
+        "comparable_methods": false,
+        "direction_relationship": "not_comparable",
+        "disagreement_type": "apparent_disagreement",
+        "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
+        "context_differences": [
+          "method: systematic review and meta-analysis vs randomized trial",
+          "intervention_or_exposure: training frequency vs training volume",
+          "conditions: ['volume-equated studies'] vs ['elbow flexors', 'mid-thigh', 'lateral thigh']"
+        ],
+        "supporting_passage_ids": [
+          "schoenfeld2019frequency-p2",
+          "schoenfeld2019frequency-p1",
+          "schoenfeld2019frequency-p0",
+          "schoenfeld2019volume-p2",
+          "schoenfeld2019volume-p1",
+          "schoenfeld2019volume-p0"
+        ],
+        "uncertainty_notes": [
+          "Missing context: population_or_material, comparator, duration, units",
+          "LLM assessment: Schoenfeld 2019 claims no significant difference, while Schoenfeld 2019 volume claims higher volume leads to greater hypertrophy."
         ]
       },
       {
@@ -225,7 +171,7 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Claim-e3e40e99ceade896f97e states no effect of training frequency, while claim-ab6e02d0f605cf544337 states a positive effect."
+          "LLM assessment: Both claims agree that higher training volume leads to greater hypertrophy."
         ]
       },
       {
@@ -252,7 +198,61 @@
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
           "A non-significant result is not proof of no effect or of an opposing effect.",
-          "LLM assessment: Claim-e3e40e99ceade896f97e discusses training frequency, while claim-5a271c5ad6367d0ae491 discusses training frequency."
+          "LLM assessment: Schoenfeld 2019 claims no significant difference, while Mitchell 2012 shows no clear effect."
+        ]
+      },
+      {
+        "comparison_id": "comparison-5e661a473a5037d9",
+        "claim_a_id": "claim-501b01bcf540f7aeba4f",
+        "claim_b_id": "claim-ab6e02d0f605cf544337",
+        "same_outcome": true,
+        "comparable_system": false,
+        "comparable_methods": false,
+        "direction_relationship": "agreement",
+        "disagreement_type": null,
+        "explanation": "The reported directions agree for the normalized outcome; agreement does not establish identical effect sizes or causality.",
+        "context_differences": [
+          "study_system: resistance training vs muscle",
+          "method: randomized trial vs systematic review and meta-analysis",
+          "conditions: ['elbow flexors', 'mid-thigh', 'lateral thigh'] vs ['resistance-trained men']"
+        ],
+        "supporting_passage_ids": [
+          "schoenfeld2019volume-p2",
+          "schoenfeld2019volume-p1",
+          "schoenfeld2019volume-p0",
+          "schoenfeld2017volume-p1",
+          "schoenfeld2017volume-p2"
+        ],
+        "uncertainty_notes": [
+          "Missing context: population_or_material, comparator, duration, units",
+          "LLM assessment: Both claims agree that higher training volume leads to greater hypertrophy."
+        ]
+      },
+      {
+        "comparison_id": "comparison-16040c7a35eb3cc8",
+        "claim_a_id": "claim-501b01bcf540f7aeba4f",
+        "claim_b_id": "claim-5a271c5ad6367d0ae491",
+        "same_outcome": true,
+        "comparable_system": false,
+        "comparable_methods": true,
+        "direction_relationship": "not_comparable",
+        "disagreement_type": "apparent_disagreement",
+        "explanation": "These claims concern different outcomes, exposures, or incompatible units; this is not a direct contradiction.",
+        "context_differences": [
+          "study_system: resistance training vs muscle",
+          "intervention_or_exposure: training volume vs training frequency",
+          "duration: 8 wk vs 10 wk",
+          "conditions: ['elbow flexors', 'mid-thigh', 'lateral thigh'] vs ['30%-3', '80%-1', '80%-3']"
+        ],
+        "supporting_passage_ids": [
+          "schoenfeld2019volume-p2",
+          "schoenfeld2019volume-p1",
+          "schoenfeld2019volume-p0",
+          "mitchell2012-p0"
+        ],
+        "uncertainty_notes": [
+          "Missing context: population_or_material, comparator, units",
+          "LLM assessment: Schoenfeld 2019 volume claims higher volume leads to greater hypertrophy, while Mitchell 2012 shows no clear effect."
         ]
       },
       {
@@ -277,46 +277,11 @@
         ],
         "uncertainty_notes": [
           "Missing context: population_or_material, comparator, duration, units",
-          "LLM assessment: Both claim-ab6e02d0f605cf544337 and claim-5a271c5ad6367d0ae491 agree on the positive effect of training frequency on hypertrophy."
+          "LLM assessment: Schoenfeld 2017 volume discusses volume, while Mitchell 2012 discusses frequency, making them incomparable."
         ]
       }
     ],
     "claims": [
-      {
-        "claim_id": "claim-501b01bcf540f7aeba4f",
-        "paper_id": "schoenfeld2019volume",
-        "statement": "Alternatively, muscle hypertrophy follows a dose-response relationship, with increasingly greater gains achieved with higher training volumes.",
-        "outcome": "muscle hypertrophy",
-        "direction": "positive",
-        "study_system": "resistance training",
-        "population_or_material": null,
-        "method": "randomized trial",
-        "intervention_or_exposure": "training volume",
-        "comparator": null,
-        "conditions": [
-          "elbow flexors",
-          "mid-thigh",
-          "lateral thigh"
-        ],
-        "duration": "8 wk",
-        "effect_size": null,
-        "units": null,
-        "sample_size": null,
-        "limitations": [],
-        "evidence_passage_ids": [
-          "schoenfeld2019volume-p2",
-          "schoenfeld2019volume-p1",
-          "schoenfeld2019volume-p0"
-        ],
-        "extraction_confidence": null,
-        "missing_fields": [
-          "population_or_material",
-          "comparator",
-          "effect_size",
-          "units",
-          "sample_size"
-        ]
-      },
       {
         "claim_id": "claim-5847b510f2fcf1c5fc5a",
         "paper_id": "schoenfeld2016frequency",
@@ -381,6 +346,41 @@
           "population_or_material",
           "comparator",
           "duration",
+          "effect_size",
+          "units",
+          "sample_size"
+        ]
+      },
+      {
+        "claim_id": "claim-501b01bcf540f7aeba4f",
+        "paper_id": "schoenfeld2019volume",
+        "statement": "Alternatively, muscle hypertrophy follows a dose-response relationship, with increasingly greater gains achieved with higher training volumes.",
+        "outcome": "muscle hypertrophy",
+        "direction": "positive",
+        "study_system": "resistance training",
+        "population_or_material": null,
+        "method": "randomized trial",
+        "intervention_or_exposure": "training volume",
+        "comparator": null,
+        "conditions": [
+          "elbow flexors",
+          "mid-thigh",
+          "lateral thigh"
+        ],
+        "duration": "8 wk",
+        "effect_size": null,
+        "units": null,
+        "sample_size": null,
+        "limitations": [],
+        "evidence_passage_ids": [
+          "schoenfeld2019volume-p2",
+          "schoenfeld2019volume-p1",
+          "schoenfeld2019volume-p0"
+        ],
+        "extraction_confidence": null,
+        "missing_fields": [
+          "population_or_material",
+          "comparator",
           "effect_size",
           "units",
           "sample_size"
@@ -455,16 +455,6 @@
     ],
     "verification_results": [
       {
-        "claim_id": "claim-501b01bcf540f7aeba4f",
-        "paper_exists": true,
-        "source_resolves": true,
-        "source_check": "cached_snapshot",
-        "passage_exists": true,
-        "passage_supports_claim": "yes",
-        "status": "verified",
-        "reason": "The passage supports the claim that muscle hypertrophy follows a dose-response relationship with higher training volumes, as it states that significant increases in muscle size were seen for specific body parts in higher-volume conditions. The study design is a randomized trial, and the duration is 8 weeks. The conditions mentioned (elbow flexors, mid-thigh, lateral thigh) are also included in the claim."
-      },
-      {
         "claim_id": "claim-5847b510f2fcf1c5fc5a",
         "paper_exists": true,
         "source_resolves": true,
@@ -472,7 +462,7 @@
         "passage_exists": true,
         "passage_supports_claim": "yes",
         "status": "verified",
-        "reason": "The passage directly supports the claim that training twice a week promotes superior hypertrophic outcomes compared to once a week on a volume-equated basis. The study design is a systematic review and meta-analysis, which matches the claim. The outcome is muscle hypertrophy, and the direction is positive, as higher frequency is associated with greater effect size."
+        "reason": "The passage directly supports the claim that training twice a week promotes superior hypertrophic outcomes compared to once a week on a volume-equated basis. The study design is a systematic review and meta-analysis, which matches the claim. The direction of the effect is positive, as higher frequency is associated with greater effect size."
       },
       {
         "claim_id": "claim-e3e40e99ceade896f97e",
@@ -483,6 +473,16 @@
         "passage_supports_claim": "yes",
         "status": "verified",
         "reason": "The passage states that results showed no significant difference between higher and lower frequency on a volume-equated basis, which directly supports the claim that there is no significant difference between higher and lower frequency on a volume-equated basis. The study design is a systematic review and meta-analysis, which matches the claim's method. The outcome is muscle hypertrophy, and the direction is no effect, which is consistent with the passage."
+      },
+      {
+        "claim_id": "claim-501b01bcf540f7aeba4f",
+        "paper_exists": true,
+        "source_resolves": true,
+        "source_check": "cached_snapshot",
+        "passage_exists": true,
+        "passage_supports_claim": "yes",
+        "status": "verified",
+        "reason": "The passage supports the claim that muscle hypertrophy follows a dose-response relationship with higher training volumes, as it states that significant increases in muscle size were seen for specific body parts in higher-volume conditions. The study design is a randomized trial, and the duration is 8 weeks. The conditions mentioned (elbow flexors, mid-thigh, lateral thigh) are also included in the claim."
       },
       {
         "claim_id": "claim-ab6e02d0f605cf544337",
@@ -502,41 +502,10 @@
         "passage_exists": true,
         "passage_supports_claim": "yes",
         "status": "verified",
-        "reason": "The passage explicitly states that subjects trained each leg with their assigned regime for a period of 10 wk, 3 times/wk, which matches the claim. The conditions listed in the claim (30%-3, 80%-1, 80%-3) are also mentioned in the passage. The study design is a randomized trial, as stated in the passage. The outcome is muscle hypertrophy, which is implied by the context of the study. The direction of the effect is unclear as the passage does not provide results or comparisons between the conditions."
+        "reason": "The passage explicitly states that subjects trained each leg with their assigned regime for a period of 10 wk, 3 times/wk, which matches the claim. The conditions listed in the claim (30%-3, 80%-1, 80%-3) are also mentioned in the passage. The study design is a randomized trial, as stated in the passage. The outcome is muscle hypertrophy, which is implied by the study's focus on resistance exercise and its effects on muscle. The direction of the effect is unclear as the passage does not provide results or comparisons between the groups."
       }
     ],
     "papers": [
-      {
-        "paper_id": "schoenfeld2019volume",
-        "provider": "source_checked_excerpt",
-        "provider_id": "schoenfeld2019volume",
-        "doi": "10.1249/MSS.0000000000001764",
-        "title": "Resistance Training Volume Enhances Muscle Hypertrophy but Not Strength in Trained Men.",
-        "abstract": "Thirty-four healthy resistance-trained men were randomly assigned to one of three experimental groups: \u2026 Training for all routines consisted of three weekly sessions performed on nonconsecutive days for 8 wk.\nAlternatively, while all groups increased muscle size in most of the measured sites from preintervention to postintervention, significant increases favoring the higher-volume conditions were seen for the elbow flexors, mid-thigh, and lateral thigh.\nAlternatively, muscle hypertrophy follows a dose-response relationship, with increasingly greater gains achieved with higher training volumes.",
-        "publication_year": 2019,
-        "publication_date": null,
-        "authors": [
-          "Brad J Schoenfeld",
-          "Bret Contreras",
-          "James Krieger",
-          "Jozo Grgic",
-          "Kenneth Delcastillo",
-          "Ramon Belliard",
-          "Andrew Alto"
-        ],
-        "source_url": "https://pubmed.ncbi.nlm.nih.gov/30153194/",
-        "full_text_available": false,
-        "license": null,
-        "retrieved_at": "2026-11-24T00:00:00Z",
-        "content_hash": "d224ab71e80d1eb2c51af95780282b103c5cce537ef6dc534c357803b664a1c9",
-        "pmcid": null,
-        "provenance": [
-          "https://pubmed.ncbi.nlm.nih.gov/30153194/",
-          "publication_type:Journal Article",
-          "publication_type:Randomized Controlled Trial"
-        ],
-        "source_checked_at": "2026-11-24T00:00:00Z"
-      },
       {
         "paper_id": "schoenfeld2016frequency",
         "provider": "source_checked_excerpt",
@@ -557,6 +526,12 @@
         "retrieved_at": "2026-11-24T00:00:00Z",
         "content_hash": "efb3d95d4156cbf835ef0f4d86ee5c116a511fd40ed87f43e9594b8acc172c8f",
         "pmcid": null,
+        "pmid": "27102172",
+        "journal": "Sports Med",
+        "publication_types": [
+          "Meta-Analysis",
+          "Systematic Review"
+        ],
         "provenance": [
           "https://pubmed.ncbi.nlm.nih.gov/27102172/",
           "publication_type:Journal Article",
@@ -585,11 +560,53 @@
         "retrieved_at": "2026-11-24T00:00:00Z",
         "content_hash": "1ad26f1e080f83e9e9ff6ca490191a641fd908c79302d8af727e8eff7935c088",
         "pmcid": null,
+        "pmid": "30558493",
+        "journal": "J Sports Sci",
+        "publication_types": [
+          "Meta-Analysis",
+          "Systematic Review"
+        ],
         "provenance": [
           "https://pubmed.ncbi.nlm.nih.gov/30558493/",
           "publication_type:Journal Article",
           "publication_type:Meta-Analysis",
           "publication_type:Systematic Review"
+        ],
+        "source_checked_at": "2026-11-24T00:00:00Z"
+      },
+      {
+        "paper_id": "schoenfeld2019volume",
+        "provider": "source_checked_excerpt",
+        "provider_id": "schoenfeld2019volume",
+        "doi": "10.1249/MSS.0000000000001764",
+        "title": "Resistance Training Volume Enhances Muscle Hypertrophy but Not Strength in Trained Men.",
+        "abstract": "Thirty-four healthy resistance-trained men were randomly assigned to one of three experimental groups: \u2026 Training for all routines consisted of three weekly sessions performed on nonconsecutive days for 8 wk.\nAlternatively, while all groups increased muscle size in most of the measured sites from preintervention to postintervention, significant increases favoring the higher-volume conditions were seen for the elbow flexors, mid-thigh, and lateral thigh.\nAlternatively, muscle hypertrophy follows a dose-response relationship, with increasingly greater gains achieved with higher training volumes.",
+        "publication_year": 2019,
+        "publication_date": null,
+        "authors": [
+          "Brad J Schoenfeld",
+          "Bret Contreras",
+          "James Krieger",
+          "Jozo Grgic",
+          "Kenneth Delcastillo",
+          "Ramon Belliard",
+          "Andrew Alto"
+        ],
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/30153194/",
+        "full_text_available": false,
+        "license": null,
+        "retrieved_at": "2026-11-24T00:00:00Z",
+        "content_hash": "d224ab71e80d1eb2c51af95780282b103c5cce537ef6dc534c357803b664a1c9",
+        "pmcid": null,
+        "pmid": "30153194",
+        "journal": "Med Sci Sports Exerc",
+        "publication_types": [
+          "Randomized Controlled Trial"
+        ],
+        "provenance": [
+          "https://pubmed.ncbi.nlm.nih.gov/30153194/",
+          "publication_type:Journal Article",
+          "publication_type:Randomized Controlled Trial"
         ],
         "source_checked_at": "2026-11-24T00:00:00Z"
       },
@@ -613,6 +630,12 @@
         "retrieved_at": "2026-11-24T00:00:00Z",
         "content_hash": "af6d3e1add926cfb3ead0b9130dec6b4fc1c5e5d1e75c72ea96bb18ddb733384",
         "pmcid": null,
+        "pmid": "27433992",
+        "journal": "J Sports Sci",
+        "publication_types": [
+          "Meta-Analysis",
+          "Systematic Review"
+        ],
         "provenance": [
           "https://pubmed.ncbi.nlm.nih.gov/27433992/",
           "publication_type:Journal Article",
@@ -645,6 +668,11 @@
         "retrieved_at": "2026-11-24T00:00:00Z",
         "content_hash": "beed13332a0ca77a37ff41f51e0ac444e07cb85d07f2fd49f74e43c755164ca2",
         "pmcid": null,
+        "pmid": "22518835",
+        "journal": "J Appl Physiol (1985)",
+        "publication_types": [
+          "Randomized Controlled Trial"
+        ],
         "provenance": [
           "https://pubmed.ncbi.nlm.nih.gov/22518835/",
           "publication_type:Journal Article",
@@ -848,14 +876,15 @@
     ],
     "overall_status": "evidence_found",
     "clarification_question": null,
-    "generated_at": "2026-11-24T18:08:14.964908Z"
+    "suggested_questions": [],
+    "generated_at": "2026-11-24T19:03:17.722601Z"
   },
   "trace": [
     {
       "node": "plan_research",
-      "started_at": "2026-11-24T18:06:57.246640Z",
-      "ended_at": "2026-11-24T18:06:59.726216Z",
-      "latency_ms": 2479.551,
+      "started_at": "2026-11-24T19:02:03.266106Z",
+      "ended_at": "2026-11-24T19:02:06.466281Z",
+      "latency_ms": 3200.164,
       "papers": 0,
       "passages": 0,
       "claims": 0,
@@ -864,17 +893,17 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 446,
-      "output_tokens": 94,
+      "input_tokens": 697,
+      "output_tokens": 131,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "retrieve_papers",
-      "started_at": "2026-11-24T18:06:59.732785Z",
-      "ended_at": "2026-11-24T18:06:59.870084Z",
-      "latency_ms": 137.301,
+      "started_at": "2026-11-24T19:02:06.473201Z",
+      "ended_at": "2026-11-24T19:02:08.669005Z",
+      "latency_ms": 2195.798,
       "papers": 7,
       "passages": 0,
       "claims": 0,
@@ -891,9 +920,9 @@
     },
     {
       "node": "retrieve_passages",
-      "started_at": "2026-11-24T18:06:59.876196Z",
-      "ended_at": "2026-11-24T18:07:00.036680Z",
-      "latency_ms": 160.483,
+      "started_at": "2026-11-24T19:02:08.674633Z",
+      "ended_at": "2026-11-24T19:02:08.854070Z",
+      "latency_ms": 179.438,
       "papers": 7,
       "passages": 12,
       "claims": 0,
@@ -910,9 +939,9 @@
     },
     {
       "node": "extract_claims",
-      "started_at": "2026-11-24T18:07:00.041522Z",
-      "ended_at": "2026-11-24T18:07:20.392653Z",
-      "latency_ms": 20350.877,
+      "started_at": "2026-11-24T19:02:08.859035Z",
+      "ended_at": "2026-11-24T19:02:29.456527Z",
+      "latency_ms": 20597.399,
       "papers": 7,
       "passages": 12,
       "claims": 5,
@@ -929,9 +958,9 @@
     },
     {
       "node": "analyze_context",
-      "started_at": "2026-11-24T18:07:20.398467Z",
-      "ended_at": "2026-11-24T18:07:41.490794Z",
-      "latency_ms": 21092.065,
+      "started_at": "2026-11-24T19:02:29.463811Z",
+      "ended_at": "2026-11-24T19:02:50.823401Z",
+      "latency_ms": 21359.496,
       "papers": 7,
       "passages": 12,
       "claims": 5,
@@ -941,16 +970,16 @@
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
       "input_tokens": 856,
-      "output_tokens": 899,
+      "output_tokens": 930,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "compare_claims",
-      "started_at": "2026-11-24T18:07:41.497231Z",
-      "ended_at": "2026-11-24T18:08:02.892662Z",
-      "latency_ms": 21395.164,
+      "started_at": "2026-11-24T19:02:50.830283Z",
+      "ended_at": "2026-11-24T19:03:05.598680Z",
+      "latency_ms": 14768.331,
       "papers": 7,
       "passages": 12,
       "claims": 5,
@@ -960,16 +989,16 @@
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
       "input_tokens": 2788,
-      "output_tokens": 851,
+      "output_tokens": 573,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "verify_evidence",
-      "started_at": "2026-11-24T18:08:02.898717Z",
-      "ended_at": "2026-11-24T18:08:14.952910Z",
-      "latency_ms": 12054.044,
+      "started_at": "2026-11-24T19:03:05.604795Z",
+      "ended_at": "2026-11-24T19:03:17.709810Z",
+      "latency_ms": 12104.964,
       "papers": 7,
       "passages": 12,
       "claims": 5,
@@ -979,16 +1008,16 @@
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
       "input_tokens": 3870,
-      "output_tokens": 474,
+      "output_tokens": 476,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "build_report",
-      "started_at": "2026-11-24T18:08:14.959446Z",
-      "ended_at": "2026-11-24T18:08:14.965066Z",
-      "latency_ms": 5.621,
+      "started_at": "2026-11-24T19:03:17.716568Z",
+      "ended_at": "2026-11-24T19:03:17.722740Z",
+      "latency_ms": 6.172,
       "papers": 7,
       "passages": 12,
       "claims": 5,
@@ -1065,41 +1094,6 @@
   ],
   "extracted_claims": [
     {
-      "claim_id": "claim-501b01bcf540f7aeba4f",
-      "paper_id": "schoenfeld2019volume",
-      "statement": "Alternatively, muscle hypertrophy follows a dose-response relationship, with increasingly greater gains achieved with higher training volumes.",
-      "outcome": "muscle hypertrophy",
-      "direction": "positive",
-      "study_system": "resistance training",
-      "population_or_material": null,
-      "method": "randomized trial",
-      "intervention_or_exposure": "training volume",
-      "comparator": null,
-      "conditions": [
-        "elbow flexors",
-        "mid-thigh",
-        "lateral thigh"
-      ],
-      "duration": "8 wk",
-      "effect_size": null,
-      "units": null,
-      "sample_size": null,
-      "limitations": [],
-      "evidence_passage_ids": [
-        "schoenfeld2019volume-p2",
-        "schoenfeld2019volume-p1",
-        "schoenfeld2019volume-p0"
-      ],
-      "extraction_confidence": null,
-      "missing_fields": [
-        "population_or_material",
-        "comparator",
-        "effect_size",
-        "units",
-        "sample_size"
-      ]
-    },
-    {
       "claim_id": "claim-5847b510f2fcf1c5fc5a",
       "paper_id": "schoenfeld2016frequency",
       "statement": "When comparing studies that investigated training muscle groups between 1 to 3 days per week on a volume-equated basis, the current body of evidence indicates that frequencies of training twice a week promote superior hypertrophic outcomes to once a week.",
@@ -1163,6 +1157,41 @@
         "population_or_material",
         "comparator",
         "duration",
+        "effect_size",
+        "units",
+        "sample_size"
+      ]
+    },
+    {
+      "claim_id": "claim-501b01bcf540f7aeba4f",
+      "paper_id": "schoenfeld2019volume",
+      "statement": "Alternatively, muscle hypertrophy follows a dose-response relationship, with increasingly greater gains achieved with higher training volumes.",
+      "outcome": "muscle hypertrophy",
+      "direction": "positive",
+      "study_system": "resistance training",
+      "population_or_material": null,
+      "method": "randomized trial",
+      "intervention_or_exposure": "training volume",
+      "comparator": null,
+      "conditions": [
+        "elbow flexors",
+        "mid-thigh",
+        "lateral thigh"
+      ],
+      "duration": "8 wk",
+      "effect_size": null,
+      "units": null,
+      "sample_size": null,
+      "limitations": [],
+      "evidence_passage_ids": [
+        "schoenfeld2019volume-p2",
+        "schoenfeld2019volume-p1",
+        "schoenfeld2019volume-p0"
+      ],
+      "extraction_confidence": null,
+      "missing_fields": [
+        "population_or_material",
+        "comparator",
         "effect_size",
         "units",
         "sample_size"
@@ -1237,29 +1266,29 @@
   ],
   "direction_reviews": [
     {
-      "claim_id": "claim-501b01bcf540f7aeba4f",
-      "effect_when_exposure_increases": "increases",
-      "explanation": "Source states muscle hypertrophy follows a dose-response relationship with higher training volumes leading to greater gains."
-    },
-    {
       "claim_id": "claim-5847b510f2fcf1c5fc5a",
       "effect_when_exposure_increases": "increases",
-      "explanation": "Source indicates twice weekly training (higher frequency) produces superior hypertrophic outcomes compared to once weekly."
+      "explanation": "Training twice weekly (higher frequency) produced superior hypertrophy compared to once weekly, indicating increased outcome with higher exposure."
     },
     {
       "claim_id": "claim-e3e40e99ceade896f97e",
       "effect_when_exposure_increases": "no_change",
-      "explanation": "Source reports no significant difference between higher and lower frequency on a volume-equated basis."
+      "explanation": "No significant difference in hypertrophy was found between higher and lower training frequency on a volume-equated basis."
+    },
+    {
+      "claim_id": "claim-501b01bcf540f7aeba4f",
+      "effect_when_exposure_increases": "increases",
+      "explanation": "Muscle hypertrophy showed a dose-response relationship with higher training volumes producing greater gains."
     },
     {
       "claim_id": "claim-ab6e02d0f605cf544337",
       "effect_when_exposure_increases": "increases",
-      "explanation": "Source describes a graded dose-response where increased RT volume produces greater hypertrophy gains."
+      "explanation": "A graded dose-response relationship was found where increased RT volume led to greater hypertrophy."
     },
     {
       "claim_id": "claim-5a271c5ad6367d0ae491",
       "effect_when_exposure_increases": "not_established",
-      "explanation": "Source only describes a study's training regimen without comparing outcomes across exposure levels."
+      "explanation": "The statement provides no comparative data on hypertrophy across different training frequencies."
     }
   ],
   "benchmark_fault": null,

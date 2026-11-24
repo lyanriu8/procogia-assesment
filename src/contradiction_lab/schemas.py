@@ -28,6 +28,9 @@ class Paper(Contract):
     retrieved_at: datetime = Field(default_factory=utcnow)
     content_hash: str | None = None
     pmcid: str | None = None
+    pmid: str | None = None
+    journal: str | None = None
+    publication_types: list[str] = Field(default_factory=list)
     provenance: list[str] = Field(default_factory=list)
     source_checked_at: datetime | None = None
 
@@ -192,22 +195,6 @@ class ResearchRequest(Contract):
         return self
 
 
-class FollowUpTurn(Contract):
-    question: str = Field(max_length=1000)
-    answer: str = Field(max_length=4000)
-
-
-class AskRequest(Contract):
-    question: str = Field(min_length=1, max_length=1000)
-    history: list[FollowUpTurn] = Field(default_factory=list, max_length=6)
-
-    @model_validator(mode="after")
-    def validate_question(self):
-        if not self.question.strip():
-            raise ValueError("question must contain non-whitespace text")
-        return self
-
-
 class RouteDecision(Contract):
     action: Literal[
         "broaden_search",
@@ -241,3 +228,57 @@ class DirectionReview(Contract):
 
 class DirectionReviews(Contract):
     reviews: list[DirectionReview]
+
+
+# ---- Chat sessions -------------------------------------------------------
+# A session is one chat anchored to one research run. The first message is
+# handled by the research service; once that run completes, later messages
+# are handled by the follow-up agent.
+
+SessionState = Literal["researching", "ready", "needs_clarification", "failed"]
+
+
+class ChatMessage(Contract):
+    message_id: str
+    role: Literal["user", "assistant"]
+    kind: Literal["question", "research", "followup"]
+    content: str
+    created_at: datetime = Field(default_factory=utcnow)
+    status: Literal["pending", "complete", "failed"] = "complete"
+    run_id: str | None = None
+    answer_status: Literal["grounded", "not_answerable", "withheld"] | None = None
+    cited_claim_ids: list[str] = Field(default_factory=list)
+    cited_passage_ids: list[str] = Field(default_factory=list)
+    input_tokens: int = 0
+    output_tokens: int = 0
+
+
+class Session(Contract):
+    session_id: str
+    title: str
+    state: SessionState
+    run_id: str
+    request: dict
+    created_at: datetime = Field(default_factory=utcnow)
+    updated_at: datetime = Field(default_factory=utcnow)
+    messages: list[ChatMessage] = Field(default_factory=list)
+
+
+class SessionSummary(Contract):
+    session_id: str
+    title: str
+    state: SessionState
+    run_id: str
+    created_at: datetime
+    updated_at: datetime
+    message_count: int
+
+
+class MessageCreate(Contract):
+    content: str = Field(min_length=1, max_length=1000)
+
+    @model_validator(mode="after")
+    def validate_content(self):
+        if not self.content.strip():
+            raise ValueError("content must contain non-whitespace text")
+        return self

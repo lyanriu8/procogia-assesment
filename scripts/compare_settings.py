@@ -3,7 +3,7 @@ from pathlib import Path
 
 from contradiction_lab.cli import DEMO_QUERY, UNCERTAINTY_QUERY
 from contradiction_lab.config import Settings
-from contradiction_lab.graph import ResearchEngine
+from contradiction_lab.ai.research.graph import ResearchEngine
 from contradiction_lab.schemas import ResearchRequest
 
 
@@ -17,7 +17,7 @@ def describe(result):
 
 if __name__ == "__main__":
     rows = []
-    for top_k in (4, 8):
+    for top_k in (4, 12):
         result = ResearchEngine().run(ResearchRequest(query=DEMO_QUERY, workflow="static", top_k=top_k))
         rows.append({"experiment": "retrieval_top_k", "value": top_k, **describe(result)})
     for iterations in (1, 2):

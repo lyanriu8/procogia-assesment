@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 from contradiction_lab.config import Settings
-from contradiction_lab.graph import ResearchEngine
+from contradiction_lab.ai.research.graph import ResearchEngine
 from contradiction_lab.schemas import ResearchRequest, utcnow
 from contradiction_lab.evaluation.runner import score
 from contradiction_lab.cli import DEMO_QUERY, UNCERTAINTY_QUERY

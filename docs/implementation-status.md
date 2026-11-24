@@ -1,20 +1,34 @@
-# Current implementation status
+# Current status
 
-The replay implementation has been replaced. Current production settings permit only Ollama inference, LangGraph, Chroma, and Ollama semantic embeddings. Source corpus annotations and replay extraction methods have been removed. Historical replay results live under artifacts/legacy-replay and do not describe current performance.
+As of November 24, 2026, on the gym-corpus branch. The main branch (and the "demo-ready" tag) holds the earlier grassland-corpus version.
 
-Actual model runs and final verification results are recorded in artifacts/validation.json when validation finishes. Automated tests mock model calls explicitly and exercise genuine LangGraph/Chroma. They are not scientific performance measurements.
+## What runs
 
-Ollama Qwen3 8B and nomic-embed-text are installed locally. LangGraph and Chroma are installed in the project virtual environment. The loopback server starts successfully. Browser automation currently fails before navigation due to a missing sandboxPolicy field in the browser connector; browser visual verification is not claimed.
+- **Runtime:** Ollama 0.40.18 serving Qwen3 8B and nomic-embed-text on Windows with an RTX 4060 laptop GPU. All inference is local.
+- **Corpus:** seven PubMed abstracts on resistance training in three disagreement clusters (volume, frequency, load). See [Article library and retrieval](rag.md).
+- **Architecture:** storage, article library, two AI services (research and follow-up), a session service that hands work from one to the other, and a REST API with 13 endpoints and generated OpenAPI documentation. See the [System overview](architecture.md).
+- **Article library:** 7 articles and 22 passages embedded in one persistent vector collection, visible through the API and the interface.
+- **Interface:** a Notion-style single-page application that uses only the REST API.
 
-Remaining scientific limitations: seven abstract-only sources; no automatic retraction check; no independently reviewed contradiction dataset; same-model extraction/verification; no broad or held-out scientific accuracy claim. External provider behavior remains a separate integration boundary from the preloaded-document presentation path.
+## Verified
 
-## Completed verification
+- **Automated tests:** 75 pass, none skipped. Model calls are scripted; the web server, processing graph and vector database run for real.
+- **Real-model scenarios:** 7 of 8 strict checks pass; the remaining failure is a planted overstatement rated "partial" instead of rejected (still excluded from the report). See [Evaluation](evaluation.md).
+- **Follow-up agent:** spot-checked on the real model. Grounded, cited answers in 5–8 seconds; an out-of-scope question refused.
+- **Live API check:** library indexed at start-up, semantic search, three sessions (frequency, vague, off-topic), follow-ups grounded or refused, 409 returned on a clarification session.
+- **Interface:** checked with headless-browser screenshots of every view (new research, a full session with follow-ups, a clarification session, the articles table, an article page). Dark mode was not checked.
 
-- Gym corpus: 62 automated tests passed; no skips. Real-model validation 7/8 strict checks (see docs/evaluation.md); Ollama 0.40.18 with qwen3:8b on Windows, RTX 4060 laptop GPU. Earlier grassland results below are archived in artifacts/grassland-v1-evaluation/.
-- Grassland corpus (archived): 56 automated tests passed; no skips. Model calls are explicitly mocked in these tests; actual LangGraph and Chroma run.
-- Eight actual Qwen3 scenarios measured; seven strict behavioral checks passed. The unsupported-claim verdict was partial/qualified rather than rejected; the claim was excluded from synthesis. See artifacts/evaluation/report.md.
-- Both successful workflows returned real model-generated, verified findings. The missing-information case exercised two adaptive actions and stopped within budget.
-- Live readiness and health endpoints confirmed both installed models, LangGraph, and Chroma. Frontend JavaScript syntax checks passed.
-- Browser rendering remains unverified because the browser connector fails before navigation. No claim of rendered visual QA or independent scientific accuracy is made.
+## Problems found by running the real model, and fixed
 
-A final actual HTTP smoke check passed through the background-job endpoint, including model inference, persisted output, clarification, and request-setting overrides. The full result is in artifacts/api-smoke.json.
+1. "No effect" findings were turned into "unclear", because the direction review had no "no change" option. Real null results could never be compared.
+2. Paper discovery ranked the wrong cluster first and let the off-topic question through. Fixed with a 0.6 similarity threshold and a title-match bonus.
+3. The abbreviation "MT" (muscle thickness) was not recognized, so a hypertrophy finding was filed under strength.
+4. Answers like "not specified" were treated as real values and created false context differences.
+5. The planner asked the off-topic question for clarification instead of searching, and the evaluation had passed it for the wrong reason. Both the planner instructions and the check were tightened.
+6. The same planner behaviour came back once the planner was given the corpus vocabulary (to make suggestions): it treated "different topic" as "unclear". Fixed and re-verified on five questions, twice each.
+
+## Known limitations
+
+Seven abstract-only sources; no automatic retraction check; no expert-labelled answer key; the same model extracts and verifies; single real-model runs without variance estimates; discovery thresholds set on this corpus; follow-up answers can over-interpret cited passages (citation checks prove scope, not correctness); no authentication. Live discovery from external scholarly APIs is a separate path from the bundled corpus.
+
+Archived results (the earlier corpus, earlier model checks, a retired implementation) are kept for reference and do not describe the current system.

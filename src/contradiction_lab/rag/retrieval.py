@@ -2,9 +2,9 @@ import json
 import math
 import re
 
-from .providers import digest
-from .schemas import EvidencePassage, Paper
-from .storage import Store
+from contradiction_lab.rag.providers import digest
+from contradiction_lab.schemas import EvidencePassage, Paper
+from contradiction_lab.db.store import Store
 
 STOPWORDS = set(
     "a an and are as at be by can compare consistently do does for from how in is it of on or that the their this to was were what when whether which with increase increasing affect enhance change".split()
@@ -12,7 +12,7 @@ STOPWORDS = set(
 
 
 def tokens(text: str) -> list[str]:
-    from .domain import load_domain
+    from contradiction_lab.domain import load_domain
 
     aliases = load_domain().get("query_aliases", {})
     return [
@@ -79,7 +79,7 @@ class OllamaEmbedding:
 
     def _encode(self, texts):
         import urllib.request
-        from .llm import ModelError
+        from contradiction_lab.ai.llm import ModelError
 
         missing = list(dict.fromkeys(t for t in texts if t not in self.cache))
         if missing:

@@ -1,9 +1,9 @@
 {
-  "run_id": "f2a93abe588841df91fe642fbbe1a46d",
+  "run_id": "3a9c911e07c24c23b3567cc56b5fdf7e",
   "status": "limited_evidence",
   "report": {
     "query": "Is training a muscle more times per week better for muscle hypertrophy?",
-    "interpreted_scope": "The question investigates whether increasing the frequency of muscle training sessions per week leads to greater muscle hypertrophy.",
+    "interpreted_scope": "The question focuses on the relationship between training frequency (specifically, training a muscle more times per week) and muscle hypertrophy.",
     "workflow_mode": "static",
     "papers_considered": 3,
     "papers_included": 1,
@@ -88,6 +88,12 @@
         "retrieved_at": "2026-11-24T00:00:00Z",
         "content_hash": "1ad26f1e080f83e9e9ff6ca490191a641fd908c79302d8af727e8eff7935c088",
         "pmcid": null,
+        "pmid": "30558493",
+        "journal": "J Sports Sci",
+        "publication_types": [
+          "Meta-Analysis",
+          "Systematic Review"
+        ],
         "provenance": [
           "https://pubmed.ncbi.nlm.nih.gov/30558493/",
           "publication_type:Journal Article",
@@ -160,14 +166,15 @@
     ],
     "overall_status": "limited_evidence",
     "clarification_question": null,
-    "generated_at": "2026-11-24T18:09:38.096782Z"
+    "suggested_questions": [],
+    "generated_at": "2026-11-24T19:04:39.424384Z"
   },
   "trace": [
     {
       "node": "plan_research",
-      "started_at": "2026-11-24T18:09:13.357668Z",
-      "ended_at": "2026-11-24T18:09:15.533460Z",
-      "latency_ms": 2175.768,
+      "started_at": "2026-11-24T19:04:15.090193Z",
+      "ended_at": "2026-11-24T19:04:18.015099Z",
+      "latency_ms": 2924.9,
       "papers": 0,
       "passages": 0,
       "claims": 0,
@@ -176,17 +183,17 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 446,
-      "output_tokens": 94,
+      "input_tokens": 697,
+      "output_tokens": 131,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "retrieve_papers",
-      "started_at": "2026-11-24T18:09:15.561973Z",
-      "ended_at": "2026-11-24T18:09:15.659642Z",
-      "latency_ms": 97.671,
+      "started_at": "2026-11-24T19:04:18.021298Z",
+      "ended_at": "2026-11-24T19:04:18.151055Z",
+      "latency_ms": 129.76,
       "papers": 3,
       "passages": 0,
       "claims": 0,
@@ -203,9 +210,9 @@
     },
     {
       "node": "retrieve_passages",
-      "started_at": "2026-11-24T18:09:15.663951Z",
-      "ended_at": "2026-11-24T18:09:15.724973Z",
-      "latency_ms": 61.022,
+      "started_at": "2026-11-24T19:04:18.156217Z",
+      "ended_at": "2026-11-24T19:04:18.272861Z",
+      "latency_ms": 116.646,
       "papers": 3,
       "passages": 4,
       "claims": 0,
@@ -222,9 +229,9 @@
     },
     {
       "node": "extract_claims",
-      "started_at": "2026-11-24T18:09:15.728703Z",
-      "ended_at": "2026-11-24T18:09:23.771162Z",
-      "latency_ms": 8042.361,
+      "started_at": "2026-11-24T19:04:18.277718Z",
+      "ended_at": "2026-11-24T19:04:26.046370Z",
+      "latency_ms": 7768.629,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -241,9 +248,9 @@
     },
     {
       "node": "analyze_context",
-      "started_at": "2026-11-24T18:09:23.776224Z",
-      "ended_at": "2026-11-24T18:09:33.099753Z",
-      "latency_ms": 9323.415,
+      "started_at": "2026-11-24T19:04:26.053012Z",
+      "ended_at": "2026-11-24T19:04:34.636312Z",
+      "latency_ms": 8583.274,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -260,9 +267,9 @@
     },
     {
       "node": "compare_claims",
-      "started_at": "2026-11-24T18:09:33.107236Z",
-      "ended_at": "2026-11-24T18:09:35.759788Z",
-      "latency_ms": 2652.524,
+      "started_at": "2026-11-24T19:04:34.643413Z",
+      "ended_at": "2026-11-24T19:04:37.168540Z",
+      "latency_ms": 2525.121,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -279,9 +286,9 @@
     },
     {
       "node": "verify_evidence",
-      "started_at": "2026-11-24T18:09:35.766636Z",
-      "ended_at": "2026-11-24T18:09:38.084575Z",
-      "latency_ms": 2317.91,
+      "started_at": "2026-11-24T19:04:37.175242Z",
+      "ended_at": "2026-11-24T19:04:39.413134Z",
+      "latency_ms": 2237.887,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -298,9 +305,9 @@
     },
     {
       "node": "build_report",
-      "started_at": "2026-11-24T18:09:38.091275Z",
-      "ended_at": "2026-11-24T18:09:38.096850Z",
-      "latency_ms": 5.576,
+      "started_at": "2026-11-24T19:04:39.419360Z",
+      "ended_at": "2026-11-24T19:04:39.424465Z",
+      "latency_ms": 5.105,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -440,7 +447,7 @@
     {
       "claim_id": "claim-5847b510f2fcf1c5fc5a",
       "effect_when_exposure_increases": "increases",
-      "explanation": "Higher training frequency (twice vs once per week) produces superior hypertrophy outcomes."
+      "explanation": "Higher training frequency (twice vs once per week) shows superior hypertrophy outcomes."
     },
     {
       "claim_id": "claim-e3e40e99ceade896f97e",

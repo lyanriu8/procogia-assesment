@@ -2,8 +2,8 @@
 
 import json
 from importlib.resources import files
-from .providers import digest
-from .schemas import EvidencePassage, Paper
+from contradiction_lab.rag.providers import digest
+from contradiction_lab.schemas import EvidencePassage, Paper
 
 
 class PublicCorpus:
@@ -25,6 +25,13 @@ class PublicCorpus:
                 license=record["license"],
                 retrieved_at=self.raw["retrieved_at"],
                 source_checked_at=record.get("checked_at", self.raw["retrieved_at"]),
+                pmid=record.get("pmid"),
+                journal=record.get("journal"),
+                publication_types=[
+                    kind
+                    for kind in record.get("publication_types", [])
+                    if kind != "Journal Article"
+                ],
                 abstract="\n".join(
                     x["text"] for x in record["fragments"] if x["type"] == "abstract"
                 ),
@@ -64,7 +71,7 @@ class PublicCorpus:
         cutoff applies to semantic similarity alone while ranking adds a lexical
         title signal (the same idea as passage ranking in VectorIndex.search).
         """
-        from .retrieval import tokens
+        from contradiction_lab.rag.retrieval import tokens
 
         candidates = [
             p

@@ -1,5 +1,5 @@
 from contradiction_lab.schemas import ScientificClaim
-from contradiction_lab.skills import (
+from contradiction_lab.ai.research.skills import (
     classify_disagreement,
     normalize_claims,
     verify_citation,

@@ -1,68 +1,87 @@
 # Contradiction Lab
 
-A local scientific evidence comparison app with **actual Ollama inference, LangGraph agents, semantic RAG, and persistent Chroma**. No replay inference, cached extraction answers, token hashing, or alternate graph executor exists in the application.
+Ask a research question and Contradiction Lab compares what the published studies report. It finds the relevant papers, extracts one finding from each, compares them in pairs, verifies every finding against the exact source text, and reports only what passed, along with the likely reason for any disagreement. Afterwards you can ask follow-up questions that are answered only from that verified evidence.
+
+Everything runs on one machine: a local language model (Qwen3 8B) and embedding model (nomic-embed-text) served by Ollama, a vector database (Chroma), a relational database (SQLite), and a web server with a REST API. The bundled corpus is seven real papers on **resistance training and muscle hypertrophy**, quoted exactly from PubMed. **The documents are preloaded; the answers are not**: every finding, comparison and verification is produced live by the model.
+
+## How the system fits together
+
+```
+ Browser ──HTTP/JSON──► REST API ──► Session service ──phase 1──► Research service ──► Article library
+                                          │                          (processing graph)   (vector index)
+                                          └────────phase 2──► Follow-up agent
+                                                both use ▼
+                                     Local language-model runtime (Ollama)
+                                     Storage: relational database + vector store
+```
+
+A question becomes a **session**. The **research service** gathers and verifies evidence once; when it finishes, every further message in that session goes to the **follow-up agent**, which can only read that verified evidence. The language model proposes at every step, but deterministic code decides what counts as evidence, how disagreements are labelled, and what enters the report.
+
+Read the [System overview](docs/architecture.md) for the full picture and the life of a question.
 
 ## Run
 
+Windows (tested with Ollama 0.40.18 on an RTX 4060 laptop GPU):
+
 ```sh
-brew install ollama
-brew services start ollama
+winget install Ollama.Ollama
 ollama pull qwen3:8b
 ollama pull nomic-embed-text
-python3 -m venv .venv
-.venv/bin/python -m pip install -e '.[dev]'
-.venv/bin/python -m contradiction_lab serve
+python -m venv .venv
+.venv\Scripts\python -m pip install -e ".[dev]"
+.venv\Scripts\python -m contradiction_lab serve
 ```
 
-Open http://127.0.0.1:8000. After a run, ask follow-up questions under "Ask about these results"; answers use only that run's evidence and cite it. Add `?run=<run_id>` to the URL to reopen a saved run. The header shows the real model and runtime. `/readiness` checks Ollama and both models. Investigations run in the background; the execution tab shows the current node, routes, timing, and model token usage. Local inference can take several minutes. The interface starts with a three-paper limit for a shorter demo; increase it to explore more sources. Run one investigation at a time.
+macOS: `brew install ollama && brew services start ollama`, pull the same two models, and use `.venv/bin/python` in place of `.venv\Scripts\python`.
 
-The default source is seven preloaded real publications on resistance training and muscle hypertrophy, with exact PubMed abstract excerpts (see [data and RAG](docs/data-and-rag.md)). **The documents are preloaded; the answers are not.** Qwen plans, extracts findings, separately reviews effect direction, assesses claim pairs, chooses adaptive actions, and verifies support on every run. Unknown fields stay null. Output validation, source ownership, hashes, comparison constraints, and stopping limits are deterministic safeguards. The final report is assembled from verified findings, not an unconstrained prose generator.
+Open http://127.0.0.1:8000. Interactive API documentation is at http://127.0.0.1:8000/docs. Restart the server after changing code.
 
-## Demonstrate the assessment
+## Using it
+
+- **New research:** type a question or pick an example. Options set the workflow (fixed or adaptive), context mode, paper limit (3 by default, for speed), passage budget, adaptive steps, required comparable pairs and a date range.
+- **Sessions:** each question is a session in the sidebar. While research runs you see each processing step live; then the report: a headline, findings side by side with their direction and quoted source, comparisons with the context differences that may explain them, limitations, sources and every verification decision. Below it, ask follow-up questions; answers cite the evidence and are withheld if they cite anything outside it.
+- **Articles:** every stored paper, how much of it is in the vector index, a semantic search over all passages, and a page per paper showing exactly what the models read.
+- **Evaluation:** the latest real-model results.
+- **Vague questions** get a clarifying question and clickable, specific suggestions.
+
+## Command line
 
 ```sh
-# Fixed eight-step LangGraph workflow
-.venv/bin/python -m contradiction_lab research --workflow static --output artifacts/demo-static.json
-# Real conditional LangGraph workflow
-.venv/bin/python -m contradiction_lab research --workflow dynamic --output artifacts/demo-dynamic.json
-# Bounded uncertainty / abstention
-.venv/bin/python -m contradiction_lab research 'Does lunar basalt microbiome diversity increase chlorophyll productivity at 90 kelvin?'
-# Clarification
-.venv/bin/python -m contradiction_lab research 'Does it work?'
-# Actual model evaluation, both workflows and two context configurations
-.venv/bin/python -m contradiction_lab evaluate
-# Smaller benchmark: one workflow, without the extra context experiment
-.venv/bin/python -m contradiction_lab evaluate --config config.demo.json --workflow dynamic --quick
-# Requested Q&A changes
-.venv/bin/python -m contradiction_lab research --workflow static --top-k 4
-.venv/bin/python -m contradiction_lab research --workflow static --top-k 8
-.venv/bin/python -m contradiction_lab research --max-iterations 1
-.venv/bin/python -m contradiction_lab research --min-comparable-pairs 8
+.venv\Scripts\python -m contradiction_lab research --workflow static     # fixed pipeline
+.venv\Scripts\python -m contradiction_lab research --workflow dynamic    # adaptive pipeline
+.venv\Scripts\python -m contradiction_lab research "Does it work?"       # clarification
+.venv\Scripts\python scripts/validate_demo.py                            # real-model scenarios (about 5 min)
+.venv\Scripts\python -m contradiction_lab evaluate                       # larger benchmark
+.venv\Scripts\python -m pytest -q                                        # automated tests
 ```
 
-The evaluation saves complete real runs and a readable report in `artifacts/evaluation/`. It includes success, ambiguity, missing information, synonyms, an unsupported-claim injection, invalid citations, and provider failure. Behavioral expectations are authored for regression testing, not independent scientific gold. Tests under `tests/` explicitly mock inference while exercising actual LangGraph and Chroma; these are distinct from real-model evaluation.
+Settings to try in Q&A: `--top-k 4` (fewer passages), `--max-iterations 1` (smaller adaptive budget), `--min-comparable-pairs 8` (stricter sufficiency).
 
-See [presentation](docs/presentation-spec.md), [architecture](docs/architecture.md), [evaluation](docs/evaluation.md), and [current validation](docs/implementation-status.md).
+Live discovery from OpenAlex and Europe PMC replaces the bundled corpus with `--config config.live.json` (or `LAB_CONFIG=config.live.json` before `serve`). Results vary with provider availability and licensing; the bundled corpus is the repeatable path.
 
-## Optional external paper discovery
+## Current results
 
-```sh
-.venv/bin/python -m contradiction_lab research --config config.live.json
-LAB_CONFIG=config.live.json .venv/bin/python -m contradiction_lab serve
-```
+- **75 automated tests pass** (scripted model; real server, processing graph and vector database).
+- **7 of 8 strict real-model checks pass.** The main adaptive run verified three findings and labelled Schoenfeld 2016 vs 2019 (training frequency) a contextual disagreement in 44 seconds. The failure, kept on record: a planted overstatement was rated "partial" instead of rejected, though it was still excluded from the report.
+- Follow-up answers take 5–8 seconds; an out-of-scope question (creatine) is refused.
 
-This uses OpenAlex and Europe PMC instead of the fixed public corpus. Discovery credentials are read from `.env`; configure `OPENALEX_API_KEY` if needed. External availability, licensing, coverage, and latency vary. A provider failure is reported separately from an empty search. Full text is fetched only where availability and licensing permit it. The preloaded corpus is the repeatable presentation path.
+## Limits
 
-## Design and limits
+Seven abstract-only sources; no automatic retraction check (a retracted paper was excluded by hand); the same model extracts and verifies, so errors can be correlated; behavioural checks are developer-written expectations run once, not an expert-labelled accuracy measure; discovery thresholds were set on this corpus; no authentication (loopback only). This is evidence navigation, not a systematic review, a scientific verdict or training advice.
 
-- Qwen3 8B is the current local model, exercised in real presentation checks. Qwen 2.5 made sign/verification errors during development; these are retained under `artifacts/model-checks/`. This is not a broad model benchmark. Override `OLLAMA_MODEL` to compare another installed model.
-- `nomic-embed-text` creates semantic document/query embeddings. Chroma ranks scoped passages; keyword/title/section signals supplement similarity.
-- State uses typed records and source IDs, not an unbounded chat transcript. Approximate prompt budgets and schema validation bound requests.
-- All findings retain passage → paper → DOI/URL provenance. Only fully supported findings enter the report. The same LLM performs extraction and verification, so errors can be correlated.
-- The seven-paper corpus contains real divergent findings (training volume, frequency, load). Where one study reports an effect and another reports no detectable effect on the same outcome and exposure, with known context differences, the rules label it `contextual_disagreement` (relationship `divergence`); they never label it `genuine_contradiction`, because "no detected effect" is not an opposite effect. Seven abstracts do not establish general accuracy. Full-paper ingestion, independently reviewed labels, held-out data, retraction checks, and a human usefulness study remain next steps.
-- Local API cost is zero; compute is not free of resource use and is not metered. Runtime and quality must be measured on the presentation machine.
-- No authentication; bind to loopback. This is evidence navigation, not a systematic review or scientific verdict.
+## Documentation
 
-Historical replay measurements were moved to `artifacts/legacy-replay/` and must not be presented as current model results.
-
-Current validation (gym corpus, qwen3:8b on an RTX 4060 laptop GPU): **62 automated tests passed** with mocked inference; **7/8 strict real-model scenario checks passed** (`artifacts/evaluation/`). The main dynamic run (frequency question, 3 papers, 46 s) verified all three claims and labelled Schoenfeld 2016 vs 2019 frequency as `contextual_disagreement`. The retained failure: an injected universal claim ("every lifter doubles their muscle mass") was rated partial/qualified instead of rejected; it was still excluded from the report. The previous grassland results (7/8 strict checks) are archived in `artifacts/grassland-v1-evaluation/` and do not describe the current corpus.
+| Page | Covers |
+|---|---|
+| [System overview](docs/architecture.md) | The parts, how they connect, the life of a question |
+| [REST API](docs/api.md) | Resources, endpoints, background jobs, status codes |
+| [Sessions](docs/sessions.md) | Chat records and the research-to-follow-up handoff |
+| [Research service](docs/research-service.md) | Processing graph, adaptive loop, comparison rules, verification |
+| [Follow-up agent](docs/followup-agent.md) | Grounded answers and citation checks |
+| [Language-model runtime](docs/language-model.md) | Local inference, structured output, budgets |
+| [Article library and retrieval](docs/rag.md) | Corpus, embeddings, vector index, ranking |
+| [Storage](docs/storage.md) | Relational database and vector store |
+| [Web interface](docs/frontend.md) | Views and the API calls behind them |
+| [Evaluation](docs/evaluation.md) | Tests, scenarios, recorded results |
+| [Status](docs/implementation-status.md) · [Presentation](docs/presentation-spec.md) · [Assessment guide](docs/assessment-answers.md) | Current state and interview material |
+| [Code index](docs/code-index.md) | Where each concept lives in the source |

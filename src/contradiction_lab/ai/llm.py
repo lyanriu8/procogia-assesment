@@ -6,8 +6,8 @@ from typing import Literal
 
 from pydantic import Field, ValidationError
 
-from .retrieval import approximate_tokens
-from .schemas import Contract, ScientificClaim, SearchPlan
+from contradiction_lab.rag.retrieval import approximate_tokens
+from contradiction_lab.schemas import Contract, ScientificClaim, SearchPlan
 
 
 class ModelError(RuntimeError):
@@ -151,11 +151,11 @@ class OllamaModel:
         raise ModelError("Structured output rejected after bounded repair budget")
 
     def plan(self, query: str):
-        from .domain import load_domain
+        from contradiction_lab.domain import load_domain
 
         return self.structured(
             SearchPlan,
-            "Plan a bounded scholarly search. Set needs_clarification true ONLY when the question names no identifiable exposure or intervention AND no measurable outcome (for example 'Does it work?'). A question that names a specific exposure and outcome MUST be searched with needs_clarification false, even if it is unusual, hypothetical, implausible, or likely outside the available literature; finding no evidence is reported later, not by asking for clarification. When clarification is needed, write a one-sentence clarification_question and give up to three specific, searchable rephrasings in suggested_questions, each naming ONE of the available_exposures and ONE of the available_outcomes; otherwise leave suggested_questions empty.",
+            "Plan a bounded scholarly search. Set needs_clarification true ONLY when the question names no identifiable exposure or intervention AND no measurable outcome (for example 'Does it work?'). A question that names a specific exposure and outcome MUST be searched with needs_clarification false, even if it is unusual, hypothetical, implausible, or likely outside the available literature; finding no evidence is reported later, not by asking for clarification. A question about a different topic than available_topic is NOT unclear: plan its search normally with needs_clarification false; the search will simply find nothing. When clarification is needed, write a one-sentence clarification_question and give up to three specific, searchable rephrasings in suggested_questions, each naming ONE of the available_exposures and ONE of the available_outcomes; otherwise leave suggested_questions empty.",
             {
                 "query": query,
                 "available_topic": load_domain().get("name", ""),
@@ -165,7 +165,7 @@ class OllamaModel:
         )
 
     def extract(self, paper, passages, query=""):
-        from .domain import load_domain
+        from contradiction_lab.domain import load_domain
 
         domain = load_domain()
 

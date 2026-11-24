@@ -5,7 +5,7 @@ from pydantic import ValidationError
 
 from contradiction_lab.config import Settings
 from contradiction_lab.schemas import ResearchRequest, ScientificClaim
-from contradiction_lab.skills import normalize_claims
+from contradiction_lab.ai.research.skills import normalize_claims
 
 
 @pytest.mark.parametrize(
@@ -61,7 +61,7 @@ def test_empty_evidence_rejected():
 
 
 def test_date_filter(corpus, mocked_models):
-    from contradiction_lab.retrieval import OllamaEmbedding
+    from contradiction_lab.rag.retrieval import OllamaEmbedding
 
     papers = corpus.search(
         "resistance training volume muscle hypertrophy",

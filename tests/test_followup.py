@@ -1,9 +1,7 @@
 import pytest
-from fastapi.testclient import TestClient
 
-from contradiction_lab import api
 from contradiction_lab.cli import DEMO_QUERY
-from contradiction_lab.followup import NOT_ANSWERABLE, UNGROUNDED, FollowUpAnswer, answer_followup
+from contradiction_lab.ai.followup.agent import NOT_ANSWERABLE, UNGROUNDED, FollowUpAnswer, answer_followup
 from contradiction_lab.schemas import ResearchRequest
 
 
@@ -60,28 +58,6 @@ def test_history_is_bounded(run):
     assert [t["question"] for t in model.context["previous_turns"]] == ["q3", "q4", "q5"]
 
 
-def test_ask_endpoint_records_followups(engine, monkeypatch):
-    from contradiction_lab.llm import OllamaModel
-
-    mocked = OllamaModel.structured
-
-    def structured(self, schema, task, context):
-        if schema is FollowUpAnswer:
-            self.usage.append({"input_tokens": 50, "output_tokens": 20, "repair": 0})
-            return FollowUpAnswer(answerable=True, answer="Grounded.", cited_claim_ids=[context["claims"][0]["claim_id"]], cited_passage_ids=[])
-        return mocked(self, schema, task, context)
-
-    monkeypatch.setattr(OllamaModel, "structured", structured)
-    monkeypatch.setattr(api, "get_engine", lambda: engine)
-    with TestClient(api.app) as client:
-        run = client.post("/research", json={"query": DEMO_QUERY, "workflow": "static"}).json()
-        reply = client.post(f"/research/{run['run_id']}/ask", json={"question": "Why?"}).json()
-        assert reply["status"] == "grounded"
-        assert client.get("/research/" + run["run_id"]).json()["followups"][0]["answer"] == "Grounded."
-        assert client.post("/research/missing/ask", json={"question": "Why?"}).status_code == 404
-        assert client.post(f"/research/{run['run_id']}/ask", json={"question": "  "}).status_code == 422
-
-
 def test_clarification_offers_suggested_questions(engine):
     report = engine.run(ResearchRequest(query="Does it work?"))["report"]
     assert report["clarification_question"]
@@ -91,7 +67,7 @@ def test_clarification_offers_suggested_questions(engine):
 
 
 def test_clarification_without_question_text_gets_default(engine, monkeypatch):
-    from contradiction_lab.llm import OllamaModel
+    from contradiction_lab.ai.llm import OllamaModel
     from contradiction_lab.schemas import SearchPlan
 
     mocked = OllamaModel.structured

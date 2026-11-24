@@ -1,6 +1,6 @@
 from contradiction_lab.cli import UNCERTAINTY_QUERY
-from contradiction_lab.graph import ResearchEngine
-from contradiction_lab.reporting import markdown_report
+from contradiction_lab.ai.research.graph import ResearchEngine
+from contradiction_lab.ai.research.reporting import markdown_report
 from contradiction_lab.schemas import ComparisonReport, ResearchRequest
 
 

@@ -7,9 +7,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
-from .config import Settings
-from .schemas import Paper, utcnow
-from .storage import Store
+from contradiction_lab.config import Settings
+from contradiction_lab.schemas import Paper, utcnow
+from contradiction_lab.db.store import Store
 
 
 class ProviderError(RuntimeError):

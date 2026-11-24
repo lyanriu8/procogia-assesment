@@ -5,10 +5,10 @@ import uuid
 from itertools import combinations
 from typing import TypedDict
 
-from .config import Settings
-from .corpus import PublicCorpus
-from .llm import ModelError, OllamaModel
-from .providers import (
+from contradiction_lab.config import Settings
+from contradiction_lab.rag.corpus import PublicCorpus
+from contradiction_lab.ai.llm import ModelError, OllamaModel
+from contradiction_lab.rag.providers import (
     EuropePMC,
     HTTPClient,
     OpenAlex,
@@ -16,9 +16,10 @@ from .providers import (
     deduplicate,
     digest,
 )
-from .reporting import build_comparison_report
-from .retrieval import OllamaEmbedding, VectorIndex, chunk_text
-from .schemas import (
+from contradiction_lab.ai.research.reporting import build_comparison_report
+from contradiction_lab.rag.retrieval import OllamaEmbedding, VectorIndex, chunk_text
+from contradiction_lab.rag.library import LIBRARY_NAMESPACE
+from contradiction_lab.schemas import (
     EvidencePassage,
     Paper,
     ResearchRequest,
@@ -27,14 +28,14 @@ from .schemas import (
     TraceEvent,
     utcnow,
 )
-from .skills import (
+from contradiction_lab.ai.research.skills import (
     check_comparability,
     classify_disagreement,
     comparable_pairs,
     normalize_claims,
     verify_citation,
 )
-from .storage import Store
+from contradiction_lab.db.store import Store
 
 logger = logging.getLogger(__name__)
 
@@ -215,7 +216,8 @@ class ResearchEngine:
         model = OllamaModel(settings)
         client = HTTPClient(settings, self.store)
         embedding = OllamaEmbedding(settings.embedding_model)
-        index = VectorIndex(self.store, run_id, embedding, settings.vector_backend)
+        # All runs read and extend the shared article library; searches are scoped to the run's papers.
+        index = VectorIndex(self.store, LIBRARY_NAMESPACE, embedding, settings.vector_backend)
         worker = Nodes(settings, self.store, corpus, model, client, index)
         state: ResearchState = {
             "run_id": run_id,
@@ -569,7 +571,7 @@ class Nodes:
     def assess_sufficiency(self, state):
         route, reason = route_after_sufficiency(state)
         if route not in {"verify_with_limitations", "analyze_context"}:
-            from .schemas import RouteDecision
+            from contradiction_lab.schemas import RouteDecision
 
             allowed = ["verify_with_limitations"]
             if "broaden_search" not in state["attempted_actions"]:
@@ -678,7 +680,7 @@ class Nodes:
         )
 
     def analyze_context(self, state):
-        from .schemas import DirectionReviews
+        from contradiction_lab.schemas import DirectionReviews
 
         claims = [ScientificClaim.model_validate(value) for value in state["claims"]]
         reviews = []
@@ -742,7 +744,7 @@ class Nodes:
             state["missing_evidence"].append(
                 "Pair comparison budget reached; not all claim pairs were analyzed."
             )
-        from .schemas import PairJudgments
+        from contradiction_lab.schemas import PairJudgments
 
         selected = pairs[: self.settings.max_comparisons]
         comparisons = []

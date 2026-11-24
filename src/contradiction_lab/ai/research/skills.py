@@ -1,8 +1,8 @@
 import re
 from itertools import combinations
 
-from .providers import digest, normalize_doi
-from .schemas import ClaimComparison, Comparability, ScientificClaim, VerificationResult
+from contradiction_lab.rag.providers import digest, normalize_doi
+from contradiction_lab.schemas import ClaimComparison, Comparability, ScientificClaim, VerificationResult
 
 CONTEXT_FIELDS = (
     "outcome",
@@ -29,7 +29,7 @@ def is_unreported(value: str) -> bool:
 
 
 def normalize_claims(claims: list[ScientificClaim]) -> list[ScientificClaim]:
-    from .domain import canonical, load_domain
+    from contradiction_lab.domain import canonical, load_domain
 
     domain = load_domain()
     unique = {}

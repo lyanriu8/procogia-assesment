@@ -1,9 +1,9 @@
-from .schemas import ComparisonReport
-from .skills import assess_evidence_quality
+from contradiction_lab.schemas import ComparisonReport
+from contradiction_lab.ai.research.skills import assess_evidence_quality
 
 
 def build_comparison_report(state) -> ComparisonReport:
-    from .schemas import Paper, EvidencePassage, ScientificClaim, ClaimComparison, VerificationResult
+    from contradiction_lab.schemas import Paper, EvidencePassage, ScientificClaim, ClaimComparison, VerificationResult
 
     papers = [Paper.model_validate(value) for value in state["included_papers"]]
     passages = [EvidencePassage.model_validate(value) for value in state["retrieved_passages"]]

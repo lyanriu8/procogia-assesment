@@ -8,42 +8,27 @@ from pathlib import Path
 base = "http://127.0.0.1:8000"
 
 
-def get(path):
-    with urllib.request.urlopen(base + path, timeout=10) as response:
+def call(path, body=None):
+    data = json.dumps(body).encode() if body is not None else None
+    request = urllib.request.Request(base + path, data=data, headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(request, timeout=300) as response:
         return json.load(response)
 
 
-assert get("/readiness")["ready"]
-assert get("/health")["model_backend"] == "ollama"
-request = urllib.request.Request(
-    base + "/research/jobs",
-    data=json.dumps(
-        {
-            "query": "Does it work?",
-            "workflow": "dynamic",
-            "max_papers": 3,
-            "min_comparable_pairs": 1,
-        }
-    ).encode(),
-    headers={"Content-Type": "application/json"},
-)
-with urllib.request.urlopen(request, timeout=10) as response:
-    assert response.status == 202
-    job = json.load(response)
-print("Live API job accepted:", job["run_id"], flush=True)
+assert call("/api/system/readiness")["ready"]
+assert len(call("/api/articles")) >= 7
+session = call("/api/sessions", {"query": "Does it work?", "workflow": "dynamic", "max_papers": 3})
+print("Session started:", session["session_id"], flush=True)
 deadline = time.monotonic() + 120
 while time.monotonic() < deadline:
-    result = get("/research/" + job["run_id"])
-    if result["status"] not in {"queued", "running"}:
+    session = call(f"/api/sessions/{session['session_id']}")
+    if session["state"] != "researching":
         break
     time.sleep(0.5)
-assert result["status"] == "insufficient_evidence", result
-assert result["report"]["clarification_question"]
-assert result["config"]["max_papers"] == 3
-assert result["config"]["min_comparable_pairs"] == 1
-assert sum(t["input_tokens"] for t in result["trace"]) > 0
-Path("artifacts/api-smoke.json").write_text(json.dumps(result, indent=2) + "\n")
-print(
-    "PASS: actual HTTP job, actual model inference, progress, persisted result, clarification, and request overrides.",
-    flush=True,
-)
+assert session["state"] == "needs_clarification", session
+run = call(f"/api/runs/{session['run_id']}")
+assert run["report"]["clarification_question"] and run["report"]["suggested_questions"]
+assert run["config"]["max_papers"] == 3
+assert sum(t["input_tokens"] for t in run["trace"]) > 0
+Path("artifacts/api-smoke.json").write_text(json.dumps({"session": session, "run": run}, indent=2) + "\n")
+print("PASS: session created, real inference, clarification with suggestions, persisted run.", flush=True)

@@ -1,5 +1,5 @@
-from contradiction_lab.retrieval import OllamaEmbedding, VectorIndex, chunk_text
-from contradiction_lab.storage import Store
+from contradiction_lab.rag.retrieval import OllamaEmbedding, VectorIndex, chunk_text
+from contradiction_lab.db.store import Store
 
 
 def test_chunks_preserve_original_text(corpus):

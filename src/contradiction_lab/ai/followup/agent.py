@@ -7,7 +7,7 @@ every citation belongs to the run; ungrounded answers are replaced, not shown.
 
 from pydantic import Field
 
-from .schemas import Contract
+from contradiction_lab.schemas import Contract
 
 NOT_ANSWERABLE = (
     "This run's evidence does not answer that. Start a new investigation to search for it."
@@ -138,3 +138,13 @@ def answer_followup(model, result: dict, question: str, history: list[dict]) -> 
         "input_tokens": usage.get("input_tokens", 0),
         "output_tokens": usage.get("output_tokens", 0),
     }
+
+
+class FollowUpAgent:
+    """Answers follow-up questions about a completed run. Never searches or adds evidence."""
+
+    def __init__(self, model):
+        self.model = model
+
+    def answer(self, result: dict, question: str, history: list[dict]) -> dict:
+        return answer_followup(self.model, result, question, history)

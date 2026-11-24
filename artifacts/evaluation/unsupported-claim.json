@@ -1,9 +1,9 @@
 {
-  "run_id": "07ae42e7e79f417db061bda548c8cd7b",
+  "run_id": "1c6f373584174907aaf5c9188f1821bc",
   "status": "limited_evidence",
   "report": {
     "query": "Is training a muscle more times per week better for muscle hypertrophy?",
-    "interpreted_scope": "The question investigates whether increasing the frequency of muscle training sessions per week leads to greater muscle hypertrophy.",
+    "interpreted_scope": "The question focuses on the relationship between training frequency (specifically, training a muscle more times per week) and muscle hypertrophy.",
     "workflow_mode": "static",
     "papers_considered": 3,
     "papers_included": 1,
@@ -54,7 +54,7 @@
         "passage_exists": true,
         "passage_supports_claim": "partial",
         "status": "qualified",
-        "reason": "The passage states that training twice a week promotes superior hypertrophic outcomes compared to once a week, which supports the claim that increasing training frequency (from once to twice) leads to better muscle hypertrophy. However, the claim states that 'every lifter doubles their muscle mass,' which is a stronger and more specific statement than what the passage supports. The passage does not provide evidence that every lifter achieves this outcome, only that higher frequency leads to better hypertrophy."
+        "reason": "The passage states that training twice a week promotes superior hypertrophic outcomes compared to once a week, which supports the claim that increasing training frequency (from once to twice) leads to better muscle hypertrophy. However, the claim states that 'every lifter doubles their muscle mass,' which is a stronger and more specific statement than what the passage supports. The passage does not provide evidence that every lifter achieves this outcome, only that higher frequency leads to better hypertrophy in general."
       },
       {
         "claim_id": "claim-e3e40e99ceade896f97e",
@@ -88,6 +88,12 @@
         "retrieved_at": "2026-11-24T00:00:00Z",
         "content_hash": "1ad26f1e080f83e9e9ff6ca490191a641fd908c79302d8af727e8eff7935c088",
         "pmcid": null,
+        "pmid": "30558493",
+        "journal": "J Sports Sci",
+        "publication_types": [
+          "Meta-Analysis",
+          "Systematic Review"
+        ],
         "provenance": [
           "https://pubmed.ncbi.nlm.nih.gov/30558493/",
           "publication_type:Journal Article",
@@ -160,14 +166,15 @@
     ],
     "overall_status": "limited_evidence",
     "clarification_question": null,
-    "generated_at": "2026-11-24T18:10:39.197157Z"
+    "suggested_questions": [],
+    "generated_at": "2026-11-24T19:05:46.213244Z"
   },
   "trace": [
     {
       "node": "plan_research",
-      "started_at": "2026-11-24T18:10:10.581138Z",
-      "ended_at": "2026-11-24T18:10:12.747279Z",
-      "latency_ms": 2166.117,
+      "started_at": "2026-11-24T19:05:17.185104Z",
+      "ended_at": "2026-11-24T19:05:20.204657Z",
+      "latency_ms": 3019.546,
       "papers": 0,
       "passages": 0,
       "claims": 0,
@@ -176,17 +183,17 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 446,
-      "output_tokens": 94,
+      "input_tokens": 697,
+      "output_tokens": 131,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "retrieve_papers",
-      "started_at": "2026-11-24T18:10:12.751795Z",
-      "ended_at": "2026-11-24T18:10:12.870515Z",
-      "latency_ms": 118.721,
+      "started_at": "2026-11-24T19:05:20.209106Z",
+      "ended_at": "2026-11-24T19:05:20.304423Z",
+      "latency_ms": 95.319,
       "papers": 3,
       "passages": 0,
       "claims": 0,
@@ -203,9 +210,9 @@
     },
     {
       "node": "retrieve_passages",
-      "started_at": "2026-11-24T18:10:12.874451Z",
-      "ended_at": "2026-11-24T18:10:12.949794Z",
-      "latency_ms": 75.346,
+      "started_at": "2026-11-24T19:05:20.308063Z",
+      "ended_at": "2026-11-24T19:05:20.377937Z",
+      "latency_ms": 69.878,
       "papers": 3,
       "passages": 4,
       "claims": 0,
@@ -222,9 +229,9 @@
     },
     {
       "node": "extract_claims",
-      "started_at": "2026-11-24T18:10:12.953661Z",
-      "ended_at": "2026-11-24T18:10:20.564035Z",
-      "latency_ms": 7610.281,
+      "started_at": "2026-11-24T19:05:20.381265Z",
+      "ended_at": "2026-11-24T19:05:27.905649Z",
+      "latency_ms": 7524.361,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -241,9 +248,9 @@
     },
     {
       "node": "analyze_context",
-      "started_at": "2026-11-24T18:10:20.568291Z",
-      "ended_at": "2026-11-24T18:10:31.982103Z",
-      "latency_ms": 11413.67,
+      "started_at": "2026-11-24T19:05:27.910561Z",
+      "ended_at": "2026-11-24T19:05:39.182933Z",
+      "latency_ms": 11272.338,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -253,16 +260,16 @@
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
       "input_tokens": 609,
-      "output_tokens": 483,
+      "output_tokens": 487,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "compare_claims",
-      "started_at": "2026-11-24T18:10:31.988223Z",
-      "ended_at": "2026-11-24T18:10:34.137082Z",
-      "latency_ms": 2148.834,
+      "started_at": "2026-11-24T19:05:39.187635Z",
+      "ended_at": "2026-11-24T19:05:41.214171Z",
+      "latency_ms": 2026.532,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -279,9 +286,9 @@
     },
     {
       "node": "verify_evidence",
-      "started_at": "2026-11-24T18:10:34.143628Z",
-      "ended_at": "2026-11-24T18:10:39.185893Z",
-      "latency_ms": 5042.207,
+      "started_at": "2026-11-24T19:05:41.219433Z",
+      "ended_at": "2026-11-24T19:05:46.170229Z",
+      "latency_ms": 4950.781,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -291,16 +298,16 @@
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
       "input_tokens": 1444,
-      "output_tokens": 206,
+      "output_tokens": 208,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "build_report",
-      "started_at": "2026-11-24T18:10:39.192445Z",
-      "ended_at": "2026-11-24T18:10:39.197213Z",
-      "latency_ms": 4.768,
+      "started_at": "2026-11-24T19:05:46.209518Z",
+      "ended_at": "2026-11-24T19:05:46.213294Z",
+      "latency_ms": 3.776,
       "papers": 3,
       "passages": 4,
       "claims": 2,
@@ -440,12 +447,12 @@
     {
       "claim_id": "claim-5847b510f2fcf1c5fc5a",
       "effect_when_exposure_increases": "not_established",
-      "explanation": "The statement makes a general claim without comparing different training frequency levels, so no effect direction can be determined."
+      "explanation": "The statement makes a general claim without comparing outcomes at different training frequencies, so no effect direction can be determined."
     },
     {
       "claim_id": "claim-e3e40e99ceade896f97e",
       "effect_when_exposure_increases": "no_change",
-      "explanation": "The study found no significant difference in muscle hypertrophy between higher and lower training frequency when volume was equated."
+      "explanation": "The study found no significant difference in muscle hypertrophy between higher and lower training frequency groups when volume was equated."
     }
   ],
   "benchmark_fault": "unsupported_claim",

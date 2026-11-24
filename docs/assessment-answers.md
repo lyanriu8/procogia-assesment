@@ -1,23 +1,29 @@
 # Assessment guide
 
-The current product uses actual Qwen inference, real LangGraph orchestration, Ollama semantic embeddings, Chroma, and a local FastAPI interface. Start with README.md and docs/presentation-spec.md.
+Short answers to the questions an assessor is likely to ask. Each links to the page with the detail.
 
-Client recommendation: pilot an evidence-navigation assistant for R&D analysts who need to compare apparently inconsistent findings. Evaluate analyst time saved, usefulness, retrieval coverage, unsupported conclusions, latency, and operating cost before making commercial claims.
+**What is it?** A local evidence-navigation tool. It compares what published studies report on a question, labels whether and why they disagree, and reports only findings it verified against the source text. See the [System overview](architecture.md).
 
-Public data: seven attributed source publications on resistance training and muscle hypertrophy (exact PubMed abstract excerpts). Titles, DOI/URLs, and original passages are preloaded; findings are extracted live. The excerpts are deliberately small, so they cannot demonstrate full-document parsing or broad scientific generalization. External discovery is an optional separate configuration.
+**Client recommendation.** Pilot it with R&D analysts who must reconcile inconsistent findings. Measure analyst time saved, usefulness, retrieval coverage, unsupported conclusions, latency and running cost before making commercial claims.
 
-Agents: the planner, extractor/context analyst, adaptive supervisor, comparison analyst, and verifier use specialized structured LLM calls and share typed state. Retriever and report assembly invoke reusable software skills. A single local model serves these roles sequentially. More roles do not inherently improve accuracy; the decomposition makes errors and evidence boundaries inspectable.
+**Data.** Seven real papers on resistance training and muscle hypertrophy, quoted exactly from PubMed, forming three real disagreement clusters. A retracted candidate was excluded by hand. Abstract-level only, so no full-document parsing and no broad generalization. See [Article library and retrieval](rag.md).
 
-RAG: section-aware exact chunks, nomic semantic embeddings, Chroma cosine retrieval, keyword/title/section ranking signals, per-run source scoping, content/model keyed embedding reuse, and passage ownership/hash checks. Unknown study fields remain unknown. Semantic similarity does not establish scientific comparability.
+**Architecture.** A relational database and a vector store; an article library; two AI services (a research service and a follow-up agent) on one local model; a session service that hands each conversation from research to follow-up; and a REST API that the interface uses exclusively. One model job at a time, enforced by a lock.
 
-Workflows: the static graph executes a fixed sequence. The dynamic graph adds a bounded sufficiency gate and LLM action selection among permitted search/full-text/refinement actions. Stop conditions prevent futile repeated work. A final gate counts verified claims and usable pairs.
+**Agents.** The research service is a directed processing graph in which specialized model calls (planner, extractor, direction reviewer, router, pair judge, verifier) share one typed state, with deterministic code between them. The follow-up agent is a separate service that takes over once research is complete. More roles do not automatically mean more accuracy; the split makes each decision and its evidence inspectable. See [Research service](research-service.md) and [Follow-up agent](followup-agent.md).
 
-Model/context: Qwen3 8B is already installed and supports structured output; it has not been benchmarked as best for this task. Local inference avoids API fees but consumes laptop memory/compute. Prompt budgets include schema and source context. No conversation history accumulates. Compact and evidence-rich configurations must be compared using current actual outputs.
+**RAG.** Exact passages embedded as 768-dimensional vectors, cosine similarity in a vector database, a similarity threshold for paper discovery, and a hybrid ranking (meaning plus keyword and title overlap plus section preference) under a token budget for passages. Embeddings are cached; answers never are. Similarity does not establish scientific comparability; that is decided by rules.
 
-Evaluation: run the behavioral harness and inspect complete saved runs. Success, ambiguity, missing information, unsupported text, invalid citations, provider failure, and synonym retrieval are explicit scenarios. Report failures honestly. Tests use explicit model mocks; real-model runs are separate. Labels are not independent scientific gold, and the same-model verifier has correlated errors.
+**Workflows.** Static: a fixed eight-step pipeline. Dynamic: adds a sufficiency check where rules propose an action and the model may pick among permitted ones (broaden the search, fetch licensed full text, refocus retrieval, stop), each at most once within a shared budget.
 
-Hallucination handling: Pydantic validates structure; exact paper/passage relationships and hashes validate provenance; a separate LLM call checks all populated claim fields; only verified claims and their comparisons survive. No mechanism guarantees scientific truth. Stronger scientific judgments require human review and held-out real opposing studies.
+**Comparison rules.** Different exposures or outcomes: "different questions". Same direction: agreement. Opposite directions with known context differences, or an effect against no detectable effect: contextual disagreement, with the caveat that a non-significant result is not an opposite effect. A candidate contradiction requires opposite directions with system, design and exposure confirmed identical. The model can only make a label weaker.
 
-Infrastructure: loopback FastAPI app, serialized UI jobs, SQLite persistence, Chroma, Ollama. No authentication or production deployment. Next steps are fuller licensed documents, independent domain labels, separate verification audits, model comparison, and a human usefulness study.
+**Model and context.** Qwen3 8B, local, 4-bit, on a laptop GPU; chosen as a practical starting point, not benchmarked as best (Qwen 2.5 made direction and verification errors). Schema-constrained output, temperature 0, a 6,000-token prompt budget checked before sending, one repair attempt, no fallback answers. Reasoning mode only for direction review. Research keeps no chat history; follow-ups carry at most three earlier grounded turns and never add evidence. See [Language-model runtime](language-model.md).
 
-AI assistance was used to build and revise the code and prepare behavioral expectations. It did not produce independent human scientific validation. Explain and validate the implementation yourself during Q&A.
+**Evaluation.** Two layers: 75 automated tests with a scripted model, and real-model behavioural scenarios including planted faults. Currently 7 of 8 strict checks pass; the failure is kept. No expert-labelled answer key, single runs, and correlated verification. See [Evaluation](evaluation.md).
+
+**Hallucination control.** Schema validation of every model output; exact paper and passage ownership plus SHA-256 hashes; a separate verification of every populated field; reports built only from verified records; follow-up answers shown only when every citation belongs to the run. None of this guarantees scientific truth.
+
+**Next steps.** Licensed full text, automatic retraction checks, an expert-labelled answer key, a separate verifier model, repeated runs for variance, and a human usefulness study.
+
+**AI assistance** was used to build and revise the code, assemble the corpus and draft behavioural expectations. It is not independent scientific validation; be ready to explain and defend the design yourself.

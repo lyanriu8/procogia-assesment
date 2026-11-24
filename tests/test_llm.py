@@ -4,7 +4,7 @@ import urllib.error
 
 import pytest
 
-from contradiction_lab.llm import ModelError, OllamaModel
+from contradiction_lab.ai.llm import ModelError, OllamaModel
 from contradiction_lab.schemas import SearchPlan
 
 
@@ -63,7 +63,7 @@ def test_unavailable_model_abstains(settings):
 def test_full_workflow_with_unavailable_model_returns_report(
     settings, mocked_models, monkeypatch
 ):
-    from contradiction_lab.graph import ResearchEngine
+    from contradiction_lab.ai.research.graph import ResearchEngine
     from contradiction_lab.schemas import ResearchRequest
 
     def unavailable(*args, **kwargs):

@@ -3,7 +3,7 @@ import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
 
-from .schemas import Paper
+from contradiction_lab.schemas import Paper
 
 
 class Store:
@@ -16,6 +16,7 @@ class Store:
                 CREATE TABLE IF NOT EXISTS runs (id TEXT PRIMARY KEY, data TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS cache (id TEXT PRIMARY KEY, data TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS evaluations (id INTEGER PRIMARY KEY, data TEXT NOT NULL);
+                CREATE TABLE IF NOT EXISTS sessions (id TEXT PRIMARY KEY, updated_at TEXT NOT NULL, data TEXT NOT NULL);
                 CREATE TABLE IF NOT EXISTS vectors (
                     namespace TEXT, id TEXT, passage TEXT, embedding TEXT,
                     PRIMARY KEY(namespace, id));
@@ -54,3 +55,42 @@ class Store:
         with self.connect() as connection:
             row = connection.execute("SELECT data FROM evaluations ORDER BY id DESC LIMIT 1").fetchone()
         return json.loads(row[0]) if row else None
+
+    # ---- chat sessions -------------------------------------------------------
+    def save_session(self, session: dict):
+        with self.connect() as connection:
+            connection.execute(
+                "INSERT OR REPLACE INTO sessions VALUES (?, ?, ?)",
+                (session["session_id"], str(session["updated_at"]), json.dumps(session, default=str)),
+            )
+
+    def get_session(self, session_id: str):
+        with self.connect() as connection:
+            row = connection.execute("SELECT data FROM sessions WHERE id = ?", (session_id,)).fetchone()
+        return json.loads(row[0]) if row else None
+
+    def list_sessions(self) -> list[dict]:
+        with self.connect() as connection:
+            rows = connection.execute("SELECT data FROM sessions ORDER BY updated_at DESC").fetchall()
+        return [json.loads(row[0]) for row in rows]
+
+    def delete_session(self, session_id: str) -> bool:
+        with self.connect() as connection:
+            return connection.execute("DELETE FROM sessions WHERE id = ?", (session_id,)).rowcount > 0
+
+    # ---- article library -----------------------------------------------------
+    def list_papers(self) -> list[dict]:
+        with self.connect() as connection:
+            rows = connection.execute("SELECT data FROM papers").fetchall()
+        return [json.loads(row[0]) for row in rows]
+
+    def vector_counts(self, namespace: str) -> dict[str, int]:
+        with self.connect() as connection:
+            rows = connection.execute(
+                "SELECT passage FROM vectors WHERE namespace = ?", (namespace,)
+            ).fetchall()
+        counts: dict[str, int] = {}
+        for (passage,) in rows:
+            paper_id = json.loads(passage)["paper_id"]
+            counts[paper_id] = counts.get(paper_id, 0) + 1
+        return counts

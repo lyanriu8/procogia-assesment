@@ -1,7 +1,7 @@
-from contradiction_lab.graph import ResearchEngine
-from contradiction_lab.llm import ModelError, OllamaModel
+from contradiction_lab.ai.research.graph import ResearchEngine
+from contradiction_lab.ai.llm import ModelError, OllamaModel
 from contradiction_lab.schemas import ResearchRequest
-from contradiction_lab.providers import deduplicate
+from contradiction_lab.rag.providers import deduplicate
 
 
 def test_missing_model_never_substitutes_answers(settings, mocked_models, monkeypatch):
@@ -48,8 +48,8 @@ def test_context_review_failure_cannot_publish_extractor_claims(engine, monkeypa
 
 
 def test_failed_full_text_action_consumes_budget(engine, monkeypatch):
-    from contradiction_lab.graph import Nodes
-    from contradiction_lab.providers import ProviderError
+    from contradiction_lab.ai.research.graph import Nodes
+    from contradiction_lab.rag.providers import ProviderError
 
     calls = []
 
@@ -57,7 +57,7 @@ def test_failed_full_text_action_consumes_budget(engine, monkeypatch):
         calls.append(paper.paper_id)
         raise ProviderError("Injected full text outage")
 
-    from contradiction_lab.corpus import PublicCorpus
+    from contradiction_lab.rag.corpus import PublicCorpus
 
     original_init = PublicCorpus.__init__
 

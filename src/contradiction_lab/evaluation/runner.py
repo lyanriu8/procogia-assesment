@@ -5,10 +5,10 @@ import json
 import statistics
 import time
 from pathlib import Path
-from ..config import Settings
-from ..graph import ResearchEngine
-from ..schemas import ResearchRequest, utcnow
-from ..cli import DEMO_QUERY, SYNONYM_QUERY, UNCERTAINTY_QUERY
+from contradiction_lab.config import Settings
+from contradiction_lab.ai.research.graph import ResearchEngine
+from contradiction_lab.schemas import ResearchRequest, utcnow
+from contradiction_lab.cli import DEMO_QUERY, SYNONYM_QUERY, UNCERTAINTY_QUERY
 
 CASES = [
     {

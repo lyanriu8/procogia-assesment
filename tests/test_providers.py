@@ -4,7 +4,7 @@ import urllib.error
 
 import pytest
 
-from contradiction_lab.providers import (
+from contradiction_lab.rag.providers import (
     EuropePMC,
     HTTPClient,
     OpenAlex,
@@ -14,7 +14,7 @@ from contradiction_lab.providers import (
     permitted_license,
     reconstruct_abstract,
 )
-from contradiction_lab.storage import Store
+from contradiction_lab.db.store import Store
 
 
 def test_abstract_reconstruction():

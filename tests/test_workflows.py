@@ -1,6 +1,6 @@
 import pytest
 from contradiction_lab.cli import DEMO_QUERY
-from contradiction_lab.graph import STATIC_NODES
+from contradiction_lab.ai.research.graph import STATIC_NODES
 from contradiction_lab.schemas import ResearchRequest
 
 
@@ -68,7 +68,7 @@ def test_request_paper_limit_is_recorded_and_applied(engine):
 
 
 def test_direction_reviewer_no_change_becomes_no_effect(engine, monkeypatch):
-    from contradiction_lab.llm import OllamaModel
+    from contradiction_lab.ai.llm import OllamaModel
     from contradiction_lab.schemas import DirectionReview, DirectionReviews, ResearchRequest
 
     mocked = OllamaModel.structured

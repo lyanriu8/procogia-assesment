@@ -5,7 +5,7 @@ from typing import Literal
 
 from pydantic import Field, model_validator
 
-from .schemas import Contract
+from contradiction_lab.schemas import Contract
 
 
 class Settings(Contract):

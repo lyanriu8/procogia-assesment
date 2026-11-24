@@ -2,10 +2,10 @@
 
 import pytest
 from contradiction_lab.config import Settings
-from contradiction_lab.corpus import PublicCorpus
-from contradiction_lab.graph import ResearchEngine
-from contradiction_lab.llm import OllamaModel, SupportJudgment
-from contradiction_lab.retrieval import OllamaEmbedding
+from contradiction_lab.rag.corpus import PublicCorpus
+from contradiction_lab.ai.research.graph import ResearchEngine
+from contradiction_lab.ai.llm import OllamaModel, SupportJudgment
+from contradiction_lab.rag.retrieval import OllamaEmbedding
 from contradiction_lab.schemas import (
     SearchPlan,
     ScientificClaim,

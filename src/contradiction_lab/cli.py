@@ -4,13 +4,13 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from .config import Settings
-from .graph import ResearchEngine
-from .reporting import markdown_report
-from .schemas import ComparisonReport, ResearchRequest
+from contradiction_lab.config import Settings
+from contradiction_lab.ai.research.graph import ResearchEngine
+from contradiction_lab.ai.research.reporting import markdown_report
+from contradiction_lab.schemas import ComparisonReport, ResearchRequest
 
 
-from .domain import load_domain
+from contradiction_lab.domain import load_domain
 
 DEMO_QUERY = load_domain()["demo_query"]
 UNCERTAINTY_QUERY = load_domain()["uncertainty_query"]
@@ -48,9 +48,9 @@ def main():
     if args.command == "serve":
         import uvicorn
 
-        uvicorn.run("contradiction_lab.api:app", host=args.host, port=args.port)
+        uvicorn.run("contradiction_lab.api.app:app", host=args.host, port=args.port)
     elif args.command == "evaluate":
-        from .evaluation.runner import evaluate
+        from contradiction_lab.evaluation.runner import evaluate
 
         result = evaluate(workflow=args.workflow, output_dir=args.output_dir, settings=Settings.load(args.config), compare_context_configs=not args.quick)
         print(json.dumps(result["summary"], indent=2))
