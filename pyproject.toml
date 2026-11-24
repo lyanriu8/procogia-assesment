@@ -19,7 +19,7 @@ contradiction-lab = "contradiction_lab.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-contradiction_lab = ["web/*.html", "data/*.json", "data/*.jsonl"]
+contradiction_lab = ["web/*.html", "data/*.json", "data/*.jsonl", "evaluation/*.json"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

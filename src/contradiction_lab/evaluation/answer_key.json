@@ -1,0 +1,264 @@
+{
+ "status": "draft",
+ "status_note": "Drafted from the abstracts by the AI assistant on 2026-11-24. Must be checked and confirmed by a person before results are reported as accuracy. Change status to 'confirmed' and fill confirmed_by when done.",
+ "confirmed_by": null,
+ "papers": {
+  "schoenfeld2017volume": {
+   "exposure": "training volume",
+   "directions": {
+    "muscle hypertrophy": [
+     "positive"
+    ]
+   },
+   "evidence": "The findings indicate a graded dose-response relationship whereby increases in RT volume produce greater gains in muscle hypertrophy."
+  },
+  "schoenfeld2019volume": {
+   "exposure": "training volume",
+   "directions": {
+    "muscle hypertrophy": [
+     "positive"
+    ]
+   },
+   "evidence": "muscle hypertrophy follows a dose-response relationship, with increasingly greater gains achieved with higher training volumes."
+  },
+  "heaselgrave2019": {
+   "exposure": "training volume",
+   "directions": {
+    "muscle hypertrophy": [
+     "no_effect",
+     "unclear",
+     "mixed"
+    ],
+    "muscle strength": [
+     "no_effect",
+     "unclear",
+     "mixed"
+    ]
+   },
+   "evidence": "There were no significant differences between groups in MT or indices of strength. However, effect-size estimates revealed that the magnitude of response was \"moderate to large\" for MOD and HIGH.",
+   "note": "Genuinely ambiguous: non-significant differences but moderate-to-large effect sizes. Any cautious reading is accepted; 'positive' is not."
+  },
+  "schoenfeld2016frequency": {
+   "exposure": "training frequency",
+   "directions": {
+    "muscle hypertrophy": [
+     "positive"
+    ]
+   },
+   "evidence": "frequencies of training twice a week promote superior hypertrophic outcomes to once a week."
+  },
+  "schoenfeld2019frequency": {
+   "exposure": "training frequency",
+   "directions": {
+    "muscle hypertrophy": [
+     "no_effect"
+    ]
+   },
+   "evidence": "resistance training frequency does not significantly or meaningfully impact muscle hypertrophy when volume is equated."
+  },
+  "campos2002": {
+   "exposure": "training load",
+   "directions": {
+    "muscle hypertrophy": [
+     "positive"
+    ]
+   },
+   "evidence": "the low to intermediate repetition resistance-training programs induced a greater hypertrophic effect compared to the high repetition regimen.",
+   "note": "Fewer repetitions maximum means a heavier load, so hypertrophy increases with load."
+  },
+  "mitchell2012": {
+   "exposure": "training load",
+   "directions": {
+    "muscle hypertrophy": [
+     "no_effect"
+    ]
+   },
+   "evidence": "a lower load lifted to failure resulted in similar hypertrophy as a heavy load lifted to failure."
+  },
+  "schoenfeld2016rest": {
+   "exposure": "rest interval",
+   "directions": {
+    "muscle hypertrophy": [
+     "positive"
+    ],
+    "muscle strength": [
+     "positive"
+    ]
+   },
+   "evidence": "longer rest periods promote greater increases in muscle strength and hypertrophy in young resistance-trained men."
+  },
+  "ahtiainen2005": {
+   "exposure": "rest interval",
+   "directions": {
+    "muscle hypertrophy": [
+     "no_effect"
+    ],
+    "muscle strength": [
+     "no_effect"
+    ]
+   },
+   "evidence": "both 3-month training periods performed with either the longer or the shorter rest periods between the sets resulted in similar gains in muscle mass and strength."
+  },
+  "morton2018": {
+   "exposure": "protein supplementation",
+   "directions": {
+    "muscle hypertrophy": [
+     "positive"
+    ],
+    "muscle strength": [
+     "positive"
+    ]
+   },
+   "evidence": "Dietary protein supplementation significantly enhanced changes in muscle strength and size during prolonged RET in healthy adults."
+  },
+  "erskine2012": {
+   "exposure": "protein supplementation",
+   "directions": {
+    "muscle hypertrophy": [
+     "no_effect"
+    ],
+    "muscle strength": [
+     "no_effect"
+    ]
+   },
+   "evidence": "protein supplementation did not augment elbow flexor muscle strength and size changes that occurred after 12 wk of RT."
+  }
+ },
+ "questions": [
+  {
+   "id": "frequency",
+   "query": "how often should i train each muscle to grow",
+   "expect": "answer",
+   "required_papers": [
+    "schoenfeld2016frequency",
+    "schoenfeld2019frequency"
+   ],
+   "pairs": [
+    {
+     "a": "schoenfeld2016frequency",
+     "b": "schoenfeld2019frequency",
+     "preferred": "contextual_disagreement",
+     "accept": [
+      "contextual_disagreement",
+      "insufficient_evidence"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "frequency-typos",
+   "query": "does trainnig frequncy matter for hypertrophy",
+   "expect": "answer",
+   "required_papers": [
+    "schoenfeld2016frequency",
+    "schoenfeld2019frequency"
+   ],
+   "pairs": [
+    {
+     "a": "schoenfeld2016frequency",
+     "b": "schoenfeld2019frequency",
+     "preferred": "contextual_disagreement",
+     "accept": [
+      "contextual_disagreement",
+      "insufficient_evidence"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "protein",
+   "query": "does protein help build muscle",
+   "expect": "answer",
+   "required_papers": [
+    "morton2018",
+    "erskine2012"
+   ],
+   "pairs": [
+    {
+     "a": "morton2018",
+     "b": "erskine2012",
+     "preferred": "contextual_disagreement",
+     "accept": [
+      "contextual_disagreement",
+      "insufficient_evidence"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rest",
+   "query": "how long should i rest between sets",
+   "expect": "answer",
+   "required_papers": [
+    "schoenfeld2016rest",
+    "ahtiainen2005"
+   ],
+   "pairs": [
+    {
+     "a": "schoenfeld2016rest",
+     "b": "ahtiainen2005",
+     "preferred": "contextual_disagreement",
+     "accept": [
+      "contextual_disagreement",
+      "insufficient_evidence"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "load",
+   "query": "is lifting heavy better than light weights for building muscle",
+   "expect": "answer",
+   "required_papers": [
+    "campos2002",
+    "mitchell2012"
+   ],
+   "pairs": [
+    {
+     "a": "campos2002",
+     "b": "mitchell2012",
+     "preferred": "contextual_disagreement",
+     "accept": [
+      "contextual_disagreement",
+      "insufficient_evidence"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "volume",
+   "query": "do more sets build more muscle?",
+   "expect": "answer",
+   "required_papers": [
+    "schoenfeld2017volume",
+    "schoenfeld2019volume"
+   ],
+   "pairs": [
+    {
+     "a": "schoenfeld2017volume",
+     "b": "schoenfeld2019volume",
+     "preferred": "agreement",
+     "accept": [
+      "agreement"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "creatine",
+   "query": "does creatine help muscle growth",
+   "expect": "abstain"
+  },
+  {
+   "id": "off-topic",
+   "query": "Does lunar basalt microbiome diversity increase chlorophyll productivity at 90 kelvin?",
+   "expect": "abstain"
+  },
+  {
+   "id": "vague",
+   "query": "Is lifting good?",
+   "expect": "clarify"
+  }
+ ],
+ "scoring_note": "Directions count only when the finding's exposure matches the key's exposure. Pairs are scored strictly (preferred label only) and leniently (any accepted label; 'insufficient_evidence' is a cautious, not wrong, answer for an effect-versus-no-effect pair)."
+}
