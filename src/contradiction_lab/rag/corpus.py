@@ -1,6 +1,7 @@
 """Public source documents. No cached findings or extraction answers."""
 
 import json
+import math
 from importlib.resources import files
 from contradiction_lab.rag.providers import digest
 from contradiction_lab.schemas import EvidencePassage, Paper
@@ -32,6 +33,7 @@ class PublicCorpus:
                     for kind in record.get("publication_types", [])
                     if kind != "Journal Article"
                 ],
+                abstract_sections=record.get("abstract_sections", []),
                 abstract="\n".join(
                     x["text"] for x in record["fragments"] if x["type"] == "abstract"
                 ),
@@ -63,13 +65,16 @@ class PublicCorpus:
                 )
 
     def search(
-        self, query, limit, embedding, date_from=None, date_to=None, minimum=0.6
+        self, query, limit, embedding, date_from=None, date_to=None, minimum=0.6, also=()
     ):
         """Semantic similarity gates relevance; title term overlap breaks near-ties.
 
         Papers in a single-topic corpus have compressed semantic scores, so the
         cutoff applies to semantic similarity alone while ranking adds a lexical
         title signal (the same idea as passage ranking in VectorIndex.search).
+        `also` holds alternative phrasings (the user's own question); each paper
+        is scored against its best-matching phrasing, so one poor rewrite by the
+        planner cannot hide relevant papers.
         """
         from contradiction_lab.rag.retrieval import tokens
 
@@ -81,17 +86,29 @@ class PublicCorpus:
         ]
         if not candidates:
             return []
-        q = embedding.encode_query(query)
+        phrasings = list(dict.fromkeys(t for t in (query, *also) if t and t.strip()))
+        query_vectors = [embedding.encode_query(text) for text in phrasings]
         vectors = embedding.encode(
             [p.title + "\n" + (p.abstract or "") for p in candidates]
         )
-        query_terms = set(tokens(query))
+        query_terms = set().union(*(tokens(text) for text in phrasings))
+        # Title bonus weighted by inverse document frequency: a word shared by
+        # every title ("muscle", "resistance") is worth nothing, a distinctive
+        # one ("load") a lot. Words that match no title do not dilute the bonus.
+        titles = {paper.paper_id: set(tokens(paper.title)) for paper in candidates}
+        idf = {}
+        for term in query_terms:
+            frequency = sum(term in words for words in titles.values())
+            if frequency:
+                idf[term] = math.log(len(titles) / frequency)
+        total = sum(idf.values())
         scored = []
         for paper, vector in zip(candidates, vectors):
-            semantic = sum(a * b for a, b in zip(q, vector))
+            semantic = max(sum(a * b for a, b in zip(q, vector)) for q in query_vectors)
             if semantic < minimum:
                 continue
-            title = len(query_terms & set(tokens(paper.title))) / max(1, len(query_terms))
+            matched = sum(idf.get(term, 0.0) for term in query_terms & titles[paper.paper_id])
+            title = matched / total if total else 0.0
             scored.append((semantic + 0.5 * title, paper))
         scored.sort(key=lambda item: (-item[0], item[1].paper_id))
         return [paper.model_copy(deep=True) for _, paper in scored][:limit]

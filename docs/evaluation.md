@@ -4,7 +4,7 @@ Evaluating a system built on a language model is harder than testing ordinary co
 
 ## Layer 1: automated tests (mocked model)
 
-A test suite of 75 tests runs the real web server, the real processing graph and the real vector database, but replaces every language-model call with a scripted reply. This isolates the deterministic machinery and makes it repeatable in seconds. It covers:
+A test suite of 77 tests runs the real web server, the real processing graph and the real vector database, but replaces every language-model call with a scripted reply. This isolates the deterministic machinery and makes it repeatable in seconds. It covers:
 
 - data contracts and validation;
 - retrieval ranking, token budgets and chunking;
@@ -43,20 +43,36 @@ A larger benchmark variant runs nine scenarios in both workflows (adding provide
 
 ## Recorded results
 
-November 24, 2026, Qwen3 8B and nomic-embed-text on an RTX 4060 laptop GPU, recorded after the architecture reorganization: **7 of 8 strict checks passed.**
+November 24, 2026, Qwen3 8B and nomic-embed-text on an RTX 4060 laptop GPU, recorded on the final code (after the robustness fixes below): **8 of 8 strict checks passed.**
 
 | Scenario | Workflow | Outcome | Result | Time |
 |---|---|---|---|---|
-| Main question, 7 papers | static | Evidence found, 5 verified findings | pass | 74 s |
-| Main question (frequency), 3 papers | dynamic | Evidence found, 3 verified; Schoenfeld 2016 vs 2019 = contextual disagreement | pass | 44 s |
-| Vague question | dynamic | Clarification with three suggestions | pass | 4 s |
+| Main question, 7 papers | static | Evidence found, 5 verified findings | pass | 81 s |
+| Main question (frequency), 3 papers | dynamic | Evidence found, 3 verified; Schoenfeld 2016 vs 2019 = contextual disagreement | pass | 42 s |
+| Vague question | dynamic | Clarification with three suggestions | pass | 5 s |
 | Off-topic question | dynamic | Searched, no papers above the threshold, broadened once, stopped | pass | 9 s |
-| Invalid citation | static | Injected citation rejected | pass | 24 s |
-| Date filter (to 2005) | dynamic | Limited evidence after broadening and refocusing | pass | 38 s |
-| Unsupported claim | static | Injected claim rated *partial* (qualified), not rejected; still excluded from the report | **fail** | 29 s |
-| Compact context | static | Evidence found, 2 verified | pass | 25 s |
+| Invalid citation | static | Injected citation rejected | pass | 26 s |
+| Date filter (to 2005) | dynamic | Limited evidence after broadening and refocusing | pass | 40 s |
+| Unsupported claim | static | Injected overstatement rejected; excluded from the report | pass | 29 s |
+| Compact context | static | Evidence found, 2 verified | pass | 30 s |
 
-The failure is kept as a failure. The verifier recognized the planted statement as stronger than the source but answered *partial* rather than *no*; the report still excluded it, but the strict check requires outright rejection.
+**Read the 8/8 with care.** The unsupported-claim check failed in the three earlier recordings (the verifier answered *partial* rather than *no*; the claim was still excluded from the report) and passed in the two most recent ones. Today's changes may have helped, but two runs cannot separate an improvement from ordinary run-to-run variation, so treat this check as unstable.
+
+## Free-typed questions
+
+Because the demo relies on typing questions naturally, seven everyday phrasings were also run on the real model. The first round exposed four problems, each fixed with a rule in code and re-tested:
+
+| Question | First result | Fix | Final result |
+|---|---|---|---|
+| "do more sets build more muscle?" | No papers found: the planner shortened it to "sets", which fell below the similarity threshold | Discovery also scores the user's own question | The three volume papers; two agree |
+| "does creatine help muscle growth" | Asked for clarification; after that fix, answered with unrelated training findings | Questions with three or more meaningful words are always searched; findings that do not address the question are set aside | Insufficient evidence, with the set-aside findings noted |
+| "is training to failure necessary" | Asked for clarification | Same rule | Mitchell 2012 vs Campos 2002, contextual disagreement |
+| "is lifting heavy better than light weights…" | Missed the heavy-load paper; later recorded its direction backwards | IDF-weighted title matching and load synonyms; direction reviewer given the domain's worked examples | Mitchell 2012 vs Campos 2002, correct directions, in two runs |
+| "how often should i train each muscle to grow" | Worked | — | Schoenfeld 2016 vs 2019, contextual disagreement |
+| "does trainnig frequncy matter for hypertrophy" (typos) | Worked | — | Same as above |
+| "best way to get bigger arms?" | Limited evidence, one paper | — | Honest limited result |
+
+The model's wording and occasionally its pair judgments vary between runs (one frequency run labelled the pair "insufficient context" instead of a disagreement), so results in a live demo can differ slightly from this table.
 
 Two earlier problems are recorded rather than hidden. The off-topic case once passed for the wrong reason (the planner asked for clarification instead of searching, and the check only counted findings); the check now also requires that no clarification was requested. The same planner behaviour briefly returned when the planner was given the corpus vocabulary for suggestions, and was fixed before this recording.
 
@@ -67,7 +83,7 @@ Follow-up answers are not part of the scored scenarios. They were spot-checked o
 - **No scientific accuracy figure.** The expectations were written by the developers, not by independent domain experts; there is no labelled set of correct findings.
 - **Correlated verification.** The same model extracts and verifies, so it can make the same mistake twice.
 - **Single samples.** Each scenario ran once; language-model output varies, so these are not pass rates.
-- **Small coverage.** Seven abstracts cannot establish general performance.
+- **Small coverage.** Eleven abstracts cannot establish general performance.
 
 Next steps would be an expert-labelled answer key, repeated runs to measure variance, a different or stronger verifier model, and held-out papers.
 

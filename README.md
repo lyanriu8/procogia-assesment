@@ -2,7 +2,7 @@
 
 Ask a research question and Contradiction Lab compares what the published studies report. It finds the relevant papers, extracts one finding from each, compares them in pairs, verifies every finding against the exact source text, and reports only what passed, along with the likely reason for any disagreement. Afterwards you can ask follow-up questions that are answered only from that verified evidence.
 
-Everything runs on one machine: a local language model (Qwen3 8B) and embedding model (nomic-embed-text) served by Ollama, a vector database (Chroma), a relational database (SQLite), and a web server with a REST API. The bundled corpus is seven real papers on **resistance training and muscle hypertrophy**, quoted exactly from PubMed. **The documents are preloaded; the answers are not**: every finding, comparison and verification is produced live by the model.
+Everything runs on one machine: a local language model (Qwen3 8B) and embedding model (nomic-embed-text) served by Ollama, a vector database (Chroma), a relational database (SQLite), and a web server with a REST API. The bundled corpus is eleven real papers on **resistance training, protein and muscle hypertrophy**, quoted exactly from PubMed. **The documents are preloaded; the answers are not**: every finding, comparison and verification is produced live by the model.
 
 ## How the system fits together
 
@@ -38,7 +38,7 @@ Open http://127.0.0.1:8000. Interactive API documentation is at http://127.0.0.1
 
 ## Using it
 
-- **New research:** type a question or pick an example. Options set the workflow (fixed or adaptive), context mode, paper limit (3 by default, for speed), passage budget, adaptive steps, required comparable pairs and a date range.
+- **New research:** type a question or pick an example. Two settings sit above the question box: the workflow (adaptive or fixed steps) and how many papers to compare (3 by default, for speed). The "Before 2006" shortcut adds a removable date limit. Other settings (passage budget, adaptive steps, required pairs, context mode, date range) keep their defaults in the interface and can be changed from the command line or the API.
 - **Sessions:** each question is a session in the sidebar. While research runs you see each processing step live; then the report: a headline, findings side by side with their direction and quoted source, comparisons with the context differences that may explain them, limitations, sources and every verification decision. Below it, ask follow-up questions; answers cite the evidence and are withheld if they cite anything outside it.
 - **Articles:** every stored paper, how much of it is in the vector index, a semantic search over all passages, and a page per paper showing exactly what the models read.
 - **Evaluation:** the latest real-model results.
@@ -61,13 +61,14 @@ Live discovery from OpenAlex and Europe PMC replaces the bundled corpus with `--
 
 ## Current results
 
-- **75 automated tests pass** (scripted model; real server, processing graph and vector database).
-- **7 of 8 strict real-model checks pass.** The main adaptive run verified three findings and labelled Schoenfeld 2016 vs 2019 (training frequency) a contextual disagreement in 44 seconds. The failure, kept on record: a planted overstatement was rated "partial" instead of rejected, though it was still excluded from the report.
+- **77 automated tests pass** (scripted model; real server, processing graph and vector database).
+- **8 of 8 strict real-model checks pass** on the final code. The main adaptive run verified three findings and labelled Schoenfeld 2016 vs 2019 (training frequency) a contextual disagreement in 42 seconds. One check (rejecting a planted overstatement) failed in three earlier recordings, so treat it as unstable.
+- Seven free-typed questions, including typos, an out-of-library topic and a vague question, behave correctly after four robustness fixes (see [Evaluation](docs/evaluation.md)).
 - Follow-up answers take 5–8 seconds; an out-of-scope question (creatine) is refused.
 
 ## Limits
 
-Seven abstract-only sources; no automatic retraction check (a retracted paper was excluded by hand); the same model extracts and verifies, so errors can be correlated; behavioural checks are developer-written expectations run once, not an expert-labelled accuracy measure; discovery thresholds were set on this corpus; no authentication (loopback only). This is evidence navigation, not a systematic review, a scientific verdict or training advice.
+Eleven abstract-only sources; no automatic retraction check (a retracted paper was excluded by hand); the same model extracts and verifies, so errors can be correlated; behavioural checks are developer-written expectations run once, not an expert-labelled accuracy measure; discovery thresholds were set on this corpus; no authentication (loopback only). This is evidence navigation, not a systematic review, a scientific verdict or training advice.
 
 ## Documentation
 
@@ -83,5 +84,6 @@ Seven abstract-only sources; no automatic retraction check (a retracted paper wa
 | [Storage](docs/storage.md) | Relational database and vector store |
 | [Web interface](docs/frontend.md) | Views and the API calls behind them |
 | [Evaluation](docs/evaluation.md) | Tests, scenarios, recorded results |
+| [Demo script](docs/demo.md) | The live walkthrough: flow, questions to type, expected results, fallbacks |
 | [Status](docs/implementation-status.md) · [Presentation](docs/presentation-spec.md) · [Assessment guide](docs/assessment-answers.md) | Current state and interview material |
 | [Code index](docs/code-index.md) | Where each concept lives in the source |

@@ -31,6 +31,7 @@ class Paper(Contract):
     pmid: str | None = None
     journal: str | None = None
     publication_types: list[str] = Field(default_factory=list)
+    abstract_sections: list[dict] = Field(default_factory=list)
     provenance: list[str] = Field(default_factory=list)
     source_checked_at: datetime | None = None
 

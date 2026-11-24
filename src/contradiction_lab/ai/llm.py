@@ -18,6 +18,9 @@ class ExtractedFinding(Contract):
     statement: str = Field(
         description="One finding close to original wording; never universalize."
     )
+    addresses_question: bool = Field(
+        description="True only if this finding studies the SAME exposure or intervention the research question asks about. A related but different one does not count: if the question names a specific substance, supplement, drug or method (for example creatine) and the passages study a different one (for example protein), this is false. A question about a training practice is addressed by findings on that practice even when worded differently (for example failure training is addressed by studies of loads lifted to failure)."
+    )
     outcome: str = Field(
         description="Measured endpoint as a short noun phrase. NEVER a direction such as positive/negative."
     )
@@ -168,6 +171,7 @@ class OllamaModel:
         from contradiction_lab.domain import load_domain
 
         domain = load_domain()
+        self.off_question = getattr(self, "off_question", 0)
 
         batch = self.structured(
             ClaimBatch,
@@ -183,6 +187,7 @@ class OllamaModel:
                 "passages": [passage.model_dump() for passage in passages],
             },
         )
+        self.off_question += sum(not finding.addresses_question for finding in batch.claims)
         return [
             ScientificClaim(
                 claim_id="pending",
@@ -192,6 +197,7 @@ class OllamaModel:
                         exclude={
                             "effect_of_increasing_exposure",
                             "evidence_passage_ids",
+                            "addresses_question",
                         }
                     ),
                     "direction": {
@@ -205,6 +211,7 @@ class OllamaModel:
                 },
             )
             for finding in batch.claims
+            if finding.addresses_question
         ]
 
     def supports(self, claim, passages):

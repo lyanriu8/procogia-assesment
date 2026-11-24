@@ -82,6 +82,7 @@ def test_extraction_uses_real_passage_packet_and_explicit_effect(settings, corpu
     passages = [p for p in corpus.passages if p.paper_id == paper.paper_id]
     finding = {
         "statement": "Synthetic adapter test finding",
+        "addresses_question": True,
         "outcome": "test outcome",
         "effect_of_increasing_exposure": "increases_outcome",
         "study_system": None,

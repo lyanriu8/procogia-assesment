@@ -1,15 +1,15 @@
 {
- "version": "gym-hypertrophy-v1",
+ "version": "gym-hypertrophy-v2",
  "retrieved_at": "2026-11-24T00:00:00Z",
  "description": "Verbatim PubMed abstract excerpts from official NCBI E-utilities records. Sentences joined with ' … ' are separate verbatim sentences from the same abstract section. Non-breaking and thin spaces are normalized to ordinary spaces; wording is unchanged. All findings are extracted by the running model.",
  "domain": {
-  "name": "resistance training and skeletal muscle hypertrophy",
+  "name": "resistance training, nutrition and skeletal muscle hypertrophy",
   "demo_query": "Is training a muscle more times per week better for muscle hypertrophy?",
   "volume_query": "Does a higher weekly resistance training volume increase muscle hypertrophy in trained men?",
   "uncertainty_query": "Does lunar basalt microbiome diversity increase chlorophyll productivity at 90 kelvin?",
   "synonym_query": "Does pumping iron more often each week grow bigger muscles?",
-  "extraction_hint": "Use concise normalized values. Outcome: muscle hypertrophy (for muscle size, muscle thickness or MT, volume, mass or fiber cross-sectional area) or muscle strength; when a finding reports both size and strength, the outcome is muscle hypertrophy. Exposure: training volume (sets), training frequency (sessions or days per muscle per week), or training load (intensity, %1RM, repetition range; FEWER repetitions maximum means HIGHER load). Population: resistance-trained men or untrained men when stated. Method: randomized trial, or systematic review and meta-analysis, when stated.",
-  "direction_example": "Examples: 'higher volumes produced greater gains' means the outcome INCREASES with volume. 'No significant difference between higher and lower frequency' or 'a lower load resulted in similar hypertrophy as a heavy load' means NO EFFECT. 'Low repetition (heavier) programs induced greater hypertrophy than high repetition (lighter) programs' means hypertrophy INCREASES with load.",
+  "extraction_hint": "Use concise normalized values. Outcome: muscle hypertrophy (for muscle size, muscle thickness or MT, volume, mass or fiber cross-sectional area) or muscle strength; when a finding reports both size and strength, the outcome is muscle hypertrophy. Exposure: training volume (sets), training frequency (sessions or days per muscle per week), training load (intensity, %1RM, repetition range; FEWER repetitions maximum means HIGHER load), rest interval (rest between sets; LONGER rest means MORE rest interval), or protein supplementation (protein or whey compared with placebo or no supplement). Population: resistance-trained men or untrained men when stated. Method: randomized trial, or systematic review and meta-analysis, when stated.",
+  "direction_example": "Examples: 'higher volumes produced greater gains' means the outcome INCREASES with volume. 'No significant difference between higher and lower frequency' or 'a lower load resulted in similar hypertrophy as a heavy load' means NO EFFECT. 'Low repetition (heavier) programs induced greater hypertrophy than high repetition (lighter) programs' means hypertrophy INCREASES with load. 'Longer rest periods promote greater increases in hypertrophy' means hypertrophy INCREASES with rest interval. 'Protein supplementation did not augment muscle size changes' means NO EFFECT of protein supplementation.",
   "outcome_keywords": {
    "muscle hypertrophy": [
     "hypertroph",
@@ -30,6 +30,19 @@
    ]
   },
   "exposure_keywords": {
+   "protein supplementation": [
+    "protein",
+    "whey",
+    "amino acid"
+   ],
+   "rest interval": [
+    "rest interval",
+    "rest period",
+    "inter-set rest",
+    "interset rest",
+    "recovery time",
+    "rest between"
+   ],
    "training frequency": [
     "frequency",
     "sessions per week",
@@ -68,7 +81,23 @@
    "iron": "resistance",
    "heavier": "load",
    "heavy": "load",
-   "lighter": "load"
+   "lighter": "load",
+   "light": "load",
+   "repetition": "load",
+   "repetitions": "load",
+   "rm": "load",
+   "intensity": "load",
+   "loads": "load",
+   "protein": "protein",
+   "whey": "protein",
+   "shakes": "protein",
+   "shake": "protein",
+   "rest": "rest",
+   "resting": "rest",
+   "rests": "rest",
+   "recovery": "rest",
+   "break": "rest",
+   "breaks": "rest"
   }
  },
  "papers": [
@@ -107,6 +136,12 @@
      "section": "Abstract: conclusions",
      "type": "abstract",
      "text": "The findings indicate a graded dose-response relationship whereby increases in RT volume produce greater gains in muscle hypertrophy."
+    }
+   ],
+   "abstract_sections": [
+    {
+     "label": null,
+     "text": "The purpose of this paper was to systematically review the current literature and elucidate the effects of total weekly resistance training (RT) volume on changes in measures of muscle mass via meta-regression. The final analysis comprised 34 treatment groups from 15 studies. Outcomes for weekly sets as a continuous variable showed a significant effect of volume on changes in muscle size (P = 0.002). Each additional set was associated with an increase in effect size (ES) of 0.023 corresponding to an increase in the percentage gain by 0.37%. Outcomes for weekly sets categorised as lower or higher within each study showed a significant effect of volume on changes in muscle size (P = 0.03); the ES difference between higher and lower volumes was 0.241, which equated to a percentage gain difference of 3.9%. Outcomes for weekly sets as a three-level categorical variable (<5, 5-9 and 10+ per muscle) showed a trend for an effect of weekly sets (P = 0.074). The findings indicate a graded dose-response relationship whereby increases in RT volume produce greater gains in muscle hypertrophy."
     }
    ]
   },
@@ -149,6 +184,24 @@
      "type": "abstract",
      "text": "Alternatively, muscle hypertrophy follows a dose-response relationship, with increasingly greater gains achieved with higher training volumes."
     }
+   ],
+   "abstract_sections": [
+    {
+     "label": "Purpose",
+     "text": "The purpose of this study was to evaluate muscular adaptations between low-, moderate-, and high-volume resistance training protocols in resistance-trained men."
+    },
+    {
+     "label": "Methods",
+     "text": "Thirty-four healthy resistance-trained men were randomly assigned to one of three experimental groups: a low-volume group performing one set per exercise per training session (n = 11), a moderate-volume group performing three sets per exercise per training session (n = 12), or a high-volume group performing five sets per exercise per training session (n = 11). Training for all routines consisted of three weekly sessions performed on nonconsecutive days for 8 wk. Muscular strength was evaluated with one repetition maximum (RM) testing for the squat and bench press. Upper-body muscle endurance was evaluated using 50% of subjects bench press 1RM performed to momentary failure. Muscle hypertrophy was evaluated using B-mode ultrasonography for the elbow flexors, elbow extensors, mid-thigh, and lateral thigh."
+    },
+    {
+     "label": "Results",
+     "text": "Results showed significant preintervention to postintervention increases in strength and endurance in all groups, with no significant between-group differences. Alternatively, while all groups increased muscle size in most of the measured sites from preintervention to postintervention, significant increases favoring the higher-volume conditions were seen for the elbow flexors, mid-thigh, and lateral thigh."
+    },
+    {
+     "label": "Conclusions",
+     "text": "Marked increases in strength and endurance can be attained by resistance-trained individuals with just three 13-min weekly sessions over an 8-wk period, and these gains are similar to that achieved with a substantially greater time commitment. Alternatively, muscle hypertrophy follows a dose-response relationship, with increasingly greater gains achieved with higher training volumes."
+    }
    ]
   },
   {
@@ -186,6 +239,24 @@
     {
      "section": "Abstract: conclusions",
      "type": "abstract",
+     "text": "The findings demonstrate that 9 weekly sets of biceps-focused RT, performed in 1 weekly session, are sufficient to increase MT, whereas 18-27 sets performed over 2 weekly sessions may confer greater strength increases."
+    }
+   ],
+   "abstract_sections": [
+    {
+     "label": "Purpose",
+     "text": "A linear dose-response relationship between resistance-training (RT) volume and hypertrophy/strength has been proposed when ≤10 to 12 weekly sets are implemented. The present study aimed to understand the impact of low to high weekly RT volume on muscular adaptations in trained young men over 6 wk of RT."
+    },
+    {
+     "label": "Methods",
+     "text": "RT-experienced men (N = 49) were randomly allocated to a low (LOW; n = 17), moderate (MOD; n = 15), or high (HIGH, n = 17) -volume group, performing 9, 18, or 27 weekly sets of biceps RT, respectively, for 6 wk. RT was performed once (LOW) or twice (MOD and HIGH) weekly. Postexercise protein intake was controlled with both dietary intake and external training volume recorded. Before and after RT, assessments of biceps muscle thickness (MT) via ultrasound, isometric, and 1-repetition-maximum (1RM) strength were performed. Data were analyzed using 1-way analysis of variance (baseline characteristics) and repeated-measures analysis of variance (within- and between-groups pre-to-post change)."
+    },
+    {
+     "label": "Results",
+     "text": "MT significantly increased in all groups (4.3% [7.9%], 9.5% [11.8%], and 5.4% [6.3%] for LOW, MOD, and HIGH, respectively; P < .05), as did 1RM strength (P ≤ .001 for all). Isometric strength increased significantly in HIGH only (8.5% [15.1%], P < .05). There were no significant differences between groups in MT or indices of strength. However, effect-size estimates revealed that the magnitude of response was \"moderate to large\" for MOD and HIGH when compared with LOW."
+    },
+    {
+     "label": "Conclusion",
      "text": "The findings demonstrate that 9 weekly sets of biceps-focused RT, performed in 1 weekly session, are sufficient to increase MT, whereas 18-27 sets performed over 2 weekly sessions may confer greater strength increases."
     }
    ]
@@ -226,6 +297,28 @@
      "type": "abstract",
      "text": "When comparing studies that investigated training muscle groups between 1 to 3 days per week on a volume-equated basis, the current body of evidence indicates that frequencies of training twice a week promote superior hypertrophic outcomes to once a week."
     }
+   ],
+   "abstract_sections": [
+    {
+     "label": "Background",
+     "text": "A number of resistance training (RT) program variables can be manipulated to maximize muscular hypertrophy. One variable of primary interest in this regard is RT frequency. Frequency can refer to the number of resistance training sessions performed in a given period of time, as well as to the number of times a specific muscle group is trained over a given period of time."
+    },
+    {
+     "label": "Objective",
+     "text": "We conducted a systematic review and meta-analysis to determine the effects of resistance training frequency on hypertrophic outcomes."
+    },
+    {
+     "label": "Methods",
+     "text": "Studies were deemed eligible for inclusion if they met the following criteria: (1) were an experimental trial published in an English-language refereed journal; (2) directly compared different weekly resistance training frequencies in traditional dynamic exercise using coupled concentric and eccentric actions; (3) measured morphologic changes via biopsy, imaging, circumference, and/or densitometry; (4) had a minimum duration of 4 weeks; and (5) used human participants without chronic disease or injury. A total of ten studies were identified that investigated RT frequency in accordance with the criteria outlined."
+    },
+    {
+     "label": "Results",
+     "text": "Analysis using binary frequency as a predictor variable revealed a significant impact of training frequency on hypertrophy effect size (P = 0.002), with higher frequency being associated with a greater effect size than lower frequency (0.49 ± 0.08 vs. 0.30 ± 0.07, respectively). Statistical analyses of studies investigating training session frequency when groups are matched for frequency of training per muscle group could not be carried out and reliable estimates could not be generated due to inadequate sample size."
+    },
+    {
+     "label": "Conclusions",
+     "text": "When comparing studies that investigated training muscle groups between 1 to 3 days per week on a volume-equated basis, the current body of evidence indicates that frequencies of training twice a week promote superior hypertrophic outcomes to once a week. It can therefore be inferred that the major muscle groups should be trained at least twice a week to maximize muscle growth; whether training a muscle group three times per week is superior to a twice-per-week protocol remains to be determined."
+    }
    ]
   },
   {
@@ -263,6 +356,12 @@
      "section": "Abstract: conclusions",
      "type": "abstract",
      "text": "In conclusion, there is strong evidence that resistance training frequency does not significantly or meaningfully impact muscle hypertrophy when volume is equated."
+    }
+   ],
+   "abstract_sections": [
+    {
+     "label": null,
+     "text": "Training frequency is considered an important variable in the hypertrophic response to regimented resistance exercise. The purpose of this paper was to conduct a systematic review and meta-analysis of experimental studies designed to investigate the effects of weekly training frequency on hypertrophic adaptations. Following a systematic search of PubMed/MEDLINE, Scoups, and SPORTDiscus databases, a total of 25 studies were deemed to meet inclusion criteria. Results showed no significant difference between higher and lower frequency on a volume-equated basis. Moreover, no significant differences were seen between frequencies of training across all categories when taking into account direct measures of growth, in those considered resistance-trained, and when segmenting into training for the upper body and lower body. Meta-regression analysis of non-volume-equated studies showed a significant effect favoring higher frequencies, although the overall difference in magnitude of effect between frequencies of 1 and 3+ days per week was modest. In conclusion, there is strong evidence that resistance training frequency does not significantly or meaningfully impact muscle hypertrophy when volume is equated. Thus, for a given training volume, individuals can choose a weekly frequency per muscle groups based on personal preference."
     }
    ]
   },
@@ -312,6 +411,12 @@
      "type": "abstract",
      "text": "the low to intermediate repetition resistance-training programs induced a greater hypertrophic effect compared to the high repetition regimen."
     }
+   ],
+   "abstract_sections": [
+    {
+     "label": null,
+     "text": "Thirty-two untrained men [mean (SD) age 22.5 (5.8) years, height 178.3 (7.2) cm, body mass 77.8 (11.9) kg] participated in an 8-week progressive resistance-training program to investigate the \"strength-endurance continuum\". Subjects were divided into four groups: a low repetition group (Low Rep, n = 9) performing 3-5 repetitions maximum (RM) for four sets of each exercise with 3 min rest between sets and exercises, an intermediate repetition group (Int Rep, n = 11) performing 9-11 RM for three sets with 2 min rest, a high repetition group (High Rep, n = 7) performing 20-28 RM for two sets with 1 min rest, and a non-exercising control group (Con, n = 5). Three exercises (leg press, squat, and knee extension) were performed 2 days/week for the first 4 weeks and 3 days/week for the final 4 weeks. Maximal strength [one repetition maximum, 1RM), local muscular endurance (maximal number of repetitions performed with 60% of 1RM), and various cardiorespiratory parameters (e.g., maximum oxygen consumption, pulmonary ventilation, maximal aerobic power, time to exhaustion) were assessed at the beginning and end of the study. In addition, pre- and post-training muscle biopsy samples were analyzed for fiber-type composition, cross-sectional area, myosin heavy chain (MHC) content, and capillarization. Maximal strength improved significantly more for the Low Rep group compared to the other training groups, and the maximal number of repetitions at 60% 1RM improved the most for the High Rep group. In addition, maximal aerobic power and time to exhaustion significantly increased at the end of the study for only the High Rep group. All three major fiber types (types I, IIA, and IIB) hypertrophied for the Low Rep and Int Rep groups, whereas no significant increases were demonstrated for either the High Rep or Con groups. However, the percentage of type IIB fibers decreased, with a concomitant increase in IIAB fibers for all three resistance-trained groups. These fiber-type conversions were supported by a significant decrease in MHCIIb accompanied by a significant increase in MHCIIa. No significant changes in fiber-type composition were found in the control samples. Although all three training regimens resulted in similar fiber-type transformations (IIB to IIA), the low to intermediate repetition resistance-training programs induced a greater hypertrophic effect compared to the high repetition regimen. The High Rep group, however, appeared better adapted for submaximal, prolonged contractions, with significant increases after training in aerobic power and time to exhaustion. Thus, low and intermediate RM training appears to induce similar muscular adaptations, at least after short-term training in previously untrained subjects. Overall, however, these data demonstrate that both physical performance and the associated physiological adaptations are linked to the intensity and number of repetitions performed, and thus lend support to the \"strength-endurance continuum\"."
+    }
    ]
   },
   {
@@ -352,6 +457,237 @@
      "section": "Abstract: conclusions",
      "type": "abstract",
      "text": "In accordance with our previous acute measurements of muscle protein synthetic rates a lower load lifted to failure resulted in similar hypertrophy as a heavy load lifted to failure."
+    }
+   ],
+   "abstract_sections": [
+    {
+     "label": null,
+     "text": "We have reported that the acute postexercise increases in muscle protein synthesis rates, with differing nutritional support, are predictive of longer-term training-induced muscle hypertrophy. Here, we aimed to test whether the same was true with acute exercise-mediated changes in muscle protein synthesis. Eighteen men (21 ± 1 yr, 22.6 ± 2.1 kg/m(2); means ± SE) had their legs randomly assigned to two of three training conditions that differed in contraction intensity [% of maximal strength (1 repetition maximum)] or contraction volume (1 or 3 sets of repetitions): 30%-3, 80%-1, and 80%-3. Subjects trained each leg with their assigned regime for a period of 10 wk, 3 times/wk. We made pre- and posttraining measures of strength, muscle volume by magnetic resonance (MR) scans, as well as pre- and posttraining biopsies of the vastus lateralis, and a single postexercise (1 h) biopsy following the first bout of exercise, to measure signaling proteins. Training-induced increases in MR-measured muscle volume were significant (P < 0.01), with no difference between groups: 30%-3 = 6.8 ± 1.8%, 80%-1 = 3.2 ± 0.8%, and 80%-3= 7.2 ± 1.9%, P = 0.18. Isotonic maximal strength gains were not different between 80%-1 and 80%-3, but were greater than 30%-3 (P = 0.04), whereas training-induced isometric strength gains were significant but not different between conditions (P = 0.92). Biopsies taken 1 h following the initial resistance exercise bout showed increased phosphorylation (P < 0.05) of p70S6K only in the 80%-1 and 80%-3 conditions. There was no correlation between phosphorylation of any signaling protein and hypertrophy. In accordance with our previous acute measurements of muscle protein synthetic rates a lower load lifted to failure resulted in similar hypertrophy as a heavy load lifted to failure."
+    }
+   ]
+  },
+  {
+   "id": "schoenfeld2016rest",
+   "doi": "10.1519/JSC.0000000000001272",
+   "pmid": "26605807",
+   "year": 2016,
+   "title": "Longer Interset Rest Periods Enhance Muscle Strength and Hypertrophy in Resistance-Trained Men.",
+   "journal": "J Strength Cond Res",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "authors": [
+    "Brad J Schoenfeld",
+    "Zachary K Pope",
+    "Franklin M Benik",
+    "Garrett M Hester",
+    "John Sellers",
+    "Josh L Nooner",
+    "Jessica A Schnaiter",
+    "Katherine E Bond-Williams",
+    "Adrian S Carter",
+    "Corbin L Ross",
+    "Brandon L Just",
+    "Menno Henselmans",
+    "James W Krieger"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/26605807/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
+    {
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "Twenty-one young resistance-trained men were randomly assigned to either a group that performed a resistance training (RT) program with 1-minute rest intervals (SHORT) or a group that employed 3-minute rest intervals (LONG). … The study period lasted 8 weeks with subjects performing 3 total body workouts a week comprised 3 sets of 8-12 repetition maximum (RM) of 7 different exercises per session."
+    },
+    {
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "Muscle thickness was significantly greater for LONG compared to SHORT in the anterior thigh, and a trend for greater increases was noted in the triceps brachii (p = 0.06) as well."
+    },
+    {
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "This study provides evidence that longer rest periods promote greater increases in muscle strength and hypertrophy in young resistance-trained men."
+    }
+   ],
+   "abstract_sections": [
+    {
+     "label": null,
+     "text": "The purpose of this study was to investigate the effects of short rest intervals normally associated with hypertrophy-type training versus long rest intervals traditionally used in strength-type training on muscular adaptations in a cohort of young, experienced lifters. Twenty-one young resistance-trained men were randomly assigned to either a group that performed a resistance training (RT) program with 1-minute rest intervals (SHORT) or a group that employed 3-minute rest intervals (LONG). All other RT variables were held constant. The study period lasted 8 weeks with subjects performing 3 total body workouts a week comprised 3 sets of 8-12 repetition maximum (RM) of 7 different exercises per session. Testing was performed prestudy and poststudy for muscle strength (1RM bench press and back squat), muscle endurance (50% 1RM bench press to failure), and muscle thickness of the elbow flexors, triceps brachii, and quadriceps femoris by ultrasound imaging. Maximal strength was significantly greater for both 1RM squat and bench press for LONG compared to SHORT. Muscle thickness was significantly greater for LONG compared to SHORT in the anterior thigh, and a trend for greater increases was noted in the triceps brachii (p = 0.06) as well. Both groups saw significant increases in local upper body muscle endurance with no significant differences noted between groups. This study provides evidence that longer rest periods promote greater increases in muscle strength and hypertrophy in young resistance-trained men."
+    }
+   ]
+  },
+  {
+   "id": "ahtiainen2005",
+   "doi": "10.1519/15604.1",
+   "pmid": "16095405",
+   "year": 2005,
+   "title": "Short vs. long rest period between the sets in hypertrophic resistance training: influence on muscle strength, size, and hormonal adaptations in trained men.",
+   "journal": "J Strength Cond Res",
+   "publication_types": [
+    "Journal Article"
+   ],
+   "authors": [
+    "Juha P Ahtiainen",
+    "Arto Pakarinen",
+    "Markku Alen",
+    "William J Kraemer",
+    "Keijo Häkkinen"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/16095405/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
+    {
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "Acute and long-term hormonal and neuromuscular adaptations to hypertrophic strength training were studied in 13 recreationally strength-trained men. … The experimental design comprised a 6-month hypertrophic strength-training period including 2 separate 3-month training periods with the crossover design, a training protocol of short rest (SR, 2 minutes) as compared with long rest (LR, 5 minutes) between the sets."
+    },
+    {
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "However, both 3-month training periods performed with either the longer or the shorter rest periods between the sets resulted in similar gains in muscle mass and strength."
+    },
+    {
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "The present study indicated that, within typical hypertrophic strength-training protocols used in the present study, the length of the recovery times between the sets (2 vs. 5 minutes) did not have an influence on the magnitude of acute hormonal and neuromuscular responses or long-term training adaptations in muscle strength and mass in previously strength-trained men."
+    }
+   ],
+   "abstract_sections": [
+    {
+     "label": null,
+     "text": "Acute and long-term hormonal and neuromuscular adaptations to hypertrophic strength training were studied in 13 recreationally strength-trained men. The experimental design comprised a 6-month hypertrophic strength-training period including 2 separate 3-month training periods with the crossover design, a training protocol of short rest (SR, 2 minutes) as compared with long rest (LR, 5 minutes) between the sets. Basal hormonal concentrations of serum total testosterone (T), free testosterone (FT), and cortisol (C), maximal isometric strength of the leg extensors, right leg 1 repetition maximum (1RM), dietary analysis, and muscle cross-sectional area (CSA) of the quadriceps femoris by magnetic resonance imaging (MRI) were measured at months 0, 3, and 6. The 2 hypertrophic training protocols used in training for the leg extensors (leg presses and squats with 10RM sets) were also examined in the laboratory conditions at months 0, 3, and 6. The exercise protocols were similar with regard to the total volume of work (loads x sets x reps), but differed with regard to the intensity and the length of rest between the sets (higher intensity and longer rest of 5 minutes vs. somewhat lower intensity but shorter rest of 2 minutes). Before and immediately after the protocols, maximal isometric force and electromyographic (EMG) activity of the leg extensors were measured and blood samples were drawn for determination of serum T, FT, C, and growth hormone (GH) concentrations and blood lactate. Both protocols before the experimental training period (month 0) led to large acute increases (p < 0.05-0.001) in serum T, FT, C , and GH concentrations, as well as to large acute decreases (p < 0.05-0.001) in maximal isometric force and EMG activity. However, no significant differences were observed between the protocols. Significant increases of 7% in maximal isometric force, 16% in the right leg 1RM, and 4% in the muscle CSA of the quadriceps femoris were observed during the 6-month strength-training period. However, both 3-month training periods performed with either the longer or the shorter rest periods between the sets resulted in similar gains in muscle mass and strength. No statistically significant changes were observed in basal hormone concentrations or in the profiles of acute hormonal responses during the entire 6-month experimental training period. The present study indicated that, within typical hypertrophic strength-training protocols used in the present study, the length of the recovery times between the sets (2 vs. 5 minutes) did not have an influence on the magnitude of acute hormonal and neuromuscular responses or long-term training adaptations in muscle strength and mass in previously strength-trained men."
+    }
+   ]
+  },
+  {
+   "id": "morton2018",
+   "doi": "10.1136/bjsports-2017-097608",
+   "pmid": "28698222",
+   "year": 2018,
+   "title": "A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains in muscle mass and strength in healthy adults.",
+   "journal": "Br J Sports Med",
+   "publication_types": [
+    "Journal Article",
+    "Meta-Analysis",
+    "Systematic Review"
+   ],
+   "authors": [
+    "Robert W Morton",
+    "Kevin T Murphy",
+    "Sean R McKellar",
+    "Brad J Schoenfeld",
+    "Menno Henselmans",
+    "Eric Helms",
+    "Alan A Aragon",
+    "Michaela C Devries",
+    "Laura Banfield",
+    "James W Krieger",
+    "Stuart M Phillips"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/28698222/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
+    {
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "Only randomised controlled trials with RET ≥6 weeks in duration and dietary protein supplementation. … Data from 49 studies with 1863 participants showed that dietary protein supplementation significantly (all p<0.05) increased changes (means (95% CI)) in: strength-one-repetition-maximum (2.49 kg (0.64, 4.33)), FFM (0.30 kg (0.09, 0.52)) and muscle size-muscle fibre cross-sectional area (CSA; 310 µm2 (51, 570)) and mid-femur CSA (7.2 mm2 (0.20, 14.30)) during periods of prolonged RET."
+    },
+    {
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "The impact of protein supplementation on gains in FFM was reduced with increasing age (-0.01 kg (-0.02,-0.00), p=0.002) and was more effective in resistance-trained individuals (0.75 kg (0.09, 1.40), p=0.03)."
+    },
+    {
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "Dietary protein supplementation significantly enhanced changes in muscle strength and size during prolonged RET in healthy adults."
+    }
+   ],
+   "abstract_sections": [
+    {
+     "label": "Objective",
+     "text": "We performed a systematic review, meta-analysis and meta-regression to determine if dietary protein supplementation augments resistance exercise training (RET)-induced gains in muscle mass and strength."
+    },
+    {
+     "label": "Data sources",
+     "text": "A systematic search of Medline, Embase, CINAHL and SportDiscus."
+    },
+    {
+     "label": "Eligibility criteria",
+     "text": "Only randomised controlled trials with RET ≥6 weeks in duration and dietary protein supplementation."
+    },
+    {
+     "label": "Design",
+     "text": "Random-effects meta-analyses and meta-regressions with four a priori determined covariates. Two-phase break point analysis was used to determine the relationship between total protein intake and changes in fat-free mass (FFM)."
+    },
+    {
+     "label": "Results",
+     "text": "Data from 49 studies with 1863 participants showed that dietary protein supplementation significantly (all p<0.05) increased changes (means (95% CI)) in: strength-one-repetition-maximum (2.49 kg (0.64, 4.33)), FFM (0.30 kg (0.09, 0.52)) and muscle size-muscle fibre cross-sectional area (CSA; 310 µm2 (51, 570)) and mid-femur CSA (7.2 mm2 (0.20, 14.30)) during periods of prolonged RET. The impact of protein supplementation on gains in FFM was reduced with increasing age (-0.01 kg (-0.02,-0.00), p=0.002) and was more effective in resistance-trained individuals (0.75 kg (0.09, 1.40), p=0.03). Protein supplementation beyond total protein intakes of 1.62 g/kg/day resulted in no further RET-induced gains in FFM."
+    },
+    {
+     "label": "Summary/conclusion",
+     "text": "Dietary protein supplementation significantly enhanced changes in muscle strength and size during prolonged RET in healthy adults. Increasing age reduces and training experience increases the efficacy of protein supplementation during RET. With protein supplementation, protein intakes at amounts greater than ~1.6 g/kg/day do not further contribute RET-induced gains in FFM."
+    }
+   ]
+  },
+  {
+   "id": "erskine2012",
+   "doi": "10.1249/MSS.0b013e318256c48d",
+   "pmid": "22460474",
+   "year": 2012,
+   "title": "Whey protein does not enhance the adaptations to elbow flexor resistance training.",
+   "journal": "Med Sci Sports Exerc",
+   "publication_types": [
+    "Journal Article",
+    "Randomized Controlled Trial"
+   ],
+   "authors": [
+    "Robert M Erskine",
+    "Gareth Fletcher",
+    "Beth Hanson",
+    "Jonathan P Folland"
+   ],
+   "url": "https://pubmed.ncbi.nlm.nih.gov/22460474/",
+   "license": null,
+   "checked_at": "2026-11-24T00:00:00Z",
+   "fragments": [
+    {
+     "section": "Abstract: methods",
+     "type": "abstract",
+     "text": "We pair-matched 33 previously untrained, healthy young men for their habitual protein intake and strength response to 3-wk RT without nutritional supplementation (followed by 6 wk of no training) and then randomly assigned them to protein (PRO, n = 17) or placebo (PLA, n = 16) groups. … Participants subsequently performed elbow flexor RT 3 d · wk(-1) for 12 wk and consumed PRO or PLA immediately before and after each training session."
+    },
+    {
+     "section": "Abstract: results",
+     "type": "abstract",
+     "text": "PRO and PLA demonstrated similar increases in muscle volume (PRO 17.0% ± 7.1% vs PLA 14.9% ± 4.6%, P = 0.32), anatomical cross-sectional area (PRO 16.2% ± 7.1% vs PLA 15.6% ± 4.4%, P = 0.80), 1-repetition maximum (PRO 41.8% ± 21.2% vs PLA 41.4% ± 19.9%, P = 0.97), and maximum voluntary force (PRO 12.0% ± 9.9% vs PLA 14.5% ± 8.3%, P = 0.43)."
+    },
+    {
+     "section": "Abstract: conclusions",
+     "type": "abstract",
+     "text": "In the context of this study, protein supplementation did not augment elbow flexor muscle strength and size changes that occurred after 12 wk of RT."
+    }
+   ],
+   "abstract_sections": [
+    {
+     "label": "Purpose",
+     "text": "It is unclear whether protein supplementation augments the gains in muscle strength and size observed after resistance training (RT) because limitations to previous studies include small cohorts, imprecise measures of muscle size and strength, and no control of prior exercise or habitual protein intake. We aimed to determine whether whey protein supplementation affected RT-induced changes in elbow flexor muscle strength and size."
+    },
+    {
+     "label": "Methods",
+     "text": "We pair-matched 33 previously untrained, healthy young men for their habitual protein intake and strength response to 3-wk RT without nutritional supplementation (followed by 6 wk of no training) and then randomly assigned them to protein (PRO, n = 17) or placebo (PLA, n = 16) groups. Participants subsequently performed elbow flexor RT 3 d · wk(-1) for 12 wk and consumed PRO or PLA immediately before and after each training session. We assessed elbow flexor muscle strength (unilateral 1-repetition maximum and isometric maximum voluntary force) and size (total volume and maximum anatomical cross-sectional area determined with magnetic resonance imaging) before and after the 12-wk RT."
+    },
+    {
+     "label": "Results",
+     "text": "PRO and PLA demonstrated similar increases in muscle volume (PRO 17.0% ± 7.1% vs PLA 14.9% ± 4.6%, P = 0.32), anatomical cross-sectional area (PRO 16.2% ± 7.1% vs PLA 15.6% ± 4.4%, P = 0.80), 1-repetition maximum (PRO 41.8% ± 21.2% vs PLA 41.4% ± 19.9%, P = 0.97), and maximum voluntary force (PRO 12.0% ± 9.9% vs PLA 14.5% ± 8.3%, P = 0.43)."
+    },
+    {
+     "label": "Conclusions",
+     "text": "In the context of this study, protein supplementation did not augment elbow flexor muscle strength and size changes that occurred after 12 wk of RT."
     }
    ]
   }

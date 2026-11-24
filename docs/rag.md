@@ -4,7 +4,7 @@ Retrieval-augmented generation (RAG) means the language model answers from retri
 
 ## Corpus
 
-Seven real publications on resistance training and skeletal muscle hypertrophy. Each passage is an exact sentence from the paper's official PubMed record, fetched through the NCBI E-utilities API on November 24, 2026 and checked as an exact substring of the abstract when the corpus was built. Non-breaking and thin spaces were normalized to ordinary spaces; wording is unchanged. Sentences joined with " … " are separate exact sentences from the same abstract section. Each paper also carries its DOI, PubMed ID, journal, authors and PubMed publication types. The corpus holds source text only; no answers or annotations.
+Eleven real publications on resistance training, protein supplementation and skeletal muscle hypertrophy. Each passage is an exact sentence from the paper's official PubMed record, fetched through the NCBI E-utilities API on November 24, 2026 and checked as an exact substring of the abstract when the corpus was built. Non-breaking and thin spaces were normalized to ordinary spaces; wording is unchanged. Sentences joined with " … " are separate exact sentences from the same abstract section. Each paper also carries its DOI, PubMed ID, journal, authors and PubMed publication types. The corpus holds source text only; no answers or annotations.
 
 | Publication | DOI | Design | Abstract-level conclusion |
 |---|---|---|---|
@@ -15,8 +15,12 @@ Seven real publications on resistance training and skeletal muscle hypertrophy. 
 | Schoenfeld, Grgic & Krieger, *J Sports Sci* 2019 | 10.1080/02640414.2018.1555906 | Meta-analysis, 25 studies | Frequency does not meaningfully affect hypertrophy when volume is equated |
 | Campos et al., *Eur J Appl Physiol* 2002 | 10.1007/s00421-002-0681-6 | Training study, 32 untrained men, 8 weeks | Heavier (low/intermediate repetition) training gave greater hypertrophy than light (high repetition) |
 | Mitchell et al., *J Appl Physiol* 2012 | 10.1152/japplphysiol.00307.2012 | Randomized within-subject trial, 18 men, 10 weeks | A lower load lifted to failure gave similar hypertrophy to a heavy load |
+| Schoenfeld et al., *J Strength Cond Res* 2016 | 10.1519/JSC.0000000000001272 | Randomized trial, 21 trained men, 8 weeks | Longer rest between sets (3 vs 1 minute) gave more strength and hypertrophy |
+| Ahtiainen et al., *J Strength Cond Res* 2005 | 10.1519/15604.1 | Crossover trial, 13 trained men, 6 months | 2 vs 5 minutes of rest gave similar gains in muscle mass and strength |
+| Morton et al., *Br J Sports Med* 2018 | 10.1136/bjsports-2017-097608 | Meta-analysis, 49 trials, 1,863 participants | Protein supplementation enhanced gains in muscle strength and size |
+| Erskine et al., *Med Sci Sports Exerc* 2012 | 10.1249/MSS.0b013e318256c48d | Randomized trial, 33 untrained men, 12 weeks | Whey protein did not augment gains in elbow-flexor size or strength |
 
-The papers form three real disagreement clusters: **training volume** (two positive results against one non-significant difference), **training frequency** (the same group's 2016 positive result against its 2019 null result when volume is equated), and **load** (heavier better against similar when taken to failure). Pairs across clusters concern different exposures and are labelled "different questions".
+The papers form five real disagreement clusters: **training volume** (two positive results against one non-significant difference), **training frequency** (the same group's 2016 positive result against its 2019 null result when volume is equated), **load** (heavier better against similar when taken to failure), **rest between sets** (longer rest better against no difference) and **protein supplementation** (a meta-analysis showing a benefit against a trial showing none). Pairs across clusters concern different exposures and are labelled "different questions". The last two clusters were added after the first seven papers to widen the questions the demo can answer; they were checked the same way (exact quotes against the PubMed record, retraction status) and appended without changing the original entries.
 
 The main demo question targets the frequency cluster because its null result is stated unambiguously. Heaselgrave 2019 shows the system being conservative: its abstract reports no significant difference but also moderate-to-large effect sizes, so the verifier rates a "no effect" finding as only partly supported and excludes it.
 
@@ -38,18 +42,18 @@ The vectors live in one persistent collection in **Chroma**, a vector database u
 - **During research**, runs search the library filtered to the papers they selected, and any passage a run fetches (for example from live discovery) is added to it.
 - **Embeddings are cached** by model name and a hash of the text, so the same text is never embedded twice. Model *answers* are never cached.
 
-The library is visible to users through the API (list, detail and search) and the Articles view of the interface. A user sees exactly the text the models read.
+The library is visible to users through the API (list, detail and search) and the Articles view of the interface, which reads like a normal reference app: each article shows its full published abstract (with section headings for structured abstracts) and links to PubMed and the DOI. The full abstracts are stored alongside the curated excerpts for display only; retrieval and the models use the excerpts, so validated behaviour is unchanged.
 
 ## Stage 1: paper discovery
 
 Decides which papers a run considers.
 
-1. The planner's first search term is embedded as a query.
+1. Both the planner's first search term and the user's own question are embedded as queries; each paper keeps its better score of the two.
 2. Each candidate paper is represented by the embedding of its title and abstract. Optional publication-year filters are applied first.
 3. Papers whose **cosine similarity is below 0.6 are discarded.** This threshold is what lets an off-topic question return no papers at all (the off-topic control scores at most 0.48).
-4. The remaining papers are ranked by **cosine similarity + 0.5 × the fraction of query terms found in the title**, and the top *N* are kept (seven by default, three in the interface for speed).
+4. The remaining papers are ranked by **cosine similarity + 0.5 × an IDF-weighted title match**, and the top *N* are kept (seven by default, three in the interface for speed). The title match sums the inverse document frequency (IDF, the logarithm of total titles divided by titles containing the word) of each query word found in the title, divided by the total for all query words that appear in any title. A word in every title ("muscle", "resistance") is worth nothing; a distinctive one ("load", "frequency") is worth a lot; words that match no title do not dilute the score.
 
-The title bonus exists because seven papers on one topic have compressed similarity scores (0.80–0.86 for every paper on the demo questions); similarity alone ranked the wrong cluster first. Both the 0.6 threshold and the 0.5 weight were set by inspecting this corpus, not tuned on held-out data.
+The title bonus exists because papers on one topic have compressed similarity scores (0.80–0.86 for every paper on the demo questions); similarity alone ranked the wrong cluster first. It is IDF-weighted because an unweighted count let shared words dominate: "is lifting heavy better than light weights" missed the heavy-load paper. Synonyms in the domain vocabulary (heavy, light, repetitions, intensity → load; rest, resting, recovery, breaks → rest; whey, shakes → protein) connect everyday words to title words. The 0.6 threshold and 0.5 weight were set by inspecting this corpus, not tuned on held-out data.
 
 Query terms are lowercase alphanumeric tokens with stop-words removed and synonyms mapped through the domain vocabulary.
 

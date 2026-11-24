@@ -92,3 +92,31 @@ def test_direction_reviewer_no_change_becomes_no_effect(engine, monkeypatch):
     result = engine.run(ResearchRequest(query="training volume", workflow="static"))
     assert result["extracted_claims"]
     assert {c["direction"] for c in result["extracted_claims"]} == {"no_effect"}
+
+
+def test_specific_question_is_searched_even_if_planner_wants_clarification(engine, monkeypatch):
+    from contradiction_lab.ai.llm import OllamaModel
+    from contradiction_lab.schemas import ResearchRequest, SearchPlan
+
+    def clarify(self, query):
+        self.usage.append({"input_tokens": 10, "output_tokens": 5, "repair": 0})
+        return SearchPlan(query=query, search_terms=["x"], interpreted_scope=query, needs_clarification=True,
+                          clarification_question="Which one?", suggested_questions=["A?"])
+
+    monkeypatch.setattr(OllamaModel, "plan", clarify)
+    specific = engine.run(ResearchRequest(query="does creatine help muscle growth"))["report"]
+    assert specific["clarification_question"] is None and specific["suggested_questions"] == []
+    vague = engine.run(ResearchRequest(query="Is lifting good?"))["report"]
+    assert vague["clarification_question"] == "Which one?"
+
+
+def test_discovery_also_scores_the_users_own_question(corpus):
+    class Embed:
+        def encode_query(self, text):
+            return [1.0, 0.0] if "muscle" in text else [0.0, 1.0]
+
+        def encode(self, texts):
+            return [[1.0, 0.0] for _ in texts]
+
+    assert corpus.search("sets", 7, Embed(), minimum=0.6) == []
+    assert len(corpus.search("sets", 7, Embed(), minimum=0.6, also=("do more sets build more muscle?",))) == 7

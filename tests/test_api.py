@@ -126,9 +126,9 @@ def test_validation_and_missing_resources(client):
 
 def test_articles_are_listed_indexed_and_searchable(client, engine):
     articles = client.get("/api/articles").json()
-    assert len(articles) == 7 and not any(a["indexed"] for a in articles)
+    assert len(articles) == 11 and not any(a["indexed"] for a in articles)
     added = ArticleLibrary(engine.settings, engine.store).ensure_indexed()
-    assert added == 22
+    assert added == 34
     articles = client.get("/api/articles").json()
     assert all(a["indexed"] and a["indexed_passages"] == a["passages"] for a in articles)
     article = client.get("/api/articles/campos2002").json()

@@ -74,5 +74,6 @@ This page shows how the parts connect. Each part has its own page (see [Document
 | [Storage](storage.md) | What is stored where, and caching |
 | [Web interface](frontend.md) | Views and how they map onto the API |
 | [Evaluation](evaluation.md) | Tests, real-model scenarios and recorded results |
+| [Demo script](demo.md) | The live walkthrough with the questions to type and what to expect |
 | [Status](implementation-status.md) · [Presentation](presentation-spec.md) · [Assessment guide](assessment-answers.md) | Current state, demo plan and interview notes |
 | [Code index](code-index.md) | Where each concept lives in the source |

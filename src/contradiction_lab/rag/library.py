@@ -97,7 +97,8 @@ class ArticleLibrary:
         passages = self._passages(article_id)
         return {
             **summary(paper),
-            "abstract_available": bool(paper.abstract),
+            "abstract": paper.abstract_sections
+            or ([{"label": None, "text": paper.abstract}] if paper.abstract else []),
             "license": paper.license,
             "full_text_available": paper.full_text_available,
             "source_checked_at": paper.source_checked_at,
@@ -147,4 +148,10 @@ def summary(paper: Paper) -> dict:
         "source_url": paper.source_url,
         "publication_types": paper.publication_types,
         "provider": paper.provider,
+        "snippet": _snippet(paper),
     }
+
+
+def _snippet(paper: Paper, length: int = 240) -> str:
+    text = " ".join(s["text"] for s in paper.abstract_sections) or (paper.abstract or "")
+    return text if len(text) <= length else text[: length].rsplit(" ", 1)[0] + "…"

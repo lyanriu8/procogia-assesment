@@ -68,6 +68,6 @@ def test_date_filter(corpus, mocked_models):
         20,
         OllamaEmbedding(),
         None,
-        date(2005, 12, 31),
+        date(2004, 12, 31),
     )
     assert [paper.paper_id for paper in papers] == ["campos2002"]

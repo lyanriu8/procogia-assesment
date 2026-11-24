@@ -6,6 +6,7 @@ from itertools import combinations
 from typing import TypedDict
 
 from contradiction_lab.config import Settings
+from contradiction_lab.domain import load_domain
 from contradiction_lab.rag.corpus import PublicCorpus
 from contradiction_lab.ai.llm import ModelError, OllamaModel
 from contradiction_lab.rag.providers import (
@@ -17,7 +18,7 @@ from contradiction_lab.rag.providers import (
     digest,
 )
 from contradiction_lab.ai.research.reporting import build_comparison_report
-from contradiction_lab.rag.retrieval import OllamaEmbedding, VectorIndex, chunk_text
+from contradiction_lab.rag.retrieval import OllamaEmbedding, VectorIndex, chunk_text, tokens
 from contradiction_lab.rag.library import LIBRARY_NAMESPACE
 from contradiction_lab.schemas import (
     EvidencePassage,
@@ -80,6 +81,9 @@ STATIC_NODES = [
     "verify_evidence",
     "build_report",
 ]
+# Questions with at least this many meaningful terms (stop-words removed) are
+# always searched, even if the planner would rather ask for clarification.
+MIN_TERMS_FOR_SEARCH = 3
 ADAPTIVE_ACTIONS = ["broaden_search", "retrieve_full_text", "refine_comparison"]
 
 
@@ -398,6 +402,10 @@ class Nodes:
 
     def plan_research(self, state):
         plan = self.model.plan(state["query"])
+        if plan.needs_clarification and len(set(tokens(state["query"]))) >= MIN_TERMS_FOR_SEARCH:
+            # The model may propose clarification, but a question with enough
+            # meaningful terms is always searched; finding nothing is reported later.
+            plan = plan.model_copy(update={"needs_clarification": False, "clarification_question": None, "suggested_questions": []})
         return {
             "search_plan": plan.model_dump(),
             "search_query": (
@@ -429,6 +437,7 @@ class Nodes:
                 ),
                 date.fromisoformat(request["date_to"]) if request["date_to"] else None,
                 self.settings.discovery_min_similarity,
+                also=(state["query"],),
             )
             if state["paper_subset"] is not None:
                 papers = [
@@ -560,6 +569,12 @@ class Nodes:
                         }
                     )
         claims = normalize_claims(claims)
+        set_aside = getattr(self.model, "off_question", 0)
+        if set_aside:
+            state["missing_evidence"].append(
+                f"{set_aside} finding(s) were set aside because they do not address what the question asks about."
+            )
+            self.model.off_question = 0
         if claims and state["fault"] == "unsupported_claim":
             claims[0].statement = (
                 "This proves every lifter doubles their muscle mass."
@@ -687,7 +702,8 @@ class Nodes:
         if claims:
             review = self.model.structured(
                 DirectionReviews,
-                "For each source statement, determine how the OUTCOME changes as the EXPOSURE INCREASES. Ignore the direction of verbs in isolation: reductions in both exposure and outcome imply that increasing exposure increases outcome. Slower decline at higher exposure is an increase relative to low exposure. If the statement reports similar outcomes or no significant difference between exposure levels, choose no_change. If the statement alone does not establish whether there is an effect, choose not_established. Return one review per claim, preserve IDs, and explain briefly.",
+                "For each source statement, determine how the OUTCOME changes as the EXPOSURE (exactly as named in the exposure field) INCREASES. Ignore the direction of verbs in isolation: reductions in both exposure and outcome imply that increasing exposure increases outcome. Slower decline at higher exposure is an increase relative to low exposure. If the statement describes the exposure indirectly (for example in repetitions rather than load), translate it into the named exposure before deciding. If the statement reports similar outcomes or no significant difference between exposure levels, choose no_change. If the statement alone does not establish whether there is an effect, choose not_established. Return one review per claim, preserve IDs, and explain briefly. "
+                + load_domain().get("direction_example", ""),
                 {
                     "claims": [
                         {

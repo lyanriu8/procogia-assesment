@@ -5,15 +5,15 @@ As of November 24, 2026, on the gym-corpus branch. The main branch (and the "dem
 ## What runs
 
 - **Runtime:** Ollama 0.40.18 serving Qwen3 8B and nomic-embed-text on Windows with an RTX 4060 laptop GPU. All inference is local.
-- **Corpus:** seven PubMed abstracts on resistance training in three disagreement clusters (volume, frequency, load). See [Article library and retrieval](rag.md).
+- **Corpus:** eleven PubMed abstracts in five disagreement clusters (training volume, frequency, load, rest between sets, protein supplementation). See [Article library and retrieval](rag.md).
 - **Architecture:** storage, article library, two AI services (research and follow-up), a session service that hands work from one to the other, and a REST API with 13 endpoints and generated OpenAPI documentation. See the [System overview](architecture.md).
-- **Article library:** 7 articles and 22 passages embedded in one persistent vector collection, visible through the API and the interface.
+- **Article library:** 11 articles and 34 passages embedded in one persistent vector collection, visible through the API and the interface.
 - **Interface:** a Notion-style single-page application that uses only the REST API.
 
 ## Verified
 
-- **Automated tests:** 75 pass, none skipped. Model calls are scripted; the web server, processing graph and vector database run for real.
-- **Real-model scenarios:** 7 of 8 strict checks pass; the remaining failure is a planted overstatement rated "partial" instead of rejected (still excluded from the report). See [Evaluation](evaluation.md).
+- **Automated tests:** 77 pass, none skipped. Model calls are scripted; the web server, processing graph and vector database run for real.
+- **Real-model scenarios:** 8 of 8 strict checks pass on the final code; the planted-overstatement check failed in three earlier recordings and is treated as unstable. Seven free-typed questions behave correctly after four robustness fixes. See [Evaluation](evaluation.md).
 - **Follow-up agent:** spot-checked on the real model. Grounded, cited answers in 5–8 seconds; an out-of-scope question refused.
 - **Live API check:** library indexed at start-up, semantic search, three sessions (frequency, vague, off-topic), follow-ups grounded or refused, 409 returned on a clarification session.
 - **Interface:** checked with headless-browser screenshots of every view (new research, a full session with follow-ups, a clarification session, the articles table, an article page). Dark mode was not checked.
@@ -29,6 +29,6 @@ As of November 24, 2026, on the gym-corpus branch. The main branch (and the "dem
 
 ## Known limitations
 
-Seven abstract-only sources; no automatic retraction check; no expert-labelled answer key; the same model extracts and verifies; single real-model runs without variance estimates; discovery thresholds set on this corpus; follow-up answers can over-interpret cited passages (citation checks prove scope, not correctness); no authentication. Live discovery from external scholarly APIs is a separate path from the bundled corpus.
+Eleven abstract-only sources; no automatic retraction check; no expert-labelled answer key; the same model extracts and verifies; single real-model runs without variance estimates; discovery thresholds set on this corpus; follow-up answers can over-interpret cited passages (citation checks prove scope, not correctness); no authentication. Live discovery from external scholarly APIs is a separate path from the bundled corpus.
 
 Archived results (the earlier corpus, earlier model checks, a retired implementation) are kept for reference and do not describe the current system.

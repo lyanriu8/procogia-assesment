@@ -1,9 +1,9 @@
 {
-  "run_id": "f967f2cc56c84e9cbf681840f27434d5",
+  "run_id": "799a802360c54704be50b52753c9aac1",
   "status": "limited_evidence",
   "report": {
     "query": "Does heavier training load increase muscle hypertrophy?",
-    "interpreted_scope": "The question focuses on the relationship between training load and muscle hypertrophy in the context of resistance training.",
+    "interpreted_scope": "The question focuses on the relationship between training load and muscle hypertrophy within the context of resistance training.",
     "workflow_mode": "dynamic",
     "papers_considered": 1,
     "papers_included": 1,
@@ -15,7 +15,7 @@
         "paper_id": "campos2002",
         "statement": "the low to intermediate repetition resistance-training programs induced a greater hypertrophic effect compared to the high repetition regimen.",
         "outcome": "muscle hypertrophy",
-        "direction": "negative",
+        "direction": "positive",
         "study_system": "muscle",
         "population_or_material": null,
         "method": "randomized trial",
@@ -23,7 +23,8 @@
         "comparator": null,
         "conditions": [
           "untrained men",
-          "resistance-training program"
+          "resistance-training program",
+          "repetition range"
         ],
         "duration": "8 weeks",
         "effect_size": null,
@@ -33,8 +34,8 @@
         "evidence_passage_ids": [
           "campos2002-p3",
           "campos2002-p0",
-          "campos2002-p2",
-          "campos2002-p1"
+          "campos2002-p1",
+          "campos2002-p2"
         ],
         "extraction_confidence": null,
         "missing_fields": [
@@ -89,6 +90,12 @@
         "pmid": "12436270",
         "journal": "Eur J Appl Physiol",
         "publication_types": [],
+        "abstract_sections": [
+          {
+            "label": null,
+            "text": "Thirty-two untrained men [mean (SD) age 22.5 (5.8) years, height 178.3 (7.2) cm, body mass 77.8 (11.9) kg] participated in an 8-week progressive resistance-training program to investigate the \"strength-endurance continuum\". Subjects were divided into four groups: a low repetition group (Low Rep, n = 9) performing 3-5 repetitions maximum (RM) for four sets of each exercise with 3 min rest between sets and exercises, an intermediate repetition group (Int Rep, n = 11) performing 9-11 RM for three sets with 2 min rest, a high repetition group (High Rep, n = 7) performing 20-28 RM for two sets with 1 min rest, and a non-exercising control group (Con, n = 5). Three exercises (leg press, squat, and knee extension) were performed 2 days/week for the first 4 weeks and 3 days/week for the final 4 weeks. Maximal strength [one repetition maximum, 1RM), local muscular endurance (maximal number of repetitions performed with 60% of 1RM), and various cardiorespiratory parameters (e.g., maximum oxygen consumption, pulmonary ventilation, maximal aerobic power, time to exhaustion) were assessed at the beginning and end of the study. In addition, pre- and post-training muscle biopsy samples were analyzed for fiber-type composition, cross-sectional area, myosin heavy chain (MHC) content, and capillarization. Maximal strength improved significantly more for the Low Rep group compared to the other training groups, and the maximal number of repetitions at 60% 1RM improved the most for the High Rep group. In addition, maximal aerobic power and time to exhaustion significantly increased at the end of the study for only the High Rep group. All three major fiber types (types I, IIA, and IIB) hypertrophied for the Low Rep and Int Rep groups, whereas no significant increases were demonstrated for either the High Rep or Con groups. However, the percentage of type IIB fibers decreased, with a concomitant increase in IIAB fibers for all three resistance-trained groups. These fiber-type conversions were supported by a significant decrease in MHCIIb accompanied by a significant increase in MHCIIa. No significant changes in fiber-type composition were found in the control samples. Although all three training regimens resulted in similar fiber-type transformations (IIB to IIA), the low to intermediate repetition resistance-training programs induced a greater hypertrophic effect compared to the high repetition regimen. The High Rep group, however, appeared better adapted for submaximal, prolonged contractions, with significant increases after training in aerobic power and time to exhaustion. Thus, low and intermediate RM training appears to induce similar muscular adaptations, at least after short-term training in previously untrained subjects. Overall, however, these data demonstrate that both physical performance and the associated physiological adaptations are linked to the intensity and number of repetitions performed, and thus lend support to the \"strength-endurance continuum\"."
+          }
+        ],
         "provenance": [
           "https://pubmed.ncbi.nlm.nih.gov/12436270/",
           "publication_type:Journal Article",
@@ -127,20 +134,6 @@
         "publication_year": 2002
       },
       {
-        "passage_id": "campos2002-p2",
-        "paper_id": "campos2002",
-        "text": "All three major fiber types (types I, IIA, and IIB) hypertrophied for the Low Rep and Int Rep groups, whereas no significant increases were demonstrated for either the High Rep or Con groups.",
-        "section": "Abstract: results",
-        "page_or_location": "Abstract: results",
-        "source_type": "abstract",
-        "source_url": "https://pubmed.ncbi.nlm.nih.gov/12436270/",
-        "chunk_index": 2,
-        "content_hash": "261c2764ecbd41f0f613c2a1ada4e30a0b6fac46c2d06a7305981dde83d2a830",
-        "paper_title": "Muscular adaptations in response to three different resistance-training regimens: specificity of repetition maximum training zones.",
-        "doi": "10.1007/s00421-002-0681-6",
-        "publication_year": 2002
-      },
-      {
         "passage_id": "campos2002-p1",
         "paper_id": "campos2002",
         "text": "a low repetition group (Low Rep, n = 9) performing 3-5 repetitions maximum (RM) for four sets of each exercise with 3 min rest between sets and exercises, an intermediate repetition group (Int Rep, n = 11) performing 9-11 RM for three sets with 2 min rest, a high repetition group (High Rep, n = 7) performing 20-28 RM for two sets with 1 min rest",
@@ -150,6 +143,20 @@
         "source_url": "https://pubmed.ncbi.nlm.nih.gov/12436270/",
         "chunk_index": 1,
         "content_hash": "9ae01f11ce1c33e21b3717b7646eddbce2e649797824234cf366f3cef2df00ea",
+        "paper_title": "Muscular adaptations in response to three different resistance-training regimens: specificity of repetition maximum training zones.",
+        "doi": "10.1007/s00421-002-0681-6",
+        "publication_year": 2002
+      },
+      {
+        "passage_id": "campos2002-p2",
+        "paper_id": "campos2002",
+        "text": "All three major fiber types (types I, IIA, and IIB) hypertrophied for the Low Rep and Int Rep groups, whereas no significant increases were demonstrated for either the High Rep or Con groups.",
+        "section": "Abstract: results",
+        "page_or_location": "Abstract: results",
+        "source_type": "abstract",
+        "source_url": "https://pubmed.ncbi.nlm.nih.gov/12436270/",
+        "chunk_index": 2,
+        "content_hash": "261c2764ecbd41f0f613c2a1ada4e30a0b6fac46c2d06a7305981dde83d2a830",
         "paper_title": "Muscular adaptations in response to three different resistance-training regimens: specificity of repetition maximum training zones.",
         "doi": "10.1007/s00421-002-0681-6",
         "publication_year": 2002
@@ -176,14 +183,14 @@
     "overall_status": "limited_evidence",
     "clarification_question": null,
     "suggested_questions": [],
-    "generated_at": "2026-11-24T19:05:17.145923Z"
+    "generated_at": "2026-11-24T22:38:46.347309Z"
   },
   "trace": [
     {
       "node": "plan_research",
-      "started_at": "2026-11-24T19:04:39.492948Z",
-      "ended_at": "2026-11-24T19:04:41.878082Z",
-      "latency_ms": 2385.129,
+      "started_at": "2026-11-24T22:38:10.265610Z",
+      "ended_at": "2026-11-24T22:38:12.869207Z",
+      "latency_ms": 2603.6,
       "papers": 0,
       "passages": 0,
       "claims": 0,
@@ -192,17 +199,17 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 692,
-      "output_tokens": 96,
+      "input_tokens": 702,
+      "output_tokens": 93,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "retrieve_papers",
-      "started_at": "2026-11-24T19:04:41.884326Z",
-      "ended_at": "2026-11-24T19:04:41.927434Z",
-      "latency_ms": 43.109,
+      "started_at": "2026-11-24T22:38:12.893684Z",
+      "ended_at": "2026-11-24T22:38:12.952860Z",
+      "latency_ms": 59.18,
       "papers": 1,
       "passages": 0,
       "claims": 0,
@@ -219,9 +226,9 @@
     },
     {
       "node": "retrieve_passages",
-      "started_at": "2026-11-24T19:04:41.932710Z",
-      "ended_at": "2026-11-24T19:04:42.015308Z",
-      "latency_ms": 82.599,
+      "started_at": "2026-11-24T22:38:12.959692Z",
+      "ended_at": "2026-11-24T22:38:13.033917Z",
+      "latency_ms": 74.226,
       "papers": 1,
       "passages": 4,
       "claims": 0,
@@ -238,9 +245,9 @@
     },
     {
       "node": "extract_claims",
-      "started_at": "2026-11-24T19:04:42.020390Z",
-      "ended_at": "2026-11-24T19:04:46.667193Z",
-      "latency_ms": 4646.79,
+      "started_at": "2026-11-24T22:38:13.039139Z",
+      "ended_at": "2026-11-24T22:38:18.101115Z",
+      "latency_ms": 5061.979,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -249,36 +256,36 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 2345,
-      "output_tokens": 157,
+      "input_tokens": 2557,
+      "output_tokens": 168,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "assess_sufficiency",
-      "started_at": "2026-11-24T19:04:46.673488Z",
-      "ended_at": "2026-11-24T19:04:48.256287Z",
-      "latency_ms": 1582.796,
+      "started_at": "2026-11-24T22:38:18.107680Z",
+      "ended_at": "2026-11-24T22:38:19.147725Z",
+      "latency_ms": 1040.048,
       "papers": 1,
       "passages": 4,
       "claims": 1,
       "iteration": 0,
       "route": "broaden_search",
-      "reason": "The current evidence is limited and lacks key details such as population, comparator, effect size, and sample size. Broadening the search will help identify more relevant studies to support or refute the claim.",
+      "reason": "Too few relevant papers or findings; broaden once within the shared budget.",
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 549,
-      "output_tokens": 57,
+      "input_tokens": 554,
+      "output_tokens": 32,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "broaden_search",
-      "started_at": "2026-11-24T19:04:48.262951Z",
-      "ended_at": "2026-11-24T19:04:51.671043Z",
-      "latency_ms": 3408.082,
+      "started_at": "2026-11-24T22:38:19.154731Z",
+      "ended_at": "2026-11-24T22:38:22.590762Z",
+      "latency_ms": 3436.034,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -295,9 +302,9 @@
     },
     {
       "node": "retrieve_papers",
-      "started_at": "2026-11-24T19:04:51.677794Z",
-      "ended_at": "2026-11-24T19:04:51.687918Z",
-      "latency_ms": 10.127,
+      "started_at": "2026-11-24T22:38:22.598295Z",
+      "ended_at": "2026-11-24T22:38:22.608926Z",
+      "latency_ms": 10.634,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -314,9 +321,9 @@
     },
     {
       "node": "retrieve_passages",
-      "started_at": "2026-11-24T19:04:51.693597Z",
-      "ended_at": "2026-11-24T19:04:51.748157Z",
-      "latency_ms": 54.562,
+      "started_at": "2026-11-24T22:38:22.614933Z",
+      "ended_at": "2026-11-24T22:38:22.681549Z",
+      "latency_ms": 66.622,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -333,9 +340,9 @@
     },
     {
       "node": "extract_claims",
-      "started_at": "2026-11-24T19:04:51.753588Z",
-      "ended_at": "2026-11-24T19:04:55.021165Z",
-      "latency_ms": 3267.567,
+      "started_at": "2026-11-24T22:38:22.686352Z",
+      "ended_at": "2026-11-24T22:38:26.728740Z",
+      "latency_ms": 4042.39,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -344,26 +351,26 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 2345,
-      "output_tokens": 137,
+      "input_tokens": 2557,
+      "output_tokens": 168,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "assess_sufficiency",
-      "started_at": "2026-11-24T19:04:55.027458Z",
-      "ended_at": "2026-11-24T19:04:56.559601Z",
-      "latency_ms": 1532.141,
+      "started_at": "2026-11-24T22:38:26.734952Z",
+      "ended_at": "2026-11-24T22:38:28.321978Z",
+      "latency_ms": 1587.028,
       "papers": 1,
       "passages": 4,
       "claims": 1,
       "iteration": 1,
       "route": "refine_comparison",
-      "reason": "The claim lacks a direct comparator for training load and specific details about the effect size, making it difficult to assess the relationship between training load and muscle hypertrophy. Refining the comparison will help identify a more precise relationship.",
+      "reason": "The claim suggests that low to intermediate repetition resistance-training programs induce greater hypertrophy compared to high repetition regimens, but the comparator is missing. Refining the comparison will help clarify the relationship between training load and hypertrophy.",
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 541,
+      "input_tokens": 546,
       "output_tokens": 61,
       "token_measurement": "provider_reported",
       "retries": 0,
@@ -371,9 +378,9 @@
     },
     {
       "node": "refine_comparison",
-      "started_at": "2026-11-24T19:04:56.566835Z",
-      "ended_at": "2026-11-24T19:04:56.571489Z",
-      "latency_ms": 4.657,
+      "started_at": "2026-11-24T22:38:28.330545Z",
+      "ended_at": "2026-11-24T22:38:28.335955Z",
+      "latency_ms": 5.413,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -390,9 +397,9 @@
     },
     {
       "node": "retrieve_passages",
-      "started_at": "2026-11-24T19:04:56.576837Z",
-      "ended_at": "2026-11-24T19:04:56.654992Z",
-      "latency_ms": 78.158,
+      "started_at": "2026-11-24T22:38:28.342560Z",
+      "ended_at": "2026-11-24T22:38:28.446914Z",
+      "latency_ms": 104.355,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -409,9 +416,9 @@
     },
     {
       "node": "extract_claims",
-      "started_at": "2026-11-24T19:04:56.660917Z",
-      "ended_at": "2026-11-24T19:04:59.913970Z",
-      "latency_ms": 3253.045,
+      "started_at": "2026-11-24T22:38:28.452727Z",
+      "ended_at": "2026-11-24T22:38:32.504231Z",
+      "latency_ms": 4051.508,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -420,17 +427,17 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 2345,
-      "output_tokens": 137,
+      "input_tokens": 2557,
+      "output_tokens": 168,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "assess_sufficiency",
-      "started_at": "2026-11-24T19:04:59.920047Z",
-      "ended_at": "2026-11-24T19:04:59.925050Z",
-      "latency_ms": 5.004,
+      "started_at": "2026-11-24T22:38:32.509933Z",
+      "ended_at": "2026-11-24T22:38:32.515038Z",
+      "latency_ms": 5.107,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -447,9 +454,9 @@
     },
     {
       "node": "verify_with_limitations",
-      "started_at": "2026-11-24T19:04:59.930647Z",
-      "ended_at": "2026-11-24T19:04:59.935193Z",
-      "latency_ms": 4.547,
+      "started_at": "2026-11-24T22:38:32.520428Z",
+      "ended_at": "2026-11-24T22:38:32.524996Z",
+      "latency_ms": 4.57,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -466,9 +473,9 @@
     },
     {
       "node": "analyze_context",
-      "started_at": "2026-11-24T19:04:59.940421Z",
-      "ended_at": "2026-11-24T19:05:14.567348Z",
-      "latency_ms": 14626.88,
+      "started_at": "2026-11-24T22:38:32.529923Z",
+      "ended_at": "2026-11-24T22:38:43.418494Z",
+      "latency_ms": 10888.574,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -477,17 +484,17 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 554,
-      "output_tokens": 654,
+      "input_tokens": 858,
+      "output_tokens": 430,
       "token_measurement": "provider_reported",
       "retries": 0,
       "errors": []
     },
     {
       "node": "compare_claims",
-      "started_at": "2026-11-24T19:05:14.572787Z",
-      "ended_at": "2026-11-24T19:05:14.576324Z",
-      "latency_ms": 3.539,
+      "started_at": "2026-11-24T22:38:43.425232Z",
+      "ended_at": "2026-11-24T22:38:43.430321Z",
+      "latency_ms": 5.093,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -504,9 +511,9 @@
     },
     {
       "node": "verify_evidence",
-      "started_at": "2026-11-24T19:05:14.581015Z",
-      "ended_at": "2026-11-24T19:05:17.137175Z",
-      "latency_ms": 2556.153,
+      "started_at": "2026-11-24T22:38:43.435878Z",
+      "ended_at": "2026-11-24T22:38:46.335099Z",
+      "latency_ms": 2899.224,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -515,7 +522,7 @@
       "reason": null,
       "model": "qwen3:8b",
       "prompt_version": "grounded-v1",
-      "input_tokens": 954,
+      "input_tokens": 959,
       "output_tokens": 95,
       "token_measurement": "provider_reported",
       "retries": 0,
@@ -523,9 +530,9 @@
     },
     {
       "node": "build_report",
-      "started_at": "2026-11-24T19:05:17.142435Z",
-      "ended_at": "2026-11-24T19:05:17.145979Z",
-      "latency_ms": 3.543,
+      "started_at": "2026-11-24T22:38:46.342150Z",
+      "ended_at": "2026-11-24T22:38:46.347377Z",
+      "latency_ms": 5.226,
       "papers": 1,
       "passages": 4,
       "claims": 1,
@@ -580,7 +587,7 @@
     "max_iterations": null,
     "context_config": "evidence-rich",
     "date_from": null,
-    "date_to": "2005-12-31",
+    "date_to": "2004-12-31",
     "sources": [
       "openalex",
       "europepmc"
@@ -589,8 +596,8 @@
   "retrieved_passage_ids": [
     "campos2002-p3",
     "campos2002-p0",
-    "campos2002-p2",
-    "campos2002-p1"
+    "campos2002-p1",
+    "campos2002-p2"
   ],
   "extracted_claims": [
     {
@@ -598,7 +605,7 @@
       "paper_id": "campos2002",
       "statement": "the low to intermediate repetition resistance-training programs induced a greater hypertrophic effect compared to the high repetition regimen.",
       "outcome": "muscle hypertrophy",
-      "direction": "negative",
+      "direction": "positive",
       "study_system": "muscle",
       "population_or_material": null,
       "method": "randomized trial",
@@ -606,7 +613,8 @@
       "comparator": null,
       "conditions": [
         "untrained men",
-        "resistance-training program"
+        "resistance-training program",
+        "repetition range"
       ],
       "duration": "8 weeks",
       "effect_size": null,
@@ -616,8 +624,8 @@
       "evidence_passage_ids": [
         "campos2002-p3",
         "campos2002-p0",
-        "campos2002-p2",
-        "campos2002-p1"
+        "campos2002-p1",
+        "campos2002-p2"
       ],
       "extraction_confidence": null,
       "missing_fields": [
@@ -632,12 +640,12 @@
   "direction_reviews": [
     {
       "claim_id": "claim-6eed0a771f3a12f6afaf",
-      "effect_when_exposure_increases": "decreases",
-      "explanation": "The statement indicates that higher training load (high repetition regimen) resulted in less muscle hypertrophy compared to lower training load (low to intermediate repetition), implying a decrease in outcome as exposure increases."
+      "effect_when_exposure_increases": "increases",
+      "explanation": "The statement indicates that lower repetition (heavier load) programs induced greater hypertrophy than higher repetition (lighter load) programs, meaning hypertrophy increases with training load."
     }
   ],
   "benchmark_fault": null,
   "implementation_version": "0.1.0",
-  "corpus_version": "gym-hypertrophy-v1",
+  "corpus_version": "gym-hypertrophy-v2",
   "config_hash": "f5c5f4c58f683fe243b427131afcc81483ed1b1bfaa2ef764f622e64d6af557a"
 }

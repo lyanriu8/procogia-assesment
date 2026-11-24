@@ -39,7 +39,7 @@ CASES = [
     {
         "case_id": "missing-information",
         "query": "Does heavier training load increase muscle hypertrophy?",
-        "date_to": "2005-12-31",
+        "date_to": "2004-12-31",
         "expected_status": "limited_evidence",
     },
     {

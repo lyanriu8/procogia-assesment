@@ -6,7 +6,7 @@ Short answers to the questions an assessor is likely to ask. Each links to the p
 
 **Client recommendation.** Pilot it with R&D analysts who must reconcile inconsistent findings. Measure analyst time saved, usefulness, retrieval coverage, unsupported conclusions, latency and running cost before making commercial claims.
 
-**Data.** Seven real papers on resistance training and muscle hypertrophy, quoted exactly from PubMed, forming three real disagreement clusters. A retracted candidate was excluded by hand. Abstract-level only, so no full-document parsing and no broad generalization. See [Article library and retrieval](rag.md).
+**Data.** Eleven real papers on resistance training, protein and muscle hypertrophy, quoted exactly from PubMed, forming five real disagreement clusters. A retracted candidate was excluded by hand. Abstract-level only, so no full-document parsing and no broad generalization. See [Article library and retrieval](rag.md).
 
 **Architecture.** A relational database and a vector store; an article library; two AI services (a research service and a follow-up agent) on one local model; a session service that hands each conversation from research to follow-up; and a REST API that the interface uses exclusively. One model job at a time, enforced by a lock.
 
@@ -20,7 +20,7 @@ Short answers to the questions an assessor is likely to ask. Each links to the p
 
 **Model and context.** Qwen3 8B, local, 4-bit, on a laptop GPU; chosen as a practical starting point, not benchmarked as best (Qwen 2.5 made direction and verification errors). Schema-constrained output, temperature 0, a 6,000-token prompt budget checked before sending, one repair attempt, no fallback answers. Reasoning mode only for direction review. Research keeps no chat history; follow-ups carry at most three earlier grounded turns and never add evidence. See [Language-model runtime](language-model.md).
 
-**Evaluation.** Two layers: 75 automated tests with a scripted model, and real-model behavioural scenarios including planted faults. Currently 7 of 8 strict checks pass; the failure is kept. No expert-labelled answer key, single runs, and correlated verification. See [Evaluation](evaluation.md).
+**Evaluation.** Two layers: 77 automated tests with a scripted model, and real-model behavioural scenarios including planted faults, plus a set of free-typed questions. Currently 8 of 8 strict checks pass, but the planted-overstatement check failed in three earlier recordings and is treated as unstable. No expert-labelled answer key, single runs, and correlated verification. See [Evaluation](evaluation.md).
 
 **Hallucination control.** Schema validation of every model output; exact paper and passage ownership plus SHA-256 hashes; a separate verification of every populated field; reports built only from verified records; follow-up answers shown only when every citation belongs to the run. None of this guarantees scientific truth.
 
