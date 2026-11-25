@@ -78,13 +78,46 @@ Two earlier problems are recorded rather than hidden. The off-topic case once pa
 
 Follow-up answers are not part of the scored scenarios. They were spot-checked on the real model: a "why do these studies disagree" question was answered with valid citations in about 8 seconds, a question about creatine was refused as not answerable, and a question about excluded findings initially repeated the previous answer until the instructions were tightened.
 
+## Context configurations on one query
+
+Same question ("Is training a muscle more times per week better for muscle hypertrophy?"), static workflow, only the passage budget changed (recorded with the scenarios above; section preference also differs, see above):
+
+| Configuration | Passages | Verified findings | Input tokens | Output tokens | Time |
+|---|---|---|---|---|---|
+| Evidence-rich (top-K 12) | 12 | 4 | 19,277 | 2,888 | 78 s |
+| Compact (top-K 4) | 4 | 2 | 8,528 | 1,099 | 27 s |
+
+Compact context cut input tokens by 56% and time by 65% but halved the verified findings: fewer passages meant fewer papers reached extraction. The raw-articles baseline below is a third configuration: everything in one call.
+
+## Answer-key scoring
+
+`scripts/score_answer_key.py` scores the pipeline against a key of the correct exposure and direction for each of the 11 papers and the expected behaviour, required papers and pair labels for nine free-typed questions. **The key is a draft written with AI assistance and not yet confirmed by a person**, so these are not accuracy figures.
+
+First run (qwen3:8b, one repeat): behaviour 9/9, exposure 12/13, direction 12/13, key pairs 6/6 (strict and lenient), no required paper missing. **The one failure:** on the frequency question, Heaselgrave 2019 (a volume study) was filed under training frequency with direction "unclear". The key does not accept that exposure, so the direction is not credited either. Details: `artifacts/answer-key/report.md`.
+
+## Raw-articles baseline
+
+To test whether the pipeline earns its complexity, `scripts/score_baseline.py` gives the same model one call containing every passage from all 11 papers, the same label definitions and domain hints, reasoning on, and the same name normalization, but no retrieval, direction review, rule-based labels or verification. It is scored with the same key (November 24, 2026, qwen3:8b, one repeat):
+
+| Metric | Baseline | Pipeline |
+|---|---|---|
+| Behaviour (answer / abstain / clarify) | 9/9 | 9/9 |
+| Exposure of reported findings | 13/14 | 12/13 |
+| Direction of reported findings | 13/14 | 12/13 |
+| Key pairs, strict / lenient | 6/6 / 6/6 | 6/6 / 6/6 |
+| Invented citations | 0 | 0 by construction |
+| Mean seconds per question | 231 (52–803) | 66 (4–169) |
+| Input tokens per question | about 4,400 (one call) | about 700–19,000 (several calls) |
+
+**On this library the baseline ties the pipeline on accuracy.** Both made the same single error (Heaselgrave 2019 under frequency, on different questions). The pipeline was about 3.5× faster, because reasoning over the whole library is slow on an 8B model; the baseline needed a 900-second timeout. The comparison is honest about what it shows: with 11 abstracts (about 4,400 tokens) the whole library fits in one prompt, so retrieval adds nothing to accuracy here. The pipeline's case rests on what the baseline cannot do: scale past the context window, run faster, show which passage supports each finding, and reject unverified claims before they reach the report. An accuracy advantage would need a library larger than the context window to test.
+
 ## What these results do not show
 
-- **No scientific accuracy figure.** The expectations were written by the developers, not by independent domain experts; there is no labelled set of correct findings.
+- **No confirmed accuracy figure.** The behavioural expectations and the draft answer key were written by the developer with AI assistance, not by independent domain experts.
 - **Correlated verification.** The same model extracts and verifies, so it can make the same mistake twice.
 - **Single samples.** Each scenario ran once; language-model output varies, so these are not pass rates.
 - **Small coverage.** Eleven abstracts cannot establish general performance.
 
-Next steps would be an expert-labelled answer key, repeated runs to measure variance, a different or stronger verifier model, and held-out papers.
+Next steps would be confirming the answer key with a domain expert, repeated runs to measure variance (`--repeats 3` on both scoring scripts), a library larger than the context window so the baseline cannot see everything, a different or stronger verifier model, and held-out papers.
 
 Earlier results for the previous grassland corpus are archived separately and do not describe the current system.

@@ -14,6 +14,7 @@ As of November 24, 2026, on the gym-corpus branch. The main branch (and the "dem
 
 - **Automated tests:** 77 pass, none skipped. Model calls are scripted; the web server, processing graph and vector database run for real.
 - **Real-model scenarios:** 8 of 8 strict checks pass on the final code; the planted-overstatement check failed in three earlier recordings and is treated as unstable. Seven free-typed questions behave correctly after four robustness fixes. See [Evaluation](evaluation.md).
+- **Answer key (draft) and baseline:** pipeline behaviour 9/9, direction 12/13, pairs 6/6; a one-call raw-articles baseline scored 9/9, 13/14, 6/6 at about 3.5× the latency. On 11 papers the pipeline does not beat the baseline on accuracy. See [Evaluation](evaluation.md).
 - **Follow-up agent:** spot-checked on the real model. Grounded, cited answers in 5–8 seconds; an out-of-scope question refused.
 - **Live API check:** library indexed at start-up, semantic search, three sessions (frequency, vague, off-topic), follow-ups grounded or refused, 409 returned on a clarification session.
 - **Interface:** checked with headless-browser screenshots of every view (new research, a full session with follow-ups, a clarification session, the articles table, an article page). Dark mode was not checked.
@@ -29,6 +30,6 @@ As of November 24, 2026, on the gym-corpus branch. The main branch (and the "dem
 
 ## Known limitations
 
-Eleven abstract-only sources; no automatic retraction check; no expert-labelled answer key; the same model extracts and verifies; single real-model runs without variance estimates; discovery thresholds set on this corpus; follow-up answers can over-interpret cited passages (citation checks prove scope, not correctness); no authentication. Live discovery from external scholarly APIs is a separate path from the bundled corpus.
+Eleven abstract-only sources; no automatic retraction check; answer key drafted with AI assistance and not yet confirmed by a person; the library is small enough to fit in one prompt, so retrieval is not tested at scale; the same model extracts and verifies; single real-model runs without variance estimates; discovery thresholds set on this corpus; follow-up answers can over-interpret cited passages (citation checks prove scope, not correctness); no authentication. Live discovery from external scholarly APIs is a separate path from the bundled corpus.
 
 Archived results (the earlier corpus, earlier model checks, a retired implementation) are kept for reference and do not describe the current system.

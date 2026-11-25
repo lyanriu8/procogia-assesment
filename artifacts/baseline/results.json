@@ -1,0 +1,435 @@
+{
+  "evaluated_at": "2026-11-25T01:13:48.120554+00:00",
+  "system": "raw-articles baseline",
+  "key_status": "draft",
+  "model": "qwen3:8b",
+  "repeats": 1,
+  "summary": {
+    "behaviour": {
+      "correct": 9,
+      "total": 9,
+      "rate": 1.0
+    },
+    "exposure": {
+      "correct": 13,
+      "total": 14,
+      "rate": 0.929
+    },
+    "direction": {
+      "correct": 13,
+      "total": 14,
+      "rate": 0.929
+    },
+    "pair_strict": {
+      "correct": 6,
+      "total": 6,
+      "rate": 1.0
+    },
+    "pair_lenient": {
+      "correct": 6,
+      "total": 6,
+      "rate": 1.0
+    },
+    "required_papers_missing": 0,
+    "ungraded_findings": 0,
+    "invented_citations": 0,
+    "mean_seconds": 230.8
+  },
+  "runs": [
+    {
+      "question": "frequency",
+      "expected_behaviour": "answer",
+      "observed_behaviour": "answer",
+      "behaviour_correct": true,
+      "directions": [
+        {
+          "paper": "schoenfeld2016frequency",
+          "outcome": "muscle hypertrophy",
+          "direction": "positive",
+          "exposure": "training frequency",
+          "graded": true,
+          "expected": [
+            "positive"
+          ],
+          "expected_exposure": "training frequency",
+          "exposure_correct": true,
+          "correct": true
+        },
+        {
+          "paper": "schoenfeld2019frequency",
+          "outcome": "muscle hypertrophy",
+          "direction": "no_effect",
+          "exposure": "training frequency",
+          "graded": true,
+          "expected": [
+            "no_effect"
+          ],
+          "expected_exposure": "training frequency",
+          "exposure_correct": true,
+          "correct": true
+        }
+      ],
+      "missing_papers": [],
+      "pairs": [
+        {
+          "a": "schoenfeld2016frequency",
+          "b": "schoenfeld2019frequency",
+          "preferred": "contextual_disagreement",
+          "accept": [
+            "contextual_disagreement",
+            "insufficient_evidence"
+          ],
+          "observed": "contextual_disagreement",
+          "strict": true,
+          "lenient": true
+        }
+      ],
+      "repeat": 0,
+      "seconds": 365,
+      "invented_paper_ids": [],
+      "input_tokens": 4403,
+      "output_tokens": 1844
+    },
+    {
+      "question": "frequency-typos",
+      "expected_behaviour": "answer",
+      "observed_behaviour": "answer",
+      "behaviour_correct": true,
+      "directions": [
+        {
+          "paper": "heaselgrave2019",
+          "outcome": "muscle hypertrophy",
+          "direction": "positive",
+          "exposure": "training frequency",
+          "graded": true,
+          "expected": [
+            "no_effect",
+            "unclear",
+            "mixed"
+          ],
+          "expected_exposure": "training volume",
+          "exposure_correct": false,
+          "correct": false
+        },
+        {
+          "paper": "schoenfeld2016frequency",
+          "outcome": "muscle hypertrophy",
+          "direction": "positive",
+          "exposure": "training frequency",
+          "graded": true,
+          "expected": [
+            "positive"
+          ],
+          "expected_exposure": "training frequency",
+          "exposure_correct": true,
+          "correct": true
+        },
+        {
+          "paper": "schoenfeld2019frequency",
+          "outcome": "muscle hypertrophy",
+          "direction": "no_effect",
+          "exposure": "training frequency",
+          "graded": true,
+          "expected": [
+            "no_effect"
+          ],
+          "expected_exposure": "training frequency",
+          "exposure_correct": true,
+          "correct": true
+        }
+      ],
+      "missing_papers": [],
+      "pairs": [
+        {
+          "a": "schoenfeld2016frequency",
+          "b": "schoenfeld2019frequency",
+          "preferred": "contextual_disagreement",
+          "accept": [
+            "contextual_disagreement",
+            "insufficient_evidence"
+          ],
+          "observed": "contextual_disagreement",
+          "strict": true,
+          "lenient": true
+        }
+      ],
+      "repeat": 0,
+      "seconds": 803,
+      "invented_paper_ids": [],
+      "input_tokens": 4416,
+      "output_tokens": 2651
+    },
+    {
+      "question": "protein",
+      "expected_behaviour": "answer",
+      "observed_behaviour": "answer",
+      "behaviour_correct": true,
+      "directions": [
+        {
+          "paper": "morton2018",
+          "outcome": "muscle hypertrophy",
+          "direction": "positive",
+          "exposure": "protein supplementation",
+          "graded": true,
+          "expected": [
+            "positive"
+          ],
+          "expected_exposure": "protein supplementation",
+          "exposure_correct": true,
+          "correct": true
+        },
+        {
+          "paper": "erskine2012",
+          "outcome": "muscle strength",
+          "direction": "no_effect",
+          "exposure": "protein supplementation",
+          "graded": true,
+          "expected": [
+            "no_effect"
+          ],
+          "expected_exposure": "protein supplementation",
+          "exposure_correct": true,
+          "correct": true
+        }
+      ],
+      "missing_papers": [],
+      "pairs": [
+        {
+          "a": "morton2018",
+          "b": "erskine2012",
+          "preferred": "contextual_disagreement",
+          "accept": [
+            "contextual_disagreement",
+            "insufficient_evidence"
+          ],
+          "observed": "contextual_disagreement",
+          "strict": true,
+          "lenient": true
+        }
+      ],
+      "repeat": 0,
+      "seconds": 54,
+      "invented_paper_ids": [],
+      "input_tokens": 4399,
+      "output_tokens": 569
+    },
+    {
+      "question": "rest",
+      "expected_behaviour": "answer",
+      "observed_behaviour": "answer",
+      "behaviour_correct": true,
+      "directions": [
+        {
+          "paper": "schoenfeld2016rest",
+          "outcome": "muscle hypertrophy",
+          "direction": "positive",
+          "exposure": "rest interval",
+          "graded": true,
+          "expected": [
+            "positive"
+          ],
+          "expected_exposure": "rest interval",
+          "exposure_correct": true,
+          "correct": true
+        },
+        {
+          "paper": "ahtiainen2005",
+          "outcome": "muscle hypertrophy",
+          "direction": "no_effect",
+          "exposure": "rest interval",
+          "graded": true,
+          "expected": [
+            "no_effect"
+          ],
+          "expected_exposure": "rest interval",
+          "exposure_correct": true,
+          "correct": true
+        }
+      ],
+      "missing_papers": [],
+      "pairs": [
+        {
+          "a": "schoenfeld2016rest",
+          "b": "ahtiainen2005",
+          "preferred": "contextual_disagreement",
+          "accept": [
+            "contextual_disagreement",
+            "insufficient_evidence"
+          ],
+          "observed": "contextual_disagreement",
+          "strict": true,
+          "lenient": true
+        }
+      ],
+      "repeat": 0,
+      "seconds": 140,
+      "invented_paper_ids": [],
+      "input_tokens": 4401,
+      "output_tokens": 966
+    },
+    {
+      "question": "load",
+      "expected_behaviour": "answer",
+      "observed_behaviour": "answer",
+      "behaviour_correct": true,
+      "directions": [
+        {
+          "paper": "campos2002",
+          "outcome": "muscle hypertrophy",
+          "direction": "positive",
+          "exposure": "training load",
+          "graded": true,
+          "expected": [
+            "positive"
+          ],
+          "expected_exposure": "training load",
+          "exposure_correct": true,
+          "correct": true
+        },
+        {
+          "paper": "mitchell2012",
+          "outcome": "muscle hypertrophy",
+          "direction": "no_effect",
+          "exposure": "training load",
+          "graded": true,
+          "expected": [
+            "no_effect"
+          ],
+          "expected_exposure": "training load",
+          "exposure_correct": true,
+          "correct": true
+        }
+      ],
+      "missing_papers": [],
+      "pairs": [
+        {
+          "a": "campos2002",
+          "b": "mitchell2012",
+          "preferred": "contextual_disagreement",
+          "accept": [
+            "contextual_disagreement",
+            "insufficient_evidence"
+          ],
+          "observed": "contextual_disagreement",
+          "strict": true,
+          "lenient": true
+        }
+      ],
+      "repeat": 0,
+      "seconds": 128,
+      "invented_paper_ids": [],
+      "input_tokens": 4404,
+      "output_tokens": 1246
+    },
+    {
+      "question": "volume",
+      "expected_behaviour": "answer",
+      "observed_behaviour": "answer",
+      "behaviour_correct": true,
+      "directions": [
+        {
+          "paper": "schoenfeld2017volume",
+          "outcome": "muscle hypertrophy",
+          "direction": "positive",
+          "exposure": "training volume",
+          "graded": true,
+          "expected": [
+            "positive"
+          ],
+          "expected_exposure": "training volume",
+          "exposure_correct": true,
+          "correct": true
+        },
+        {
+          "paper": "schoenfeld2019volume",
+          "outcome": "muscle hypertrophy",
+          "direction": "positive",
+          "exposure": "training volume",
+          "graded": true,
+          "expected": [
+            "positive"
+          ],
+          "expected_exposure": "training volume",
+          "exposure_correct": true,
+          "correct": true
+        },
+        {
+          "paper": "heaselgrave2019",
+          "outcome": "muscle hypertrophy",
+          "direction": "no_effect",
+          "exposure": "training volume",
+          "graded": true,
+          "expected": [
+            "no_effect",
+            "unclear",
+            "mixed"
+          ],
+          "expected_exposure": "training volume",
+          "exposure_correct": true,
+          "correct": true
+        }
+      ],
+      "missing_papers": [],
+      "pairs": [
+        {
+          "a": "schoenfeld2017volume",
+          "b": "schoenfeld2019volume",
+          "preferred": "agreement",
+          "accept": [
+            "agreement"
+          ],
+          "observed": "agreement",
+          "strict": true,
+          "lenient": true
+        }
+      ],
+      "repeat": 0,
+      "seconds": 375,
+      "invented_paper_ids": [],
+      "input_tokens": 4400,
+      "output_tokens": 2777
+    },
+    {
+      "question": "creatine",
+      "expected_behaviour": "abstain",
+      "observed_behaviour": "abstain",
+      "behaviour_correct": true,
+      "directions": [],
+      "missing_papers": [],
+      "pairs": [],
+      "repeat": 0,
+      "seconds": 52,
+      "invented_paper_ids": [],
+      "input_tokens": 4400,
+      "output_tokens": 296
+    },
+    {
+      "question": "off-topic",
+      "expected_behaviour": "abstain",
+      "observed_behaviour": "abstain",
+      "behaviour_correct": true,
+      "directions": [],
+      "missing_papers": [],
+      "pairs": [],
+      "repeat": 0,
+      "seconds": 63,
+      "invented_paper_ids": [],
+      "input_tokens": 4412,
+      "output_tokens": 373
+    },
+    {
+      "question": "vague",
+      "expected_behaviour": "clarify",
+      "observed_behaviour": "clarify",
+      "behaviour_correct": true,
+      "directions": [],
+      "missing_papers": [],
+      "pairs": [],
+      "repeat": 0,
+      "seconds": 97,
+      "invented_paper_ids": [],
+      "input_tokens": 4397,
+      "output_tokens": 623
+    }
+  ]
+}

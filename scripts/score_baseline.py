@@ -24,7 +24,8 @@ args = parser.parse_args()
 key = load_key()
 corpus = PublicCorpus()
 # A larger prompt budget so every passage fits; nothing is truncated.
-model = OllamaModel(Settings(context_tokens=8000))
+# Reasoning over ~8k tokens of passages takes several minutes on a local 8B model.
+model = OllamaModel(Settings(context_tokens=8000, request_timeout=900))
 out = Path("artifacts/baseline")
 out.mkdir(parents=True, exist_ok=True)
 rows = []
