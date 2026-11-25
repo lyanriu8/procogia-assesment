@@ -27,6 +27,7 @@ The API is the system's only entry point. It is an HTTP server built with FastAP
 | `GET /api/articles/{id}` | One article with every stored passage and its hash | 200 |
 | `GET /api/articles/search?q=&k=` | Similarity search over all stored passages | 200 |
 | `GET /api/evaluation/latest` | Most recent saved evaluation | 200 |
+| `GET /api/evaluation/answer-key` | Saved answer-key scores for the pipeline and the raw-articles baseline (null where not yet run) | 200 · 404 |
 | `POST /api/evaluation/jobs` · `GET /api/evaluation/jobs/{id}` | Run the benchmark in the background; poll its progress | 202 · 200 |
 | `GET /api/system/health` · `GET /api/system/readiness` | Server status and whether the model is busy · whether the inference server and both models are available | 200 |
 

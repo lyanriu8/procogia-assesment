@@ -358,40 +358,15 @@ or microservices for the MVP.
 
 ### 4.2 Logical architecture
 
-``` text
-                         USER
-                          |
-                    FastAPI / UI
-                          |
-                   LangGraph Runtime
-                          |
-             +------------+------------+
-             |                         |
-       Static Workflow          Dynamic Workflow
-             |                         |
-             +------------+------------+
-                          |
-                    Shared Graph State
-                          |
-        +-----------------+------------------+
-        |                 |                  |
-  Research Planner   Evidence Retriever   Claim Extractor
-        |                 |                  |
-        |          OpenAlex / Europe PMC     |
-        |                 |                  |
-        |          Chroma Vector Store      |
-        |                                    |
-        +----------------+-------------------+
-                         |
-                Context + Conflict Analysis
-                         |
-                 Evidence Verification
-                         |
-                Comparison Report Builder
-                         |
-                  UI / JSON Response
-                         |
-                Evaluation + Run Logs
+```mermaid
+flowchart TD
+    U[User] --> UI[FastAPI / UI] --> LG[LangGraph runtime]
+    LG --> SW[Static workflow] & DW[Dynamic workflow]
+    SW & DW --> GS[Shared graph state]
+    GS --> RP[Research planner] & ER[Evidence retriever] & CE[Claim extractor]
+    ER --> SRC[OpenAlex / Europe PMC] --> CH[(Chroma vector store)]
+    RP & CH & CE --> CA[Context + conflict analysis]
+    CA --> EV[Evidence verification] --> RB[Comparison report builder] --> OUT[UI / JSON response] --> LOG[Evaluation + run logs]
 ```
 
 ### 4.3 Suggested repository structure

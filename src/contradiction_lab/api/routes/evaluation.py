@@ -1,3 +1,4 @@
+import json
 import uuid
 from pathlib import Path
 
@@ -14,6 +15,24 @@ def latest_evaluation():
     if not result:
         raise HTTPException(status_code=404, detail="No evaluation yet. Run the benchmark first.")
     return result
+
+
+ANSWER_KEY_RESULTS = {
+    "pipeline": Path("artifacts/answer-key/results.json"),  # scripts/score_answer_key.py
+    "baseline": Path("artifacts/baseline/results.json"),  # scripts/score_baseline.py
+}
+
+
+@router.get("/answer-key")
+def answer_key_results():
+    """Saved answer-key scores for the pipeline and the raw-articles baseline; null where not yet run."""
+    results = {
+        name: json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+        for name, path in ANSWER_KEY_RESULTS.items()
+    }
+    if not any(results.values()):
+        raise HTTPException(status_code=404, detail="No answer-key results yet. Run scripts/score_answer_key.py.")
+    return results
 
 
 @router.post("/jobs", status_code=202)

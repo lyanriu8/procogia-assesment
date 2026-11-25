@@ -11,7 +11,7 @@ A **single-page application**: one HTML document with plain JavaScript and CSS, 
 | **Session** | Title and properties (status, evidence, workflow, counts, run); the question; the research result; the follow-up thread; a message box | `GET /api/sessions/{id}`, `GET /api/runs/{id}` (every 1.2 s while researching), `POST /api/sessions/{id}/messages`, `DELETE /api/sessions/{id}` |
 | **Articles** | A card per article (title, authors, journal and year, design tags, abstract preview) and a library search that ranks whole articles by their best-matching passage, showing that passage | `GET /api/articles`, `GET /api/articles/search` |
 | **Article** | Title, authors, design tags, links to PubMed and the DOI, the full published abstract with its section headings, and a short details table (PubMed ID, licence, search-index status) | `GET /api/articles/{id}` |
-| **Evaluation** | The latest real-model results with pass/fail per scenario | `GET /api/evaluation/latest` |
+| **Evaluation** | The latest real-model scenario results with pass/fail per scenario; the two context configurations on one query; and, when saved, the draft answer-key scores of the pipeline beside the raw-articles baseline, overall and per question | `GET /api/evaluation/latest`, `GET /api/evaluation/answer-key` |
 
 Navigation uses the URL fragment (for example `#/sessions/<id>` or `#/articles/<id>`), so views can be bookmarked and the browser's back button works.
 

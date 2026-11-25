@@ -17,22 +17,16 @@ This page shows how the parts connect. Each part has its own page (see [Document
 | **Article library (RAG)** | A vector index (Chroma, cosine similarity) over exact passages from stored papers, plus ranking rules | Finds the papers and passages the models are allowed to read |
 | **Storage** | A relational database file (SQLite) and a persistent vector store directory | Durable sessions, runs, articles, vectors, caches and evaluation results |
 
-```
- Browser (single-page app)
-        │  HTTP/JSON
-        ▼
- REST API ──────────────► Article library ◄────────────┐
-        │                  (vector index)              │
-        ▼                                              │ retrieval
- Session service ──phase 1──► Research service ────────┘
-        │                          │
-        └──────phase 2──► Follow-up agent
-                                   │
-                 both call ▼       │
-          Language-model runtime (local)
-                                   │
-        everything persists in ▼   ▼
-          Storage: relational DB + vector store
+```mermaid
+flowchart TD
+    B["Browser (single-page app)"] -- HTTP/JSON --> API[REST API]
+    API --> L["Article library<br/>(vector index)"]
+    API --> S[Session service]
+    S -- phase 1 --> R[Research service]
+    S -- phase 2 --> F[Follow-up agent]
+    R -- retrieval --> L
+    R & F --> M["Language-model runtime (local)"]
+    API & S & R & F & L -. persist .-> D[("Storage: relational DB + vector store")]
 ```
 
 ## Life of a question

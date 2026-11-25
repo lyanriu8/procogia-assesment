@@ -616,6 +616,59 @@ async function evaluationPage() {
   const t = el('table', undefined, 'db'); t.append(put(el('tr'), el('th', 'Scenario'), el('th', 'Workflow'), el('th', 'Status'), el('th', 'Result'), el('th', 'Time')));
   for (const c of r.cases) t.append(put(el('tr'), el('td', c.case_id), el('td', c.workflow, 'dim'), el('td', human(c.actual_status), 'dim'), put(el('td'), tag(c.passed ? 'pass' : 'fail', c.passed ? 'green' : 'red')), el('td', `${(c.latency_ms / 1000).toFixed(0)}s`, 'dim')));
   page.append(t);
+  contextComparison(page, r.cases);
+  await answerKeySection(page);
+}
+
+/* Same query, only the passage budget changed: evidence-rich (success-static) vs compact. */
+function contextComparison(page, cases) {
+  const rich = cases.find(c => c.case_id === 'success-static'), compact = cases.find(c => c.case_id === 'compact-context');
+  if (!rich || !compact) return;
+  page.append(el('h2', 'Context configurations'), el('p', 'Same question, static workflow; only the number of retrieved passages changes.', 'dim'));
+  const t = el('table', undefined, 'db');
+  t.append(put(el('tr'), el('th', 'Configuration'), el('th', 'Verified findings'), el('th', 'Input tokens'), el('th', 'Output tokens'), el('th', 'Time')));
+  for (const [name, c] of [['Evidence-rich (12 passages)', rich], ['Compact (4 passages)', compact]])
+    t.append(put(el('tr'), el('td', name), el('td', String(c.verified_claims)), el('td', c.input_tokens.toLocaleString(), 'dim'), el('td', c.output_tokens.toLocaleString(), 'dim'), el('td', `${(c.latency_ms / 1000).toFixed(0)}s`, 'dim')));
+  page.append(t);
+}
+
+async function answerKeySection(page) {
+  let r; try { r = await api('/api/evaluation/answer-key'); } catch { return; }
+  const p = r.pipeline, b = r.baseline, any = p || b;
+  page.append(el('h2', 'Answer key: pipeline vs raw-articles baseline'));
+  if (any.key_status !== 'confirmed') page.append(callout('minusCircle:yellow', 'Draft answer key', el('p', 'Labels were drafted with AI assistance and not yet confirmed by a person. Do not quote these as accuracy.', 'dim')));
+  page.append(el('p', 'The baseline is one model call with every passage from all 11 papers, the same label definitions and reasoning on, but no retrieval, direction review, rule-based labels or verification. Both are scored against the same key.', 'dim'));
+  const frac = m => m && m.total ? `${m.correct}/${m.total}` : 'n/a';
+  const meanSeconds = x => x ? Math.round(x.summary.mean_seconds ?? x.runs.reduce((n, row) => n + row.seconds, 0) / x.runs.length) + 's' : 'not run';
+  const rows = [
+    ['Behaviour (answer / abstain / clarify)', x => frac(x.summary.behaviour)],
+    ['Exposure of reported findings', x => frac(x.summary.exposure)],
+    ['Direction of reported findings', x => frac(x.summary.direction)],
+    ['Key pairs, strict', x => frac(x.summary.pair_strict)],
+    ['Key pairs, lenient', x => frac(x.summary.pair_lenient)],
+    ['Required papers missing', x => String(x.summary.required_papers_missing)],
+    ['Invented citations', x => x.summary.invented_citations !== undefined ? String(x.summary.invented_citations) : '0 by construction'],
+  ];
+  const t = el('table', undefined, 'db');
+  t.append(put(el('tr'), el('th', 'Metric'), el('th', 'Pipeline'), el('th', 'Baseline')));
+  for (const [name, f] of rows) t.append(put(el('tr'), el('td', name), el('td', p ? f(p) : 'not run'), el('td', b ? f(b) : 'not run')));
+  t.append(put(el('tr'), el('td', 'Mean time per question'), el('td', meanSeconds(p)), el('td', meanSeconds(b))));
+  page.append(t, el('p', `${any.model} · ${any.repeats} repeat(s) · single runs vary, so small differences are noise.`, 'faint'));
+
+  page.append(el('h2', 'Per question'));
+  const q = el('table', undefined, 'db');
+  q.append(put(el('tr'), el('th', 'Question'), el('th', 'Expected'), el('th', 'Pipeline'), el('th', 'Baseline')));
+  const verdict = row => {
+    if (!row) return el('td', '—', 'faint');
+    const wrong = row.directions.filter(d => d.graded && !d.correct).map(d => `${d.paper} ${d.exposure_correct === false ? 'filed under ' + d.exposure : 'read as ' + human(d.direction)}`);
+    const pairsOk = row.pairs.every(x => x.lenient), ok = row.behaviour_correct && !wrong.length && pairsOk && !(row.missing_papers || []).length;
+    return put(el('td'), tag(ok ? 'pass' : 'fail', ok ? 'green' : 'red'), ' ', row.observed_behaviour, ...wrong.map(w => el('div', w, 'dim')), el('div', `${row.seconds}s`, 'faint'));
+  };
+  for (const row of (p || b).runs.filter(x => !x.repeat)) {
+    const other = b && b.runs.find(x => x.question === row.question && !x.repeat);
+    q.append(put(el('tr'), el('td', row.question), el('td', row.expected_behaviour, 'dim'), verdict(p ? row : null), verdict(p ? other : row)));
+  }
+  page.append(q);
 }
 
 document.querySelectorAll('[data-icon]').forEach(n => n.replaceChildren(icon(n.dataset.icon)));

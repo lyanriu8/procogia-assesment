@@ -6,13 +6,13 @@ Everything runs on one machine: a local language model (Qwen3 8B) and embedding 
 
 ## How the system fits together
 
-```
- Browser ──HTTP/JSON──► REST API ──► Session service ──phase 1──► Research service ──► Article library
-                                          │                          (processing graph)   (vector index)
-                                          └────────phase 2──► Follow-up agent
-                                                both use ▼
-                                     Local language-model runtime (Ollama)
-                                     Storage: relational database + vector store
+```mermaid
+flowchart LR
+    B[Browser] -- HTTP/JSON --> API[REST API] --> S[Session service]
+    S -- phase 1 --> R["Research service<br/>(processing graph)"] --> L["Article library<br/>(vector index)"]
+    S -- phase 2 --> F[Follow-up agent]
+    R & F --> M["Local language-model runtime (Ollama)"]
+    R & F --> D[("Storage: relational database + vector store")]
 ```
 
 A question becomes a **session**. The **research service** gathers and verifies evidence once; when it finishes, every further message in that session goes to the **follow-up agent**, which can only read that verified evidence. The language model proposes at every step, but deterministic code decides what counts as evidence, how disagreements are labelled, and what enters the report.
@@ -61,7 +61,7 @@ Live discovery from OpenAlex and Europe PMC replaces the bundled corpus with `--
 
 ## Current results
 
-- **77 automated tests pass** (scripted model; real server, processing graph and vector database).
+- **84 automated tests pass** (scripted model; real server, processing graph and vector database).
 - **8 of 8 strict real-model checks pass** on the final code. The main adaptive run verified three findings and labelled Schoenfeld 2016 vs 2019 (training frequency) a contextual disagreement in 42 seconds. One check (rejecting a planted overstatement) failed in three earlier recordings, so treat it as unstable.
 - Seven free-typed questions, including typos, an out-of-library topic and a vague question, behave correctly after four robustness fixes (see [Evaluation](docs/evaluation.md)).
 - Follow-up answers take 5–8 seconds; an out-of-scope question (creatine) is refused.

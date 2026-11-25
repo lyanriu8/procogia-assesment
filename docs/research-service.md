@@ -6,21 +6,25 @@ The research service turns a question into a verified comparison report. Technic
 
 **Static workflow:** a fixed sequence of eight steps.
 
-```
-plan → find papers → retrieve passages → extract findings → review directions → compare → verify → build report
+```mermaid
+flowchart LR
+    P[plan] --> FP[find papers] --> RP[retrieve passages] --> E[extract findings] --> RD[review directions] --> C[compare] --> V[verify] --> BR[build report]
 ```
 
 **Dynamic workflow:** the same steps, plus a decision point after extraction.
 
+```mermaid
+flowchart LR
+    P[plan] --> FP[find papers] --> RP[retrieve passages] --> E[extract findings] --> A{assess sufficiency}
+    A -- enough evidence --> RD[review directions]
+    A -- broaden search --> FP
+    A -- fetch licensed full text --> RP
+    A -- refocus retrieval --> RP
+    A -- stop with limitations --> RD
+    RD --> C[compare] --> V[verify] --> BR[build report]
 ```
-                                   ┌──────────── enough evidence ────────────┐
-plan → find papers → retrieve → extract → assess sufficiency                 ▼
-          ▲              ▲                    │                       review directions → compare → verify → report
-          │              │                    ├─ broaden search ─► back to "find papers"           ▲
-          │              └────────────────────┼─ fetch licensed full text ─► back to "retrieve"     │
-          │                                   ├─ refocus retrieval ─► back to "retrieve"            │
-          └───────────────────────────────────┴─ stop with limitations ─────────────────────────────┘
-```
+
+Each adaptive action can be taken at most once within the shared budget. "Stop with limitations" still runs review, comparison and verification on what was found; the report is marked as limited.
 
 Each step records its start and end time, latency, the model's input and output token counts, retries and errors. These form the trace shown in the interface and stored with the run.
 

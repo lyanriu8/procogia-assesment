@@ -4,7 +4,7 @@ Evaluating a system built on a language model is harder than testing ordinary co
 
 ## Layer 1: automated tests (mocked model)
 
-A test suite of 77 tests runs the real web server, the real processing graph and the real vector database, but replaces every language-model call with a scripted reply. This isolates the deterministic machinery and makes it repeatable in seconds. It covers:
+A test suite of 84 tests runs the real web server, the real processing graph and the real vector database, but replaces every language-model call with a scripted reply. This isolates the deterministic machinery and makes it repeatable in seconds. It covers:
 
 - data contracts and validation;
 - retrieval ranking, token budgets and chunking;

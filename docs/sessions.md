@@ -6,14 +6,22 @@ A session is one conversation about one research question. It is stored as a sin
 
 Each session is bound to exactly one research run. This is the boundary between the two AI services:
 
-```
- Phase 1: research                              Phase 2: follow-up
- ─────────────────                              ──────────────────
- question ─► session "researching" ─► research service runs
-                                         │
-                      session "ready" ◄──┘ (or "needs clarification" / "failed")
-                                         │
- follow-up message ──────────────────────┴─► follow-up agent reads the finished run
+```mermaid
+sequenceDiagram
+    actor U as User
+    participant S as Session
+    participant R as Research service
+    participant F as Follow-up agent
+    Note over U,R: Phase 1: research
+    U->>S: question
+    S->>S: state "researching"
+    S->>R: run research
+    R-->>S: finished run
+    S->>S: state "ready" (or "needs clarification" / "failed")
+    Note over U,F: Phase 2: follow-up
+    U->>S: follow-up message
+    S->>F: hand over the finished run
+    F-->>U: answer citing only that run's evidence
 ```
 
 - **Phase 1** is the only time evidence is gathered. The research service searches the article library, extracts and verifies findings, and stores the run.

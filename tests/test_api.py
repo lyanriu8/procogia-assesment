@@ -142,3 +142,17 @@ def test_research_runs_extend_the_shared_library(engine, client):
     session = wait_for(client, client.post("/api/sessions", json={"query": DEMO_QUERY, "workflow": "static"}).json()["session_id"])
     assert session["state"] == "ready"
     assert any(a["indexed_passages"] for a in client.get("/api/articles").json())
+
+
+def test_answer_key_results_serves_saved_files_and_404s_without_them(client, monkeypatch, tmp_path):
+    from contradiction_lab.api.routes import evaluation
+
+    missing = {"pipeline": tmp_path / "none.json", "baseline": tmp_path / "none2.json"}
+    monkeypatch.setattr(evaluation, "ANSWER_KEY_RESULTS", missing)
+    assert client.get("/api/evaluation/answer-key").status_code == 404
+
+    saved = tmp_path / "pipeline.json"
+    saved.write_text('{"key_status": "draft", "summary": {}, "runs": []}', encoding="utf-8")
+    monkeypatch.setattr(evaluation, "ANSWER_KEY_RESULTS", {**missing, "pipeline": saved})
+    body = client.get("/api/evaluation/answer-key").json()
+    assert body["pipeline"]["key_status"] == "draft" and body["baseline"] is None

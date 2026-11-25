@@ -16,7 +16,7 @@ The step-by-step live demo, with the exact questions to type, is in the [demo sc
 
 1. Start Ollama, restart the app server so it runs the current code, and check that the sidebar's status dot is green (model ready).
 2. Warm the model with one practice run: the first call after loading took about 85 s; warm runs take about 50 s.
-3. Run `pytest -q` (77 tests) and, if time allows, `scripts/validate_demo.py` (about 5 minutes on the RTX 4060 laptop).
+3. Run `pytest -q` (84 tests) and, if time allows, `scripts/validate_demo.py` (about 5 minutes on the RTX 4060 laptop).
 4. Keep a completed session in the sidebar as a fallback if live inference is slow, and say it was run earlier. Sessions are stored locally on this machine. Never present saved output as live.
 
 Measured on this laptop: static, 7 papers, 74 s; adaptive frequency question, 3 papers, 44 s; follow-up answers 5–8 s each.
